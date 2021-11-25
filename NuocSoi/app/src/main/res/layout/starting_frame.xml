@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/be"
-    tools:context=".StaringApp">
+    tools:context=".StaringFrame">
 
     <ImageView
         android:id="@+id/imgLogo"
@@ -28,7 +28,7 @@
         android:textAlignment="center"
         android:textColor="@color/gray"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

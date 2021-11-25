@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignIn">
+    tools:context=".SignInFrame">
 
     <ImageView
         android:id="@+id/imgBackground"
@@ -16,12 +16,12 @@
 
     <LinearLayout
         android:id="@+id/lnlContent"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/fwd_width"
         android:layout_height="wrap_content"
         android:background="@drawable/flt_window"
-        android:elevation="60dp"
+        android:elevation="@dimen/fwd_elevation"
         android:orientation="vertical"
-        android:padding="20dp"
+        android:padding="@dimen/fwd_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:drawableLeft="@drawable/ic_baseline_person_add_alt_1_24"
-            android:text="Đăng kí tài khoản" />
+            android:text="Đăng ký tài khoản" />
 
         <TextView
             android:layout_gravity="bottom"

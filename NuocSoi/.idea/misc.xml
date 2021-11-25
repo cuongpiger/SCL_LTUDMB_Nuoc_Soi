@@ -8,6 +8,8 @@
         <entry key="app/src/main/res/drawable/btn_red.xml" value="0.2388888888888889" />
         <entry key="app/src/main/res/drawable/flt_window.xml" value="0.2388888888888889" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10555555555555556" />
+        <entry key="app/src/main/res/layout/customer_registration_frame.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/sign_in_frame.xml" value="0.3567708333333333" />
         <entry key="app/src/main/res/layout/sign_in_page.xml" value="0.33" />
       </map>
     </option>

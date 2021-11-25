@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 
-public class StaringApp extends AppCompatActivity {
+public class StaringFrame extends AppCompatActivity {
 
     ImageView imgLogo;
     TextView txtCopyright;
@@ -21,11 +21,11 @@ public class StaringApp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.starting_page);
+        setContentView(R.layout.starting_frame);
 
         referWidgets();
         setupAnimation();
-        turnSignInPage();
+        turnSignInFrame();
     }
 
     private void referWidgets() {
@@ -47,11 +47,11 @@ public class StaringApp extends AppCompatActivity {
         });
     }
 
-    private void turnSignInPage() {
+    private void turnSignInFrame() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(StaringApp.this, SignIn.class);
+                Intent intent = new Intent(StaringFrame.this, SignInFrame.class);
                 startActivity(intent);
                 finish();
             }

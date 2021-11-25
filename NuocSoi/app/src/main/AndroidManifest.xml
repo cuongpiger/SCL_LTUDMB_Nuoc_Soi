@@ -10,10 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NuocSoi">
         <activity
-            android:name=".SignIn"
+            android:name=".CustomerRegistrationFrame"
             android:exported="true" />
         <activity
-            android:name=".StaringApp"
+            android:name=".SignInFrame"
+            android:exported="true" />
+        <activity
+            android:name=".StaringFrame"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

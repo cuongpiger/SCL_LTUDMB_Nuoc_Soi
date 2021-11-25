@@ -9,9 +9,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-public class SignIn extends AppCompatActivity {
+public class SignInFrame extends AppCompatActivity {
 
     Button btnSignInEmail, btnSignInPhone, btnSignUp;
     ImageView imgBackground;
@@ -19,7 +18,7 @@ public class SignIn extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_in_page);
+        setContentView(R.layout.sign_in_frame);
 
         referWidgets();
         setupAnimation();
@@ -99,11 +98,17 @@ public class SignIn extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent signUp = new Intent(SignIn.this, ChooseOne.class);
-//                signUp.putExtra("Home", "SignUp");
-//                startActivity(signUp);
-//                finish();
+                Intent signUp = new Intent(SignInFrame.this, CustomerRegistrationFrame.class);
+                signUp.putExtra("Home", "SignUp");
+                startActivity(signUp);
+                finish();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
     }
 }
