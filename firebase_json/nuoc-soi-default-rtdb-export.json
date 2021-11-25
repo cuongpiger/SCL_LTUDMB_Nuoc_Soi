@@ -1,0 +1,47 @@
+{
+  "User" : {
+    "0786333545" : {
+      "Name" : "Dương Mạnh Cường",
+      "Password" : "123"
+    },
+    "0902209902" : {
+      "name" : "Tiểu Yến Tử",
+      "password" : "123"
+    },
+    "0929272261" : {
+      "Name" : "Đặng Khánh Hưng",
+      "Password" : "123"
+    }
+  },
+  
+  "Category": {
+    "00": {
+      "Name": "Bữa ăn nhẹ",
+      "Image": "https://i.imgur.com/Q4MwyKv.jpg"
+    },
+    "01": {
+      "Name": "Canh và súp",
+      "Image": "https://i.imgur.com/4NLVqXu.jpg"
+    },
+    "02": {
+      "Name": "Món Tàu",
+      "Image": "https://i.imgur.com/mwuqsSW.jpg"
+    },
+    "03": {
+      "Name": "Các món cá",
+      "Image": "https://i.imgur.com/QMjFCyd.jpg"
+    },
+    "04": {
+      "Name": "Các món gà",
+      "Image": "https://i.imgur.com/qiceYY7.jpg"
+    },
+    "05": {
+      "Name": "Thức ăn nhanh",
+      "Image": "https://i.imgur.com/LbXholx.jpg"
+    },
+    "06": {
+      "Name": "Thức uống",
+      "Image": "https://i.imgur.com/jTfz9vF.jpg"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainMenu">
+
+    <ImageView
+        android:id="@+id/imgBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/background"/>
+
+
+    <LinearLayout
+        android:id="@+id/lnlContent"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_shape"
+        android:elevation="60dp"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/logo" />
+
+        <Button
+            android:id="@+id/btnSignInEmail"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btnred"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_baseline_email_24"
+            android:text="Đăng nhập qua Email" />
+
+        <Button
+            android:id="@+id/btnSignInPhone"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btnblue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_baseline_smartphone_24"
+            android:text="Đăng nhập qua SĐT" />
+
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/gray" />
+
+        <Button
+            android:id="@+id/btnSignUp"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btngreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_baseline_person_add_alt_1_24"
+            android:text="Đăng kí tài khoản" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

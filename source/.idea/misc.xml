@@ -3,9 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.23596014492753623" />
-        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
+        <entry key="app/src/main/res/drawable/background_shape.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/drawable/btnblue.xml" value="0.1355263157894737" />
+        <entry key="app/src/main/res/drawable/btngreen.xml" value="0.1355263157894737" />
+        <entry key="app/src/main/res/drawable/btnred.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.1355263157894737" />
+        <entry key="app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.1355263157894737" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1355263157894737" />
+        <entry key="app/src/main/res/layout-v21/activity_main_menu.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_choose_one.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main_menu.xml" value="0.22" />
       </map>
     </option>
   </component>
