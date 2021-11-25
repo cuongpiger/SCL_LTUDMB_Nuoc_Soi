@@ -32,7 +32,7 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CustomerRegistrationFrame.this, "Hello", Toast.LENGTH_SHORT).show();
+
             }
         });
 
