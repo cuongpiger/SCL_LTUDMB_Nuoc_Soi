@@ -95,20 +95,24 @@
 
             <com.hbb20.CountryCodePicker
                 android:id="@+id/ccpCountry"
-                android:paddingTop="2dp"
-                android:layout_width="135dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-
-            <EditText
-                android:id="@+id/edtPhone"
+                android:paddingBottom="3dp"
+                android:layout_gravity="left|bottom"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPhone"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
-                android:hint="Điện thoại"
-                android:text=""
-                android:ems="10"
-                android:inputType="phone" />
+                android:layout_gravity="right">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Điện thoại"
+                    android:text=""
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <Button
