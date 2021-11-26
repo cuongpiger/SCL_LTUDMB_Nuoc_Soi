@@ -43,4 +43,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'com.hbb20:ccp:2.4.7'
+    implementation 'org.apache.commons:commons-text:1.7'
 }
