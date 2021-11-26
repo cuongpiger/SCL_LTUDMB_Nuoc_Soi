@@ -11,12 +11,11 @@ import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Calendar;
 
 public class StaringFrame extends AppCompatActivity {
 
     ImageView imgLogo;
-    TextView txtCopyright;
+    TextView tvCopyright;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,19 +29,19 @@ public class StaringFrame extends AppCompatActivity {
 
     private void referWidgets() {
         imgLogo = findViewById(R.id.imgLogo);
-        txtCopyright = findViewById(R.id.txtCopyright);
+        tvCopyright = findViewById(R.id.tvCopyright);
     }
 
     private void setupAnimation() {
         imgLogo.animate().alpha(0f).setDuration(0);
-        txtCopyright.animate().alpha(0f).setDuration(0);
+        tvCopyright.animate().alpha(0f).setDuration(0);
 
         imgLogo.animate().alpha(1f).setDuration(Config.LOGO_DELAY).setListener(new AnimatorListenerAdapter() {
             @SuppressLint("DefaultLocale")
             @Override
             public void onAnimationEnd(Animator animator) {
-                txtCopyright.setText(String.format(Config.COPYRIGHT, Calendar.getInstance().get(Calendar.YEAR)));
-                txtCopyright.animate().alpha(1f).setDuration((Config.COPYRIGHT_DELAY));
+                Config.setCopyright(tvCopyright);
+                tvCopyright.animate().alpha(1f).setDuration((Config.COPYRIGHT_DELAY));
             }
         });
     }

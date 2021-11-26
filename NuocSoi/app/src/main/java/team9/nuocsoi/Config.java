@@ -1,5 +1,9 @@
 package team9.nuocsoi;
 
+import android.widget.TextView;
+
+import java.util.Calendar;
+
 public class Config {
     public static final int TURN_SIGN_IN_DELAY = 3000; // 3000
     public static final int COPYRIGHT_DELAY = 800; // 800
@@ -9,4 +13,8 @@ public class Config {
 //    public static final int TURN_SIGN_IN_DELAY = 0; // 3000
 //    public static final int COPYRIGHT_DELAY = 0; // 800
 //    public static final int LOGO_DELAY = 0; // 1000
+
+    public static void setCopyright(TextView textView) {
+        textView.setText(String.format(COPYRIGHT, Calendar.getInstance().get(Calendar.YEAR)));
+    }
 }

@@ -9,11 +9,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class SignInFrame extends AppCompatActivity {
 
     Button btnSignInEmail, btnSignInPhone, btnSignUp;
     ImageView imgBackground;
+    TextView tvCopyright;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +23,18 @@ public class SignInFrame extends AppCompatActivity {
         setContentView(R.layout.sign_in_frame);
 
         referWidgets();
+        setupView();
         setupAnimation();
         setupEventListeners();
     }
 
+    private void setupView() {
+        Config.setCopyright(tvCopyright);
+    }
+
     private void referWidgets() {
         imgBackground = findViewById(R.id.imgBackground);
+        tvCopyright = findViewById(R.id.txtCopyright);
         btnSignInEmail = findViewById(R.id.btnSignInEmail);
         btnSignInPhone = findViewById(R.id.btnSignInPhone);
         btnSignUp = findViewById(R.id.btnSignUp);
@@ -88,9 +96,9 @@ public class SignInFrame extends AppCompatActivity {
         btnSignInPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent signInPhone = new Intent(SignIn.this, ChooseOne.class);
-//                signInPhone.putExtra("Home", "Phone");
-//                startActivity(signInPhone);
+                Intent signInPhone = new Intent(SignInFrame.this, PhoneSignInFrame.class);
+                signInPhone.putExtra("Home", "Phone");
+                startActivity(signInPhone);
 //                finish();
             }
         });

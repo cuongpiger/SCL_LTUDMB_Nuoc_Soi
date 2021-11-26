@@ -8,6 +8,7 @@
     tools:context=".EmailSignInFrame">
 
     <LinearLayout
+        android:id="@+id/lnlWindow"
         android:layout_width="@dimen/fwd_width"
         android:layout_height="wrap_content"
         android:background="@drawable/flt_window"
@@ -81,7 +82,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/btn_red"
+            android:background="@drawable/btn_blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
@@ -99,5 +100,20 @@
             android:clickable="true"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCopyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:textAlignment="center"
+        android:textColor="@color/gray"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lnlWindow"
+        app:layout_constraintVertical_bias="0.747"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

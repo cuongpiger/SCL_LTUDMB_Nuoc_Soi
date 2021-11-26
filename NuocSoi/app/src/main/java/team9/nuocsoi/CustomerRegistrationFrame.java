@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class CustomerRegistrationFrame extends AppCompatActivity {
 
     Button btnSignUp;
-    TextView tvPreviousFrame;
+    TextView tvPreviousFrame, tvCopyright;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +20,18 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
         setContentView(R.layout.customer_registration_frame);
 
         referWidgets();
+        setupView();
         setupEventListeners();
     }
 
     private void referWidgets() {
         btnSignUp = findViewById(R.id.btnSignUp);
+        tvCopyright = findViewById(R.id.tvCopyright);
         tvPreviousFrame = findViewById(R.id.tvPreviousFrame);
+    }
+
+    private void setupView() {
+        Config.setCopyright(tvCopyright);
     }
 
     private void setupEventListeners() {

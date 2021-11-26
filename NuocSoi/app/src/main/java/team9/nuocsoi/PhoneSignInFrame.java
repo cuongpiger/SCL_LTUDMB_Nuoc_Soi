@@ -5,14 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class EmailSignInFrame extends AppCompatActivity {
+public class PhoneSignInFrame extends AppCompatActivity {
 
     TextView tvCopyright;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.email_sign_in_frame);
+        setContentView(R.layout.phone_sign_in_frame);
 
         referWidgets();
         setupView();
@@ -25,5 +25,4 @@ public class EmailSignInFrame extends AppCompatActivity {
     private void setupView() {
         Config.setCopyright(tvCopyright);
     }
-
 }
