@@ -78,9 +78,9 @@ public class SignInFrame extends AppCompatActivity {
         btnSignInEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent signInEmail = new Intent(SignIn.this, ChooseOne.class);
-//                signInEmail.putExtra("Home", "Email");
-//                startActivity(signInEmail);
+                Intent signInEmail = new Intent(SignInFrame.this, EmailSignInFrame.class);
+                signInEmail.putExtra("Home", "Email");
+                startActivity(signInEmail);
 //                finish();
             }
         });

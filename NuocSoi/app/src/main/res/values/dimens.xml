@@ -4,4 +4,5 @@
     <dimen name="fwd_padding">20dp</dimen>
     <dimen name="fwd_elevation">60dp</dimen>
     <dimen name="logo_height">200dp</dimen>
+    <dimen name="fwd_title_size">30sp</dimen>
 </resources>

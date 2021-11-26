@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NuocSoi">
         <activity
+            android:name=".EmailSignInFrame"
+            android:exported="true" />
+        <activity
             android:name=".CustomerRegistrationFrame"
             android:exported="true" />
         <activity

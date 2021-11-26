@@ -8,9 +8,11 @@
         <entry key="app/src/main/res/drawable/btn_red.xml" value="0.2388888888888889" />
         <entry key="app/src/main/res/drawable/flt_window.xml" value="0.2388888888888889" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10555555555555556" />
-        <entry key="app/src/main/res/layout/customer_registration_frame.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/child_sign_in_frame.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/customer_registration_frame.xml" value="0.5044182621502209" />
         <entry key="app/src/main/res/layout/sign_in_frame.xml" value="0.22" />
         <entry key="app/src/main/res/layout/sign_in_page.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/starting_frame.xml" value="0.22532894736842105" />
       </map>
     </option>
   </component>
