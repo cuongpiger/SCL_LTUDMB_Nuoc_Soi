@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -19,17 +20,19 @@ import org.apache.commons.text.WordUtils;
 
 import java.util.Objects;
 
+import team9.nuocsoi.Model.User;
+
 public class CustomerRegistrationFrame extends AppCompatActivity {
 
     Button btnSignUp;
     TextView tvPreviousFrame, tvCopyright;
-    TextInputEditText edtFullName, edtEmail, edtPassword, edtRetype;
     EditText edtPhone;
     CountryCodePicker ccpCountry;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     String fullName, email, password, retype, phone, country;
+    TextInputLayout tilFullName, tilEmail, tilPassword, tilRetype;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,37 +42,46 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
         referWidgets();
         setupView();
         setupEventListeners();
-
+        setupFirebase();
     }
 
-    private void getWidgetValues() {
-        fullName = WordUtils.capitalize(Objects.requireNonNull(edtFullName.getText()).toString().trim());
-        email = Objects.requireNonNull(edtEmail.getText()).toString().trim();
-        password = Objects.requireNonNull(edtPassword.getText()).toString();
-        retype = Objects.requireNonNull(edtRetype.getText()).toString();
-        phone = edtPhone.getText().toString();
+    private void setupFirebase() {
+        databaseReference = FirebaseDatabase.getInstance().getReference(User.class.getSimpleName());
+        firebaseAuth = FirebaseAuth.getInstance();
+    }
+
+    private boolean isValid() {
+//        edtEmail.setErrorEnabled();
+
+
+        return false;
     }
 
     private void referWidgets() {
-        btnSignUp = findViewById(R.id.btnSignUp);
         tvCopyright = findViewById(R.id.tvCopyright);
         tvPreviousFrame = findViewById(R.id.tvPreviousFrame);
-        edtFullName = findViewById(R.id.edtFullName);
-        edtEmail = findViewById(R.id.edtEmail);
-        edtPassword = findViewById(R.id.edtPassword);
-        edtRetype = findViewById(R.id.edtRetype);
-        edtPhone = findViewById(R.id.edtPhone);
+        tilFullName = findViewById(R.id.tilFullName);
+        tilEmail = findViewById(R.id.tilEmail);
+        tilPassword = findViewById(R.id.tilPassword);
+        tilRetype = findViewById(R.id.tilRetype);
         ccpCountry = findViewById(R.id.ccpCountry);
+        edtPhone = findViewById(R.id.edtPhone);
+        btnSignUp = findViewById(R.id.btnSignUp);
     }
 
     private void setupView() {
-        Config.setCopyright(tvCopyright);
+        tvCopyright.setText(Config.COPYRIGHT);
+        ccpCountry.setCountryForNameCode(Config.COUNTRY_NAME_CODE);
     }
 
     private void setupEventListeners() {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fullName = WordUtils.capitalize(Objects.requireNonNull(tilFullName.getEditText()).getText().toString().trim());
+                email = Objects.requireNonNull(tilEmail.getEditText()).getText().toString().trim();
+                password = Objects.requireNonNull(tilPassword.getEditText()).getText().toString();
+                retype = Objects.requireNonNull(tilRetype.getEditText()).getText().toString();
                 Toast.makeText(CustomerRegistrationFrame.this, fullName, Toast.LENGTH_SHORT).show();
 
             }

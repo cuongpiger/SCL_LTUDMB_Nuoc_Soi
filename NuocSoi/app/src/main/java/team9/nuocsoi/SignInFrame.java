@@ -29,7 +29,7 @@ public class SignInFrame extends AppCompatActivity {
     }
 
     private void setupView() {
-        Config.setCopyright(tvCopyright);
+        tvCopyright.setText(Config.COPYRIGHT);
     }
 
     private void referWidgets() {

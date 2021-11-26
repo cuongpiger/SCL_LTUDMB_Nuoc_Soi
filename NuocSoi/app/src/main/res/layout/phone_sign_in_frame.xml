@@ -35,6 +35,7 @@
             android:orientation="horizontal">
 
             <com.hbb20.CountryCodePicker
+                android:id="@+id/ccpCountry"
                 android:paddingTop="2dp"
                 android:layout_width="135dp"
                 android:layout_height="wrap_content"

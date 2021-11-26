@@ -40,7 +40,7 @@ public class StaringFrame extends AppCompatActivity {
             @SuppressLint("DefaultLocale")
             @Override
             public void onAnimationEnd(Animator animator) {
-                Config.setCopyright(tvCopyright);
+                tvCopyright.setText(Config.COPYRIGHT);
                 tvCopyright.animate().alpha(1f).setDuration((Config.COPYRIGHT_DELAY));
             }
         });

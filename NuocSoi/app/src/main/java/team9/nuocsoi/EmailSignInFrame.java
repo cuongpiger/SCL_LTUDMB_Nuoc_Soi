@@ -23,7 +23,7 @@ public class EmailSignInFrame extends AppCompatActivity {
     }
 
     private void setupView() {
-        Config.setCopyright(tvCopyright);
+        tvCopyright.setText(Config.COPYRIGHT);
     }
 
 }
