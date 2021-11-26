@@ -1,7 +1,9 @@
 package team9.nuocsoi;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,7 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -42,7 +48,7 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
         referWidgets();
         setupView();
         setupEventListeners();
-//        setupFirebase();
+        setupFirebase();
     }
 
     private void setupFirebase() {
@@ -50,7 +56,7 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
-    public boolean isValid() {
+    private boolean isValid() {
         Config.clearError(tilEmail);
         Config.clearError(tilFullName);
         Config.clearError(tilPassword);
@@ -118,10 +124,26 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
                 password = Objects.requireNonNull(tilPassword.getEditText()).getText().toString();
                 retype = Objects.requireNonNull(tilRetype.getEditText()).getText().toString();
                 phone = Objects.requireNonNull(tilPhone.getEditText()).getText().toString();
+                country = ccpCountry.getSelectedCountryNameCode();
 
-                isValid();
+                if (isValid()) {
+                    final ProgressDialog mDialog = new ProgressDialog(CustomerRegistrationFrame.this);
+                    mDialog.setCancelable(false);
+                    mDialog.setCanceledOnTouchOutside(false);
+                    mDialog.setMessage("Đang đăng kí tài khoản.\nBạn vui lòng chờ trong giây lát nhé...");
+                    mDialog.show();
 
-                Toast.makeText(CustomerRegistrationFrame.this, fullName, Toast.LENGTH_SHORT).show();
+//                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<AuthResult> task) {
+//                            if (task.isSuccessful()) {
+//                                String userIdd = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+//                                databaseReference = FirebaseDatabase.getInstance().getReference(User.class.getSimpleName()).child(userIdd);
+//
+//                            }
+//                        }
+//                    });
+                }
 
             }
         });

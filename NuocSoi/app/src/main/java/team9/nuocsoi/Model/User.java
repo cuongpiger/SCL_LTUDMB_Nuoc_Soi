@@ -4,15 +4,17 @@ public class User {
     int type;
     String fullname;
     String phone;
+    String country;
     String email;
     String password;
 
     public User() {}
 
-    public User(int type, String fullname, String phone, String email, String password) {
+    public User(int type, String fullname, String phone, String country, String email, String password) {
         this.type = type;
         this.fullname = fullname;
         this.phone = phone;
+        this.country = country;
         this.email = email;
         this.password = password;
     }
@@ -39,6 +41,14 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getEmail() {
