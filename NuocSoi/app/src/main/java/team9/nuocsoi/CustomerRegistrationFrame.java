@@ -3,10 +3,13 @@ package team9.nuocsoi;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
@@ -27,6 +31,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 
 import java.util.Objects;
 
+import team9.nuocsoi.Model.Customer;
 import team9.nuocsoi.Model.User;
 
 public class CustomerRegistrationFrame extends AppCompatActivity {
@@ -130,29 +135,70 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
                     final ProgressDialog mDialog = new ProgressDialog(CustomerRegistrationFrame.this);
                     mDialog.setCancelable(false);
                     mDialog.setCanceledOnTouchOutside(false);
-                    mDialog.setMessage("Đang đăng kí tài khoản.\nBạn vui lòng chờ trong giây lát nhé...");
+                    mDialog.setMessage("Đang đăng kí tài khoản.\nBạn chờ mình xíu nha...");
                     mDialog.show();
 
-//                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            if (task.isSuccessful()) {
-//                                String userIdd = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-//                                databaseReference = FirebaseDatabase.getInstance().getReference(User.class.getSimpleName()).child(userIdd);
-//
-//                            }
-//                        }
-//                    });
-                }
+                    Customer customer = new Customer(fullName, phone, country, email, password);
 
+                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                                databaseReference = FirebaseDatabase.getInstance().getReference(Customer.class.getSimpleName()).child(userId);
+                                databaseReference.setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        mDialog.dismiss();
+                                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+//                                                    ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Đăng ký thành công", "Kiểm tra email của bạn và xác nhận đăng ký giúp mình nhé.");
+                                                    AlertDialog.Builder builder = new AlertDialog.Builder(CustomerRegistrationFrame.this);
+                                                    builder.setTitle("Đăng ký thành công").
+                                                            setMessage("Kiểm tra email của bạn và xác nhận đăng ký giúp mình nhé.").
+                                                            setCancelable(false).setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                                            dialogInterface.dismiss();
+                                                            CustomerRegistrationFrame.this.finish();
+                                                            onBackPressed();
+                                                        }
+                                                    });
+
+                                                    builder.create().show();
+                                                } else {
+                                                    ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Có tí trục trặc rồi...", task.getException().getMessage());
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                            } else {
+                                mDialog.dismiss();
+                                // https://stackoverflow.com/questions/40093781/check-if-given-email-exists
+                                try {
+                                    throw Objects.requireNonNull(task.getException());
+                                } catch (FirebaseAuthUserCollisionException existEmail) {
+                                    tilEmail.setError("Email này đã được sử dụng!");
+                                    tilEmail.getEditText().requestFocus();
+                                }
+                                catch (Exception e) {
+                                    ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Có tí trục trặc rồi...", e.getMessage());
+                                }
+                            }
+                        }
+                    });
+                }
             }
         });
 
         tvPreviousFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
                 finish();
+                onBackPressed();
             }
         });
 
