@@ -22,6 +22,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
@@ -138,55 +139,59 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
                     mDialog.setMessage("Đang đăng kí tài khoản.\nBạn chờ mình xíu nha...");
                     mDialog.show();
 
+                    // https://stackoverflow.com/questions/39866086/change-password-with-firebase-for-android
+                    // https://stackoverflow.com/questions/40093781/check-if-given-email-exists
                     Customer customer = new Customer(fullName, phone, country, email, password);
-
-                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    firebaseAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                                databaseReference = FirebaseDatabase.getInstance().getReference(Customer.class.getSimpleName()).child(userId);
-                                databaseReference.setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                            if (task.getResult().getSignInMethods().isEmpty()) {
+                                /* New customer */
+                                firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        mDialog.dismiss();
-                                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-//                                                    ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Đăng ký thành công", "Kiểm tra email của bạn và xác nhận đăng ký giúp mình nhé.");
-                                                    AlertDialog.Builder builder = new AlertDialog.Builder(CustomerRegistrationFrame.this);
-                                                    builder.setTitle("Đăng ký thành công").
-                                                            setMessage("Kiểm tra email của bạn và xác nhận đăng ký giúp mình nhé.").
-                                                            setCancelable(false).setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                                            databaseReference = FirebaseDatabase.getInstance().getReference(Customer.class.getSimpleName()).child(userId);
+                                            databaseReference.setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    mDialog.dismiss();
+                                                    firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
-                                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                                            dialogInterface.dismiss();
-                                                            CustomerRegistrationFrame.this.finish();
-                                                            onBackPressed();
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+//                                                    ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Đăng ký thành công", "Kiểm tra email của bạn và xác nhận đăng ký giúp mình nhé.");
+                                                                AlertDialog.Builder builder = new AlertDialog.Builder(CustomerRegistrationFrame.this);
+                                                                builder.setTitle("Đăng ký thành công").
+                                                                        setMessage("Kiểm tra email của bạn và xác nhận đăng ký giúp mình nhé.").
+                                                                        setCancelable(false).setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                                        dialogInterface.dismiss();
+                                                                        CustomerRegistrationFrame.this.finish();
+                                                                        onBackPressed();
+                                                                    }
+                                                                });
+
+                                                                builder.create().show();
+                                                            } else {
+                                                                ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Có tí trục trặc rồi...", task.getException().getMessage());
+                                                            }
                                                         }
                                                     });
-
-                                                    builder.create().show();
-                                                } else {
-                                                    ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Có tí trục trặc rồi...", task.getException().getMessage());
                                                 }
-                                            }
-                                        });
+                                            });
+                                        } else {
+                                            mDialog.dismiss();
+                                            ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Có tí trục trặc rồi...", task.getException().getMessage());
+                                        }
                                     }
                                 });
                             } else {
                                 mDialog.dismiss();
-                                // https://stackoverflow.com/questions/40093781/check-if-given-email-exists
-                                try {
-                                    throw Objects.requireNonNull(task.getException());
-                                } catch (FirebaseAuthUserCollisionException existEmail) {
-                                    tilEmail.setError("Email này đã được sử dụng!");
-                                    tilEmail.getEditText().requestFocus();
-                                }
-                                catch (Exception e) {
-                                    ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Có tí trục trặc rồi...", e.getMessage());
-                                }
+                                tilEmail.setError("Email này đã được sử dụng!");
+                                tilEmail.getEditText().requestFocus();
                             }
                         }
                     });
