@@ -30,6 +30,7 @@ import com.hbb20.CountryCodePicker;
 import org.apache.commons.text.WordUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 
+import java.util.Collections;
 import java.util.Objects;
 
 import team9.nuocsoi.Model.Customer;
@@ -70,35 +71,25 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
         Config.clearError(tilPhone);
 
         if (fullName.isEmpty()) {
-            tilFullName.setError("Bạn chưa nhập tên!");
-            return false;
+            return ReusableCodeForAll.clearFocisEditText(tilFullName, "Bạn chưa nhập tên!");
         } else if (email.isEmpty()) {
-            tilEmail.setError("Bạn chưa nhập email!");
-            return false;
+            return ReusableCodeForAll.clearFocisEditText(tilEmail, "Bạn chưa nhập email!");
         } else if (!EmailValidator.getInstance().isValid(email)) {
-            tilEmail.setError("Email chưa hợp lệ!");
-            return false;
+            return ReusableCodeForAll.clearFocisEditText(tilEmail, "Email chưa hợp lệ!");
         } else if (password.isEmpty()) {
-            tilPassword.setError("Bạn chưa nhập mật khẩu!");
-            return false;
+            return ReusableCodeForAll.clearFocisEditText(tilPassword, "Bạn chưa nhập mật khẩu!");
         } else if (password.length() < 8) {
-            tilPassword.setError("Mật khẩu phải hơn 8 kí tự!");
-            return false;
+            return ReusableCodeForAll.clearFocisEditText(tilPassword, "Mật khẩu phải hơn 8 kí tự!");
         } else if (password.length() > 18) {
-            tilPassword.setError("Mật khẩu phải dưới 18 kí tự!");
-            return false;
+            return ReusableCodeForAll.clearFocisEditText(tilPassword, "Mật khẩu phải dưới 18 kí tự!");
         } else if (retype.isEmpty()) {
-            tilRetype.setError("Bạn chưa xác thực mật khẩu!");
-            return false;
+            return ReusableCodeForAll.clearFocisEditText(tilRetype, "Bạn chưa xác thực mật khẩu!");
         } else if (!retype.equals(password)) {
-            tilRetype.setError("Bạn chưa nhập đúng mật khẩu!");
-            return false;
+            return ReusableCodeForAll.clearFocisEditText(tilRetype, "Mật khẩu xác thực chưa đúng!");
         } else if (phone.isEmpty()) {
-            tilPhone.setError("Bạn chưa nhập SĐT!");
-            return false;
+            return ReusableCodeForAll.clearFocisEditText(tilPhone, "Bạn chưa nhập SĐT!");
         } else if (!phone.matches(Config.PHONE_PATTERN)) {
-            tilPhone.setError("SĐT chưa hợp lệ!");
-            return false;
+            return ReusableCodeForAll.clearFocisEditText(tilPhone, "SĐT chưa hợp lệ!");
         }
 
         return true;
@@ -152,7 +143,10 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
                                             String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                                            databaseReference = FirebaseDatabase.getInstance().getReference(Customer.class.getSimpleName()).child(userId);
+                                            firebaseDatabase = FirebaseDatabase.getInstance();
+                                            databaseReference = firebaseDatabase.getReference(User.class.getSimpleName()).child(userId);
+                                            databaseReference.setValue(Collections.singletonMap("role", Customer.class.getSimpleName()));
+                                            databaseReference = firebaseDatabase.getReference(Customer.class.getSimpleName()).child(userId);
                                             databaseReference.setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
