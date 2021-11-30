@@ -3,12 +3,12 @@ package team9.nuocsoi;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
 
@@ -37,7 +36,6 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
     User customer;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks verifiedCallback;
     PhoneAuthProvider.ForceResendingToken resendingToken;
 
@@ -53,7 +51,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
         setupEventListeners();
         setupPhoneVerification();
 
-        startVerificationPhoneNumber(customer.getPhoneNumberWithPlus());
+        startVerificationPhoneNumber(customer.takePhoneNumberWithPlus());
         countDownTimer();
     }
 
@@ -80,13 +78,13 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
         firebaseAuth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                String phoneNumber = firebaseAuth.getCurrentUser().getPhoneNumber();
-                Toast.makeText(CustomerVerifyPhoneFrame.this, "Success " + phoneNumber, Toast.LENGTH_SHORT).show();
+                firebaseDatabase.getReference(User.class.getSimpleName()).child(userId).setValue(customer);
+                finishAffinity();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(CustomerVerifyPhoneFrame.this, "Failure!!!!!", Toast.LENGTH_SHORT).show();
+                ReusableCodeForAll.clearFocisEditText(tilOtp, "Mã OTP không chính xác!");
             }
         });
     }
@@ -125,7 +123,11 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
     private void setupView() {
         tvCopyright.setText(Config.COPYRIGHT);
         tilPhone.getEditText().setText(customer.getPhone());
+        tilPhone.getEditText().setEnabled(false);
+        tilPhone.getEditText().setTextColor(Color.BLACK);
         ccpCountry.setCountryForPhoneCode(Integer.parseInt(customer.getCountry()));
+        ccpCountry.setEnabled(false);
+        ccpCountry.setCcpClickable(false);
         btnResend.setEnabled(false);
         btnResend.setAlpha(0.5f);
     }
@@ -180,7 +182,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
         btnResend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                resendVerification(customer.getPhoneNumberWithPlus());
+                resendVerification(customer.takePhoneNumberWithPlus());
                 btnResend.setEnabled(false);
                 btnResend.setAlpha(0.5f);
                 countDownTimer();

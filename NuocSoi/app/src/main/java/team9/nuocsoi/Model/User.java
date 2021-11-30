@@ -59,7 +59,7 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public String getPhoneNumberWithPlus() {
+    public String takePhoneNumberWithPlus() {
         return "+" + this.country + this.phone;
     }
 }

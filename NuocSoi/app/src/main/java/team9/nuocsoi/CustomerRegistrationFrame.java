@@ -119,10 +119,9 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
                 password = Objects.requireNonNull(tilPassword.getEditText()).getText().toString();
                 retype = Objects.requireNonNull(tilRetype.getEditText()).getText().toString();
                 phone = Objects.requireNonNull(tilPhone.getEditText()).getText().toString();
-                country = ccpCountry.getDefaultCountryCode();
+                country = ccpCountry.getSelectedCountryCode();
 
-//                if (isValid())
-                if (true) {
+                if (isValid()) {
                     final ProgressDialog mDialog = new ProgressDialog(CustomerRegistrationFrame.this);
                     mDialog.setCancelable(false);
                     mDialog.setCanceledOnTouchOutside(false);
@@ -131,11 +130,11 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
 
                     // https://stackoverflow.com/questions/39866086/change-password-with-firebase-for-android
                     // https://stackoverflow.com/questions/40093781/check-if-given-email-exists
-//                    User customer = new User(fullName, country, phone, email, Customer.class.getSimpleName());
+                    User customer = new User(fullName, country, phone, email, Customer.class.getSimpleName());
 
-                    User customer = new User("Mạnh Cường", "84", "0786333545", "cuongpigerr@gmail.com", Customer.class.getSimpleName());
-                    email = customer.getEmail();
-                    password = "12345678";
+//                    User customer = new User("Mạnh Cường", "84", "0786333545", "cuongpigerr@gmail.com", Customer.class.getSimpleName());
+//                    email = customer.getEmail();
+//                    password = "12345678";
 
                     firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
