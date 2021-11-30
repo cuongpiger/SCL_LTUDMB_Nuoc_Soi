@@ -60,6 +60,6 @@ public class User implements Serializable {
     }
 
     public String getPhoneNumberWithPlus() {
-        return "+84786333545";
+        return "+" + this.country + this.phone;
     }
 }
