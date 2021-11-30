@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -121,9 +122,10 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
                 password = Objects.requireNonNull(tilPassword.getEditText()).getText().toString();
                 retype = Objects.requireNonNull(tilRetype.getEditText()).getText().toString();
                 phone = Objects.requireNonNull(tilPhone.getEditText()).getText().toString();
-                country = ccpCountry.getSelectedCountryNameCode();
+                country = ccpCountry.getDefaultCountryCode();
 
-                if (isValid()) {
+//                if (isValid())
+                if (true) {
                     final ProgressDialog mDialog = new ProgressDialog(CustomerRegistrationFrame.this);
                     mDialog.setCancelable(false);
                     mDialog.setCanceledOnTouchOutside(false);
@@ -132,60 +134,45 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
 
                     // https://stackoverflow.com/questions/39866086/change-password-with-firebase-for-android
                     // https://stackoverflow.com/questions/40093781/check-if-given-email-exists
-                    Customer customer = new Customer(fullName, phone, country, email, password);
-                    firebaseAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-                            if (task.getResult().getSignInMethods().isEmpty()) {
-                                /* New customer */
-                                firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                                            firebaseDatabase = FirebaseDatabase.getInstance();
-                                            databaseReference = firebaseDatabase.getReference(User.class.getSimpleName()).child(userId);
-                                            databaseReference.setValue(Collections.singletonMap("role", Customer.class.getSimpleName()));
-                                            databaseReference = firebaseDatabase.getReference(Customer.class.getSimpleName()).child(userId);
-                                            databaseReference.setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    mDialog.dismiss();
-                                                    firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if (task.isSuccessful()) {
-//                                                    ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Đăng ký thành công", "Kiểm tra email của bạn và xác nhận đăng ký giúp mình nhé.");
-                                                                AlertDialog.Builder builder = new AlertDialog.Builder(CustomerRegistrationFrame.this);
-                                                                builder.setTitle("Đăng ký thành công").
-                                                                        setMessage("Kiểm tra email của bạn và xác nhận đăng ký giúp mình nhé.").
-                                                                        setCancelable(false).setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
-                                                                    @Override
-                                                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                                                        dialogInterface.dismiss();
-                                                                        CustomerRegistrationFrame.this.finish();
-                                                                        onBackPressed();
-                                                                    }
-                                                                });
+//                    User customer = new User(fullName, country, phone, email, Customer.class.getSimpleName());
 
-                                                                builder.create().show();
-                                                            } else {
-                                                                ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Có tí trục trặc rồi...", task.getException().getMessage());
-                                                            }
-                                                        }
-                                                    });
+                    User customer = new User("Mạnh Cường", "84", "0786333545", "cuongpigerr@gmail.com", Customer.class.getSimpleName());
+                    email = customer.getEmail();
+                    password = "12345678";
+
+                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                                firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        mDialog.dismiss();
+                                        if (task.isSuccessful()) {
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(CustomerRegistrationFrame.this);
+                                            builder.setTitle("Đăng ký thành công").
+                                                    setMessage("Kiểm tra tin nhắn điện thoại và email của bạn để xác nhận đăng ký giúp mình nhé.").
+                                                    setCancelable(false).setPositiveButton("Tiếp tục", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dialogInterface.dismiss();
+                                                    Intent intent = new Intent(CustomerRegistrationFrame.this, CustomerVerifyPhoneFrame.class);
+                                                    intent.putExtra("user", customer);
+                                                    intent.putExtra("userId", userId);
+                                                    startActivity(intent);
                                                 }
                                             });
+
+                                            builder.create().show();
                                         } else {
-                                            mDialog.dismiss();
                                             ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Có tí trục trặc rồi...", task.getException().getMessage());
                                         }
                                     }
                                 });
                             } else {
                                 mDialog.dismiss();
-                                tilEmail.setError("Email này đã được sử dụng!");
-                                tilEmail.getEditText().requestFocus();
+                                ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Có tí trục trặc rồi...", task.getException().getMessage());
                             }
                         }
                     });

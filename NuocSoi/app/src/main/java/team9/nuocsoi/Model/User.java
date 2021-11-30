@@ -1,25 +1,65 @@
 package team9.nuocsoi.Model;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable {
     String fullname;
     String phone;
     String country;
     String email;
-    String password;
+    String role;
 
     public User() {}
 
-    public User(String fullname, String phone, String country, String email, String password) {
+    public User(String fullname, String country, String phone, String email, String role) {
         this.fullname = fullname;
-        this.phone = phone;
         this.country = country;
+        this.phone = phone;
         this.email = email;
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+        this.role = role;
     }
 
-    public boolean matchPassword(String candidatePassword) {
-        return BCrypt.checkpw(candidatePassword, this.password);
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getPhoneNumberWithPlus() {
+        return "+84786333545";
     }
 }

@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10555555555555556" />
         <entry key="app/src/main/res/layout/child_sign_in_frame.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/customer_registration_frame.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/customer_verify_phone_frame.xml" value="0.2726449275362319" />
         <entry key="app/src/main/res/layout/email_sign_in_frame.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/phone_sign_in_frame.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/sign_in_frame.xml" value="0.22" />
