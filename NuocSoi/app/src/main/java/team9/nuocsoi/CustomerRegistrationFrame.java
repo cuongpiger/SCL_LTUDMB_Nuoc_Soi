@@ -43,8 +43,6 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
     TextView tvPreviousFrame, tvCopyright;
     CountryCodePicker ccpCountry;
     FirebaseAuth firebaseAuth;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
     String fullName, email, password, retype, phone, country;
     TextInputLayout tilFullName, tilEmail, tilPassword, tilRetype, tilPhone;
 
@@ -60,7 +58,6 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
     }
 
     private void setupFirebase() {
-        databaseReference = FirebaseDatabase.getInstance().getReference(User.class.getSimpleName());
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
