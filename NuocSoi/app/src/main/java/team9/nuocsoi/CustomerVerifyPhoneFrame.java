@@ -3,6 +3,7 @@ package team9.nuocsoi;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks verifiedCallback;
     PhoneAuthProvider.ForceResendingToken resendingToken;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
                 super.onCodeSent(id, forceResendingToken);
                 resendingToken = forceResendingToken;
                 verificationId = id;
+                progressDialog.dismiss();
             }
         };
     }
@@ -138,6 +141,8 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
         ccpCountry.setCcpClickable(false);
         btnResend.setEnabled(false);
         btnResend.setAlpha(0.5f);
+
+        progressDialog = new ProgressDialog(CustomerVerifyPhoneFrame.this);
     }
 
     private void setupFirebase() {
@@ -148,6 +153,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
     private void startVerificationPhoneNumber(String phoneNumber) {
         PhoneAuthOptions phoneAuthOptions = PhoneAuthOptions.newBuilder(firebaseAuth).setPhoneNumber(phoneNumber).setTimeout(60L, TimeUnit.SECONDS).setActivity(CustomerVerifyPhoneFrame.this).setCallbacks(verifiedCallback).build();
         PhoneAuthProvider.verifyPhoneNumber(phoneAuthOptions);
+        ReusableCodeForAll.showProgressDialog(progressDialog, "Đang xác thực người máy, bạn đợi tí nha...");
     }
 
     private void countDownTimer() {
@@ -195,6 +201,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
                 btnResend.setEnabled(false);
                 btnResend.setAlpha(0.5f);
                 countDownTimer();
+                ReusableCodeForAll.showProgressDialog(progressDialog, "Đang xác thực người máy, bạn đợi tí nha...");
             }
         });
     }
