@@ -162,7 +162,7 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
 
                                             builder.create().show();
                                         } else {
-                                            ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Có tí trục trặc rồi...", task.getException().getMessage());
+                                            ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, Config.ERROR_TITLE, task.getException().getMessage());
                                         }
                                     }
                                 });
