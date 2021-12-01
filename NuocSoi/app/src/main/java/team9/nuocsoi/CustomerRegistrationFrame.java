@@ -125,7 +125,7 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
                     final ProgressDialog mDialog = new ProgressDialog(CustomerRegistrationFrame.this);
                     mDialog.setCancelable(false);
                     mDialog.setCanceledOnTouchOutside(false);
-                    mDialog.setMessage("Đang đăng kí tài khoản.\nBạn chờ mình xíu nha...");
+                    mDialog.setMessage("Đang đăng ký tài khoản.\nBạn chờ mình xíu nha...");
                     mDialog.show();
 
                     // https://stackoverflow.com/questions/39866086/change-password-with-firebase-for-android
