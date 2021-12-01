@@ -35,11 +35,11 @@
             android:layout_height="wrap_content"
             android:text="Kiểm tra tin nhắn điện thoại\nvà nhập mã OTP vào bên dưới nhé."
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:clickable="true"/>
 
         <LinearLayout
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -70,15 +70,34 @@
             android:id="@+id/tilOtp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_gravity="right">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+            <com.chaos.view.PinView
+                android:id="@+id/pvOtp"
+                style="@style/PinWidget.PinView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Mã OTP"
-                android:text=""
-                android:inputType="numberDecimal" />
+                android:cursorVisible="true"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:inputType="numberDecimal"
+                android:itemBackground="@color/white"
+                android:textColor="@color/gray"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cursorColor="@color/black"
+                app:cursorWidth="1dp"
+                app:hideLineWhenFilled="true"
+                app:itemCount="6"
+                app:itemHeight="40dp"
+                app:itemRadius="7dp"
+                app:itemSpacing="4dp"
+                app:itemWidth="40dp"
+                app:lineColor="@color/gray"
+                app:lineWidth="2dp"
+                app:viewType="rectangle" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -91,7 +110,6 @@
             android:textColor="@color/white"
             android:drawableLeft="@drawable/ic_baseline_verified_24"
             android:text="Xác nhận" />
-
 
         <TextView
             android:layout_marginTop="15dp"

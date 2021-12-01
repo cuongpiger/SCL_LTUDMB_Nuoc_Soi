@@ -3,13 +3,16 @@ package team9.nuocsoi;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.chaos.view.PinView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
@@ -32,6 +35,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
     TextView tvCopyright, tvPreviousFrame;
     CountryCodePicker ccpCountry;
     TextInputLayout tilPhone, tilOtp;
+    PinView pvOtp;
     String verificationId, userId;
     User customer;
     FirebaseAuth firebaseAuth;
@@ -80,6 +84,9 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
             public void onSuccess(AuthResult authResult) {
                 firebaseDatabase.getReference(User.class.getSimpleName()).child(userId).setValue(customer);
                 finishAffinity();
+                Toast.makeText(CustomerVerifyPhoneFrame.this, "Hoàn tất rồi, hãy nhớ xác nhận email nữa nhé!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CustomerVerifyPhoneFrame.this, SignInFrame.class);
+                startActivity(intent);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -111,6 +118,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
         tvCopyright = findViewById(R.id.tvCopyright);
         tvPreviousFrame = findViewById(R.id.tvPreviousFrame);
         tilOtp = findViewById(R.id.tilOtp);
+        pvOtp = findViewById(R.id.pvOtp);
         tilPhone = findViewById(R.id.tilPhone);
         ccpCountry = findViewById(R.id.ccpCountry);
     }
@@ -170,7 +178,8 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String otpCode = tilOtp.getEditText().getText().toString().trim();
+//                String otpCode = tilOtp.getEditText().getText().toString().trim();
+                String otpCode = pvOtp.getText().toString();
                 if (otpCode.isEmpty() && otpCode.length() < Config.OTP_LENGTH) {
                     ReusableCodeForAll.clearFocisEditText(tilOtp, "Bạn chưa nhập mã OTP!");
                 } else {
