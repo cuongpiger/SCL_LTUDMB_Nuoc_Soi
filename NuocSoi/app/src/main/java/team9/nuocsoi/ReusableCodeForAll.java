@@ -1,6 +1,7 @@
 package team9.nuocsoi;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
@@ -22,5 +23,12 @@ public class ReusableCodeForAll {
         textInputLayout.setError(message);
         textInputLayout.getEditText().requestFocus();
         return false;
+    }
+
+    public static void showProgressDialog(ProgressDialog mDialog, String message) {
+        mDialog.setCancelable(false);
+        mDialog.setCanceledOnTouchOutside(false);
+        mDialog.setMessage(message);
+        mDialog.show();
     }
 }

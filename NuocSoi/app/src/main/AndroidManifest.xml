@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NuocSoi">
         <activity
+            android:name=".UserForgetPasswordFrame"
+            android:exported="true" />
+        <activity
             android:name=".CustomerVerifyPhoneFrame"
             android:exported="true" />
         <activity

@@ -29,12 +29,12 @@
             android:layout_gravity="center_horizontal"/>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
@@ -42,13 +42,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Mật khẩu"
@@ -73,7 +73,6 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:clickable="true"/>
-
 
         <Button
             android:id="@+id/btnSignInEmail"
