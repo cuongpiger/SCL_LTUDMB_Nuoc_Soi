@@ -131,7 +131,7 @@ public class EmailSignInFrame extends AppCompatActivity {
                                 }
                             } else {
                                 mDialog.dismiss();
-                                ReusableCodeForAll.showAlert(EmailSignInFrame.this, Config.ERROR_TITLE, task.getException().getMessage());
+                                ReusableCodeForAll.showAlert(EmailSignInFrame.this, "Đăng nhập thất bại!", "Bạn kiểm tra lại email và mật khẩu giúp mình nhé.");
                             }
                         }
                     });
