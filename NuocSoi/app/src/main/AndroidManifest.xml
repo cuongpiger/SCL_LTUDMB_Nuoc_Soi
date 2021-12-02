@@ -13,13 +13,13 @@
             android:name=".SignInVerifyPhoneFrame"
             android:exported="true" />
         <activity
+            android:name=".PhoneSignInFrame"
+            android:exported="true" />
+        <activity
             android:name=".UserForgetPasswordFrame"
             android:exported="true" />
         <activity
             android:name=".CustomerVerifyPhoneFrame"
-            android:exported="true" />
-        <activity
-            android:name=".PhoneSignInFrame"
             android:exported="true" />
         <activity
             android:name=".EmailSignInFrame"

@@ -26,7 +26,6 @@ public class EmailSignInFrame extends AppCompatActivity {
 
     TextView tvCopyright, tvPreviousFrame, tvForgetPassword;
     TextInputLayout tilEmail, tilPassword;
-    CheckBox cbKeepSignIn;
     Button btnSignInEmail;
     FirebaseAuth firebaseAuth;
 
@@ -47,7 +46,6 @@ public class EmailSignInFrame extends AppCompatActivity {
         tvForgetPassword = findViewById(R.id.tvForgetPassword);
         tilEmail = findViewById(R.id.tilEmail);
         tilPassword = findViewById(R.id.tilPassword);
-        cbKeepSignIn = findViewById(R.id.cbKeepSignIn);
         btnSignInEmail = findViewById(R.id.btnSignInEmail);
     }
 
@@ -125,13 +123,11 @@ public class EmailSignInFrame extends AppCompatActivity {
                                                     dialog.cancel();
                                                     dialog.dismiss();
                                                 }
-                                            });
-                                    AlertDialog alert = builder.create();
-                                    alert.show();
+                                            }).create().show();
                                 }
                             } else {
                                 mDialog.dismiss();
-                                ReusableCodeForAll.showAlert(EmailSignInFrame.this, Config.ERROR_TITLE, task.getException().getMessage());
+                                ReusableCodeForAll.showAlert(EmailSignInFrame.this, "Đăng nhập thất bại!", "Bạn kiểm tra lại email và mật khẩu giúp mình nhé.");
                             }
                         }
                     });

@@ -14,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
@@ -83,22 +85,34 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
     }
 
     private void verify(PhoneAuthCredential credential) {
-        firebaseAuth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+        firebaseAuth.getCurrentUser().linkWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onSuccess(AuthResult authResult) {
+            public void onComplete(@NonNull Task<AuthResult> task) {
                 firebaseDatabase.getReference(User.class.getSimpleName()).child(userId).setValue(customer);
-                firebaseDatabase.getReference(Config.PHONE_VERIFICATION).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(Collections.singletonMap("userId", userId));
+                firebaseAuth.signOut();
                 finishAffinity();
                 Toast.makeText(CustomerVerifyPhoneFrame.this, "Hoàn tất rồi, hãy nhớ xác nhận email nữa nhé!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CustomerVerifyPhoneFrame.this, SignInFrame.class);
                 startActivity(intent);
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                ReusableCodeForAll.clearFocisEditText(tilOtp, "Mã OTP không chính xác!");
-            }
         });
+
+//        firebaseAuth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+//            @Override
+//            public void onSuccess(AuthResult authResult) {
+//                firebaseDatabase.getReference(User.class.getSimpleName()).child(userId).setValue(customer);
+//                firebaseDatabase.getReference(Config.PHONE_VERIFICATION).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(Collections.singletonMap("userId", userId));
+//                finishAffinity();
+//                Toast.makeText(CustomerVerifyPhoneFrame.this, "Hoàn tất rồi, hãy nhớ xác nhận email nữa nhé!", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(CustomerVerifyPhoneFrame.this, SignInFrame.class);
+//                startActivity(intent);
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                ReusableCodeForAll.clearFocisEditText(tilOtp, "Mã OTP không chính xác!");
+//            }
+//        });
     }
 
     private void verifyPhoneNumber(String otpCode) {

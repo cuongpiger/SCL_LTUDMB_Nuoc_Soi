@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
 
 public class PhoneSignInFrame extends AppCompatActivity {
@@ -21,6 +23,8 @@ public class PhoneSignInFrame extends AppCompatActivity {
     Button btnSignInPhone;
     CheckBox cvKeepSignIn;
     FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,18 +74,19 @@ public class PhoneSignInFrame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String phone = tilPhone.getEditText().getText().toString();
-                String country = ccpCountry.getSelectedCountryCodeWithPlus();
+                String country = ccpCountry.getSelectedCountryCode();
                 if (isValid(phone)) {
                     Intent intent = new Intent(PhoneSignInFrame.this, SignInVerifyPhoneFrame.class);
-                    intent.putExtra("phone", country+phone);
+                    intent.putExtra("country", country);
+                    intent.putExtra("phone", phone);
                     startActivity(intent);
-                    finish();
                 }
             }
         });
     }
 
     private void setupFirebase() {
+        firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
     }
 }
