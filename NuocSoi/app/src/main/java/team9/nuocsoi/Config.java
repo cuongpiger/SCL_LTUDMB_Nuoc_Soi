@@ -16,6 +16,7 @@ public class Config {
     public static final String COUNTRY_NAME_CODE = "VN";
     public static final String PHONE_PATTERN = "^[0-9]{10,11}$";
     public static final String ERROR_TITLE = "Có tí trục trặc rồi...";
+    public static final String PHONE_VERIFICATION = "PhoneVerification";
 
 
     public static final int TURN_SIGN_IN_DELAY = 0; // 3000

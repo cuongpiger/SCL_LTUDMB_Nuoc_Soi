@@ -26,6 +26,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
 
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import team9.nuocsoi.Model.User;
@@ -86,6 +87,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
             @Override
             public void onSuccess(AuthResult authResult) {
                 firebaseDatabase.getReference(User.class.getSimpleName()).child(userId).setValue(customer);
+                firebaseDatabase.getReference(Config.PHONE_VERIFICATION).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(Collections.singletonMap("userId", userId));
                 finishAffinity();
                 Toast.makeText(CustomerVerifyPhoneFrame.this, "Hoàn tất rồi, hãy nhớ xác nhận email nữa nhé!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CustomerVerifyPhoneFrame.this, SignInFrame.class);
