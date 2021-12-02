@@ -31,4 +31,8 @@ public class ReusableCodeForAll {
         mDialog.setMessage(message);
         mDialog.show();
     }
+
+    public static String genPhoneNumber(String country, String phone) {
+        return "+" + country + phone;
+    }
 }
