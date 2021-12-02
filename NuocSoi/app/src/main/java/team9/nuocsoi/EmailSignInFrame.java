@@ -3,7 +3,9 @@ package team9.nuocsoi;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -102,7 +104,30 @@ public class EmailSignInFrame extends AppCompatActivity {
                                     Toast.makeText(EmailSignInFrame.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 //                                    Intent intent = new Intent()
                                 } else {
-                                    ReusableCodeForAll.showAlert(EmailSignInFrame.this, Config.ERROR_TITLE, "Email này chưa được xác thực!");
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(EmailSignInFrame.this);
+                                    builder.setTitle("Email này chưa được xác thực!")
+                                            .setMessage("Bạn có muốn xác thực lại email này không?")
+                                            .setCancelable(false)
+                                            .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            FirebaseAuth.getInstance().signOut();
+                                                            Toast.makeText(EmailSignInFrame.this, "Email xác thực vừa được gửi lại. Hãy nhớ kiểm tra email của bạn nhé.", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                                }
+                                            })
+                                            .setNegativeButton("Từ chối", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    FirebaseAuth.getInstance().signOut();
+                                                    dialog.cancel();
+                                                    dialog.dismiss();
+                                                }
+                                            });
+                                    AlertDialog alert = builder.create();
+                                    alert.show();
                                 }
                             } else {
                                 mDialog.dismiss();
