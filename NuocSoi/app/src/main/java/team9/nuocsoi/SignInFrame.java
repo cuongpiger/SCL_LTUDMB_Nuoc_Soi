@@ -10,7 +10,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SignInFrame extends AppCompatActivity {
 
@@ -97,7 +96,10 @@ public class SignInFrame extends AppCompatActivity {
         btnSignInPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SignInFrame.this, "Sẽ hỗ trợ sau.", Toast.LENGTH_SHORT).show();
+                Intent signInPhone = new Intent(SignInFrame.this, PhoneSignInFrame.class);
+                signInPhone.putExtra("Home", "Phone");
+                startActivity(signInPhone);
+//                finish();
             }
         });
 

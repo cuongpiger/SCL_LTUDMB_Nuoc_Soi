@@ -8,7 +8,6 @@ public class User implements Serializable {
     String country;
     String email;
     String role;
-    String state;
 
     public User() {}
 

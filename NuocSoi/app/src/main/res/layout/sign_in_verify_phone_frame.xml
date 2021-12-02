@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/customer_registration_background"
+    tools:context=".SignInVerifyPhoneFrame">
+
+    <LinearLayout
+        android:layout_width="@dimen/fwd_width"
+        android:layout_height="wrap_content"
+        android:background="@drawable/flt_window"
+        android:elevation="@dimen/fwd_elevation"
+        android:orientation="vertical"
+        android:padding="@dimen/fwd_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đăng nhập SĐT"
+            android:textSize="@dimen/fwd_title_size"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:textStyle="italic"
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:text="Kiểm tra tin nhắn điện thoại\nvà nhập mã OTP vào bên dưới nhé."
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:clickable="true"/>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccpCountry"
+                android:paddingBottom="3dp"
+                android:layout_gravity="left|bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Điện thoại"
+                    android:text=""
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilOtp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp">
+
+            <com.chaos.view.PinView
+                android:id="@+id/pvOtp"
+                style="@style/PinWidget.PinView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:cursorVisible="true"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:inputType="numberDecimal"
+                android:itemBackground="@color/white"
+                android:textColor="@color/gray"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cursorColor="@color/black"
+                app:cursorWidth="1dp"
+                app:hideLineWhenFilled="true"
+                app:itemCount="6"
+                app:itemHeight="40dp"
+                app:itemRadius="7dp"
+                app:itemSpacing="4dp"
+                app:itemWidth="40dp"
+                app:lineColor="@color/gray"
+                app:lineWidth="2dp"
+                app:viewType="rectangle" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnVerify"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_blue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:drawableLeft="@drawable/ic_baseline_verified_24"
+            android:text="Xác nhận" />
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/gray" />
+
+        <Button
+            android:id="@+id/btnResend"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_green"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:drawableLeft="@drawable/ic_baseline_change_circle_24"
+            android:text="Gửi lại mã OTP" />
+
+        <TextView
+            android:id="@+id/tvPreviousFrame"
+            android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quay về trang trước"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:clickable="true"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCopyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:textAlignment="center"
+        android:textColor="@color/gray"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

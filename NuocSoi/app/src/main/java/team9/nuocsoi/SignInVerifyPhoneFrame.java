@@ -3,7 +3,9 @@ package team9.nuocsoi;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,23 +27,30 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.auth.SignInMethodQueryResult;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hbb20.CountryCodePicker;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import team9.nuocsoi.Model.User;
 
-public class CustomerVerifyPhoneFrame extends AppCompatActivity {
+public class SignInVerifyPhoneFrame extends AppCompatActivity {
 
     Button btnVerify, btnResend;
     TextView tvCopyright, tvPreviousFrame;
     CountryCodePicker ccpCountry;
     TextInputLayout tilPhone, tilOtp;
     PinView pvOtp;
-    String verificationId, userId;
-    User customer;
+    String verificationId, userId, country, phone;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks verifiedCallback;
@@ -51,7 +60,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.customer_verify_phone_frame);
+        setContentView(R.layout.sign_in_verify_phone_frame);
 
         referWidgets();
         getValues();
@@ -60,7 +69,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
         setupEventListeners();
         setupPhoneVerification();
 
-        startVerificationPhoneNumber(customer.takePhoneNumberWithPlus());
+        startVerificationPhoneNumber(ReusableCodeForAll.genPhoneNumber(country, phone));
         countDownTimer();
     }
 
@@ -85,34 +94,67 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
     }
 
     private void verify(PhoneAuthCredential credential) {
-        firebaseAuth.getCurrentUser().linkWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                firebaseDatabase.getReference(User.class.getSimpleName()).child(userId).setValue(customer);
-                firebaseAuth.signOut();
-                finishAffinity();
-                Toast.makeText(CustomerVerifyPhoneFrame.this, "Hoàn tất rồi, hãy nhớ xác nhận email nữa nhé!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(CustomerVerifyPhoneFrame.this, SignInFrame.class);
-                startActivity(intent);
+            public void onSuccess(AuthResult authResult) {
+                checkUserVerifyEmail(authResult);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                ReusableCodeForAll.clearFocisEditText(tilOtp, "Mã OTP không chính xác!");
             }
         });
+    }
 
-//        firebaseAuth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-//            @Override
-//            public void onSuccess(AuthResult authResult) {
-//                firebaseDatabase.getReference(User.class.getSimpleName()).child(userId).setValue(customer);
-//                firebaseDatabase.getReference(Config.PHONE_VERIFICATION).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(Collections.singletonMap("userId", userId));
-//                finishAffinity();
-//                Toast.makeText(CustomerVerifyPhoneFrame.this, "Hoàn tất rồi, hãy nhớ xác nhận email nữa nhé!", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(CustomerVerifyPhoneFrame.this, SignInFrame.class);
-//                startActivity(intent);
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                ReusableCodeForAll.clearFocisEditText(tilOtp, "Mã OTP không chính xác!");
-//            }
-//        });
+    private void checkUserVerifyEmail(AuthResult authResult) {
+        if (authResult.getUser().getEmail() == null) {
+            authResult.getUser().delete();
+            new AlertDialog.Builder(SignInVerifyPhoneFrame.this)
+                    .setTitle("Đăng nhập thất bại")
+                    .setMessage("Số điện thoại này chưa được đăng kí.\nBạn sẽ được đưa về màn hình đăng nhập.")
+                    .setCancelable(false)
+                    .setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            authResult.getUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    finishAffinity();
+                                    startActivity(new Intent(SignInVerifyPhoneFrame.this, SignInFrame.class));
+                                }
+                            });
+                        }
+                    }).create().show();
+        } else {
+            if (authResult.getUser().isEmailVerified()) {
+                Toast.makeText(SignInVerifyPhoneFrame.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+            } else {
+                new AlertDialog.Builder(SignInVerifyPhoneFrame.this)
+                        .setTitle("Email này chưa được xác thực!")
+                        .setMessage("Bạn có muốn xác thực lại email này không?")
+                        .setCancelable(false)
+                        .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                authResult.getUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        FirebaseAuth.getInstance().signOut();
+                                        Toast.makeText(SignInVerifyPhoneFrame.this, "Email xác thực vừa được gửi lại. Hãy nhớ kiểm tra email của bạn nhé.", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                });
+                            }
+                        })
+                        .setNegativeButton("Từ chối", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                FirebaseAuth.getInstance().signOut();
+                                dialog.dismiss();
+                                finish();
+                                startActivity(new Intent(SignInVerifyPhoneFrame.this, SignInFrame.class));
+                            }
+                        }).create().show();
+            }
+        }
     }
 
     private void verifyPhoneNumber(String otpCode) {
@@ -124,7 +166,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
         PhoneAuthOptions options = PhoneAuthOptions.newBuilder(firebaseAuth)
                 .setPhoneNumber(phoneNumber)
                 .setTimeout(60L, TimeUnit.SECONDS)
-                .setActivity(CustomerVerifyPhoneFrame.this)
+                .setActivity(SignInVerifyPhoneFrame.this)
                 .setCallbacks(verifiedCallback)
                 .setForceResendingToken(resendingToken)
                 .build();
@@ -143,22 +185,23 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
     }
 
     private void getValues() {
-        customer = (User) getIntent().getSerializableExtra("user");
+        country = getIntent().getStringExtra("country");
+        phone = getIntent().getStringExtra("phone");
         userId = getIntent().getStringExtra("userId");
     }
 
     private void setupView() {
         tvCopyright.setText(Config.COPYRIGHT);
-        tilPhone.getEditText().setText(customer.getPhone());
+        tilPhone.getEditText().setText(phone);
         tilPhone.getEditText().setEnabled(false);
         tilPhone.getEditText().setTextColor(Color.BLACK);
-        ccpCountry.setCountryForPhoneCode(Integer.parseInt(customer.getCountry()));
+        ccpCountry.setCountryForPhoneCode(Integer.parseInt(country));
         ccpCountry.setEnabled(false);
         ccpCountry.setCcpClickable(false);
         btnResend.setEnabled(false);
         btnResend.setAlpha(0.5f);
 
-        progressDialog = new ProgressDialog(CustomerVerifyPhoneFrame.this);
+        progressDialog = new ProgressDialog(SignInVerifyPhoneFrame.this);
     }
 
     private void setupFirebase() {
@@ -167,7 +210,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
     }
 
     private void startVerificationPhoneNumber(String phoneNumber) {
-        PhoneAuthOptions phoneAuthOptions = PhoneAuthOptions.newBuilder(firebaseAuth).setPhoneNumber(phoneNumber).setTimeout(60L, TimeUnit.SECONDS).setActivity(CustomerVerifyPhoneFrame.this).setCallbacks(verifiedCallback).build();
+        PhoneAuthOptions phoneAuthOptions = PhoneAuthOptions.newBuilder(firebaseAuth).setPhoneNumber(phoneNumber).setTimeout(60L, TimeUnit.SECONDS).setActivity(SignInVerifyPhoneFrame.this).setCallbacks(verifiedCallback).build();
         PhoneAuthProvider.verifyPhoneNumber(phoneAuthOptions);
         ReusableCodeForAll.showProgressDialog(progressDialog, "Đang xác thực người máy, bạn đợi tí nha...");
     }
@@ -213,7 +256,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
         btnResend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                resendVerification(customer.takePhoneNumberWithPlus());
+                resendVerification(ReusableCodeForAll.genPhoneNumber(country, phone));
                 btnResend.setEnabled(false);
                 btnResend.setAlpha(0.5f);
                 countDownTimer();
