@@ -62,32 +62,32 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
     }
 
     private boolean isValid() {
-        Config.clearError(tilEmail);
-        Config.clearError(tilFullName);
-        Config.clearError(tilPassword);
-        Config.clearError(tilRetype);
-        Config.clearError(tilPhone);
+        ReusableCodeForAll.clearError(tilEmail);
+        ReusableCodeForAll.clearError(tilFullName);
+        ReusableCodeForAll.clearError(tilPassword);
+        ReusableCodeForAll.clearError(tilRetype);
+        ReusableCodeForAll.clearError(tilPhone);
 
         if (fullName.isEmpty()) {
-            return ReusableCodeForAll.clearFocisEditText(tilFullName, "Bạn chưa nhập tên!");
+            return ReusableCodeForAll.clearFocisEditText(tilFullName, getString(R.string.fullname_empty));
         } else if (email.isEmpty()) {
-            return ReusableCodeForAll.clearFocisEditText(tilEmail, "Bạn chưa nhập email!");
+            return ReusableCodeForAll.clearFocisEditText(tilEmail, getString(R.string.email_empty));
         } else if (!EmailValidator.getInstance().isValid(email)) {
-            return ReusableCodeForAll.clearFocisEditText(tilEmail, "Email chưa hợp lệ!");
+            return ReusableCodeForAll.clearFocisEditText(tilEmail, getString(R.string.email_invalid));
         } else if (password.isEmpty()) {
-            return ReusableCodeForAll.clearFocisEditText(tilPassword, "Bạn chưa nhập mật khẩu!");
+            return ReusableCodeForAll.clearFocisEditText(tilPassword, getString(R.string.password_empty));
         } else if (password.length() < 8) {
-            return ReusableCodeForAll.clearFocisEditText(tilPassword, "Mật khẩu phải hơn 8 kí tự!");
+            return ReusableCodeForAll.clearFocisEditText(tilPassword, getString(R.string.password_short));
         } else if (password.length() > 18) {
-            return ReusableCodeForAll.clearFocisEditText(tilPassword, "Mật khẩu phải dưới 18 kí tự!");
+            return ReusableCodeForAll.clearFocisEditText(tilPassword, getString(R.string.password_long));
         } else if (retype.isEmpty()) {
-            return ReusableCodeForAll.clearFocisEditText(tilRetype, "Bạn chưa xác thực mật khẩu!");
+            return ReusableCodeForAll.clearFocisEditText(tilRetype, getString(R.string.retype_empty));
         } else if (!retype.equals(password)) {
-            return ReusableCodeForAll.clearFocisEditText(tilRetype, "Mật khẩu xác thực chưa đúng!");
+            return ReusableCodeForAll.clearFocisEditText(tilRetype, getString(R.string.retype_unmatched));
         } else if (phone.isEmpty()) {
-            return ReusableCodeForAll.clearFocisEditText(tilPhone, "Bạn chưa nhập SĐT!");
+            return ReusableCodeForAll.clearFocisEditText(tilPhone, getString(R.string.phone_empty));
         } else if (!phone.matches(Config.PHONE_PATTERN)) {
-            return ReusableCodeForAll.clearFocisEditText(tilPhone, "SĐT chưa hợp lệ!");
+            return ReusableCodeForAll.clearFocisEditText(tilPhone, getString(R.string.phone_unmatched));
         }
 
         return true;
@@ -125,11 +125,9 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
                     final ProgressDialog mDialog = new ProgressDialog(CustomerRegistrationFrame.this);
                     mDialog.setCancelable(false);
                     mDialog.setCanceledOnTouchOutside(false);
-                    mDialog.setMessage("Đang đăng ký tài khoản.\nBạn chờ mình xíu nha...");
+                    mDialog.setMessage(getString(R.string.sign_up_dialog));
                     mDialog.show();
 
-                    // https://stackoverflow.com/questions/39866086/change-password-with-firebase-for-android
-                    // https://stackoverflow.com/questions/40093781/check-if-given-email-exists
                     User customer = new User(fullName, country, phone, email, Customer.class.getSimpleName());
 
 //                    User customer = new User("Mạnh Cường", "84", "0786333545", "cuongpigerr@gmail.com", Customer.class.getSimpleName());
@@ -146,10 +144,10 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         mDialog.dismiss();
                                         if (task.isSuccessful()) {
-                                            AlertDialog.Builder builder = new AlertDialog.Builder(CustomerRegistrationFrame.this);
-                                            builder.setTitle("Đăng ký thành công").
-                                                    setMessage("Kiểm tra tin nhắn điện thoại và email của bạn để xác nhận đăng ký giúp mình nhé.").
-                                                    setCancelable(false).setPositiveButton("Tiếp tục", new DialogInterface.OnClickListener() {
+                                            new AlertDialog.Builder(CustomerRegistrationFrame.this)
+                                                    .setTitle(getString(R.string.sign_up_success))
+                                                    .setMessage(getString(R.string.sign_up_verify_remind))
+                                                    .setCancelable(false).setPositiveButton(getString(R.string.btn_continue), new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
                                                     dialogInterface.dismiss();
@@ -158,9 +156,7 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
                                                     intent.putExtra("userId", userId);
                                                     startActivity(intent);
                                                 }
-                                            });
-
-                                            builder.create().show();
+                                            }).create().show();
                                         } else {
                                             ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, Config.ERROR_TITLE, task.getException().getMessage());
                                         }
@@ -168,7 +164,7 @@ public class CustomerRegistrationFrame extends AppCompatActivity {
                                 });
                             } else {
                                 mDialog.dismiss();
-                                ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, "Có tí trục trặc rồi...", task.getException().getMessage());
+                                ReusableCodeForAll.showAlert(CustomerRegistrationFrame.this, getString(R.string.error_title), task.getException().getMessage());
                             }
                         }
                     });

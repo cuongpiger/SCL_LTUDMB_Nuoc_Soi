@@ -91,7 +91,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
                 firebaseDatabase.getReference(User.class.getSimpleName()).child(userId).setValue(customer);
                 firebaseAuth.signOut();
                 finishAffinity();
-                Toast.makeText(CustomerVerifyPhoneFrame.this, "Hoàn tất rồi, hãy nhớ xác nhận email nữa nhé!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CustomerVerifyPhoneFrame.this, getString(R.string.toast_sign_up_complete), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CustomerVerifyPhoneFrame.this, SignInFrame.class);
                 startActivity(intent);
             }
@@ -169,21 +169,21 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
     private void startVerificationPhoneNumber(String phoneNumber) {
         PhoneAuthOptions phoneAuthOptions = PhoneAuthOptions.newBuilder(firebaseAuth).setPhoneNumber(phoneNumber).setTimeout(60L, TimeUnit.SECONDS).setActivity(CustomerVerifyPhoneFrame.this).setCallbacks(verifiedCallback).build();
         PhoneAuthProvider.verifyPhoneNumber(phoneAuthOptions);
-        ReusableCodeForAll.showProgressDialog(progressDialog, "Đang xác thực người máy, bạn đợi tí nha...");
+        ReusableCodeForAll.showProgressDialog(progressDialog, getString(R.string.check_robot));
     }
 
     private void countDownTimer() {
         new CountDownTimer(60000, 1000) {
             @Override
             public void onTick(long l) {
-                btnResend.setText(String.format("Gửi lại sau %d giây", l/1000));
+                btnResend.setText(String.format(getString(R.string.btn_resend_otp_second), l/1000));
             }
 
             @Override
             public void onFinish() {
                 btnResend.setEnabled(true);
                 btnResend.setAlpha(1.0f);
-                btnResend.setText("Gửi lại mã OTP");
+                btnResend.setText(getString(R.string.btn_resend_otp));
             }
         }.start();
     }
@@ -203,7 +203,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
 //                String otpCode = tilOtp.getEditText().getText().toString().trim();
                 String otpCode = pvOtp.getText().toString();
                 if (otpCode.isEmpty() && otpCode.length() < Config.OTP_LENGTH) {
-                    ReusableCodeForAll.clearFocisEditText(tilOtp, "Bạn chưa nhập mã OTP!");
+                    ReusableCodeForAll.clearFocisEditText(tilOtp, getString(R.string.otp_empty));
                 } else {
                     verifyPhoneNumber(otpCode);
                 }
@@ -217,7 +217,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
                 btnResend.setEnabled(false);
                 btnResend.setAlpha(0.5f);
                 countDownTimer();
-                ReusableCodeForAll.showProgressDialog(progressDialog, "Đang xác thực người máy, bạn đợi tí nha...");
+                ReusableCodeForAll.showProgressDialog(progressDialog, getString(R.string.check_robot));
             }
         });
     }

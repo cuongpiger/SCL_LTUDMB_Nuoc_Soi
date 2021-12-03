@@ -9,9 +9,9 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class ReusableCodeForAll {
     public static void showAlert(Context context, String title, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setCancelable(false);
-        builder.setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(context)
+                .setCancelable(false)
+                .setPositiveButton(context.getString(R.string.btn_close), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -34,5 +34,10 @@ public class ReusableCodeForAll {
 
     public static String genPhoneNumber(String country, String phone) {
         return "+" + country + phone;
+    }
+
+    public static void clearError(TextInputLayout textInputLayout) {
+        textInputLayout.setErrorEnabled(false);
+        textInputLayout.setError("");
     }
 }

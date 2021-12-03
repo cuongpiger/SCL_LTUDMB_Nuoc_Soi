@@ -53,9 +53,9 @@ public class PhoneSignInFrame extends AppCompatActivity {
 
     private boolean isValid(String phone) {
         if (phone.isEmpty()) {
-            return ReusableCodeForAll.clearFocisEditText(tilPhone, "Bạn chưa nhập SĐT!");
+            return ReusableCodeForAll.clearFocisEditText(tilPhone, getString(R.string.phone_empty));
         } else if (!phone.matches(Config.PHONE_PATTERN)) {
-            return ReusableCodeForAll.clearFocisEditText(tilPhone, "SĐT chưa hợp lệ!");
+            return ReusableCodeForAll.clearFocisEditText(tilPhone, getString(R.string.phone_unmatched));
         }
 
         return true;

@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Nước Sôi</string>
+    <string name="error_title">Có tí trục trặc rồi...</string>
+    <string name="fullname_empty">Bạn chưa nhập tên!</string>
+    <string name="email_empty">Bạn chưa nhập email!</string>
+    <string name="email_invalid">Email chưa hợp lệ!</string>
+    <string name="email_unverified">Email này chưa được xác thực!</string>
+    <string name="email_verify_question">Bạn có muốn xác thực lại email này không?</string>
+    <string name="email_verify_resend">Email xác thực vừa được gửi lại. Hãy nhớ kiểm tra email của bạn nhé.</string>
+    <string name="password_empty">Bạn chưa nhập mật khẩu!</string>
+    <string name="password_short">Mật khẩu phải hơn 8 kí tự!</string>
+    <string name="password_long">Mật khẩu phải dưới 18 kí tự!</string>
+    <string name="retype_empty">Bạn chưa xác thực mật khẩu!</string>
+    <string name="retype_unmatched">Mật khẩu xác thực chưa đúng!</string>
+    <string name="phone_empty">Bạn chưa nhập SĐT!</string>
+    <string name="phone_unmatched">SĐT chưa hợp lệ!</string>
+    <string name="phone_sign_in_failure_dialog">Số điện thoại này chưa được đăng kí.
+Bạn sẽ được đưa về màn hình đăng nhập.</string>
+    <string name="otp_empty">Bạn chưa nhập mã OTP!</string>
+    <string name="otp_unmatched">Mã OTP không chính xác!</string>
+    <string name="sign_up_success">Đăng ký thành công</string>
+    <string name="sign_up_verify_remind">Kiểm tra tin nhắn điện thoại và email của bạn để xác nhận đăng ký giúp mình nhé.</string>
+    <string name="toast_sign_up_complete">Hoàn tất rồi, hãy nhớ xác nhận email nữa nhé.</string>
+    <string name="sign_up_dialog">Đang đăng ký tài khoản.\nBạn chờ mình tí nha...</string>
+    <string name="sign_in_success">Đăng nhập thành công</string>
+    <string name="sign_in_failure">Đăng nhập thất bại</string>
+    <string name="sign_in_failure_dialog">Bạn kiểm tra lại email và mật khẩu giúp mình nhé.</string>
+    <string name="sign_in_dialog">Đang đăng nhập, bạn chờ tí nha...</string>
+    <string name="btn_continue">Tiếp tục</string>
+    <string name="btn_accept">Đồng ý</string>
+    <string name="btn_refuse">Từ chối</string>
+    <string name="btn_resend_otp">Gửi lại mã OTP</string>
+    <string name="btn_resend_otp_second">Gửi lại sau %d giây</string>
+    <string name="btn_close">Đóng</string>
+    <string name="check_robot">Đang xác thực người máy, bạn đợi tí nha...</string>
 </resources>
