@@ -6,14 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
+
+import team9.nuocsoi.Module.Config;
+import team9.nuocsoi.Module.ReusableCodeForAll;
 
 public class PhoneSignInFrame extends AppCompatActivity {
 
@@ -21,15 +22,14 @@ public class PhoneSignInFrame extends AppCompatActivity {
     CountryCodePicker ccpCountry;
     TextInputLayout tilPhone;
     Button btnSignInPhone;
-    CheckBox cvKeepSignIn;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phone_sign_in_frame);
+        getSupportActionBar().hide();
 
         referWidgets();
         setupView();
@@ -43,7 +43,6 @@ public class PhoneSignInFrame extends AppCompatActivity {
         ccpCountry = findViewById(R.id.ccpCountry);
         tilPhone = findViewById(R.id.tilPhone);
         btnSignInPhone = findViewById(R.id.btnSignInPhone);
-        cvKeepSignIn = findViewById(R.id.cbKeepSignIn);
     }
 
     private void setupView() {
@@ -53,9 +52,9 @@ public class PhoneSignInFrame extends AppCompatActivity {
 
     private boolean isValid(String phone) {
         if (phone.isEmpty()) {
-            return ReusableCodeForAll.clearFocisEditText(tilPhone, "Bạn chưa nhập SĐT!");
+            return ReusableCodeForAll.clearFocisEditText(tilPhone, getString(R.string.phone_empty));
         } else if (!phone.matches(Config.PHONE_PATTERN)) {
-            return ReusableCodeForAll.clearFocisEditText(tilPhone, "SĐT chưa hợp lệ!");
+            return ReusableCodeForAll.clearFocisEditText(tilPhone, getString(R.string.phone_unmatched));
         }
 
         return true;
@@ -79,6 +78,7 @@ public class PhoneSignInFrame extends AppCompatActivity {
                     Intent intent = new Intent(PhoneSignInFrame.this, SignInVerifyPhoneFrame.class);
                     intent.putExtra("country", country);
                     intent.putExtra("phone", phone);
+                    finish();
                     startActivity(intent);
                 }
             }

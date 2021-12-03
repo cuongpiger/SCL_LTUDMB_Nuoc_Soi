@@ -39,7 +39,7 @@
             android:clickable="true"/>
 
         <LinearLayout
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -71,7 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp">
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp">
 
             <com.chaos.view.PinView
                 android:id="@+id/pvOtp"

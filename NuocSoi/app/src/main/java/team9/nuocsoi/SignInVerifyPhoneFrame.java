@@ -27,21 +27,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.auth.SignInMethodQueryResult;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.hbb20.CountryCodePicker;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import team9.nuocsoi.Model.User;
+import team9.nuocsoi.Module.Config;
+import team9.nuocsoi.Module.ReusableCodeForAll;
 
 public class SignInVerifyPhoneFrame extends AppCompatActivity {
 
@@ -61,6 +53,7 @@ public class SignInVerifyPhoneFrame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in_verify_phone_frame);
+        getSupportActionBar().hide();
 
         referWidgets();
         getValues();
@@ -97,12 +90,13 @@ public class SignInVerifyPhoneFrame extends AppCompatActivity {
         firebaseAuth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
+                progressDialog.dismiss();
                 checkUserVerifyEmail(authResult);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                ReusableCodeForAll.clearFocisEditText(tilOtp, "Mã OTP không chính xác!");
+                ReusableCodeForAll.clearFocisEditText(tilOtp, getString(R.string.otp_unmatched));
             }
         });
     }
@@ -111,46 +105,46 @@ public class SignInVerifyPhoneFrame extends AppCompatActivity {
         if (authResult.getUser().getEmail() == null) {
             authResult.getUser().delete();
             new AlertDialog.Builder(SignInVerifyPhoneFrame.this)
-                    .setTitle("Đăng nhập thất bại")
-                    .setMessage("Số điện thoại này chưa được đăng kí.\nBạn sẽ được đưa về màn hình đăng nhập.")
+                    .setTitle(getString(R.string.sign_in_failure))
+                    .setMessage(getString(R.string.phone_sign_in_failure_dialog))
                     .setCancelable(false)
-                    .setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getString(R.string.btn_close), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             authResult.getUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    finishAffinity();
-                                    startActivity(new Intent(SignInVerifyPhoneFrame.this, SignInFrame.class));
+                                    finish();
                                 }
                             });
                         }
                     }).create().show();
         } else {
             if (authResult.getUser().isEmailVerified()) {
-                Toast.makeText(SignInVerifyPhoneFrame.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                finishAffinity();
+                Toast.makeText(SignInVerifyPhoneFrame.this, getString(R.string.sign_in_success), Toast.LENGTH_SHORT).show();
             } else {
                 new AlertDialog.Builder(SignInVerifyPhoneFrame.this)
-                        .setTitle("Email này chưa được xác thực!")
-                        .setMessage("Bạn có muốn xác thực lại email này không?")
+                        .setTitle(getString(R.string.email_unverified))
+                        .setMessage(getString(R.string.email_verify_question))
                         .setCancelable(false)
-                        .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(getString(R.string.btn_accept), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 authResult.getUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         FirebaseAuth.getInstance().signOut();
-                                        Toast.makeText(SignInVerifyPhoneFrame.this, "Email xác thực vừa được gửi lại. Hãy nhớ kiểm tra email của bạn nhé.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignInVerifyPhoneFrame.this, getString(R.string.email_verify_resend), Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
                                 });
                             }
                         })
-                        .setNegativeButton("Từ chối", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(getString(R.string.btn_refuse), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 FirebaseAuth.getInstance().signOut();
                                 dialog.dismiss();
                                 finish();
-                                startActivity(new Intent(SignInVerifyPhoneFrame.this, SignInFrame.class));
+                                startActivity(new Intent(SignInVerifyPhoneFrame.this, PhoneSignInFrame.class));
                             }
                         }).create().show();
             }
@@ -212,23 +206,7 @@ public class SignInVerifyPhoneFrame extends AppCompatActivity {
     private void startVerificationPhoneNumber(String phoneNumber) {
         PhoneAuthOptions phoneAuthOptions = PhoneAuthOptions.newBuilder(firebaseAuth).setPhoneNumber(phoneNumber).setTimeout(60L, TimeUnit.SECONDS).setActivity(SignInVerifyPhoneFrame.this).setCallbacks(verifiedCallback).build();
         PhoneAuthProvider.verifyPhoneNumber(phoneAuthOptions);
-        ReusableCodeForAll.showProgressDialog(progressDialog, "Đang xác thực người máy, bạn đợi tí nha...");
-    }
-
-    private void countDownTimer() {
-        new CountDownTimer(60000, 1000) {
-            @Override
-            public void onTick(long l) {
-                btnResend.setText(String.format("Gửi lại sau %d giây", l/1000));
-            }
-
-            @Override
-            public void onFinish() {
-                btnResend.setEnabled(true);
-                btnResend.setAlpha(1.0f);
-                btnResend.setText("Gửi lại mã OTP");
-            }
-        }.start();
+        ReusableCodeForAll.showProgressDialog(progressDialog, getString(R.string.check_robot));
     }
 
     private void setupEventListeners() {
@@ -243,11 +221,11 @@ public class SignInVerifyPhoneFrame extends AppCompatActivity {
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String otpCode = tilOtp.getEditText().getText().toString().trim();
                 String otpCode = pvOtp.getText().toString();
                 if (otpCode.isEmpty() && otpCode.length() < Config.OTP_LENGTH) {
-                    ReusableCodeForAll.clearFocisEditText(tilOtp, "Bạn chưa nhập mã OTP!");
+                    ReusableCodeForAll.clearFocisEditText(tilOtp, getString(R.string.otp_empty));
                 } else {
+                    ReusableCodeForAll.showProgressDialog(progressDialog, getString(R.string.sign_in_dialog));
                     verifyPhoneNumber(otpCode);
                 }
             }
@@ -260,8 +238,24 @@ public class SignInVerifyPhoneFrame extends AppCompatActivity {
                 btnResend.setEnabled(false);
                 btnResend.setAlpha(0.5f);
                 countDownTimer();
-                ReusableCodeForAll.showProgressDialog(progressDialog, "Đang xác thực người máy, bạn đợi tí nha...");
+                ReusableCodeForAll.showProgressDialog(progressDialog, getString(R.string.check_robot));
             }
         });
+    }
+
+    private void countDownTimer() {
+        new CountDownTimer(60000, 1000) {
+            @Override
+            public void onTick(long l) {
+                btnResend.setText(String.format(getString(R.string.btn_resend_otp_second), l/1000));
+            }
+
+            @Override
+            public void onFinish() {
+                btnResend.setEnabled(true);
+                btnResend.setAlpha(1.0f);
+                btnResend.setText(getString(R.string.btn_resend_otp));
+            }
+        }.start();
     }
 }
