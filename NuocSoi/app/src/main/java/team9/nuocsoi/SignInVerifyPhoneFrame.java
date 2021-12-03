@@ -27,21 +27,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.auth.SignInMethodQueryResult;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.hbb20.CountryCodePicker;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import team9.nuocsoi.Model.User;
+import team9.nuocsoi.Module.Config;
+import team9.nuocsoi.Module.ReusableCodeForAll;
 
 public class SignInVerifyPhoneFrame extends AppCompatActivity {
 
@@ -61,6 +53,7 @@ public class SignInVerifyPhoneFrame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in_verify_phone_frame);
+        getSupportActionBar().hide();
 
         referWidgets();
         getValues();
@@ -97,6 +90,7 @@ public class SignInVerifyPhoneFrame extends AppCompatActivity {
         firebaseAuth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
+                progressDialog.dismiss();
                 checkUserVerifyEmail(authResult);
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -119,14 +113,14 @@ public class SignInVerifyPhoneFrame extends AppCompatActivity {
                             authResult.getUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    finishAffinity();
-                                    startActivity(new Intent(SignInVerifyPhoneFrame.this, SignInFrame.class));
+                                    finish();
                                 }
                             });
                         }
                     }).create().show();
         } else {
             if (authResult.getUser().isEmailVerified()) {
+                finishAffinity();
                 Toast.makeText(SignInVerifyPhoneFrame.this, getString(R.string.sign_in_success), Toast.LENGTH_SHORT).show();
             } else {
                 new AlertDialog.Builder(SignInVerifyPhoneFrame.this)
@@ -215,22 +209,6 @@ public class SignInVerifyPhoneFrame extends AppCompatActivity {
         ReusableCodeForAll.showProgressDialog(progressDialog, getString(R.string.check_robot));
     }
 
-    private void countDownTimer() {
-        new CountDownTimer(60000, 1000) {
-            @Override
-            public void onTick(long l) {
-                btnResend.setText(String.format(getString(R.string.btn_resend_otp_second), l/1000));
-            }
-
-            @Override
-            public void onFinish() {
-                btnResend.setEnabled(true);
-                btnResend.setAlpha(1.0f);
-                btnResend.setText(getString(R.string.btn_resend_otp));
-            }
-        }.start();
-    }
-
     private void setupEventListeners() {
         tvPreviousFrame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -247,6 +225,7 @@ public class SignInVerifyPhoneFrame extends AppCompatActivity {
                 if (otpCode.isEmpty() && otpCode.length() < Config.OTP_LENGTH) {
                     ReusableCodeForAll.clearFocisEditText(tilOtp, getString(R.string.otp_empty));
                 } else {
+                    ReusableCodeForAll.showProgressDialog(progressDialog, getString(R.string.sign_in_dialog));
                     verifyPhoneNumber(otpCode);
                 }
             }
@@ -262,5 +241,21 @@ public class SignInVerifyPhoneFrame extends AppCompatActivity {
                 ReusableCodeForAll.showProgressDialog(progressDialog, getString(R.string.check_robot));
             }
         });
+    }
+
+    private void countDownTimer() {
+        new CountDownTimer(60000, 1000) {
+            @Override
+            public void onTick(long l) {
+                btnResend.setText(String.format(getString(R.string.btn_resend_otp_second), l/1000));
+            }
+
+            @Override
+            public void onFinish() {
+                btnResend.setEnabled(true);
+                btnResend.setAlpha(1.0f);
+                btnResend.setText(getString(R.string.btn_resend_otp));
+            }
+        }.start();
     }
 }

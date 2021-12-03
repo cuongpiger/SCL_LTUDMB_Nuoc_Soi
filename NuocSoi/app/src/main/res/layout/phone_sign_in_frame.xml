@@ -56,15 +56,6 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/cbKeepSignIn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
-            android:checked="false"
-            android:textColor="@color/gray"
-            android:text="Duy trì đăng nhập"/>
-
         <Button
             android:id="@+id/btnSignInPhone"
             android:padding="15dp"

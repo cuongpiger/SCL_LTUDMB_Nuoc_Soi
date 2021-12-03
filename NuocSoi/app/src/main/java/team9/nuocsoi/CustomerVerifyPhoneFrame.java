@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import com.chaos.view.PinView;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
@@ -28,10 +26,11 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
 
-import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import team9.nuocsoi.Model.User;
+import team9.nuocsoi.Module.Config;
+import team9.nuocsoi.Module.ReusableCodeForAll;
 
 public class CustomerVerifyPhoneFrame extends AppCompatActivity {
 
@@ -52,6 +51,7 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_verify_phone_frame);
+        getSupportActionBar().hide();
 
         referWidgets();
         getValues();
@@ -90,29 +90,13 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 firebaseDatabase.getReference(User.class.getSimpleName()).child(userId).setValue(customer);
                 firebaseAuth.signOut();
+                progressDialog.dismiss();
                 finishAffinity();
-                Toast.makeText(CustomerVerifyPhoneFrame.this, getString(R.string.toast_sign_up_complete), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CustomerVerifyPhoneFrame.this, getString(R.string.toast_sign_up_complete), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(CustomerVerifyPhoneFrame.this, SignInFrame.class);
                 startActivity(intent);
             }
         });
-
-//        firebaseAuth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-//            @Override
-//            public void onSuccess(AuthResult authResult) {
-//                firebaseDatabase.getReference(User.class.getSimpleName()).child(userId).setValue(customer);
-//                firebaseDatabase.getReference(Config.PHONE_VERIFICATION).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(Collections.singletonMap("userId", userId));
-//                finishAffinity();
-//                Toast.makeText(CustomerVerifyPhoneFrame.this, "Hoàn tất rồi, hãy nhớ xác nhận email nữa nhé!", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(CustomerVerifyPhoneFrame.this, SignInFrame.class);
-//                startActivity(intent);
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                ReusableCodeForAll.clearFocisEditText(tilOtp, "Mã OTP không chính xác!");
-//            }
-//        });
     }
 
     private void verifyPhoneNumber(String otpCode) {
@@ -200,11 +184,11 @@ public class CustomerVerifyPhoneFrame extends AppCompatActivity {
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String otpCode = tilOtp.getEditText().getText().toString().trim();
                 String otpCode = pvOtp.getText().toString();
                 if (otpCode.isEmpty() && otpCode.length() < Config.OTP_LENGTH) {
                     ReusableCodeForAll.clearFocisEditText(tilOtp, getString(R.string.otp_empty));
                 } else {
+                    ReusableCodeForAll.showProgressDialog(progressDialog, getString(R.string.sign_up_verify_phone));
                     verifyPhoneNumber(otpCode);
                 }
             }

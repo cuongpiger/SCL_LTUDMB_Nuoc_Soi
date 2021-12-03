@@ -19,6 +19,7 @@ Bạn sẽ được đưa về màn hình đăng nhập.</string>
     <string name="otp_empty">Bạn chưa nhập mã OTP!</string>
     <string name="otp_unmatched">Mã OTP không chính xác!</string>
     <string name="sign_up_success">Đăng ký thành công</string>
+    <string name="sign_up_verify_phone">Đang xác thực thông tin người dùng.\nBạn chờ mình tí nha...</string>
     <string name="sign_up_verify_remind">Kiểm tra tin nhắn điện thoại và email của bạn để xác nhận đăng ký giúp mình nhé.</string>
     <string name="toast_sign_up_complete">Hoàn tất rồi, hãy nhớ xác nhận email nữa nhé.</string>
     <string name="sign_up_dialog">Đang đăng ký tài khoản.\nBạn chờ mình tí nha...</string>

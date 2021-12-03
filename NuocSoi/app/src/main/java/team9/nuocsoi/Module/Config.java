@@ -1,4 +1,4 @@
-package team9.nuocsoi;
+package team9.nuocsoi.Module;
 
 import android.widget.TextView;
 
@@ -15,7 +15,6 @@ public class Config {
     public static final String COPYRIGHT = String.format("Copyright %d - Team9", Calendar.getInstance().get(Calendar.YEAR));
     public static final String COUNTRY_NAME_CODE = "VN";
     public static final String PHONE_PATTERN = "^[0-9]{10,11}$";
-    public static final String ERROR_TITLE = "Có tí trục trặc rồi...";
 
 
 
@@ -23,4 +22,5 @@ public class Config {
 //    public static final int COPYRIGHT_DELAY = 0; // 800
 //    public static final int LOGO_DELAY = 0; // 1000
     public static final int OTP_LENGTH = 6;
+    public static final int WAITING_TOAST = 3;
 }

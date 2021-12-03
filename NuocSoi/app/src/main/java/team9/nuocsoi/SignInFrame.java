@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import team9.nuocsoi.Module.Config;
+
 public class SignInFrame extends AppCompatActivity {
 
     Button btnSignInEmail, btnSignInPhone, btnSignUp;
@@ -21,6 +23,7 @@ public class SignInFrame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in_frame);
+        getSupportActionBar().hide();
 
         referWidgets();
         setupView();

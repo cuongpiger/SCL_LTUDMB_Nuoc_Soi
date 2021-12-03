@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +18,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.apache.commons.validator.routines.EmailValidator;
+
+import team9.nuocsoi.Model.Customer;
+import team9.nuocsoi.Model.User;
+import team9.nuocsoi.Module.Config;
+import team9.nuocsoi.Module.ReusableCodeForAll;
 
 public class EmailSignInFrame extends AppCompatActivity {
 
@@ -28,11 +36,13 @@ public class EmailSignInFrame extends AppCompatActivity {
     TextInputLayout tilEmail, tilPassword;
     Button btnSignInEmail;
     FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.email_sign_in_frame);
+        getSupportActionBar().hide();
 
         referWidgets();
         setupView();
@@ -72,6 +82,7 @@ public class EmailSignInFrame extends AppCompatActivity {
 
     private void setupFirebase() {
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
     }
 
     private void setupEventListeners() {
@@ -99,8 +110,26 @@ public class EmailSignInFrame extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 mDialog.dismiss();
                                 if (firebaseAuth.getCurrentUser().isEmailVerified()) {
-                                    Toast.makeText(EmailSignInFrame.this, getString(R.string.sign_in_success), Toast.LENGTH_SHORT).show();
-//                                    Intent intent = new Intent()
+                                    String userId = firebaseAuth.getCurrentUser().getUid();
+                                    firebaseDatabase.getReference(User.class.getSimpleName()).child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            User user = snapshot.getValue(User.class);
+                                            if (user.getRole().equals(Customer.class.getSimpleName())) {
+                                                finishAffinity();
+                                                Intent intent = new Intent(EmailSignInFrame.this, CustomerHomeFrame.class);
+                                                intent.putExtra("user", user);
+                                                startActivity(intent);
+                                                Toast.makeText(EmailSignInFrame.this, getString(R.string.sign_in_success), Toast.LENGTH_LONG).show();
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 } else {
                                     new AlertDialog.Builder(EmailSignInFrame.this)
                                             .setTitle(getString(R.string.email_unverified))
