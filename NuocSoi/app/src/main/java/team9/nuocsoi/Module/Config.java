@@ -1,11 +1,5 @@
 package team9.nuocsoi.Module;
 
-import android.widget.TextView;
-
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.Calendar;
 
 public class Config {
@@ -22,5 +16,4 @@ public class Config {
 //    public static final int COPYRIGHT_DELAY = 0; // 800
 //    public static final int LOGO_DELAY = 0; // 1000
     public static final int OTP_LENGTH = 6;
-    public static final int WAITING_TOAST = 3;
 }
