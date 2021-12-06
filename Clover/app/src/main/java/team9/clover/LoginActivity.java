@@ -6,10 +6,16 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import java.util.Calendar;
 
 public class LoginActivity extends AppCompatActivity {
 
     FrameLayout floLogin;
+    ImageButton ibtClose;
+    TextView tvCopyright;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +23,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         referWidgets();
-        setView(new SignInFragment());
+        setView();
+        setFragment(new SignInFragment());
     }
 
     /*
@@ -25,9 +32,15 @@ public class LoginActivity extends AppCompatActivity {
     * */
     private void referWidgets() {
         floLogin = findViewById(R.id.floLogin);
+        tvCopyright = findViewById(R.id.tvCopyright);
+        ibtClose = findViewById(R.id.ibtClose);
     }
 
-    private void setView(Fragment fragment) {
+    private void setView() {
+        tvCopyright.setText(String.format(getString(R.string.copyright), Calendar.getInstance().get(Calendar.YEAR)));
+    }
+
+    private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(floLogin.getId(), fragment);
         fragmentTransaction.commit();

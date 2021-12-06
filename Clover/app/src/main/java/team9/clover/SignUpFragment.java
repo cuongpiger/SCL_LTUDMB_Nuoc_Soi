@@ -1,6 +1,5 @@
 package team9.clover;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -34,11 +32,6 @@ import org.apache.commons.text.WordUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.IntStream;
-
-import team9.clover.Module.Reusable;
 
 
 public class SignUpFragment extends Fragment {
@@ -232,17 +225,7 @@ public class SignUpFragment extends Fragment {
                             getActivity().finish();
                             startActivity(mainIntent);
                         } else {
-                            pgbSignUp.setVisibility(View.INVISIBLE);
-                            mbtSignUp.setClickable(true);
-                            new MaterialAlertDialogBuilder(getContext(), R.style.ThemeOverlay_App_MaterialAlertDialog).setTitle(getString(R.string.error_title))
-                                    .setMessage(getString(R.string.sign_up_failure))
-                                    .setCancelable(false)
-                                    .setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            dialogInterface.dismiss();
-                                        }
-                                    }).create().show();
+                            errorDialog();
                         }
                     }
                 });
@@ -259,19 +242,23 @@ public class SignUpFragment extends Fragment {
                 if (task.isSuccessful()) {
                     addNewUser();
                 } else {
-                    pgbSignUp.setVisibility(View.INVISIBLE);
-                    mbtSignUp.setClickable(true);
-                    new MaterialAlertDialogBuilder(getContext(), R.style.ThemeOverlay_App_MaterialAlertDialog).setTitle(getString(R.string.error_title))
-                            .setMessage(getString(R.string.sign_up_failure))
-                            .setCancelable(false)
-                            .setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.dismiss();
-                                }
-                            }).create().show();
+                    errorDialog();
                 }
             }
         });
+    }
+
+    private void errorDialog() {
+        pgbSignUp.setVisibility(View.INVISIBLE);
+        mbtSignUp.setClickable(true);
+        new MaterialAlertDialogBuilder(getContext(), R.style.ThemeOverlay_App_MaterialAlertDialog).setTitle(getString(R.string.error_title))
+                .setMessage(getString(R.string.sign_up_failure))
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).create().show();
     }
 }

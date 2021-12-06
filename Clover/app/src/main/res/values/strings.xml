@@ -13,5 +13,7 @@
     <string name="retype_invalid">Mật khẩu nhập lại chưa khớp!</string>
     <string name="error_title">Có tí trục trặc rồi...</string>
     <string name="sign_up_failure">Đăng ký tài khoản không thành công!</string>
+    <string name="sign_in_failure">Đăng nhập tài khoản không thành công!</string>
     <string name="close">Đóng</string>
+    <string name="copyright">Copyright %d - Team9</string>
 </resources>
