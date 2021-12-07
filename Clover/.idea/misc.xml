@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/drawable/ripple_effect.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/drawable/textview_ripple_effect.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29483695652173914" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.22532894736842105" />

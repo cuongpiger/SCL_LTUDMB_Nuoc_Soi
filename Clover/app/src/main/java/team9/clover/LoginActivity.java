@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.Calendar;
+import team9.clover.Module.Config;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,12 +26,10 @@ public class LoginActivity extends AppCompatActivity {
 
         referWidgets();
         setView();
+        setEvents();
         setFragment(new SignInFragment());
     }
 
-    /*
-    * Refer to all widget components
-    * */
     private void referWidgets() {
         floLogin = findViewById(R.id.floLogin);
         tvCopyright = findViewById(R.id.tvCopyright);
@@ -37,12 +37,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setView() {
-        tvCopyright.setText(String.format(getString(R.string.copyright), Calendar.getInstance().get(Calendar.YEAR)));
+        tvCopyright.setText(Config.COPYRIGHT);
     }
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(floLogin.getId(), fragment);
         fragmentTransaction.commit();
+    }
+
+    private void setEvents() {
+        ibtClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                finish();
+                startActivity(mainIntent);
+            }
+        });
     }
 }
