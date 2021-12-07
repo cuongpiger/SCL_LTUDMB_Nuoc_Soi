@@ -2,6 +2,7 @@ package team9.clover;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,7 @@ public class SignUpFragment extends Fragment {
     ProgressBar pgbSignUp;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
+    String email, fullName, password, retype;
 
     public SignUpFragment() { }
 
@@ -50,6 +52,7 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setValues();
         setFirebase();
     }
 
@@ -68,6 +71,13 @@ public class SignUpFragment extends Fragment {
         setEvents();
     }
 
+    private void setValues() {
+        email = "";
+        fullName = "";
+        password = "";
+        retype = "";
+    }
+
     private void referWidgets(View view) {
         tilEmail = view.findViewById(R.id.tilEmail);
         tilFullName = view.findViewById(R.id.tilFullName);
@@ -79,10 +89,71 @@ public class SignUpFragment extends Fragment {
         floLogin = getActivity().findViewById(R.id.floLogin);
     }
 
+    private boolean emailValid() {
+        email = tilEmail.getEditText().getText().toString();
+        tilEmail.setErrorEnabled(true);
+        if (email.isEmpty()) {
+            tilEmail.setError(getString(R.string.email_empty)); email = "";
+        } else if (!EmailValidator.getInstance().isValid(email)) {
+            tilEmail.setError(getString(R.string.email_invalid)); email = "";
+        } else {
+            tilEmail.setErrorEnabled(false);
+            tilEmail.setError("");
+        }
+
+        return !email.isEmpty();
+    }
+
+    private boolean fullNameValid() {
+        fullName = tilFullName.getEditText().getText().toString();
+        tilFullName.setErrorEnabled(true);
+        if (fullName.isEmpty()) {
+            tilFullName.setError(getString(R.string.name_empty)); fullName = "";
+        } else {
+            tilFullName.setErrorEnabled(false);
+            tilFullName.setError("");
+        }
+
+        return !fullName.isEmpty();
+    }
+
+    private boolean passwordValid() {
+        password = tilPassword.getEditText().getText().toString();
+        tilPassword.setErrorEnabled(true);
+        if (password.isEmpty()) {
+            tilPassword.setError(getString(R.string.password_empty)); password = "";
+        } else if (password.length() < 8) {
+            tilPassword.setError(getString(R.string.password_short)); password = "";
+        } else if (password.length() > 18) {
+            tilPassword.setError(getString(R.string.password_long)); password = "";
+        } else {
+            tilPassword.setErrorEnabled(false);
+            tilPassword.setError("");
+        }
+
+        return !password.isEmpty();
+    }
+
+    private boolean retypeValid() {
+        retype = tilRetype.getEditText().getText().toString();
+        tilRetype.setErrorEnabled(true);
+        if (retype.isEmpty()) {
+            tilRetype.setError(getString(R.string.retype_empty)); retype = "";
+        } else if (!retype.equals(password)) {
+            tilRetype.setError(getString(R.string.retype_invalid)); retype = "";
+        } else {
+            tilRetype.setErrorEnabled(false);
+            tilRetype.setError("");
+        }
+
+        return !retype.isEmpty();
+    }
+
     private void setEvents() {
         mtvSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mtvSignIn.setTypeface(null, Typeface.BOLD);
                 setFragment(new SignInFragment());
             }
         });
@@ -100,16 +171,7 @@ public class SignUpFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String email = tilEmail.getEditText().getText().toString();
-                tilEmail.setErrorEnabled(true);
-                if (email.isEmpty()) {
-                    tilEmail.setError(getString(R.string.email_empty));
-                } else if (!EmailValidator.getInstance().isValid(email)) {
-                    tilEmail.setError(getString(R.string.email_invalid));
-                } else {
-                    tilEmail.setErrorEnabled(false);
-                    tilEmail.setError("");
-                }
+                emailValid();
             }
         });
 
@@ -126,14 +188,7 @@ public class SignUpFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String fullName = tilFullName.getEditText().getText().toString();
-                tilFullName.setErrorEnabled(true);
-                if (fullName.isEmpty()) {
-                    tilFullName.setError(getString(R.string.name_empty));
-                } else {
-                    tilFullName.setErrorEnabled(false);
-                    tilFullName.setError("");
-                }
+                fullNameValid();
             }
         });
 
@@ -150,18 +205,7 @@ public class SignUpFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String password = tilPassword.getEditText().getText().toString();
-                tilPassword.setErrorEnabled(true);
-                if (password.isEmpty()) {
-                    tilPassword.setError(getString(R.string.password_empty));
-                } else if (password.length() < 8) {
-                    tilPassword.setError(getString(R.string.password_short));
-                } else if (password.length() > 18) {
-                    tilPassword.setError(getString(R.string.password_long));
-                } else {
-                    tilPassword.setErrorEnabled(false);
-                    tilPassword.setError("");
-                }
+                passwordValid();
             }
         });
 
@@ -178,24 +222,14 @@ public class SignUpFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String password = tilPassword.getEditText().getText().toString();
-                String retype = tilRetype.getEditText().getText().toString();
-                tilRetype.setErrorEnabled(true);
-                if (retype.isEmpty()) {
-                    tilRetype.setError(getString(R.string.retype_empty));
-                } else if (!retype.equals(password)) {
-                    tilRetype.setError(getString(R.string.retype_invalid));
-                } else {
-                    tilRetype.setErrorEnabled(false);
-                    tilRetype.setError("");
-                }
+                retypeValid();
             }
         });
 
         mbtSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!(tilEmail.isErrorEnabled() && tilFullName.isErrorEnabled() && tilPassword.isErrorEnabled() && tilRetype.isErrorEnabled())) {
+                if (emailValid() && fullNameValid() && passwordValid() && retypeValid()) {
                     signUp();
                 }
             }
@@ -234,8 +268,6 @@ public class SignUpFragment extends Fragment {
     private void signUp() {
         pgbSignUp.setVisibility(View.VISIBLE);
         mbtSignUp.setClickable(false);
-        String email = tilEmail.getEditText().getText().toString().trim();
-        String password = tilPassword.getEditText().getText().toString();
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
