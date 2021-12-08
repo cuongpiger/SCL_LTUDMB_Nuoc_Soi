@@ -1,4 +1,4 @@
-package team9.clover;
+package team9.clover.Fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,13 +11,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,6 +27,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.apache.commons.validator.routines.EmailValidator;
+
+import team9.clover.MainActivity;
+import team9.clover.R;
 
 
 public class SignInFragment extends Fragment {
@@ -159,6 +160,14 @@ public class SignInFragment extends Fragment {
             public void onClick(View view) {
                 mtvSignUp.setTypeface(null, Typeface.BOLD);
                 setFragment(new SignUpFragment());
+            }
+        });
+
+        mtvForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mtvForgetPassword.setTypeface(null, Typeface.BOLD);
+                setFragment(new ResetPasswordFragment());
             }
         });
     }
