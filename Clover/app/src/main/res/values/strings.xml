@@ -15,4 +15,8 @@
     <string name="sign_up_failure">Đăng ký tài khoản không thành công!</string>
     <string name="sign_in_failure">Đăng nhập tài khoản không thành công!</string>
     <string name="close">Đóng</string>
+    <string name="forget_password_worry">Đừng lo lắng. Hãy nhập email bạn đã đăng ký vào bên dưới.</string>
+    <string name="recovery_email_sending">\tEmail khôi phục đang được gửi...</string>
+    <string name="recovery_email_failure">Gửi email khôi phục không thành công!</string>
+    <string name="recovery_email_sent">\tEmail khôi phục đã gửi đi.\n\tBan nhớ kiểm tra email nhé.</string>
 </resources>

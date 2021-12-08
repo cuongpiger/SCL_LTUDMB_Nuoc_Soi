@@ -1,4 +1,4 @@
-package team9.clover;
+package team9.clover.Fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +32,10 @@ import org.apache.commons.text.WordUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import java.util.Collections;
+
+import team9.clover.Fragment.SignInFragment;
+import team9.clover.MainActivity;
+import team9.clover.R;
 
 
 public class SignUpFragment extends Fragment {
@@ -160,14 +163,10 @@ public class SignUpFragment extends Fragment {
 
         tilEmail.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void afterTextChanged(Editable editable) {
