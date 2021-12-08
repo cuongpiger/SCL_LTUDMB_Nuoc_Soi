@@ -77,4 +77,10 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, Config.TURN_SIGN_IN_DELAY);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slideout_from_left);
+    }
 }
