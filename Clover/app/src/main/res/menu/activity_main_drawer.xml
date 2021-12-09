@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group>
+        <item
+            android:id="@+id/nbOrder"
+            android:icon="@drawable/ic_mall_24"
+            android:title="Đơn hàng" />
+        <item
+            android:id="@+id/nbCart"
+            android:icon="@drawable/ic_cart_24"
+            android:title="Giỏ hàng" />
+        <item
+            android:id="@+id/nbFavorite"
+            android:icon="@drawable/ic_favorite_24"
+            android:title="Yêu thích" />
+        <item
+            android:id="@+id/nbReward"
+            android:icon="@drawable/ic_reward_24"
+            android:title="Khuyến mãi" />
+        <item
+            android:id="@+id/nbProfile"
+            android:icon="@drawable/ic_profile_24"
+            android:title="Tài khoản" />
+    </group>
+</menu>
