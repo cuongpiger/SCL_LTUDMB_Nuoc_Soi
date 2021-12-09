@@ -33,8 +33,6 @@ import org.apache.commons.validator.routines.EmailValidator;
 
 import java.util.Collections;
 
-import team9.clover.Fragment.SignInFragment;
-import team9.clover.LoginActivity;
 import team9.clover.MainActivity;
 import team9.clover.R;
 
