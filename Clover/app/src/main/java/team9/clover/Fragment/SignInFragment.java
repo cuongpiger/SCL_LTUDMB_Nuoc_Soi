@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
+import team9.clover.LoginActivity;
 import team9.clover.MainActivity;
 import team9.clover.R;
 
@@ -123,14 +124,10 @@ public class SignInFragment extends Fragment {
 
         tilEmail.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -140,14 +137,10 @@ public class SignInFragment extends Fragment {
 
         tilPassword.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -159,6 +152,7 @@ public class SignInFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mtvSignUp.setTypeface(null, Typeface.BOLD);
+                LoginActivity.onResetPasswordFragment = true;
                 setFragment(new SignUpFragment());
             }
         });
@@ -167,6 +161,7 @@ public class SignInFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mtvForgetPassword.setTypeface(null, Typeface.BOLD);
+                LoginActivity.onResetPasswordFragment = true;
                 setFragment(new ResetPasswordFragment());
             }
         });

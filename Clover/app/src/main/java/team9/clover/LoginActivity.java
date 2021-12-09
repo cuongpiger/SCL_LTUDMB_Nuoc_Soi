@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -18,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     FrameLayout floLogin;
     ImageButton ibtClose;
-    TextView tvCopyright;
+    public static boolean onResetPasswordFragment = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,23 +27,44 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         referWidgets();
-        setView();
         setEvents();
-        setFragment(new SignInFragment());
+        setDefaultFragment(new SignInFragment());
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (onResetPasswordFragment) {
+                onResetPasswordFragment = false;
+                setFragment(new SignInFragment());
+                return false;
+            }
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slideout_from_left);
     }
 
     private void referWidgets() {
         floLogin = findViewById(R.id.floLogin);
-        tvCopyright = findViewById(R.id.tvCopyright);
         ibtClose = findViewById(R.id.ibtClose);
     }
 
-    private void setView() {
-        tvCopyright.setText(Config.COPYRIGHT);
+    private void setDefaultFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(floLogin.getId(), fragment);
+        fragmentTransaction.commit();
     }
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.slide_from_left, R.anim.slideout_from_right);
         fragmentTransaction.replace(floLogin.getId(), fragment);
         fragmentTransaction.commit();
     }

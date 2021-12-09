@@ -92,6 +92,47 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pgbSignIn" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mbtSignInGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="100dp"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="12dp"
+            android:text="Đăng nhập Google"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:icon="@drawable/ic_google_24"
+            app:iconTint="@color/black"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mbtSignIn"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mbtSignInFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="100dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="12dp"
+            android:text="Đăng nhập Facebook"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:icon="@drawable/ic_facebook_24"
+            app:iconTint="@color/black"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mbtSignInGoogle"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp" />
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
@@ -101,7 +142,7 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mbtSignIn" />
+            app:layout_constraintTop_toBottomOf="@+id/mbtSignInFacebook" />
 
         <View
             android:layout_width="100dp"
