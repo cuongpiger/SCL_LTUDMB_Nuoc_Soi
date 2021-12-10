@@ -18,7 +18,7 @@
     <string name="forget_password_worry">Đừng lo lắng. Hãy nhập email bạn đã đăng ký vào bên dưới.</string>
     <string name="recovery_email_sending">\tEmail khôi phục đang được gửi...</string>
     <string name="recovery_email_failure">Gửi email khôi phục không thành công!</string>
-    <string name="recovery_email_sent">\tEmail khôi phục đã gửi đi.\n\tBan nhớ kiểm tra email nhé.</string>
+    <string name="recovery_email_sent">\tEmail khôi phục đã gửi đi.\n\tBạn nhớ kiểm tra email nhé.</string>
 
 
     <string name="title_activity_main">MainActivity</string>

@@ -3,7 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nbMall"
+            android:icon="@drawable/ic_store_24"
+            android:title="Cửa hàng" />
         <item
             android:id="@+id/nbOrder"
             android:icon="@drawable/ic_mall_24"
@@ -25,4 +29,9 @@
             android:icon="@drawable/ic_profile_24"
             android:title="Tài khoản" />
     </group>
+
+    <item
+        android:id="@+id/nbLogOut"
+        android:icon="@drawable/ic_logout_24"
+        android:title="Đăng xuất" />
 </menu>

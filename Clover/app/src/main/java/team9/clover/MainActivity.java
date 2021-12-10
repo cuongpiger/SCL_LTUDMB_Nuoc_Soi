@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        setView();
+        setView(navigationView);
     }
 
     @Override
@@ -86,7 +87,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         int itemId = item.getItemId();
 
-        if (itemId == R.id.nbOrder) {
+        if (itemId == R.id.nbMall) {
+
+        } else if (itemId == R.id.nbOrder) {
 
         } else if (itemId == R.id.nbCart) {
 
@@ -95,7 +98,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (itemId == R.id.nbReward) {
 
         } else if (itemId == R.id.nbProfile) {
+            Toast.makeText(MainActivity.this, "Hello2", Toast.LENGTH_SHORT).show();
 
+        } else if (itemId == R.id.nbLogOut) {
+            Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
@@ -104,8 +110,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void setView() {
+    private void setView(NavigationView navigationView) {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        navigationView.getMenu().getItem(0).setChecked(true);
     }
 }
