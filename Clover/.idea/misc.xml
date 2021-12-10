@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable/navigation_side_shape.xml" value="0.1355263157894737" />
         <entry key="app/src/main/res/drawable/ripple_effect.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/drawable/slider_background.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/textview_ripple_effect.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29483695652173914" />
@@ -26,6 +27,7 @@
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/slider_layout.xml" value="0.45036160420775806" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.5" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/menu/main.xml" value="0.22532894736842105" />
