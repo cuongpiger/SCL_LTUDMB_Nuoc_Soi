@@ -16,13 +16,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vpBannerSlider"
-        android:layout_width="0dp"
-        android:layout_height="230dp"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/rvCategory"
+        tools:ignore="MissingConstraints">
+
+        <include layout="@layout/sliding_ad_layout" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:ignore="MissingConstraints">
+
+        <include layout="@layout/strip_ad_layout" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
