@@ -17,15 +17,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textview.MaterialTextView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import team9.clover.Model.Category;
+import team9.clover.Model.HorizontalProductScroll;
 import team9.clover.Model.Slider;
 import team9.clover.Module.CategoryAdapter;
 import team9.clover.Module.Config;
+import team9.clover.Module.HorizontalProductScrollAdapter;
 import team9.clover.Module.SliderAdapter;
 import team9.clover.R;
 import team9.clover.databinding.FragmentHomeBinding;
@@ -46,11 +51,14 @@ public class HomeFragment extends Fragment {
     ImageView stripAdImage;
     ConstraintLayout stripAdContainer;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+    // Horizontal product layout
+    MaterialTextView horizontalLayoutTitle;
+    MaterialButton horizontalViewAllButton;
+    RecyclerView horizontalRecyclerView;
+    //________________________________
 
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -58,6 +66,7 @@ public class HomeFragment extends Fragment {
         setViewCategory();
         setViewBannerSlider(root);
         setViewAdImage(root);
+        setHorizontalProduct(root);
 
         return root;
     }
@@ -188,5 +197,28 @@ public class HomeFragment extends Fragment {
 
         stripAdImage.setImageResource(R.drawable.banner_ad1);
         stripAdContainer.setBackgroundColor(Color.parseColor("#D5D7D6"));
+    }
+
+    private void setHorizontalProduct(View view) {
+        horizontalLayoutTitle = view.findViewById(R.id.mtvTitle);
+        horizontalViewAllButton = view.findViewById(R.id.mbtButton);
+        horizontalRecyclerView = view.findViewById(R.id.rvLayout);
+
+        List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
+
+        HorizontalProductScrollAdapter horizontalProductScrollAdapter = new HorizontalProductScrollAdapter(horizontalProductScrollList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        horizontalRecyclerView.setLayoutManager(linearLayoutManager);
+        horizontalRecyclerView.setAdapter(horizontalProductScrollAdapter);
+        horizontalProductScrollAdapter.notifyDataSetChanged();
     }
 }

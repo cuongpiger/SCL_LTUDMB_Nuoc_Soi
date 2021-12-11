@@ -22,10 +22,20 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvCategory"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toBottomOf="@+id/rvCategory">
 
-        <include layout="@layout/sliding_ad_layout" />
+        <include layout="@layout/horizontal_scroll_layout" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <include layout="@layout/strip_ad_layout" />
     </LinearLayout>
 
     <LinearLayout
@@ -33,9 +43,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-        <include layout="@layout/strip_ad_layout" />
+        <include layout="@layout/sliding_ad_layout" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
