@@ -27,11 +27,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import team9.clover.Model.Category;
+import team9.clover.Model.HomePage;
 import team9.clover.Model.HorizontalProductScroll;
 import team9.clover.Model.Slider;
 import team9.clover.Module.CategoryAdapter;
 import team9.clover.Module.Config;
 import team9.clover.Module.GridProductAdapter;
+import team9.clover.Module.HomePageAdapter;
 import team9.clover.Module.HorizontalProductScrollAdapter;
 import team9.clover.Module.SliderAdapter;
 import team9.clover.R;
@@ -74,6 +76,9 @@ public class HomeFragment extends Fragment {
         setViewAdImage(root);
         setHorizontalProduct(root);
         setGridLayoutProduct(root);
+
+        // important
+        setTesting(root);
 
         return root;
     }
@@ -216,11 +221,11 @@ public class HomeFragment extends Fragment {
         horizontalLayoutTitle.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.black));
 
         List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "M | L | XL", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S | M | L", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S | M | L", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS | S", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L | XL", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "M   L   XL", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S   M   L", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S   M   L", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS   S", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L   XL", "1.390.000 đ"));
         horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L", "1.390.000 đ"));
         horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS", "1.390.000 đ"));
         horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XL", "1.390.000 đ"));
@@ -231,7 +236,6 @@ public class HomeFragment extends Fragment {
         horizontalRecyclerView.setLayoutManager(linearLayoutManager);
         horizontalRecyclerView.setAdapter(horizontalProductScrollAdapter);
         horizontalProductScrollAdapter.notifyDataSetChanged();
-
     }
 
     private void setGridLayoutProduct(View view) {
@@ -253,6 +257,44 @@ public class HomeFragment extends Fragment {
         GridProductAdapter gridProductAdapter = new GridProductAdapter(horizontalProductGridView);
         gridViewLayout.setAdapter(gridProductAdapter);
         gridProductAdapter.notifyDataSetChanged();
+    }
 
+    private void setTesting(View view) {
+        RecyclerView testing = view.findViewById(R.id.testing);
+        LinearLayoutManager testLinearLayoutManager = new LinearLayoutManager(getContext());
+        testLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        testing.setLayoutManager(testLinearLayoutManager);
+
+        // ----------------------
+
+        sliderList = new ArrayList<Slider>();
+        sliderList.add(new Slider(R.drawable.banner6, "#EFEFEF"));
+        sliderList.add(new Slider(R.drawable.banner7, "#7696A5"));
+
+        sliderList.add(new Slider(R.drawable.banner1, "#EF6540"));
+        sliderList.add(new Slider(R.drawable.banner2, "#988F7E"));
+        sliderList.add(new Slider(R.drawable.banner3, "#898989"));
+        sliderList.add(new Slider(R.drawable.banner4, "#775440"));
+        sliderList.add(new Slider(R.drawable.banner5, "#FAC6CD"));
+        sliderList.add(new Slider(R.drawable.banner6, "#EFEFEF"));
+        sliderList.add(new Slider(R.drawable.banner7, "#7696A5"));
+
+
+        sliderList.add(new Slider(R.drawable.banner1, "#EF6540"));
+        sliderList.add(new Slider(R.drawable.banner2, "#988F7E"));
+
+        List<HomePage> homePageList = new ArrayList<>();
+        homePageList.add(new HomePage(HomePage.BANNER_SLIDER, sliderList));
+        homePageList.add(new HomePage(HomePage.STRIP_AD_BANNER, R.drawable.banner_ad1, "#D5D7D6"));
+        homePageList.add(new HomePage(HomePage.STRIP_AD_BANNER, R.drawable.banner1, "#EF6540"));
+        homePageList.add(new HomePage(HomePage.BANNER_SLIDER, sliderList));
+        homePageList.add(new HomePage(HomePage.BANNER_SLIDER, sliderList));
+        homePageList.add(new HomePage(HomePage.STRIP_AD_BANNER, R.drawable.banner_ad1, "#D5D7D6"));
+
+        HomePageAdapter adapter = new HomePageAdapter(homePageList);
+
+        // ---------------
+        testing.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 }
