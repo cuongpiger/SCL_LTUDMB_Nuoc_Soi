@@ -1,11 +1,14 @@
 package team9.clover.Module;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.List;
@@ -25,6 +28,8 @@ public class SliderAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.slider_layout, container, false);
+        ConstraintLayout bannerContainer = view.findViewById(R.id.bannerContainer);
+        bannerContainer.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(sliderList.get(position).getBackgroundColor())));
         ImageView ivBanner = view.findViewById(R.id.ivBannerSlider);
         ivBanner.setImageResource(sliderList.get(position).getBanner());
         container.addView(view, 0);
