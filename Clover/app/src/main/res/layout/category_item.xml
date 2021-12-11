@@ -13,7 +13,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_home_24" />
+        app:srcCompat="@drawable/ic_home_24"
+        app:tint="@color/violet_mid" />
 
     <TextView
         android:id="@+id/tvCategoryName"
@@ -24,6 +25,8 @@
         android:layout_marginBottom="4dp"
         android:text="Trang chủ"
         android:textSize="10sp"
+        android:textStyle="bold"
+        android:textColor="@color/violet_mid"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

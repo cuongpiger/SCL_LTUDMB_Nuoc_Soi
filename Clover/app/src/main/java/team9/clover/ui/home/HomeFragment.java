@@ -204,6 +204,10 @@ public class HomeFragment extends Fragment {
         horizontalViewAllButton = view.findViewById(R.id.mbtButton);
         horizontalRecyclerView = view.findViewById(R.id.rvLayout);
 
+        horizontalLayoutTitle.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_discount_24, 0, 0, 0);
+        horizontalLayoutTitle.setCompoundDrawablePadding(Config.PADDING_ICON_DRAWABLE);
+        horizontalLayoutTitle.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.black));
+
         List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
         horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
         horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
