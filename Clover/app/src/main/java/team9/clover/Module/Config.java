@@ -11,5 +11,6 @@ public class Config {
     public static final int BANNER_SLIDER_DELAY = 3000;
     public static final int BANNER_SLIDER_PERIOD = 3000;
     public static final int PADDING_ICON_DRAWABLE = 15;
+    public static final int NUMBER_PRODUCT_HORIZONTAL_VIEW = 8;
     public static final String COPYRIGHT = String.format("Copyright %d - Team9", Calendar.getInstance().get(Calendar.YEAR));
 }
