@@ -45,7 +45,11 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
 
     @Override
     public int getItemCount() {
-        return horizontalProductScrollList.size();
+        if (horizontalProductScrollList.size() > Config.NUMBER_PRODUCT_HORIZONTAL_VIEW) {
+            return 8;
+        } else {
+            return horizontalProductScrollList.size();
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -57,7 +61,7 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
             super(itemView);
             image = itemView.findViewById(R.id.ivProduct);
             title = itemView.findViewById(R.id.mtvProductTitle);
-            stuff = itemView.findViewById(R.id.mtvStuff);
+            stuff = itemView.findViewById(R.id.mtvSize);
             price = itemView.findViewById(R.id.mtvPrice);
         }
 
