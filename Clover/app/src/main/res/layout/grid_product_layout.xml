@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Được mua nhiều nhất"
+        android:text="Sản phẩm mới"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -40,7 +40,7 @@
     <GridView
         android:id="@+id/gvProductLayout"
         android:layout_width="0dp"
-        android:layout_height="370dp"
+        android:layout_height="380dp"
         android:layout_marginBottom="8dp"
         android:background="@color/white_blur"
         android:horizontalSpacing="1dp"

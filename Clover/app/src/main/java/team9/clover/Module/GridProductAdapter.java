@@ -47,7 +47,7 @@ public class GridProductAdapter extends BaseAdapter {
             view.setBackgroundColor(Color.parseColor("#ffffff"));
             ImageView productImage = view.findViewById(R.id.ivProduct);
             MaterialTextView productTitle = view.findViewById(R.id.mtvProductTitle);
-            MaterialTextView productStuff = view.findViewById(R.id.mtvStuff);
+            MaterialTextView productStuff = view.findViewById(R.id.mtvSize);
             MaterialTextView productPrice = view.findViewById(R.id.mtvPrice);
 
             HorizontalProductScroll product = horizontalProductScrollList.get(position);

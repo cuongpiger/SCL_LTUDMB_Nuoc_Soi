@@ -216,14 +216,14 @@ public class HomeFragment extends Fragment {
         horizontalLayoutTitle.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.black));
 
         List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "M | L | XL", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S | M | L", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S | M | L", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS | S", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L | XL", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS", "1.390.000 đ"));
+        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XL", "1.390.000 đ"));
 
         HorizontalProductScrollAdapter horizontalProductScrollAdapter = new HorizontalProductScrollAdapter(horizontalProductScrollList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -239,15 +239,15 @@ public class HomeFragment extends Fragment {
         MaterialButton buttonLayout = view.findViewById(R.id.mbtGridViewButton);
         GridView gridViewLayout = view.findViewById(R.id.gvProductLayout);
 
-        titleLayout.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_basket_24, 0, 0, 0);
+        titleLayout.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_new_product_24, 0, 0, 0);
         titleLayout.setCompoundDrawablePadding(Config.PADDING_ICON_DRAWABLE);
         titleLayout.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.black));
 
         List<HorizontalProductScroll> horizontalProductGridView = new ArrayList<>();
-        horizontalProductGridView.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "Vải đũi", "720.000 đ"));
-        horizontalProductGridView.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "Vải đũi", "720.000 đ"));
-        horizontalProductGridView.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
-        horizontalProductGridView.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
+        horizontalProductGridView.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "XS | S", "720.000 đ"));
+        horizontalProductGridView.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "L | XL", "720.000 đ"));
+        horizontalProductGridView.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S", "1.390.000 đ"));
+        horizontalProductGridView.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XXL", "1.390.000 đ"));
 
 
         GridProductAdapter gridProductAdapter = new GridProductAdapter(horizontalProductGridView);

@@ -57,7 +57,7 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
             super(itemView);
             image = itemView.findViewById(R.id.ivProduct);
             title = itemView.findViewById(R.id.mtvProductTitle);
-            stuff = itemView.findViewById(R.id.mtvStuff);
+            stuff = itemView.findViewById(R.id.mtvSize);
             price = itemView.findViewById(R.id.mtvPrice);
         }
 
