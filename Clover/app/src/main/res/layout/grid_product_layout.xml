@@ -2,29 +2,27 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:elevation="3dp"
     android:background="@drawable/slider_background"
     android:layout_margin="8dp"
-    android:paddingBottom="4dp"
-    android:paddingHorizontal="4dp"
-    android:elevation="3dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mtvTitle"
+        android:id="@+id/mtvGridTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Khuyến mãi hôm nay"
+        android:text="Được mua nhiều nhất"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/mbtGridView"
+        app:layout_constraintBottom_toBottomOf="@+id/mbtGridViewButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/mbtGridView" />
+        app:layout_constraintTop_toTopOf="@+id/mbtGridViewButton" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/mbtGridView"
+        android:id="@+id/mbtGridViewButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Xem thêm"
@@ -39,11 +37,17 @@
         app:strokeColor="@color/black"
         app:strokeWidth="2dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvLayout"
+    <GridView
+        android:id="@+id/gvProductLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="370dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/white_blur"
+        android:horizontalSpacing="1dp"
+        android:numColumns="2"
+        android:verticalSpacing="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mbtGridView" />
+        app:layout_constraintTop_toBottomOf="@+id/mbtGridViewButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

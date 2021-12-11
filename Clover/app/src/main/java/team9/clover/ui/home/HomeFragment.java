@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ import team9.clover.Model.HorizontalProductScroll;
 import team9.clover.Model.Slider;
 import team9.clover.Module.CategoryAdapter;
 import team9.clover.Module.Config;
+import team9.clover.Module.GridProductAdapter;
 import team9.clover.Module.HorizontalProductScrollAdapter;
 import team9.clover.Module.SliderAdapter;
 import team9.clover.R;
@@ -57,6 +59,10 @@ public class HomeFragment extends Fragment {
     RecyclerView horizontalRecyclerView;
     //________________________________
 
+    // Grid product layout
+
+    //________________________________
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -67,6 +73,7 @@ public class HomeFragment extends Fragment {
         setViewBannerSlider(root);
         setViewAdImage(root);
         setHorizontalProduct(root);
+        setGridLayoutProduct(root);
 
         return root;
     }
@@ -201,7 +208,7 @@ public class HomeFragment extends Fragment {
 
     private void setHorizontalProduct(View view) {
         horizontalLayoutTitle = view.findViewById(R.id.mtvTitle);
-        horizontalViewAllButton = view.findViewById(R.id.mbtButton);
+        horizontalViewAllButton = view.findViewById(R.id.mbtGridView);
         horizontalRecyclerView = view.findViewById(R.id.rvLayout);
 
         horizontalLayoutTitle.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_discount_24, 0, 0, 0);
@@ -224,5 +231,28 @@ public class HomeFragment extends Fragment {
         horizontalRecyclerView.setLayoutManager(linearLayoutManager);
         horizontalRecyclerView.setAdapter(horizontalProductScrollAdapter);
         horizontalProductScrollAdapter.notifyDataSetChanged();
+
+    }
+
+    private void setGridLayoutProduct(View view) {
+        MaterialTextView titleLayout = view.findViewById(R.id.mtvGridTitle);
+        MaterialButton buttonLayout = view.findViewById(R.id.mbtGridViewButton);
+        GridView gridViewLayout = view.findViewById(R.id.gvProductLayout);
+
+        titleLayout.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_basket_24, 0, 0, 0);
+        titleLayout.setCompoundDrawablePadding(Config.PADDING_ICON_DRAWABLE);
+        titleLayout.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.black));
+
+        List<HorizontalProductScroll> horizontalProductGridView = new ArrayList<>();
+        horizontalProductGridView.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "Vải đũi", "720.000 đ"));
+        horizontalProductGridView.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "Vải đũi", "720.000 đ"));
+        horizontalProductGridView.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
+        horizontalProductGridView.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "Vải flannel", "1.390.000 đ"));
+
+
+        GridProductAdapter gridProductAdapter = new GridProductAdapter(horizontalProductGridView);
+        gridViewLayout.setAdapter(gridProductAdapter);
+        gridProductAdapter.notifyDataSetChanged();
+
     }
 }
