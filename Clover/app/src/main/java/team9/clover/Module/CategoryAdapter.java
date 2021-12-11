@@ -1,6 +1,7 @@
 package team9.clover.Module;
 
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import team9.clover.CategoryActivity;
 import team9.clover.Model.Category;
 import team9.clover.R;
 
@@ -36,7 +38,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         String icon = item.getCategoryIcon();
         String name = item.getCategoryName();
 
-        holder.setCategoryName(name);
+        holder.setCategory(name, position);
     }
 
     @Override
@@ -60,10 +62,19 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         }
 
-        private void setCategoryName(String name) {
+        private void setCategory(final String name, final int position) {
             categoryName.setText(name);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (position != 0) {
+                        Intent categoryItent = new Intent(itemView.getContext(), CategoryActivity.class);
+                        categoryItent.putExtra("CategoryName", name);
+                        itemView.getContext().startActivity(categoryItent);
+                    }
+                }
+            });
         }
-
-
     }
 }
