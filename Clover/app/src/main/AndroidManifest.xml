@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Clover">
         <activity
+            android:name=".ProductDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".CategoryActivity"
             android:exported="true" />
         <activity

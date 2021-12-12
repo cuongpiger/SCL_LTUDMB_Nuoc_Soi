@@ -1,5 +1,6 @@
 package team9.clover.Module;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.google.android.material.textview.MaterialTextView;
 import java.util.List;
 
 import team9.clover.Model.HorizontalProductScroll;
+import team9.clover.ProductDetailActivity;
 import team9.clover.R;
 
 public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<HorizontalProductScrollAdapter.ViewHolder> {
@@ -63,6 +65,14 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
             title = itemView.findViewById(R.id.mtvProductTitle);
             stuff = itemView.findViewById(R.id.mtvSize);
             price = itemView.findViewById(R.id.mtvPrice);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent productDetailIntent = new Intent(itemView.getContext(), ProductDetailActivity.class);
+                    itemView.getContext().startActivity(productDetailIntent);
+                }
+            });
         }
 
         private void setProductImage(int resorce) {

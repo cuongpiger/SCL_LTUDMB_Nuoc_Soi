@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        overridePendingTransition(R.anim.slide_from_right, R.anim.slideout_from_left);
         setContentView(R.layout.activity_login);
 
         referWidgets();

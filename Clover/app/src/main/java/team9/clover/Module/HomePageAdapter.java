@@ -268,7 +268,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             super(itemView);
 
             titleLayout = itemView.findViewById(R.id.mtvGridTitle);
-            buttonLayout = itemView.findViewById(R.id.mbtGridViewButton);
+            buttonLayout = itemView.findViewById(R.id.mbtFindSize);
             gridViewLayout = itemView.findViewById(R.id.gvProductLayout);
         }
 
