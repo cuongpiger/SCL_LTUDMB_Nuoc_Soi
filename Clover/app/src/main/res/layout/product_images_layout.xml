@@ -31,12 +31,11 @@
         android:id="@+id/fbAddWish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:rippleColor="@color/violet_mid"
+        android:layout_marginTop="16dp"
         android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/mbtFindSize"
         app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="@color/violet_mid"
         app:srcCompat="@drawable/ic_wish_24"
         app:tint="@color/violet_light" />
 
@@ -143,4 +142,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tlIndicator"
         app:strokeColor="@color/black"
         app:strokeWidth="2dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtvSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XS  S  M  L  XL"
+        android:textAlignment="center"
+        android:textColor="@color/violet_mid"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/mtvCuttedPrice"
+        app:layout_constraintEnd_toEndOf="@+id/mbtFindSize"
+        app:layout_constraintStart_toStartOf="@+id/mbtFindSize"
+        app:layout_constraintTop_toBottomOf="@+id/mbtFindSize" />
 </androidx.constraintlayout.widget.ConstraintLayout>
