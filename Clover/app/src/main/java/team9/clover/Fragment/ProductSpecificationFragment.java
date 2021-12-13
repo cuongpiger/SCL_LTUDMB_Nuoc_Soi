@@ -39,11 +39,16 @@ public class ProductSpecificationFragment extends Fragment {
         productSpecificationRecyclerView.setLayoutManager(linearLayoutManager);
 
         List<ProductSpecificationModel> productSpecificationModelList = new ArrayList<>();
-        productSpecificationModelList.add(new ProductSpecificationModel("Chất liệu", "Vải flannel"));
-        productSpecificationModelList.add(new ProductSpecificationModel("Giới tính", "Nữ"));
-        productSpecificationModelList.add(new ProductSpecificationModel("Kích cỡ", "XS, S, M, L, XL"));
-        productSpecificationModelList.add(new ProductSpecificationModel("Loại sản phẩm", "Váy"));
-        productSpecificationModelList.add(new ProductSpecificationModel("Màu sắc", "Đen"));
+        productSpecificationModelList.add(new ProductSpecificationModel(0, "Mô tả chung"));
+        productSpecificationModelList.add(new ProductSpecificationModel(1, "Chất liệu", "Vải flannel"));
+        productSpecificationModelList.add(new ProductSpecificationModel(1, "Giới tính", "Nữ"));
+        productSpecificationModelList.add(new ProductSpecificationModel(1, "Loại sản phẩm", "Váy"));
+        productSpecificationModelList.add(new ProductSpecificationModel(1, "Màu sắc", "Đen"));
+        productSpecificationModelList.add(new ProductSpecificationModel(0,"Kích cỡ"));
+        productSpecificationModelList.add(new ProductSpecificationModel(1, "XS","Tay: 20cm, Eo: 60cm, Lưng: 120cm"));
+        productSpecificationModelList.add(new ProductSpecificationModel(1, "S", "Tay: 20cm, Eo: 60cm, Lưng: 120cm"));
+        productSpecificationModelList.add(new ProductSpecificationModel(1, "M", "Tay: 20cm, Eo: 60cm, Lưng: 120cm"));
+        productSpecificationModelList.add(new ProductSpecificationModel(1, "L", "Tay: 20cm, Eo: 60cm, Lưng: 120cm"));
         ProductSpecificationAdapter productSpecificationAdapter = new ProductSpecificationAdapter(productSpecificationModelList);
         productSpecificationRecyclerView.setAdapter(productSpecificationAdapter);
         productSpecificationAdapter.notifyDataSetChanged();
