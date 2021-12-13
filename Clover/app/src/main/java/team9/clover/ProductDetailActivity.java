@@ -2,14 +2,10 @@ package team9.clover;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,19 +16,19 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import team9.clover.Module.ProductDetailsAdapter;
 import team9.clover.Module.ProductImagesAdapter;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
-    ViewPager productImageViewPager;
-    TabLayout tlIndicator;
+    ViewPager productImageViewPager, productDetailsViewpager;
+    TabLayout tlIndicator, productDetailsTabLayout;
     static boolean ALREADY_ADDED_TO_WISH_LIST = false;
     FloatingActionButton addWish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.slide_from_right, R.anim.slideout_from_left);
         setContentView(R.layout.activity_product_detail);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -43,6 +39,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         productImageViewPager = findViewById(R.id.vpProductImages);
         tlIndicator = findViewById(R.id.tlIndicator);
         addWish = findViewById(R.id.fbAddWish);
+        productDetailsViewpager = findViewById(R.id.product_details_viewpager);
+        productDetailsTabLayout = findViewById(R.id.product_details_tablayout);
 
         List<Integer> productImages = new ArrayList<>();
         productImages.add(R.drawable.p01);
@@ -68,6 +66,32 @@ public class ProductDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
+        productDetailsViewpager.setAdapter(new ProductDetailsAdapter(getSupportFragmentManager(), productDetailsTabLayout.getTabCount()));
+        productDetailsViewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(productDetailsTabLayout));
+        productDetailsTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                productDetailsViewpager.setCurrentItem(tab.getPosition());
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slideout_from_left);
     }
 
     @Override

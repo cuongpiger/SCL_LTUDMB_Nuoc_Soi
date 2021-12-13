@@ -1,5 +1,6 @@
 package team9.clover.Module;
 
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -7,7 +8,11 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.makeramen.roundedimageview.RoundedImageView;
+
 import java.util.List;
+
+import team9.clover.R;
 
 public class ProductImagesAdapter extends PagerAdapter {
 
@@ -20,8 +25,12 @@ public class ProductImagesAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        ImageView productImage = new ImageView(container.getContext());
+        RoundedImageView productImage = new RoundedImageView(container.getContext());
+        productImage.setCornerRadius((float) 50);
         productImage.setImageResource(productImages.get(position));
+
+//        ImageView productImage = new ImageView(container.getContext());
+//        productImage.setImageResource(productImages.get(position));
         container.addView(productImage, 0);
         return productImage;
     }

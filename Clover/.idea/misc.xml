@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/app_icon_background.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/default_dot.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/drawable/detail_image.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/dot_selector.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.2355263157894737" />
@@ -12,6 +13,7 @@
         <entry key="app/src/main/res/drawable/navigation_item.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/navigation_side.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/navigation_side_shape.xml" value="0.1355263157894737" />
+        <entry key="app/src/main/res/drawable/product_detail.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/ripple_effect.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/selected_dot.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.2355263157894737" />
@@ -20,13 +22,16 @@
         <entry key="app/src/main/res/layout/activity_category.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29483695652173914" />
-        <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.5987025023169601" />
+        <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/category_item.xml" value="1.0" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/detail_image_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_product_description.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/fragment_product_specification.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_reset_password.xml" value="0.3361138370951914" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.22532894736842105" />
@@ -35,7 +40,9 @@
         <entry key="app/src/main/res/layout/horizontal_scroll_item_layout.xml" value="0.67" />
         <entry key="app/src/main/res/layout/horizontal_scroll_layout.xml" value="0.22" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/product_images_layout.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/product_description_layout.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/product_images_layout.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/product_specification_item_layout.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/slider_layout.xml" value="0.45036160420775806" />
         <entry key="app/src/main/res/layout/sliding_ad_banner.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/strip_ad_layout.xml" value="0.22532894736842105" />
@@ -54,5 +61,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.5062992125984253" />
+      </ProjectState>
+    </option>
   </component>
 </project>
