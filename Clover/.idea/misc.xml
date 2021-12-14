@@ -14,6 +14,8 @@
         <entry key="app/src/main/res/drawable/navigation_side.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/navigation_side_shape.xml" value="0.1355263157894737" />
         <entry key="app/src/main/res/drawable/product_detail.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/drawable/rating_bar.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/drawable/rating_empty.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/ripple_effect.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/selected_dot.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.2355263157894737" />
@@ -44,7 +46,7 @@
         <entry key="app/src/main/res/layout/product_details_only_layout.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/product_images_layout.xml" value="0.22" />
         <entry key="app/src/main/res/layout/product_specification_item_layout.xml" value="0.22532894736842105" />
-        <entry key="app/src/main/res/layout/ratings_layout.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/ratings_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/slider_layout.xml" value="0.45036160420775806" />
         <entry key="app/src/main/res/layout/sliding_ad_banner.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/strip_ad_layout.xml" value="0.22532894736842105" />

@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -25,6 +27,10 @@ public class ProductDetailActivity extends AppCompatActivity {
     TabLayout tlIndicator, productDetailsTabLayout;
     static boolean ALREADY_ADDED_TO_WISH_LIST = false;
     FloatingActionButton addWish;
+
+    /* Rating layout */
+    LinearLayout rateNowContainer;
+    /****************/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +92,19 @@ public class ProductDetailActivity extends AppCompatActivity {
 
             }
         });
+
+        /* Rating layout */
+        rateNowContainer = findViewById(R.id.rate_now_container);
+        for (int x = 0; x < rateNowContainer.getChildCount(); ++x) {
+            final int starPosition = x;
+            rateNowContainer.getChildAt(x).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setRating(starPosition);
+                }
+            });
+        }
+        /* ****************/
     }
 
     @Override
@@ -119,5 +138,17 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setRating(int starPosition) {
+        for (int x = 0; x < rateNowContainer.getChildCount(); ++x) {
+            ImageView starBtn = (ImageView) rateNowContainer.getChildAt(x);
+
+            if (x <= starPosition) {
+                starBtn.setImageResource(R.drawable.filled_star);
+            } else {
+                starBtn.setImageResource(R.drawable.empty_start);
+            }
+        }
     }
 }
