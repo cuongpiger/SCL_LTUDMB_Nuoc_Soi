@@ -1,4 +1,4 @@
-package team9.clover.ui.home;
+package team9.clover.Fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -41,7 +41,6 @@ import team9.clover.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
 
     RecyclerView categoryRecyclerView;
@@ -50,7 +49,6 @@ public class HomeFragment extends Fragment {
     public HomeFragment() {}
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 

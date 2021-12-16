@@ -24,14 +24,20 @@
             android:id="@+id/nbReward"
             android:icon="@drawable/ic_reward_24"
             android:title="Khuyến mãi" />
-        <item
-            android:id="@+id/nbProfile"
-            android:icon="@drawable/ic_profile_24"
-            android:title="Tài khoản" />
     </group>
 
-    <item
-        android:id="@+id/nbLogOut"
-        android:icon="@drawable/ic_logout_24"
-        android:title="Đăng xuất" />
+    <item android:title="Cá nhân">
+        <menu>
+            <item
+                android:id="@+id/nbProfile"
+                android:icon="@drawable/ic_profile_24"
+                android:title="Tài khoản" />
+            <item
+                android:id="@+id/nbLogOut"
+                android:icon="@drawable/ic_logout_24"
+                android:title="Đăng xuất" />
+        </menu>
+
+    </item>
+
 </menu>

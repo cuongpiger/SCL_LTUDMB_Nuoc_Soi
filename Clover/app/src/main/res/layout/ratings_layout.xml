@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="27 lượt đánh giá"
+        android:text="Đã bán 1102 sản phẩm"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
         app:layout_constraintStart_toStartOf="@+id/linearLayout3"
@@ -270,6 +270,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="right"
             android:gravity="center"
             android:text="12"
             android:textSize="10sp" />
@@ -278,14 +279,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="right"
             android:gravity="center"
             android:text="5"
-            android:textAlignment="center"
             android:textSize="10sp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:layout_weight="1"
             android:gravity="center"
             android:text="0"
@@ -294,31 +296,55 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:layout_weight="1"
             android:gravity="center"
             android:text="10"
-            android:textAlignment="center"
             android:textSize="10sp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:layout_weight="1"
             android:gravity="center"
             android:text="1"
-            android:textAlignment="center"
             android:textSize="10sp" />
     </LinearLayout>
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="3dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="@+id/materialTextView3"
+        app:layout_constraintStart_toStartOf="@+id/materialTextView3"
+        app:layout_constraintTop_toBottomOf="@+id/ratings_numbers_container" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingHorizontal="4dp"
+        android:text="690"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/ratings_numbers_container"
+        app:layout_constraintStart_toStartOf="@+id/ratings_numbers_container"
+        app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_your_ratings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textStyle="bold"
         android:text="Đánh giá của bạn"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/materialTextView2"
-        app:layout_constraintTop_toBottomOf="@+id/ratings_progressbar_containers" />
+        app:layout_constraintTop_toBottomOf="@+id/materialTextView3" />
 
     <LinearLayout
         android:id="@+id/rate_now_container"

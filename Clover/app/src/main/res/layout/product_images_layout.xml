@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:elevation="3dp"
-    android:paddingBottom="16dp"
+    android:paddingBottom="8dp"
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -107,7 +107,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mtvCuttedPrice"
+        android:id="@+id/cutted_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="bottom"
@@ -119,14 +119,14 @@
         app:layout_constraintStart_toEndOf="@+id/mtvProductPrice" />
 
     <View
-        android:id="@+id/divider"
+        android:id="@+id/price_cutted_divider"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/gray_dark"
-        app:layout_constraintBottom_toBottomOf="@+id/mtvCuttedPrice"
-        app:layout_constraintEnd_toEndOf="@+id/mtvCuttedPrice"
-        app:layout_constraintStart_toStartOf="@+id/mtvCuttedPrice"
-        app:layout_constraintTop_toTopOf="@+id/mtvCuttedPrice" />
+        app:layout_constraintBottom_toBottomOf="@+id/cutted_price"
+        app:layout_constraintEnd_toEndOf="@+id/cutted_price"
+        app:layout_constraintStart_toStartOf="@+id/cutted_price"
+        app:layout_constraintTop_toTopOf="@+id/cutted_price" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtFindSize"
@@ -138,7 +138,7 @@
         android:textColor="@color/black"
         app:backgroundTint="@color/white"
         app:cornerRadius="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/mtvCuttedPrice"
+        app:layout_constraintBottom_toBottomOf="@+id/cutted_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tlIndicator"
         app:strokeColor="@color/black"
@@ -153,8 +153,47 @@
         android:textColor="@color/violet_mid"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/mtvCuttedPrice"
+        app:layout_constraintBottom_toBottomOf="@+id/cutted_price"
         app:layout_constraintEnd_toEndOf="@+id/mbtFindSize"
         app:layout_constraintStart_toStartOf="@+id/mbtFindSize"
         app:layout_constraintTop_toBottomOf="@+id/mbtFindSize" />
+
+    <LinearLayout
+        android:id="@+id/coupen_redemption_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/violet_mid"
+        android:layout_marginTop="16dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingVertical="7dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cutted_price">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_coupen_redemption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Dùng mã giảm giá để nhận giá tốt hơn"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/coupen_redemption_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="Dùng mã"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:backgroundTint="@color/violet_mid"
+            app:cornerRadius="50dp"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
