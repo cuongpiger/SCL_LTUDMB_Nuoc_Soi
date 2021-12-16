@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
@@ -33,11 +34,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private FrameLayout frameLayout;
     private NavigationView navigationView;
+    private ImageView actionBarLogo;
 
     private static final int HOME_FRAGMENT = 0;
     private static final int CART_FRAGMENT = 1;
 
-    private static int currentFragment;
+    private static int currentFragment = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +48,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(Color.BLACK);
+        actionBarLogo = findViewById(R.id.actionbar_logo);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (currentFragment == HOME_FRAGMENT) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
             getMenuInflater().inflate(R.menu.main, menu);
         }
 
@@ -106,6 +110,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void myCart() {
+        actionBarLogo.setVisibility(View.GONE);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("Giỏ hàng");
         invalidateOptionsMenu();
         setFragment(new MyCartFragment(), CART_FRAGMENT);
         navigationView.getMenu().getItem(2).setChecked(true);
@@ -116,6 +123,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int itemId = item.getItemId();
 
         if (itemId == R.id.nbMall) {
+            actionBarLogo.setVisibility(View.VISIBLE);
+            invalidateOptionsMenu(); // đồng bộ hóa actionbar
             setFragment(new HomeFragment(), HOME_FRAGMENT);
 
         } else if (itemId == R.id.nbOrder) {
@@ -140,9 +149,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setFragment(Fragment fragment, int fragmentNo) {
-        currentFragment = fragmentNo;
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(frameLayout.getId(), fragment);
-        fragmentTransaction.commit();
+        if (fragmentNo != currentFragment) {
+            currentFragment = fragmentNo;
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+            fragmentTransaction.replace(frameLayout.getId(), fragment);
+            fragmentTransaction.commit();
+        }
     }
 }
