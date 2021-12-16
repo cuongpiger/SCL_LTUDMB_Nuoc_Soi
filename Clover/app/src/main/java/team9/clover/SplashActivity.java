@@ -40,7 +40,14 @@ public class SplashActivity extends AppCompatActivity {
 
         referWidgets();
         setAnimation();
-        runNextActivity();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+                startActivity(intent);
+            }
+        }, Config.TURN_SIGN_IN_DELAY);
     }
 
     private void referWidgets() {
@@ -66,16 +73,6 @@ public class SplashActivity extends AppCompatActivity {
 
         tvCopyright.animate().alpha(0f).setDuration(0);
         ivLogo.startAnimation(splashScreen);
-    }
-
-    private void runNextActivity() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                finish();
-                startActivity(intent);
-            }
-        }, Config.TURN_SIGN_IN_DELAY);
     }
 
     @Override

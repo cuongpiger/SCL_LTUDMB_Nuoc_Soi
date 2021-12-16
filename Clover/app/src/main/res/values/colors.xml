@@ -11,7 +11,9 @@
     <color name="gray_mid">#ff808080</color>
     <color name="violet_mid">#ffa69eb0</color>
     <color name="violet_light">#ffdadae3</color>
-    <color name="straw">#fff2e2cd</color>
+    <color name="violet_dark">#ff8F70B2</color>
+    <color name="straw_light">#fff2e2cd</color>
+    <color name="straw_mid">#ffF1BC01</color>
     <color name="gray_dark">#ff4c4c4c</color>
     <color name="red">#ffB80D20</color>
     <color name="green">#ff238000</color>
