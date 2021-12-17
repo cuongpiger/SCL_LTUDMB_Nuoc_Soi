@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import team9.clover.Fragment.HomeFragment;
 import team9.clover.Fragment.MyCartFragment;
+import team9.clover.Fragment.MyOrdersFragment;
 import team9.clover.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private static final int HOME_FRAGMENT = 0;
     private static final int CART_FRAGMENT = 1;
+    private static final int ORDERS_FRAGMENT = 2;
 
     private static int currentFragment = -1;
 
@@ -102,20 +104,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
 
         } else if (itemId == R.id.abCart) {
-            myCart();
+            goToFragment("Giỏ hàng", new MyCartFragment(), CART_FRAGMENT);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void myCart() {
+    private void goToFragment(String title, Fragment fragment, int fragmentNo) {
         actionBarLogo.setVisibility(View.GONE);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle("Giỏ hàng");
+        getSupportActionBar().setTitle(title);
         invalidateOptionsMenu();
-        setFragment(new MyCartFragment(), CART_FRAGMENT);
-        navigationView.getMenu().getItem(2).setChecked(true);
+        setFragment(fragment, fragmentNo);
+
+        if (fragmentNo == CART_FRAGMENT) {
+            navigationView.getMenu().getItem(2).setChecked(true);
+        }
     }
 
     @Override
@@ -128,9 +133,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setFragment(new HomeFragment(), HOME_FRAGMENT);
 
         } else if (itemId == R.id.nbOrder) {
-
+            goToFragment("Đơn hàng", new MyOrdersFragment(), ORDERS_FRAGMENT);
         } else if (itemId == R.id.nbCart) {
-            myCart();
+            goToFragment("Giỏ hàng", new MyCartFragment(), CART_FRAGMENT);
         } else if (itemId == R.id.nbFavorite) {
 
         } else if (itemId == R.id.nbReward) {

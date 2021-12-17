@@ -10,17 +10,18 @@
     android:layout_height="wrap_content">
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/productImage"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/product1"
+        android:src="@drawable/p03"
+        app:riv_corner_radius="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textView6"
+        android:id="@+id/product_titlee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -29,21 +30,20 @@
         android:textStyle="bold"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+        app:layout_constraintTop_toTopOf="@+id/productImage" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textView8"
+        android:id="@+id/deliveryStatus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/dot"
         android:drawablePadding="4dp"
         android:text="Giao hàng thành công vào ngày 13/12/2021"
-        app:drawableTint="@color/green"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintEnd_toStartOf="@+id/productImage"
+        app:layout_constraintStart_toEndOf="@+id/deliveryDot"
+        app:layout_constraintTop_toBottomOf="@+id/product_titlee" />
 
     <TextView
         android:id="@+id/textView9"
@@ -54,7 +54,7 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/rate_now_container"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="@+id/product_titlee"
         app:layout_constraintTop_toTopOf="@+id/rate_now_container" />
 
     <LinearLayout
@@ -67,7 +67,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView8">
+        app:layout_constraintTop_toBottomOf="@+id/deliveryStatus">
 
         <ImageView
             android:layout_width="30dp"
@@ -99,4 +99,14 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/empty_start" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/deliveryDot"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        app:tint="@color/red"
+        app:layout_constraintBottom_toBottomOf="@+id/deliveryStatus"
+        app:layout_constraintStart_toStartOf="@+id/product_titlee"
+        app:layout_constraintTop_toTopOf="@+id/deliveryStatus"
+        app:srcCompat="@drawable/dot" />
 </androidx.constraintlayout.widget.ConstraintLayout>
