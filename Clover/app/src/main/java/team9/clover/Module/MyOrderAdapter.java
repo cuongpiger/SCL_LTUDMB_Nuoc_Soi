@@ -1,22 +1,13 @@
 package team9.clover.Module;
 
 import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
@@ -69,8 +60,8 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            productImage = itemView.findViewById(R.id.productImage);
-            productTitle = itemView.findViewById(R.id.product_titlee);
+            productImage = itemView.findViewById(R.id.product_image);
+            productTitle = itemView.findViewById(R.id.product_title);
             deliveryStatus = itemView.findViewById(R.id.deliveryStatus);
             deliveryDot = itemView.findViewById(R.id.deliveryDot);
             rateNowContainer = itemView.findViewById(R.id.rate_now_container);
