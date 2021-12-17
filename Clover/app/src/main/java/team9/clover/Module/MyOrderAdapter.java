@@ -1,5 +1,6 @@
 package team9.clover.Module;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import java.util.List;
 
 import team9.clover.Model.MyOrderItemModel;
+import team9.clover.OrderDetailsActivity;
 import team9.clover.R;
 
 public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHolder> {
@@ -65,6 +67,14 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             deliveryStatus = itemView.findViewById(R.id.deliveryStatus);
             deliveryDot = itemView.findViewById(R.id.deliveryDot);
             rateNowContainer = itemView.findViewById(R.id.rate_now_container);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent orderDetailsIntent = new Intent(itemView.getContext(), OrderDetailsActivity.class);
+                    itemView.getContext().startActivity(orderDetailsIntent);
+                }
+            });
         }
 
         private void setData(int resource, String title, String deliveryDate, int rating) {

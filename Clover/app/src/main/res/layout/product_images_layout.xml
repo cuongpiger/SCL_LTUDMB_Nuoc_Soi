@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/productTitle">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mtvProductRatingMini"
+            android:id="@+id/rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
@@ -95,7 +95,7 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mtvProductPrice"
+        android:id="@+id/product_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -115,8 +115,8 @@
         android:layout_marginBottom="3dp"
         android:text="750.000 đ"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/mtvProductPrice"
-        app:layout_constraintStart_toEndOf="@+id/mtvProductPrice" />
+        app:layout_constraintBottom_toBottomOf="@+id/product_price"
+        app:layout_constraintStart_toEndOf="@+id/product_price" />
 
     <View
         android:id="@+id/price_cutted_divider"

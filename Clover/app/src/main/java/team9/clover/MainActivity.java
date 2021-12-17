@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int HOME_FRAGMENT = 0;
     private static final int CART_FRAGMENT = 1;
     private static final int ORDERS_FRAGMENT = 2;
-//    private static final int
+    private static final int WISHLIST_FRAGMENT = 3;
 
     private static int currentFragment = -1;
 
@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
-
-
         frameLayout = findViewById(R.id.main_framelayout);
         setFragment(new HomeFragment(), HOME_FRAGMENT);
     }
@@ -80,7 +78,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (currentFragment == HOME_FRAGMENT) {
+                super.onBackPressed();
+            } else {
+                actionBarLogo.setVisibility(View.VISIBLE);
+                invalidateOptionsMenu(); // đồng bộ hóa actionbar
+                setFragment(new HomeFragment(), HOME_FRAGMENT);
+                navigationView.getMenu().getItem(0).setChecked(true);
+            }
         }
     }
 
@@ -132,13 +137,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             actionBarLogo.setVisibility(View.VISIBLE);
             invalidateOptionsMenu(); // đồng bộ hóa actionbar
             setFragment(new HomeFragment(), HOME_FRAGMENT);
-
         } else if (itemId == R.id.nbOrder) {
             goToFragment("Đơn hàng", new MyOrdersFragment(), ORDERS_FRAGMENT);
         } else if (itemId == R.id.nbCart) {
             goToFragment("Giỏ hàng", new MyCartFragment(), CART_FRAGMENT);
         } else if (itemId == R.id.nbFavorite) {
-
+            goToFragment("Yêu thích", new MyWishlistFragment(), WISHLIST_FRAGMENT);
         } else if (itemId == R.id.nbReward) {
 
         } else if (itemId == R.id.nbProfile) {

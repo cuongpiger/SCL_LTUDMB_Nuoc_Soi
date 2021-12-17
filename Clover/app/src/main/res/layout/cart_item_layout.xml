@@ -33,17 +33,17 @@
         app:layout_constraintTop_toTopOf="@+id/product_image" />
 
     <ImageView
-        android:id="@+id/free_coupen_icon"
+        android:id="@+id/coupen_icon"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_free_coupen"
+        app:layout_constraintBottom_toBottomOf="@+id/free_coupens"
         app:layout_constraintStart_toStartOf="@+id/product_title"
-        app:layout_constraintTop_toTopOf="@+id/tv_free_coupen"
+        app:layout_constraintTop_toTopOf="@+id/free_coupens"
         app:srcCompat="@drawable/ic_baseline_discount_24"
         app:tint="@color/violet_dark" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_free_coupen"
+        android:id="@+id/free_coupens"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -51,7 +51,7 @@
         android:text="2 mã giảm giá"
         android:textColor="@color/violet_dark"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/free_coupen_icon"
+        app:layout_constraintStart_toEndOf="@+id/coupen_icon"
         app:layout_constraintTop_toBottomOf="@+id/product_title" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -65,7 +65,7 @@
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_free_coupen" />
+        app:layout_constraintTop_toBottomOf="@+id/free_coupens" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/cutted_price"

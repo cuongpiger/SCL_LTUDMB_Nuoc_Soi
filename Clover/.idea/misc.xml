@@ -27,6 +27,7 @@
         <entry key="app/src/main/res/layout/activity_category.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29483695652173914" />
+        <entry key="app/src/main/res/layout/activity_order_details.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.22532894736842105" />
@@ -39,7 +40,8 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_my_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_my_orders.xml" value="0.22532894736842105" />
-        <entry key="app/src/main/res/layout/fragment_orders_datail.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/fragment_my_wishlist.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/fragment_orders_datail.xml" value="0.33578431372549017" />
         <entry key="app/src/main/res/layout/fragment_product_description.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_product_specification.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_reset_password.xml" value="0.3361138370951914" />
@@ -62,6 +64,7 @@
         <entry key="app/src/main/res/layout/slider_layout.xml" value="0.45036160420775806" />
         <entry key="app/src/main/res/layout/sliding_ad_banner.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/strip_ad_layout.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/wishlist_item_layout.xml" value="0.75" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.5" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/menu/main.xml" value="0.22532894736842105" />
