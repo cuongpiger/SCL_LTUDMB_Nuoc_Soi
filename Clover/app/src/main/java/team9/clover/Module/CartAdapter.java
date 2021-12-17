@@ -101,8 +101,8 @@ public class CartAdapter extends RecyclerView.Adapter {
             super(itemView);
             productImage = itemView.findViewById(R.id.product_image);
             productTitle = itemView.findViewById(R.id.product_title);
-            freeCoupenIcon = itemView.findViewById(R.id.free_coupen_icon);
-            freeCoupens = itemView.findViewById(R.id.tv_free_coupen);
+            freeCoupenIcon = itemView.findViewById(R.id.coupen_icon);
+            freeCoupens = itemView.findViewById(R.id.free_coupens);
             productPrice = itemView.findViewById(R.id.product_price);
             cuttedPrice = itemView.findViewById(R.id.cutted_price);
             offersApplied = itemView.findViewById(R.id.offers_applied);

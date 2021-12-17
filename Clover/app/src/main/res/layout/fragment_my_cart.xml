@@ -54,6 +54,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/cart_continue_btn"
+            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -63,10 +65,8 @@
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/cart_continue_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:clickable="true"
                 android:drawableEnd="@drawable/cart_check"
                 android:drawablePadding="8dp"
                 android:drawableTint="@color/white"
