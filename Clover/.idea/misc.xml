@@ -6,6 +6,8 @@
         <entry key="../../../../../layout/custom_preview.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/app_icon_background.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/border_background.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/drawable/border_left_background.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/drawable/border_transparent_background.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/default_dot.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/detail_image.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/dot_selector.xml" value="0.2355263157894737" />
@@ -40,6 +42,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_my_cart.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_my_orders.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/fragment_my_reward.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_my_wishlist.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_orders_datail.xml" value="0.33578431372549017" />
         <entry key="app/src/main/res/layout/fragment_product_description.xml" value="0.22532894736842105" />
@@ -60,6 +63,7 @@
         <entry key="app/src/main/res/layout/product_specification_item_layout.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/ratings_layout.xml" value="0.9" />
         <entry key="app/src/main/res/layout/reward_with_product_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/rewards_item_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/shipping_details_layout.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/slider_layout.xml" value="0.45036160420775806" />
         <entry key="app/src/main/res/layout/sliding_ad_banner.xml" value="0.22532894736842105" />

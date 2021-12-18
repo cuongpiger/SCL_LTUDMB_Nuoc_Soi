@@ -44,7 +44,7 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tmp"
+                android:id="@+id/reward_expired_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3.259.000 đ"
