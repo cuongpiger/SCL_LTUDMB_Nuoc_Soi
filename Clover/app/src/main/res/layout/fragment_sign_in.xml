@@ -93,7 +93,7 @@
             app:layout_constraintTop_toBottomOf="@+id/pgbSignIn" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/mbtSignInGoogle"
+            android:id="@+id/change_or_add_address_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="100dp"
@@ -129,7 +129,7 @@
             app:cornerRadius="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mbtSignInGoogle"
+            app:layout_constraintTop_toBottomOf="@+id/change_or_add_address_btn"
             app:strokeColor="@color/black"
             app:strokeWidth="2dp" />
 

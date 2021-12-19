@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -29,6 +31,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import team9.clover.Fragment.HomeFragment;
 import team9.clover.Fragment.MyCartFragment;
 import team9.clover.Fragment.MyOrdersFragment;
+import team9.clover.Fragment.MyRewardFragment;
 import team9.clover.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,11 +39,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FrameLayout frameLayout;
     private NavigationView navigationView;
     private ImageView actionBarLogo;
+    private Window window;
+    private Toolbar toolbar;
+    private DrawerArrowDrawable arrowDrawable;
+    private ActionBarDrawerToggle toggle;
 
     private static final int HOME_FRAGMENT = 0;
     private static final int CART_FRAGMENT = 1;
     private static final int ORDERS_FRAGMENT = 2;
     private static final int WISHLIST_FRAGMENT = 3;
+    private static final int REWARDS_FRAGMENT = 4;
+    private static final int ACCOUNT_FRAGMENT = 5;
 
     private static int currentFragment = -1;
 
@@ -50,15 +59,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         overridePendingTransition(R.anim.slide_from_right, R.anim.slideout_from_left);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(Color.BLACK);
         actionBarLogo = findViewById(R.id.actionbar_logo);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        DrawerArrowDrawable arrowDrawable = toggle.getDrawerArrowDrawable();
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        arrowDrawable = toggle.getDrawerArrowDrawable();
         arrowDrawable.setColor(getResources().getColor(R.color.black));
         toggle.setDrawerArrowDrawable(arrowDrawable);
         toggle.syncState();
@@ -144,10 +156,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (itemId == R.id.nbFavorite) {
             goToFragment("Yêu thích", new MyWishlistFragment(), WISHLIST_FRAGMENT);
         } else if (itemId == R.id.nbReward) {
-
+            goToFragment("Khuyến mãi", new MyRewardFragment(), REWARDS_FRAGMENT);
         } else if (itemId == R.id.nbProfile) {
-            Toast.makeText(MainActivity.this, "Hello2", Toast.LENGTH_SHORT).show();
-
+            goToFragment("Tài khoản", new MyAccountFragment(), ACCOUNT_FRAGMENT);
         } else if (itemId == R.id.nbLogOut) {
             Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_SHORT).show();
         }
@@ -160,6 +171,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setFragment(Fragment fragment, int fragmentNo) {
         if (fragmentNo != currentFragment) {
+            if (fragmentNo == REWARDS_FRAGMENT) {
+                window.setStatusBarColor(getColor(R.color.violet_deep));
+                toolbar.setBackgroundColor(getColor(R.color.violet_deep));
+                toolbar.setTitleTextColor(Color.WHITE);
+                arrowDrawable.setColor(getResources().getColor(R.color.white));
+                toggle.setDrawerArrowDrawable(arrowDrawable);
+                toggle.syncState();
+            } else if (fragmentNo == ACCOUNT_FRAGMENT) {
+                window.setStatusBarColor(getColor(R.color.violet_deep));
+                toolbar.setBackgroundColor(getColor(R.color.black));
+                toolbar.setTitleTextColor(Color.WHITE);
+                arrowDrawable.setColor(getColor(R.color.white));
+                toggle.setDrawerArrowDrawable(arrowDrawable);
+                toggle.syncState();
+            } else {
+                window.setStatusBarColor(getColor(R.color.violet_mid));
+                toolbar.setBackgroundColor(Color.WHITE);
+                toolbar.setTitleTextColor(Color.BLACK);
+                arrowDrawable.setColor(getResources().getColor(R.color.black));
+                toggle.setDrawerArrowDrawable(arrowDrawable);
+                toggle.syncState();
+            }
+
             currentFragment = fragmentNo;
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
