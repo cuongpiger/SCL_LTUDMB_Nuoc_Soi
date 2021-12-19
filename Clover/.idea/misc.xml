@@ -61,6 +61,7 @@
         <entry key="app/src/main/res/layout/product_details_only_layout.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/product_images_layout.xml" value="0.22" />
         <entry key="app/src/main/res/layout/product_specification_item_layout.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/profile_data_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/ratings_layout.xml" value="0.9" />
         <entry key="app/src/main/res/layout/reward_with_product_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/rewards_item_layout.xml" value="0.33" />

@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/product_title" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Đánh giá của bạn"
@@ -66,7 +66,7 @@
         android:layout_marginBottom="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintStart_toEndOf="@+id/user_email"
         app:layout_constraintTop_toBottomOf="@+id/deliveryStatus">
 
         <ImageView
