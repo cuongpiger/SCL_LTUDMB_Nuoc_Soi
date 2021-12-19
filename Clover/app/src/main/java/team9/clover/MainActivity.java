@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int ORDERS_FRAGMENT = 2;
     private static final int WISHLIST_FRAGMENT = 3;
     private static final int REWARDS_FRAGMENT = 4;
+    private static final int ACCOUNT_FRAGMENT = 5;
 
     private static int currentFragment = -1;
 
@@ -157,8 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (itemId == R.id.nbReward) {
             goToFragment("Khuyến mãi", new MyRewardFragment(), REWARDS_FRAGMENT);
         } else if (itemId == R.id.nbProfile) {
-            Toast.makeText(MainActivity.this, "Hello2", Toast.LENGTH_SHORT).show();
-
+            goToFragment("Tài khoản", new MyAccountFragment(), ACCOUNT_FRAGMENT);
         } else if (itemId == R.id.nbLogOut) {
             Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_SHORT).show();
         }
@@ -176,6 +176,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 toolbar.setBackgroundColor(getColor(R.color.violet_deep));
                 toolbar.setTitleTextColor(Color.WHITE);
                 arrowDrawable.setColor(getResources().getColor(R.color.white));
+                toggle.setDrawerArrowDrawable(arrowDrawable);
+                toggle.syncState();
+            } else if (fragmentNo == ACCOUNT_FRAGMENT) {
+                window.setStatusBarColor(getColor(R.color.violet_deep));
+                toolbar.setBackgroundColor(getColor(R.color.black));
+                toolbar.setTitleTextColor(Color.WHITE);
+                arrowDrawable.setColor(getColor(R.color.white));
                 toggle.setDrawerArrowDrawable(arrowDrawable);
                 toggle.syncState();
             } else {

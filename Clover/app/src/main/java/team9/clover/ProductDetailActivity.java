@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -25,6 +26,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     ViewPager productImageViewPager, productDetailsViewpager;
     TabLayout tlIndicator, productDetailsTabLayout;
+    LinearLayout buyNowBtn;
     static boolean ALREADY_ADDED_TO_WISH_LIST = false;
     FloatingActionButton addWish;
 
@@ -47,6 +49,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         addWish = findViewById(R.id.fbAddWish);
         productDetailsViewpager = findViewById(R.id.product_details_viewpager);
         productDetailsTabLayout = findViewById(R.id.product_details_tablayout);
+        buyNowBtn = findViewById(R.id.buy_now_btn);
 
         List<Integer> productImages = new ArrayList<>();
         productImages.add(R.drawable.p01);
@@ -105,6 +108,14 @@ public class ProductDetailActivity extends AppCompatActivity {
             });
         }
         /* ****************/
+
+        buyNowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent deliveryIntent = new Intent(ProductDetailActivity.this, DeliveryActivity.class);
+                startActivity(deliveryIntent);
+            }
+        });
     }
 
     @Override
