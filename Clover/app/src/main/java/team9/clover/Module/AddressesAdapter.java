@@ -4,10 +4,12 @@ import static team9.clover.DeliveryActivity.SELECT_ADDRESS;
 import static team9.clover.Fragment.MyAccountFragment.MANAGE_ADDRESS;
 import static team9.clover.MyAddressActivity.refreshItem;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +24,7 @@ import team9.clover.R;
 public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.ViewHolder> {
 
     List<AddressesMOdel> addressesMOdelList;
-    int preSelectedPosition;
+    int preSelectedPosition = -1;
     int MODE;
 
     public AddressesAdapter(List<AddressesMOdel> addressesMOdelList, int MODE) {
@@ -57,6 +59,7 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.View
 
         MaterialTextView fullname, address, phone;
         ImageView icon_view;
+        LinearLayout optionContainer;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,6 +68,7 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.View
             address = itemView.findViewById(R.id.address);
             phone = itemView.findViewById(R.id.phone);
             icon_view = itemView.findViewById(R.id.icon_view);
+            optionContainer = itemView.findViewById(R.id.option_container);
         }
 
         private void setData(String username, String userAddress, String userPhone, Boolean selected, int position) {
@@ -94,7 +98,25 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.View
                     }
                 });
             } else if (MODE == MANAGE_ADDRESS) {
+                optionContainer.setVisibility(View.GONE);
+                icon_view.setImageResource(R.drawable.ic_bell_24);
+                icon_view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.v("here", "" + position + " " + optionContainer.getVisibility());
+                        optionContainer.setVisibility(View.VISIBLE);
+                        refreshItem(preSelectedPosition, preSelectedPosition);
+                        preSelectedPosition = position;
+                    }
+                });
 
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        refreshItem(preSelectedPosition, preSelectedPosition);
+                        preSelectedPosition = -1;
+                    }
+                });
             }
          }
     }

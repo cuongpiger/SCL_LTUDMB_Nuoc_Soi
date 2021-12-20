@@ -47,20 +47,22 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:tint="@color/black"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_add_24" />
 
     <LinearLayout
-        android:padding="4dp"
+        android:id="@+id/option_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="4dp"
-        android:gravity="right"
-        android:elevation="3dp"
-        android:visibility="gone"
         android:background="@drawable/slider_background"
+        android:elevation="3dp"
+        android:gravity="right"
+        android:orientation="vertical"
+        android:padding="4dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/icon_view"
         app:layout_constraintTop_toBottomOf="@+id/icon_view">
 
