@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginHorizontal="8dp"
     android:layout_marginVertical="4dp"
+    android:foreground="?attr/selectableItemBackground"
     android:background="@drawable/slider_background"
     android:elevation="3dp"
     android:layout_width="match_parent"

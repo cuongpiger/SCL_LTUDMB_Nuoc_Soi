@@ -1,8 +1,13 @@
 package team9.clover.Module;
 
+import static team9.clover.DeliveryActivity.SELECT_ADDRESS;
+import static team9.clover.Fragment.MyAccountFragment.MANAGE_ADDRESS;
+import static team9.clover.MyAddressActivity.refreshItem;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,9 +22,12 @@ import team9.clover.R;
 public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.ViewHolder> {
 
     List<AddressesMOdel> addressesMOdelList;
+    int preSelectedPosition;
+    int MODE;
 
-    public AddressesAdapter(List<AddressesMOdel> addressesMOdelList) {
+    public AddressesAdapter(List<AddressesMOdel> addressesMOdelList, int MODE) {
         this.addressesMOdelList = addressesMOdelList;
+        this.MODE = MODE;
     }
 
     @NonNull
@@ -35,8 +43,9 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.View
         String name = item.getFullname(),
                 address = item.getAddress(),
                 phone = item.getPhone();
+        Boolean selected = item.getSelected();
 
-        holder.setData(name, address, phone);
+        holder.setData(name, address, phone, selected, position);
     }
 
     @Override
@@ -47,6 +56,7 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         MaterialTextView fullname, address, phone;
+        ImageView icon_view;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,12 +64,38 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.View
             fullname = itemView.findViewById(R.id.name);
             address = itemView.findViewById(R.id.address);
             phone = itemView.findViewById(R.id.phone);
+            icon_view = itemView.findViewById(R.id.icon_view);
         }
 
-        private void setData(String username, String userAddress, String userPhone) {
+        private void setData(String username, String userAddress, String userPhone, Boolean selected, int position) {
             fullname.setText(username);
             address.setText(userAddress);
             phone.setText(userPhone);
-        }
+
+            if (MODE == SELECT_ADDRESS) {
+                icon_view.setImageResource(R.drawable.empty_start);
+
+                if (selected) {
+                    icon_view.setVisibility(View.VISIBLE);
+                    preSelectedPosition = position;
+                } else  {
+                    icon_view.setVisibility(View.GONE);
+                }
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (preSelectedPosition != position){
+                            addressesMOdelList.get(position).setSelected(true);
+                            addressesMOdelList.get(preSelectedPosition).setSelected(false);
+                            refreshItem(preSelectedPosition, position);
+                            preSelectedPosition = position;
+                        }
+                    }
+                });
+            } else if (MODE == MANAGE_ADDRESS) {
+
+            }
+         }
     }
 }

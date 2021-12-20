@@ -2,11 +2,21 @@ package team9.clover.Model;
 
 public class AddressesMOdel {
     String fullname, address, phone;
+    Boolean selected;
 
-    public AddressesMOdel(String fullname, String address, String phone) {
+    public Boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
+    }
+
+    public AddressesMOdel(String fullname, String address, String phone, Boolean selected) {
         this.fullname = fullname;
         this.address = address;
         this.phone = phone;
+        this.selected = selected;
     }
 
     public String getFullname() {

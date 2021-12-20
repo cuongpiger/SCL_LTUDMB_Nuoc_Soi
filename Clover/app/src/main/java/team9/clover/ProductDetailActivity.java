@@ -141,6 +141,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         int itemId = item.getItemId();
 
         if (itemId == android.R.id.home) {
+            finish();
             return true;
         } else if (itemId == R.id.abSearch) {
             return true;

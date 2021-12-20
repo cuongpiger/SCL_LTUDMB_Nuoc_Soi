@@ -41,13 +41,13 @@
         android:id="@+id/addresses_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/deliveryHereBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/deliveryHereBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Giao đến địa chỉ này"
