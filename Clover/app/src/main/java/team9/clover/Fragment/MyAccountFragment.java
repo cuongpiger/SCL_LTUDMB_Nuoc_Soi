@@ -1,4 +1,4 @@
-package team9.clover;
+package team9.clover.Fragment;
 
 import android.os.Bundle;
 
@@ -8,12 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MyAccountFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import team9.clover.R;
+
 public class MyAccountFragment extends Fragment {
+
+    public static final int MANAGE_ADDRESS = 1;
 
     public MyAccountFragment() {
         // Required empty public constructor

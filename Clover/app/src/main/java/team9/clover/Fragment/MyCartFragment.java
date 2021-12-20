@@ -17,6 +17,7 @@ import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import team9.clover.AddressActivity;
 import team9.clover.DeliveryActivity;
 import team9.clover.Model.CartItemModel;
 import team9.clover.Module.CartAdapter;
@@ -58,7 +59,7 @@ public class MyCartFragment extends Fragment {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent deliveryIntent = new Intent(getContext(), DeliveryActivity.class);
+                Intent deliveryIntent = new Intent(getContext(), AddressActivity.class);
                 getContext().startActivity(deliveryIntent);
             }
         });

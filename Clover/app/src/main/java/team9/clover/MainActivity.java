@@ -14,25 +14,21 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import team9.clover.Fragment.HomeFragment;
+import team9.clover.Fragment.MyAccountFragment;
 import team9.clover.Fragment.MyCartFragment;
 import team9.clover.Fragment.MyOrdersFragment;
 import team9.clover.Fragment.MyRewardFragment;
-import team9.clover.databinding.ActivityMainBinding;
+import team9.clover.Fragment.MyWishlistFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

@@ -1,4 +1,4 @@
-package team9.clover;
+package team9.clover.Fragment;
 
 import android.os.Bundle;
 
@@ -15,6 +15,7 @@ import java.util.List;
 
 import team9.clover.Model.WishlistModel;
 import team9.clover.Module.WishlistAdapter;
+import team9.clover.R;
 
 public class MyWishlistFragment extends Fragment {
 
