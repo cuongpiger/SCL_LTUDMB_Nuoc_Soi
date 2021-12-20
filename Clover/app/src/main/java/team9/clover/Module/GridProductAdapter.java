@@ -26,7 +26,7 @@ public class GridProductAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return horizontalProductScrollList.size();
     }
 
     @Override

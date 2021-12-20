@@ -44,7 +44,7 @@ public class MyWishlistFragment extends Fragment {
         wishlistModelList.add(new WishlistModel(R.drawable.p04, "Áo Blazer", 1, "3", 145, "790.000 đ", "1.200.000 đ"));
         wishlistModelList.add(new WishlistModel(R.drawable.p01, "Áo Blazer", 1, "3", 145, "790.000 đ", "1.200.000 đ"));
 
-        WishlistAdapter wishlistAdapter = new WishlistAdapter(wishlistModelList);
+        WishlistAdapter wishlistAdapter = new WishlistAdapter(wishlistModelList, true);
         wishlistRecyclerView.setAdapter(wishlistAdapter);
         wishlistAdapter.notifyDataSetChanged();
 
