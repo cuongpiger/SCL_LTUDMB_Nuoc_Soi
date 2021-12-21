@@ -11,6 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 import team9.clover.CategoryActivity;
@@ -39,6 +42,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         String name = item.getCategoryName();
 
         holder.setCategory(name, position);
+        holder.setCategoryIcon(icon);
     }
 
     @Override
@@ -58,8 +62,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             categoryName = itemView.findViewById(R.id.tvCategoryName);
         }
 
-        private void setCategoryIcon() {
-
+        /*
+        * Thiệt lập icon cho Category RecyclerView.
+        * PARAMS:
+        *   @iconUrl: Downloaded URL được Firebase Storage cấp cho icon
+        * */
+        private void setCategoryIcon(String iconUrl) {
+            if (!iconUrl.equals("null")) {
+                Glide.with(itemView.getContext())
+                        .load(iconUrl)
+                        .apply(new RequestOptions().placeholder(R.drawable.ic_home_24))
+                        .into(categoryIcon);
+            }
         }
 
         private void setCategory(final String name, final int position) {

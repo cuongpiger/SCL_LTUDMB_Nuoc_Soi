@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -18,8 +19,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +51,15 @@ public class HomeFragment extends Fragment {
 
     RecyclerView categoryRecyclerView;
     CategoryAdapter categoryAdapter;
+    List<Category> categoryList;
+    FirebaseFirestore firebaseFirestore;
 
     public HomeFragment() {}
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
 
         referWidgets(root);
         setViewCategory();
@@ -74,18 +83,32 @@ public class HomeFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         categoryRecyclerView.setLayoutManager(linearLayoutManager);
 
-        List<Category> categoryList = new ArrayList<>();
-        categoryList.add(new Category("link", "Trang chủ"));
-        categoryList.add(new Category("link", "Đồ bộ"));
-        categoryList.add(new Category("link", "Áo"));
-        categoryList.add(new Category("link", "Quần"));
-        categoryList.add(new Category("link", "Đầm"));
-        categoryList.add(new Category("link", "Chân váy"));
-        categoryList.add(new Category("link", "Giày"));
-        categoryList.add(new Category("link", "Phụ kiện"));
+        categoryList = new ArrayList<>();
         categoryAdapter = new CategoryAdapter(categoryList);
         categoryRecyclerView.setAdapter(categoryAdapter);
-        categoryAdapter.notifyDataSetChanged();
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("Category")
+                .orderBy("index")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            // duyệt qua Firebase Storage => lấy về => lưu vào mảng
+                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                categoryList.add(new Category(snapshot.get("icon").toString(), snapshot.get("name").toString()));
+                            }
+
+                            // adapter báo cho RecyclerView => cập nhật giao diện
+                            categoryAdapter.notifyDataSetChanged();
+
+                        } else {
+                            String error = task.getException().getMessage();
+                            Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void setViewRemaining(View view) {

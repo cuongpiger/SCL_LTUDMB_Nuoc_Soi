@@ -40,7 +40,7 @@
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/cart_item_layout.xml" value="0.75" />
         <entry key="app/src/main/res/layout/cart_total_amount_layout.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/category_item.xml" value="1.0" />
+        <entry key="app/src/main/res/layout/category_item.xml" value="0.75" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/detail_image_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.22532894736842105" />

@@ -1,7 +1,9 @@
 package team9.clover;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -46,9 +48,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int WISHLIST_FRAGMENT = 3;
     private static final int REWARDS_FRAGMENT = 4;
     private static final int ACCOUNT_FRAGMENT = 5;
+    public static Boolean showCart = false;
 
-    private static int currentFragment = -1;
+    private int currentFragment = -1;
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,19 +69,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        arrowDrawable = toggle.getDrawerArrowDrawable();
-        arrowDrawable.setColor(getResources().getColor(R.color.black));
-        toggle.setDrawerArrowDrawable(arrowDrawable);
-        toggle.syncState();
         drawerLayout.addDrawerListener(toggle);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
+        Log.v("flow", "0");
+
         frameLayout = findViewById(R.id.main_framelayout);
-        setFragment(new HomeFragment(), HOME_FRAGMENT);
+        if (showCart) {
+            drawerLayout.setDrawerLockMode(1);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            goToFragment("Giỏ hàng", new MyCartFragment(), CART_FRAGMENT);
+        } else {
+            toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            arrowDrawable = toggle.getDrawerArrowDrawable();
+            arrowDrawable.setColor(getResources().getColor(R.color.black));
+            toggle.setDrawerArrowDrawable(arrowDrawable);
+            toggle.syncState();
+
+            setFragment(new HomeFragment(), HOME_FRAGMENT);
+        }
+
     }
 
     @Override
@@ -90,10 +104,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 currentFragment = -1;
                 super.onBackPressed();
             } else {
-                actionBarLogo.setVisibility(View.VISIBLE);
-                invalidateOptionsMenu(); // đồng bộ hóa actionbar
-                setFragment(new HomeFragment(), HOME_FRAGMENT);
-                navigationView.getMenu().getItem(0).setChecked(true);
+                if (showCart) {
+                    Log.v("flow", "1");
+                    showCart = false;
+                    finish();
+                } else {
+                    actionBarLogo.setVisibility(View.VISIBLE);
+                    invalidateOptionsMenu(); // đồng bộ hóa actionbar
+                    setFragment(new HomeFragment(), HOME_FRAGMENT);
+                    navigationView.getMenu().getItem(0).setChecked(true);
+                }
             }
         }
     }
@@ -121,6 +141,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (itemId == R.id.abCart) {
             goToFragment("Giỏ hàng", new MyCartFragment(), CART_FRAGMENT);
             return true;
+        } else if (itemId == android.R.id.home) {
+            if (showCart) {
+                Log.v("flow", "2");
+                showCart = false;
+                finish();
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -197,5 +223,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.replace(frameLayout.getId(), fragment);
             fragmentTransaction.commit();
         }
+    }
+
+    public static void setShowCart(Boolean value) {
+        showCart = value;
+        Log.v("db", " " + showCart);
     }
 }
