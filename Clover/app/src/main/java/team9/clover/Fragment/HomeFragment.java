@@ -50,8 +50,10 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
 
     RecyclerView categoryRecyclerView;
+    RecyclerView rvHomePage;
     CategoryAdapter categoryAdapter;
     List<Category> categoryList;
+    HomePageAdapter adapter;
     FirebaseFirestore firebaseFirestore;
 
     public HomeFragment() {}
@@ -112,50 +114,84 @@ public class HomeFragment extends Fragment {
     }
 
     private void setViewRemaining(View view) {
-        RecyclerView rvHomePage = view.findViewById(R.id.rvHomePage);
+        rvHomePage = view.findViewById(R.id.rvHomePage);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvHomePage.setLayoutManager(linearLayoutManager);
-
-        List<Slider> sliderList = new ArrayList<Slider>();
-        sliderList.add(new Slider(R.drawable.banner6, "#EFEFEF"));
-        sliderList.add(new Slider(R.drawable.banner7, "#7696A5"));
-        sliderList.add(new Slider(R.drawable.banner1, "#EF6540"));
-        sliderList.add(new Slider(R.drawable.banner2, "#988F7E"));
-        sliderList.add(new Slider(R.drawable.banner3, "#898989"));
-        sliderList.add(new Slider(R.drawable.banner4, "#775440"));
-        sliderList.add(new Slider(R.drawable.banner5, "#FAC6CD"));
-        sliderList.add(new Slider(R.drawable.banner6, "#EFEFEF"));
-        sliderList.add(new Slider(R.drawable.banner7, "#7696A5"));
-        sliderList.add(new Slider(R.drawable.banner1, "#EF6540"));
-        sliderList.add(new Slider(R.drawable.banner2, "#988F7E"));
-
-        List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "M  L  XL", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S  M  L", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "XS  S", "720.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "L  XL", "720.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S  M  L", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS  S", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L  XL", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XL", "1.390.000 đ"));
-
         List<HomePage> homePageList = new ArrayList<>();
-        homePageList.add(new HomePage(HomePage.BANNER_SLIDER, sliderList));
-        homePageList.add(new HomePage(HomePage.STRIP_AD_BANNER, R.drawable.banner_ad1, "#D5D7D6"));
-        homePageList.add(new HomePage(HomePage.HORIZONTAL_PRODUCT_VIEW,"Khuyến mãi hôm nay", horizontalProductScrollList));
-        homePageList.add(new HomePage(HomePage.GRID_PRODUCT_VIEW, "Sản phẩm mới", horizontalProductScrollList));
-//        homePageList.add(new HomePage(HomePage.STRIP_AD_BANNER, R.drawable.banner1, "#EF6540"));
-//        homePageList.add(new HomePage(HomePage.BANNER_SLIDER, sliderList));
-//        homePageList.add(new HomePage(HomePage.BANNER_SLIDER, sliderList));
-//        homePageList.add(new HomePage(HomePage.STRIP_AD_BANNER, R.drawable.banner_ad1, "#D5D7D6"));
+        adapter = new HomePageAdapter(homePageList);
+        rvHomePage.setAdapter(adapter);
 
-        HomePageAdapter adapter = new HomePageAdapter(homePageList);
+        firebaseFirestore.collection("Category")
+                .document("home")
+                .collection("Banner")
+                .orderBy("index")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            // duyệt qua Firebase Storage => lấy về => lưu vào mảng
+                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                if ((long) snapshot.get("view_type") == 0) {
+                                    List<Slider> sliderList = new ArrayList<>();
+                                    long no_of_banners = (long) snapshot.get("no_of_banners");
+                                    for (long x = 0; x < no_of_banners; ++x) {
+                                        sliderList.add(new Slider(snapshot.get("banner_"+ x).toString(), snapshot.get("banner_" + x + "_padding").toString()));
+                                    }
+
+                                    homePageList.add(new HomePage(0, sliderList));
+                                } else if ((long) snapshot.get("view_type") == 1) {
+                                    homePageList.add(new HomePage(1, snapshot.get("strip_ad_banner").toString(), snapshot.get("background").toString()));
+
+                                } else if ((long) snapshot.get("view_type") == 2) {
+
+                                } else if ((long) snapshot.get("view_type") == 3) {
+
+                                }
+                            }
+
+                            // adapter báo cho RecyclerView => cập nhật giao diện
+                            adapter.notifyDataSetChanged();
+
+                        } else {
+                            String error = task.getException().getMessage();
+                            Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+
+//        List<Slider> sliderList = new ArrayList<Slider>();
+//        sliderList.add(new Slider(R.drawable.banner6, "#EFEFEF"));
+//        sliderList.add(new Slider(R.drawable.banner7, "#7696A5"));
+//        sliderList.add(new Slider(R.drawable.banner1, "#EF6540"));
+//        sliderList.add(new Slider(R.drawable.banner2, "#988F7E"));
+//        sliderList.add(new Slider(R.drawable.banner3, "#898989"));
+//        sliderList.add(new Slider(R.drawable.banner4, "#775440"));
+//        sliderList.add(new Slider(R.drawable.banner5, "#FAC6CD"));
+//        sliderList.add(new Slider(R.drawable.banner6, "#EFEFEF"));
+//        sliderList.add(new Slider(R.drawable.banner7, "#7696A5"));
+//        sliderList.add(new Slider(R.drawable.banner1, "#EF6540"));
+//        sliderList.add(new Slider(R.drawable.banner2, "#988F7E"));
+
+//        List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
+//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "M  L  XL", "1.390.000 đ"));
+//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S  M  L", "1.390.000 đ"));
+//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "XS  S", "720.000 đ"));
+//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "L  XL", "720.000 đ"));
+//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S  M  L", "1.390.000 đ"));
+//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS  S", "1.390.000 đ"));
+//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L  XL", "1.390.000 đ"));
+//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L", "1.390.000 đ"));
+//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS", "1.390.000 đ"));
+//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XL", "1.390.000 đ"));
+
+
+
+
 
         // ---------------
-        rvHomePage.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
 }

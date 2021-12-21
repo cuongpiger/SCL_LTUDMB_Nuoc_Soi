@@ -31,17 +31,17 @@ public class HomePage {
     //____________________________________________________
 
     // Strip ad
-    private int resource;
+    private String resource;
     private String backgroundColor;
-    public HomePage(int type, int resource, String backgroundColor) {
+    public HomePage(int type, String resource, String backgroundColor) {
         this.type = type;
         this.resource = resource;
         this.backgroundColor = backgroundColor;
     }
-    public int getResource() {
+    public String getResource() {
         return resource;
     }
-    public void setResource(int resource) {
+    public void setResource(String resource) {
         this.resource = resource;
     }
     public String getBackgroundColor() {
