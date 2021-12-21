@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 setFragment(new HomeFragment(), HOME_FRAGMENT);
             }
         } else {
-            Glide.with(this).load(R.drawable.no_internet_connection).into(noInternetConnection);
+            Glide.with(this).load(R.drawable.no_internet).into(noInternetConnection);
             noInternetConnection.setVisibility(View.VISIBLE);
         }
     }
