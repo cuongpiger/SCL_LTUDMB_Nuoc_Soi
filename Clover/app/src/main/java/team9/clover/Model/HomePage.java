@@ -55,8 +55,9 @@ public class HomePage {
     // Horizontal product & grid view product layout
     private String title;
     private List<HorizontalProductScroll> horizontalProductScrollList;
-    public HomePage(int type, String title, List<HorizontalProductScroll> horizontalProductScrollList) {
+    public HomePage(int type, String title, String backgroundColor, List<HorizontalProductScroll> horizontalProductScrollList) {
         this.type = type;
+        this.backgroundColor = backgroundColor;
         this.title = title;
         this.horizontalProductScrollList = horizontalProductScrollList;
     }

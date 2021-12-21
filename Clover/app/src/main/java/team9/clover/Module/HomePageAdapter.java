@@ -1,6 +1,7 @@
 package team9.clover.Module;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -105,9 +107,10 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
             case HomePage.HORIZONTAL_PRODUCT_VIEW:
                 String horizontalTitle = homePageList.get(position).getTitle();
+                String layoutColor = homePageList.get(position).getBackgroundColor();
                 int horizontalIcon = R.drawable.ic_baseline_discount_24;
                 List<HorizontalProductScroll> horizontalProductScrollList = homePageList.get(position).getHorizontalProductScrollList();
-                ((HorizontalProductViewHolder) holder).setHorizontalProductLayout(horizontalProductScrollList, horizontalTitle, horizontalIcon);
+                ((HorizontalProductViewHolder) holder).setHorizontalProductLayout(horizontalProductScrollList, horizontalTitle, horizontalIcon, layoutColor);
                 break;
 
             case HomePage.GRID_PRODUCT_VIEW:
@@ -254,20 +257,23 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
     public class HorizontalProductViewHolder extends RecyclerView.ViewHolder {
 
+        ConstraintLayout container;
         MaterialTextView horizontalLayoutTitle;
         MaterialButton horizontalViewAllButton;
         RecyclerView horizontalRecyclerView;
 
         public HorizontalProductViewHolder(@NonNull View itemView) {
             super(itemView);
+            container = itemView.findViewById(R.id.container);
             horizontalLayoutTitle = itemView.findViewById(R.id.mtvTitle);
             horizontalViewAllButton = itemView.findViewById(R.id.mbtGridView);
             horizontalRecyclerView = itemView.findViewById(R.id.rvLayout);
             horizontalRecyclerView.setRecycledViewPool(recycledViewPool);
         }
 
-        private void setHorizontalProductLayout(List<HorizontalProductScroll> horizontalProductScrollList, String title, int icon) {
+        private void setHorizontalProductLayout(List<HorizontalProductScroll> horizontalProductScrollList, String title, int icon, String color) {
 //            int i = R.drawable.ic_baseline_discount_24;
+            container.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(color)));
             horizontalLayoutTitle.setText(title);
             horizontalLayoutTitle.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
             horizontalLayoutTitle.setCompoundDrawablePadding(Config.PADDING_ICON_DRAWABLE);
@@ -326,7 +332,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                         productPrice = child.findViewById(R.id.mtvPrice);
 
                 HorizontalProductScroll product = horizontalProductScrollList.get(x);
-                productImage.setImageResource(product.getImage());
+//                Glide.with(itemView.getContext()).load(horizontalProductScrollList.get())
+
+//                productImage.setImageResource(product.getImage());
                 productTitle.setText(product.getTitle());
                 productSize.setText(product.getStuff());
                 productPrice.setText(product.getPrice());

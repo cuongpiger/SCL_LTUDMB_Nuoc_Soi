@@ -61,7 +61,7 @@ public class GridProductAdapter extends BaseAdapter {
             MaterialTextView productPrice = view.findViewById(R.id.mtvPrice);
 
             HorizontalProductScroll product = horizontalProductScrollList.get(position);
-            productImage.setImageResource(product.getImage());
+//            productImage.setImageResource(product.getImage());
             productTitle.setText(product.getTitle());
             productStuff.setText(product.getStuff());
             productPrice.setText(product.getPrice());

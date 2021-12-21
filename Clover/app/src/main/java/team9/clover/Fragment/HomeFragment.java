@@ -143,9 +143,21 @@ public class HomeFragment extends Fragment {
                                     homePageList.add(new HomePage(0, sliderList));
                                 } else if ((long) snapshot.get("view_type") == 1) {
                                     homePageList.add(new HomePage(1, snapshot.get("strip_ad_banner").toString(), snapshot.get("background").toString()));
-
                                 } else if ((long) snapshot.get("view_type") == 2) {
+                                    List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
+                                    long no_of_products = (long) snapshot.get("no_of_products");
+                                    for (long x = 0; x < no_of_products; ++x) {
+//                                        int image, String title, String stuff, String price
+                                        horizontalProductScrollList.add(new HorizontalProductScroll(
+                                                snapshot.get("product_id_" + x).toString(),
+                                                snapshot.get("product_image_" + x).toString(),
+                                                snapshot.get("product_title_" + x).toString(),
+                                                snapshot.get("product_size_" + x).toString(),
+                                                snapshot.get("product_price_" + x).toString()
+                                        ));
+                                    }
 
+                                    homePageList.add(new HomePage(2, snapshot.get("layout_title").toString(), snapshot.get("layout_background").toString(),horizontalProductScrollList));
                                 } else if ((long) snapshot.get("view_type") == 3) {
 
                                 }
@@ -160,38 +172,5 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 });
-
-
-
-//        List<Slider> sliderList = new ArrayList<Slider>();
-//        sliderList.add(new Slider(R.drawable.banner6, "#EFEFEF"));
-//        sliderList.add(new Slider(R.drawable.banner7, "#7696A5"));
-//        sliderList.add(new Slider(R.drawable.banner1, "#EF6540"));
-//        sliderList.add(new Slider(R.drawable.banner2, "#988F7E"));
-//        sliderList.add(new Slider(R.drawable.banner3, "#898989"));
-//        sliderList.add(new Slider(R.drawable.banner4, "#775440"));
-//        sliderList.add(new Slider(R.drawable.banner5, "#FAC6CD"));
-//        sliderList.add(new Slider(R.drawable.banner6, "#EFEFEF"));
-//        sliderList.add(new Slider(R.drawable.banner7, "#7696A5"));
-//        sliderList.add(new Slider(R.drawable.banner1, "#EF6540"));
-//        sliderList.add(new Slider(R.drawable.banner2, "#988F7E"));
-
-//        List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
-//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "M  L  XL", "1.390.000 đ"));
-//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S  M  L", "1.390.000 đ"));
-//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "XS  S", "720.000 đ"));
-//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "L  XL", "720.000 đ"));
-//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S  M  L", "1.390.000 đ"));
-//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS  S", "1.390.000 đ"));
-//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L  XL", "1.390.000 đ"));
-//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L", "1.390.000 đ"));
-//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS", "1.390.000 đ"));
-//        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XL", "1.390.000 đ"));
-
-
-
-
-
-        // ---------------
     }
 }
