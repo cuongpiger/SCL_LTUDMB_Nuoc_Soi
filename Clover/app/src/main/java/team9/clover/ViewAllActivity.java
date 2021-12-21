@@ -23,6 +23,8 @@ public class ViewAllActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     GridView gridView;
+    public static List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class ViewAllActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("View all");
+        getSupportActionBar().setTitle(getIntent().getStringExtra("title"));
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -68,11 +70,10 @@ public class ViewAllActivity extends AppCompatActivity {
         } else if (layout_code == 1) {
 
             gridView.setVisibility(View.VISIBLE);
-            List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
 
             GridProductAdapter gridProductAdapter = new GridProductAdapter(horizontalProductScrollList);
             gridView.setAdapter(gridProductAdapter);
-            gridProductAdapter.notifyDataSetChanged();
+//            gridProductAdapter.notifyDataSetChanged();
         }
     }
 

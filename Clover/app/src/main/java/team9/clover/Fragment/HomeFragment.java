@@ -6,7 +6,10 @@ import static team9.clover.Module.DBqueries.homePageList;
 import static team9.clover.Module.DBqueries.loadCategories;
 import static team9.clover.Module.DBqueries.loadFragmentData;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -25,6 +28,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -59,17 +63,28 @@ public class HomeFragment extends Fragment {
     RecyclerView rvHomePage;
     CategoryAdapter categoryAdapter;
     HomePageAdapter adapter;
+    ImageView noInternetConnection;
 
     public HomeFragment() {}
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        noInternetConnection = root.findViewById(R.id.no_internet_connection);
 
+        // check internet connection is possible
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
-        referWidgets(root);
-        setViewCategory();
-        setViewRemaining(root);
+        if (networkInfo != null && networkInfo.isConnected()) {
+            noInternetConnection.setVisibility(View.GONE);
+            referWidgets(root);
+            setViewCategory();
+            setViewRemaining(root);
+        } else {
+            Glide.with(this).load(R.drawable.no_internet).into(noInternetConnection);
+            noInternetConnection.setVisibility(View.VISIBLE);
+        }
 
         return root;
     }

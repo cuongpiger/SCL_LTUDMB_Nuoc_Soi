@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private DrawerArrowDrawable arrowDrawable;
     private ActionBarDrawerToggle toggle;
-    private ImageView noInternetConnection;
 
     private static final int HOME_FRAGMENT = 0;
     private static final int CART_FRAGMENT = 1;
@@ -83,31 +82,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.v("flow", "0");
 
         frameLayout = findViewById(R.id.main_framelayout);
-        noInternetConnection = findViewById(R.id.no_internet_connection);
 
-        // check internet connection is possible
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-        if (networkInfo != null && networkInfo.isConnected()) {
-            noInternetConnection.setVisibility(View.GONE);
-            if (showCart) {
-                drawerLayout.setDrawerLockMode(1);
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                goToFragment("Giỏ hàng", new MyCartFragment(), CART_FRAGMENT);
-            } else {
-                toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-                arrowDrawable = toggle.getDrawerArrowDrawable();
-                arrowDrawable.setColor(getResources().getColor(R.color.black));
-                toggle.setDrawerArrowDrawable(arrowDrawable);
-                toggle.syncState();
-
-                setFragment(new HomeFragment(), HOME_FRAGMENT);
-            }
+        if (showCart) {
+            drawerLayout.setDrawerLockMode(1);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            goToFragment("Giỏ hàng", new MyCartFragment(), CART_FRAGMENT);
         } else {
-            Glide.with(this).load(R.drawable.no_internet).into(noInternetConnection);
-            noInternetConnection.setVisibility(View.VISIBLE);
+            toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            arrowDrawable = toggle.getDrawerArrowDrawable();
+            arrowDrawable.setColor(getResources().getColor(R.color.black));
+            toggle.setDrawerArrowDrawable(arrowDrawable);
+            toggle.syncState();
+
+            setFragment(new HomeFragment(), HOME_FRAGMENT);
         }
+
+
     }
 
     @Override

@@ -339,7 +339,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
                 productTitle.setText(product.getTitle());
                 productSize.setText(product.getStuff());
-                productPrice.setText(product.getPrice());
+                productPrice.setText(product.getPrice() + " đ");
 
                 child.setBackgroundColor(itemView.getContext().getColor(R.color.white));
                 gridProductLayout.getChildAt(x).setOnClickListener(new View.OnClickListener() {
@@ -351,11 +351,15 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 });
 
             }
+
+            // button view all of grid product layout
             buttonLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    ViewAllActivity.horizontalProductScrollList = horizontalProductScrollList; // assign data for view all activity
                     Intent viewAllIntent = new Intent(itemView.getContext(), ViewAllActivity.class);
                     viewAllIntent.putExtra("layout_code", 1);
+                    viewAllIntent.putExtra("title", title);
                     itemView.getContext().startActivity(viewAllIntent);
                 }
             });
