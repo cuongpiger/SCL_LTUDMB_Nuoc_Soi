@@ -103,12 +103,12 @@ public class SignInFragment extends Fragment {
     }
 
     private void referWidgets(View view) {
-        tilEmail = view.findViewById(R.id.tilEmail);
+        tilEmail = view.findViewById(R.id.city);
         tilPassword = view.findViewById(R.id.tilPassword);
         mtvSignUp = view.findViewById(R.id.mtvSignUp);
         mtvForgetPassword = view.findViewById(R.id.mtvForgetPassword);
         pgbSignIn = view.findViewById(R.id.pgbSignIn);
-        mbtSignIn = view.findViewById(R.id.mbtSignIn);
+        mbtSignIn = view.findViewById(R.id.save_btn);
         floLogin = getActivity().findViewById(R.id.floLogin);
     }
 

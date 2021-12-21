@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
@@ -34,7 +36,7 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
 
     @Override
     public void onBindViewHolder(@NonNull HorizontalProductScrollAdapter.ViewHolder holder, int position) {
-        int resource = horizontalProductScrollList.get(position).getImage();
+        String resource = horizontalProductScrollList.get(position).getImage();
         String title = horizontalProductScrollList.get(position).getTitle();
         String stuff = horizontalProductScrollList.get(position).getStuff();
         String price = horizontalProductScrollList.get(position).getPrice();
@@ -75,8 +77,11 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
             });
         }
 
-        private void setProductImage(int resorce) {
-            image.setImageResource(resorce);
+        private void setProductImage(String resorce) {
+            Glide.with(itemView.getContext())
+                    .load(resorce)
+                    .apply(new RequestOptions().placeholder(R.drawable.product1))
+                    .into(image);
         }
 
         private void setProductTitle(String productTitle) {
@@ -88,7 +93,7 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
         }
 
         private void setProductPrice(String productPrice) {
-            price.setText(productPrice);
+            price.setText(productPrice + " đ");
         }
     }
 }

@@ -81,37 +81,7 @@ public class CategoryActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         categoryRecyclerView.setLayoutManager(linearLayoutManager);
-
-        List<Slider> sliderList = new ArrayList<Slider>();
-        sliderList.add(new Slider(R.drawable.banner6, "#EFEFEF"));
-        sliderList.add(new Slider(R.drawable.banner7, "#7696A5"));
-        sliderList.add(new Slider(R.drawable.banner1, "#EF6540"));
-        sliderList.add(new Slider(R.drawable.banner2, "#988F7E"));
-        sliderList.add(new Slider(R.drawable.banner3, "#898989"));
-        sliderList.add(new Slider(R.drawable.banner4, "#775440"));
-        sliderList.add(new Slider(R.drawable.banner5, "#FAC6CD"));
-        sliderList.add(new Slider(R.drawable.banner6, "#EFEFEF"));
-        sliderList.add(new Slider(R.drawable.banner7, "#7696A5"));
-        sliderList.add(new Slider(R.drawable.banner1, "#EF6540"));
-        sliderList.add(new Slider(R.drawable.banner2, "#988F7E"));
-
-        List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "M  L  XL", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S  M  L", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "XS  S", "720.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "L  XL", "720.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S  M  L", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS  S", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L  XL", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XL", "1.390.000 đ"));
-
         List<HomePage> homePageList = new ArrayList<>();
-        homePageList.add(new HomePage(HomePage.BANNER_SLIDER, sliderList));
-        homePageList.add(new HomePage(HomePage.STRIP_AD_BANNER, R.drawable.banner_ad1, "#D5D7D6"));
-        homePageList.add(new HomePage(HomePage.HORIZONTAL_PRODUCT_VIEW,"Khuyến mãi hôm nay", horizontalProductScrollList));
-        homePageList.add(new HomePage(HomePage.GRID_PRODUCT_VIEW, "Sản phẩm mới", horizontalProductScrollList));
 
         HomePageAdapter adapter = new HomePageAdapter(homePageList);
         categoryRecyclerView.setAdapter(adapter);

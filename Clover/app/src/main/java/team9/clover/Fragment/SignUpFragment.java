@@ -81,7 +81,7 @@ public class SignUpFragment extends Fragment {
     }
 
     private void referWidgets(View view) {
-        tilEmail = view.findViewById(R.id.tilEmail);
+        tilEmail = view.findViewById(R.id.city);
         tilFullName = view.findViewById(R.id.tilFullName);
         tilPassword = view.findViewById(R.id.tilPassword);
         tilRetype = view.findViewById(R.id.tilRetype);

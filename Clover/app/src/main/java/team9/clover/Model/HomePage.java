@@ -31,17 +31,17 @@ public class HomePage {
     //____________________________________________________
 
     // Strip ad
-    private int resource;
+    private String resource;
     private String backgroundColor;
-    public HomePage(int type, int resource, String backgroundColor) {
+    public HomePage(int type, String resource, String backgroundColor) {
         this.type = type;
         this.resource = resource;
         this.backgroundColor = backgroundColor;
     }
-    public int getResource() {
+    public String getResource() {
         return resource;
     }
-    public void setResource(int resource) {
+    public void setResource(String resource) {
         this.resource = resource;
     }
     public String getBackgroundColor() {
@@ -55,8 +55,9 @@ public class HomePage {
     // Horizontal product & grid view product layout
     private String title;
     private List<HorizontalProductScroll> horizontalProductScrollList;
-    public HomePage(int type, String title, List<HorizontalProductScroll> horizontalProductScrollList) {
+    public HomePage(int type, String title, String backgroundColor, List<HorizontalProductScroll> horizontalProductScrollList) {
         this.type = type;
+        this.backgroundColor = backgroundColor;
         this.title = title;
         this.horizontalProductScrollList = horizontalProductScrollList;
     }

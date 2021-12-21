@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -141,10 +142,16 @@ public class ProductDetailActivity extends AppCompatActivity {
         int itemId = item.getItemId();
 
         if (itemId == android.R.id.home) {
+            finish();
             return true;
         } else if (itemId == R.id.abSearch) {
             return true;
         } else if (itemId == R.id.abCart) {
+            Intent cartIntent = new Intent(ProductDetailActivity.this, MainActivity.class);
+            MainActivity.setShowCart(true);
+            finish();
+            startActivity(cartIntent);
+            Log.v("here", "product detail");
             return true;
         }
 

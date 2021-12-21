@@ -67,7 +67,7 @@ public class ResetPasswordFragment extends Fragment {
     }
 
     private void referWidgets(View view) {
-        tilEmail = view.findViewById(R.id.tilEmail);
+        tilEmail = view.findViewById(R.id.city);
         mbtResetPassword = view.findViewById(R.id.mbtResetPassword);
         mtvSignIn = view.findViewById(R.id.mtvSignIn);
         ivSending = view.findViewById(R.id.ivSending);

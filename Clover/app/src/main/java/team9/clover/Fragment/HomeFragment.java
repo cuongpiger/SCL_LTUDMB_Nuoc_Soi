@@ -1,6 +1,15 @@
 package team9.clover.Fragment;
 
+import static team9.clover.Module.DBqueries.categoryList;
+import static team9.clover.Module.DBqueries.firebaseFirestore;
+import static team9.clover.Module.DBqueries.homePageList;
+import static team9.clover.Module.DBqueries.loadCategories;
+import static team9.clover.Module.DBqueries.loadFragmentData;
+
+import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -9,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -18,8 +28,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,17 +60,31 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
 
     RecyclerView categoryRecyclerView;
+    RecyclerView rvHomePage;
     CategoryAdapter categoryAdapter;
+    HomePageAdapter adapter;
+    ImageView noInternetConnection;
 
     public HomeFragment() {}
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        noInternetConnection = root.findViewById(R.id.no_internet_connection);
 
-        referWidgets(root);
-        setViewCategory();
-        setViewRemaining(root);
+        // check internet connection is possible
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+            noInternetConnection.setVisibility(View.GONE);
+            referWidgets(root);
+            setViewCategory();
+            setViewRemaining(root);
+        } else {
+            Glide.with(this).load(R.drawable.no_internet).into(noInternetConnection);
+            noInternetConnection.setVisibility(View.VISIBLE);
+        }
 
         return root;
     }
@@ -74,65 +104,31 @@ public class HomeFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         categoryRecyclerView.setLayoutManager(linearLayoutManager);
 
-        List<Category> categoryList = new ArrayList<>();
-        categoryList.add(new Category("link", "Trang chủ"));
-        categoryList.add(new Category("link", "Đồ bộ"));
-        categoryList.add(new Category("link", "Áo"));
-        categoryList.add(new Category("link", "Quần"));
-        categoryList.add(new Category("link", "Đầm"));
-        categoryList.add(new Category("link", "Chân váy"));
-        categoryList.add(new Category("link", "Giày"));
-        categoryList.add(new Category("link", "Phụ kiện"));
         categoryAdapter = new CategoryAdapter(categoryList);
         categoryRecyclerView.setAdapter(categoryAdapter);
-        categoryAdapter.notifyDataSetChanged();
+
+        // load category data from firebase
+        if (categoryList.size() == 0) {
+            loadCategories(categoryAdapter, getContext());
+        } else {
+            categoryAdapter.notifyDataSetChanged();
+        }
     }
 
     private void setViewRemaining(View view) {
-        RecyclerView rvHomePage = view.findViewById(R.id.rvHomePage);
+        rvHomePage = view.findViewById(R.id.rvHomePage);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvHomePage.setLayoutManager(linearLayoutManager);
 
-        List<Slider> sliderList = new ArrayList<Slider>();
-        sliderList.add(new Slider(R.drawable.banner6, "#EFEFEF"));
-        sliderList.add(new Slider(R.drawable.banner7, "#7696A5"));
-        sliderList.add(new Slider(R.drawable.banner1, "#EF6540"));
-        sliderList.add(new Slider(R.drawable.banner2, "#988F7E"));
-        sliderList.add(new Slider(R.drawable.banner3, "#898989"));
-        sliderList.add(new Slider(R.drawable.banner4, "#775440"));
-        sliderList.add(new Slider(R.drawable.banner5, "#FAC6CD"));
-        sliderList.add(new Slider(R.drawable.banner6, "#EFEFEF"));
-        sliderList.add(new Slider(R.drawable.banner7, "#7696A5"));
-        sliderList.add(new Slider(R.drawable.banner1, "#EF6540"));
-        sliderList.add(new Slider(R.drawable.banner2, "#988F7E"));
-
-        List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "M  L  XL", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S  M  L", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "XS  S", "720.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.product1, "Olympiah", "L  XL", "720.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "S  M  L", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS  S", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L  XL", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "L", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XS", "1.390.000 đ"));
-        horizontalProductScrollList.add(new HorizontalProductScroll(R.drawable.hz_product1, "Paradiso blazer", "XL", "1.390.000 đ"));
-
-        List<HomePage> homePageList = new ArrayList<>();
-        homePageList.add(new HomePage(HomePage.BANNER_SLIDER, sliderList));
-        homePageList.add(new HomePage(HomePage.STRIP_AD_BANNER, R.drawable.banner_ad1, "#D5D7D6"));
-        homePageList.add(new HomePage(HomePage.HORIZONTAL_PRODUCT_VIEW,"Khuyến mãi hôm nay", horizontalProductScrollList));
-        homePageList.add(new HomePage(HomePage.GRID_PRODUCT_VIEW, "Sản phẩm mới", horizontalProductScrollList));
-//        homePageList.add(new HomePage(HomePage.STRIP_AD_BANNER, R.drawable.banner1, "#EF6540"));
-//        homePageList.add(new HomePage(HomePage.BANNER_SLIDER, sliderList));
-//        homePageList.add(new HomePage(HomePage.BANNER_SLIDER, sliderList));
-//        homePageList.add(new HomePage(HomePage.STRIP_AD_BANNER, R.drawable.banner_ad1, "#D5D7D6"));
-
-        HomePageAdapter adapter = new HomePageAdapter(homePageList);
-
-        // ---------------
+        adapter = new HomePageAdapter(homePageList);
         rvHomePage.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+
+        // load category data from firebase
+        if (homePageList.size() == 0) {
+            loadFragmentData(adapter, getContext());
+        } else {
+            adapter.notifyDataSetChanged();
+        }
     }
 }

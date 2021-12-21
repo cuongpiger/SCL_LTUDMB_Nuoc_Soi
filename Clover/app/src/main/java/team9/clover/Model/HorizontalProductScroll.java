@@ -2,23 +2,33 @@ package team9.clover.Model;
 
 public class HorizontalProductScroll {
 
-    private int image;
+    private String productId;
+    private String image;
     private String title;
     private String stuff;
     private String price;
 
-    public HorizontalProductScroll(int image, String title, String stuff, String price) {
+    public HorizontalProductScroll(String productId, String image, String title, String stuff, String price) {
+        this.productId = productId;
         this.image = image;
         this.title = title;
         this.stuff = stuff;
         this.price = price;
     }
 
-    public int getImage() {
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

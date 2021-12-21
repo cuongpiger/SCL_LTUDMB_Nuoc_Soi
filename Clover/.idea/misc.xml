@@ -26,17 +26,21 @@
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/slider_background.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/textview_ripple_effect.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/layout/activity_address.xml" value="0.20564395076553588" />
         <entry key="app/src/main/res/layout/activity_category.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/activity_delivery.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29483695652173914" />
+        <entry key="app/src/main/res/layout/activity_my_address.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_order_details.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/activity_view_all.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/addresses_item_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/cart_item_layout.xml" value="0.75" />
         <entry key="app/src/main/res/layout/cart_total_amount_layout.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/category_item.xml" value="1.0" />
+        <entry key="app/src/main/res/layout/category_item.xml" value="0.75" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/detail_image_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.22532894736842105" />
@@ -53,7 +57,7 @@
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.22532894736842105" />
-        <entry key="app/src/main/res/layout/grid_product_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/grid_product_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/horizontal_scroll_item_layout.xml" value="0.67" />
         <entry key="app/src/main/res/layout/horizontal_scroll_layout.xml" value="0.22" />
         <entry key="app/src/main/res/layout/my_address_layout.xml" value="0.22532894736842105" />
