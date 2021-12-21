@@ -115,9 +115,10 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
             case HomePage.GRID_PRODUCT_VIEW:
                 String gridTitle = homePageList.get(position).getTitle();
+                String gridColor = homePageList.get(position).getBackgroundColor();
                 int gridIcon = R.drawable.ic_new_product_24;
                 List<HorizontalProductScroll> gridProductScrollList = homePageList.get(position).getHorizontalProductScrollList();
-                ((GridProductViewHolder) holder).setGridProductLayout(gridProductScrollList, gridTitle, gridIcon);
+                ((GridProductViewHolder) holder).setGridProductLayout(gridProductScrollList, gridTitle, gridIcon, gridColor);
                 break;
 
             default:
@@ -305,20 +306,22 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
     public class GridProductViewHolder extends RecyclerView.ViewHolder {
 
+        ConstraintLayout container;
         MaterialTextView titleLayout;
         MaterialButton buttonLayout;
         GridLayout gridProductLayout;
 
         public GridProductViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            container = itemView.findViewById(R.id.container);
             titleLayout = itemView.findViewById(R.id.mtvGridTitle);
             buttonLayout = itemView.findViewById(R.id.mbt_view_all);
             gridProductLayout = itemView.findViewById(R.id.grid_layout);
         }
 
-        public void setGridProductLayout(List<HorizontalProductScroll> horizontalProductScrollList, String title, int icon) {
+        public void setGridProductLayout(List<HorizontalProductScroll> horizontalProductScrollList, String title, int icon, String color) {
             // R.drawable.ic_new_product_24
+            container.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(color)));
             titleLayout.setText(title);
             titleLayout.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
             titleLayout.setCompoundDrawablePadding(Config.PADDING_ICON_DRAWABLE);
@@ -332,9 +335,8 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                         productPrice = child.findViewById(R.id.mtvPrice);
 
                 HorizontalProductScroll product = horizontalProductScrollList.get(x);
-//                Glide.with(itemView.getContext()).load(horizontalProductScrollList.get())
+                Glide.with(itemView.getContext()).load(horizontalProductScrollList.get(x).getImage()).apply(new RequestOptions().placeholder(R.drawable.product1)).into(productImage);
 
-//                productImage.setImageResource(product.getImage());
                 productTitle.setText(product.getTitle());
                 productSize.setText(product.getStuff());
                 productPrice.setText(product.getPrice());

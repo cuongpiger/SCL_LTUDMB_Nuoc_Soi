@@ -1,5 +1,11 @@
 package team9.clover.Fragment;
 
+import static team9.clover.Module.DBqueries.categoryList;
+import static team9.clover.Module.DBqueries.firebaseFirestore;
+import static team9.clover.Module.DBqueries.homePageList;
+import static team9.clover.Module.DBqueries.loadCategories;
+import static team9.clover.Module.DBqueries.loadFragmentData;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,9 +58,7 @@ public class HomeFragment extends Fragment {
     RecyclerView categoryRecyclerView;
     RecyclerView rvHomePage;
     CategoryAdapter categoryAdapter;
-    List<Category> categoryList;
     HomePageAdapter adapter;
-    FirebaseFirestore firebaseFirestore;
 
     public HomeFragment() {}
 
@@ -85,32 +89,15 @@ public class HomeFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         categoryRecyclerView.setLayoutManager(linearLayoutManager);
 
-        categoryList = new ArrayList<>();
         categoryAdapter = new CategoryAdapter(categoryList);
         categoryRecyclerView.setAdapter(categoryAdapter);
 
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("Category")
-                .orderBy("index")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            // duyệt qua Firebase Storage => lấy về => lưu vào mảng
-                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
-                                categoryList.add(new Category(snapshot.get("icon").toString(), snapshot.get("name").toString()));
-                            }
-
-                            // adapter báo cho RecyclerView => cập nhật giao diện
-                            categoryAdapter.notifyDataSetChanged();
-
-                        } else {
-                            String error = task.getException().getMessage();
-                            Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+        // load category data from firebase
+        if (categoryList.size() == 0) {
+            loadCategories(categoryAdapter, getContext());
+        } else {
+            categoryAdapter.notifyDataSetChanged();
+        }
     }
 
     private void setViewRemaining(View view) {
@@ -118,59 +105,15 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvHomePage.setLayoutManager(linearLayoutManager);
-        List<HomePage> homePageList = new ArrayList<>();
+
         adapter = new HomePageAdapter(homePageList);
         rvHomePage.setAdapter(adapter);
 
-        firebaseFirestore.collection("Category")
-                .document("home")
-                .collection("Banner")
-                .orderBy("index")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            // duyệt qua Firebase Storage => lấy về => lưu vào mảng
-                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
-                                if ((long) snapshot.get("view_type") == 0) {
-                                    List<Slider> sliderList = new ArrayList<>();
-                                    long no_of_banners = (long) snapshot.get("no_of_banners");
-                                    for (long x = 0; x < no_of_banners; ++x) {
-                                        sliderList.add(new Slider(snapshot.get("banner_"+ x).toString(), snapshot.get("banner_" + x + "_padding").toString()));
-                                    }
-
-                                    homePageList.add(new HomePage(0, sliderList));
-                                } else if ((long) snapshot.get("view_type") == 1) {
-                                    homePageList.add(new HomePage(1, snapshot.get("strip_ad_banner").toString(), snapshot.get("background").toString()));
-                                } else if ((long) snapshot.get("view_type") == 2) {
-                                    List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
-                                    long no_of_products = (long) snapshot.get("no_of_products");
-                                    for (long x = 0; x < no_of_products; ++x) {
-//                                        int image, String title, String stuff, String price
-                                        horizontalProductScrollList.add(new HorizontalProductScroll(
-                                                snapshot.get("product_id_" + x).toString(),
-                                                snapshot.get("product_image_" + x).toString(),
-                                                snapshot.get("product_title_" + x).toString(),
-                                                snapshot.get("product_size_" + x).toString(),
-                                                snapshot.get("product_price_" + x).toString()
-                                        ));
-                                    }
-
-                                    homePageList.add(new HomePage(2, snapshot.get("layout_title").toString(), snapshot.get("layout_background").toString(),horizontalProductScrollList));
-                                } else if ((long) snapshot.get("view_type") == 3) {
-
-                                }
-                            }
-
-                            // adapter báo cho RecyclerView => cập nhật giao diện
-                            adapter.notifyDataSetChanged();
-
-                        } else {
-                            String error = task.getException().getMessage();
-                            Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+        // load category data from firebase
+        if (homePageList.size() == 0) {
+            loadFragmentData(adapter, getContext());
+        } else {
+            adapter.notifyDataSetChanged();
+        }
     }
 }

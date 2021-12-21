@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
@@ -61,7 +63,7 @@ public class GridProductAdapter extends BaseAdapter {
             MaterialTextView productPrice = view.findViewById(R.id.mtvPrice);
 
             HorizontalProductScroll product = horizontalProductScrollList.get(position);
-//            productImage.setImageResource(product.getImage());
+            Glide.with(contentView.getContext()).load(product.getImage()).apply(new RequestOptions().placeholder(R.drawable.product1)).into(productImage);
             productTitle.setText(product.getTitle());
             productStuff.setText(product.getStuff());
             productPrice.setText(product.getPrice());
