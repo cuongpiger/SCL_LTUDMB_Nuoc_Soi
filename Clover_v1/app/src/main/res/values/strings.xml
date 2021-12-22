@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Clover</string>
+    <string name="copyright">Copyright %d - Team9</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="on_back_press">Nhấn lần nữa để thoát.</string>
+</resources>
