@@ -55,6 +55,16 @@ public class HomePage {
     // Horizontal product & grid view product layout
     private String title;
     private List<HorizontalProductScroll> horizontalProductScrollList;
+    private List<WishlistModel> viewAllProductList;
+
+    public HomePage(int type, String title, String backgroundColor, List<HorizontalProductScroll> horizontalProductScrollList, List<WishlistModel> viewAllProductList) {
+        this.type = type;
+        this.backgroundColor = backgroundColor;
+        this.title = title;
+        this.horizontalProductScrollList = horizontalProductScrollList;
+        this.viewAllProductList = viewAllProductList;
+    }
+
     public HomePage(int type, String title, String backgroundColor, List<HorizontalProductScroll> horizontalProductScrollList) {
         this.type = type;
         this.backgroundColor = backgroundColor;
@@ -73,5 +83,14 @@ public class HomePage {
     public void setHorizontalProductScrollList(List<HorizontalProductScroll> horizontalProductScrollList) {
         this.horizontalProductScrollList = horizontalProductScrollList;
     }
+
+    public List<WishlistModel> getViewAllProductList() {
+        return viewAllProductList;
+    }
+
+    public void setViewAllProductList(List<WishlistModel> viewAllProductList) {
+        this.viewAllProductList = viewAllProductList;
+    }
+
     //---------------------------------------------------
 }

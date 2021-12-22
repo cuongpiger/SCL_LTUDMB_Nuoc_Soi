@@ -2,27 +2,27 @@ package team9.clover.Model;
 
 public class WishlistModel {
 
-    public int getProductImage() {
+    public String getProductImage() {
         return productImage;
     }
 
-    public void setProductImage(int productImage) {
+    public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
 
-    public int getFreeCoupens() {
+    public long getFreeCoupens() {
         return freeCoupens;
     }
 
-    public void setFreeCoupens(int freeCoupens) {
+    public void setFreeCoupens(long freeCoupens) {
         this.freeCoupens = freeCoupens;
     }
 
-    public int getTotalRatings() {
+    public long getTotalRatings() {
         return totalRatings;
     }
 
-    public void setTotalRatings(int totalRatings) {
+    public void setTotalRatings(long totalRatings) {
         this.totalRatings = totalRatings;
     }
 
@@ -58,10 +58,10 @@ public class WishlistModel {
         this.cuttedPrice = cuttedPrice;
     }
 
-    int productImage, freeCoupens, totalRatings;
-    String productTitle, rating, productPrice, cuttedPrice;
+    long freeCoupens, totalRatings;
+    String productImage, productTitle, rating, productPrice, cuttedPrice;
 
-    public WishlistModel(int productImage, String productTitle, int freeCoupens, String rating, int totalRatings, String productPrice, String cuttedPrice) {
+    public WishlistModel(String productImage, String productTitle, long freeCoupens, String rating, long totalRatings, String productPrice, String cuttedPrice) {
         this.productImage = productImage;
         this.freeCoupens = freeCoupens;
         this.totalRatings = totalRatings;

@@ -18,6 +18,8 @@ import team9.clover.Model.Category;
 import team9.clover.Model.HomePage;
 import team9.clover.Model.HorizontalProductScroll;
 import team9.clover.Model.Slider;
+import team9.clover.Model.WishlistModel;
+import team9.clover.R;
 
 public class DBqueries {
     public static  FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
@@ -72,20 +74,35 @@ public class DBqueries {
                                 } else if ((long) snapshot.get("view_type") == 1) {
                                     homePageList.add(new HomePage(1, snapshot.get("strip_ad_banner").toString(), snapshot.get("background").toString()));
                                 } else if ((long) snapshot.get("view_type") == 2) {
+                                    List<WishlistModel> viewAllProductList = new ArrayList<>();
                                     List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
                                     long no_of_products = (long) snapshot.get("no_of_products");
                                     for (long x = 0; x < no_of_products; ++x) {
-//                                        int image, String title, String stuff, String price
-                                        horizontalProductScrollList.add(new HorizontalProductScroll(
-                                                snapshot.get("product_id_" + x).toString(),
-                                                snapshot.get("product_image_" + x).toString(),
-                                                snapshot.get("product_title_" + x).toString(),
-                                                snapshot.get("product_size_" + x).toString(),
-                                                snapshot.get("product_price_" + x).toString()
-                                        ));
+                                        for (int i = 0; i < 5; ++i) {
+                                            // int image, String title, String stuff, String price
+                                            horizontalProductScrollList.add(new HorizontalProductScroll(
+                                                    snapshot.get("id_" + x).toString(),
+                                                    snapshot.get("image_" + x).toString(),
+                                                    snapshot.get("title_" + x).toString(),
+                                                    snapshot.get("size_" + x).toString(),
+                                                    snapshot.get("price_" + x).toString()
+                                            ));
+
+                                            //R.drawable.hz_product1, "Áo Blazer", 1, "3", 145, "790.000 đ", "1.200.000 đ"
+                                            viewAllProductList.add(new WishlistModel(
+                                                    snapshot.get("image_" + x).toString(),
+                                                    snapshot.get("title_" + x).toString(),
+                                                    (long) snapshot.get("free_coupens_" + x),
+                                                    snapshot.get("avg_rating_" + x).toString(),
+                                                    (long) snapshot.get("total_rating_" + x),
+                                                    snapshot.get("price_" + x).toString(),
+                                                    snapshot.get("cutted_price_" + x).toString()
+                                            ));
+                                        }
                                     }
 
-                                    homePageList.add(new HomePage(2, snapshot.get("layout_title").toString(), snapshot.get("layout_background").toString(),horizontalProductScrollList));
+                                    // thêm vào trang chủ
+                                    homePageList.add(new HomePage(2, snapshot.get("layout_title").toString(), snapshot.get("layout_background").toString(),horizontalProductScrollList, viewAllProductList));
                                 } else if ((long) snapshot.get("view_type") == 3) {
                                     List<HorizontalProductScroll> gridLayoutModelList = new ArrayList<>();
                                     long no_of_products = (long) snapshot.get("no_of_products");

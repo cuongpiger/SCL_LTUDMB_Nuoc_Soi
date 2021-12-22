@@ -32,6 +32,7 @@ import java.util.TimerTask;
 import team9.clover.Model.HomePage;
 import team9.clover.Model.HorizontalProductScroll;
 import team9.clover.Model.Slider;
+import team9.clover.Model.WishlistModel;
 import team9.clover.ProductDetailActivity;
 import team9.clover.R;
 import team9.clover.ViewAllActivity;
@@ -109,8 +110,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 String horizontalTitle = homePageList.get(position).getTitle();
                 String layoutColor = homePageList.get(position).getBackgroundColor();
                 int horizontalIcon = R.drawable.ic_baseline_discount_24;
+                List<WishlistModel> viewAllProductList = homePageList.get(position).getViewAllProductList();
                 List<HorizontalProductScroll> horizontalProductScrollList = homePageList.get(position).getHorizontalProductScrollList();
-                ((HorizontalProductViewHolder) holder).setHorizontalProductLayout(horizontalProductScrollList, horizontalTitle, horizontalIcon, layoutColor);
+                ((HorizontalProductViewHolder) holder).setHorizontalProductLayout(horizontalProductScrollList, horizontalTitle, horizontalIcon, layoutColor, viewAllProductList);
                 break;
 
             case HomePage.GRID_PRODUCT_VIEW:
@@ -272,7 +274,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             horizontalRecyclerView.setRecycledViewPool(recycledViewPool);
         }
 
-        private void setHorizontalProductLayout(List<HorizontalProductScroll> horizontalProductScrollList, String title, int icon, String color) {
+        private void setHorizontalProductLayout(List<HorizontalProductScroll> horizontalProductScrollList, String title, int icon, String color, List<WishlistModel> viewAllProductList) {
 //            int i = R.drawable.ic_baseline_discount_24;
             container.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(color)));
             horizontalLayoutTitle.setText(title);
@@ -280,13 +282,16 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             horizontalLayoutTitle.setCompoundDrawablePadding(Config.PADDING_ICON_DRAWABLE);
             horizontalLayoutTitle.getCompoundDrawables()[0].setTint(itemView.getResources().getColor(R.color.black));
 
+            // set button view all for horizontal layout
             if (horizontalProductScrollList.size() > Config.NUMBER_PRODUCT_HORIZONTAL_VIEW) {
                 horizontalViewAllButton.setVisibility(View.VISIBLE);
                 horizontalViewAllButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        ViewAllActivity.wishlistModelList = viewAllProductList;
                         Intent viewAllIntent = new Intent(itemView.getContext(), ViewAllActivity.class);
                         viewAllIntent.putExtra("layout_code", 0);
+                        viewAllIntent.putExtra("title", title);
                         itemView.getContext().startActivity(viewAllIntent);
 
                     }

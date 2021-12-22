@@ -32,4 +32,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="copyright">Copyright %d - Team9</string>
+    <string name="reset_password">Đang khôi phục mật khẩu...</string>
+    <string name="on_back_press">Nhấn lần nữa để thoát.</string>
 </resources>

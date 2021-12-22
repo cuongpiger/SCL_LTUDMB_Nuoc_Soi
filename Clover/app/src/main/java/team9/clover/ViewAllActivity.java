@@ -23,7 +23,8 @@ public class ViewAllActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     GridView gridView;
-    public static List<HorizontalProductScroll> horizontalProductScrollList = new ArrayList<>();
+    public static List<HorizontalProductScroll> horizontalProductScrollList; // = new ArrayList<>()
+    public static List<WishlistModel> wishlistModelList;
 
 
     @Override
@@ -48,20 +49,6 @@ public class ViewAllActivity extends AppCompatActivity {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(layoutManager);
-
-            List<WishlistModel> wishlistModelList = new ArrayList<>();
-            wishlistModelList.add(new WishlistModel(R.drawable.hz_product1, "Áo Blazer", 1, "3", 145, "790.000 đ", "1.200.000 đ"));
-            wishlistModelList.add(new WishlistModel(R.drawable.p03, "Áo Blazer", 0, "3", 145, "790.000 đ", "1.200.000 đ"));
-            wishlistModelList.add(new WishlistModel(R.drawable.product1, "Áo Blazer", 2, "3", 145, "790.000 đ", "1.200.000 đ"));
-            wishlistModelList.add(new WishlistModel(R.drawable.p05, "Áo Blazer", 4, "3", 145, "790.000 đ", "1.200.000 đ"));
-            wishlistModelList.add(new WishlistModel(R.drawable.p04, "Áo Blazer", 1, "3", 145, "790.000 đ", "1.200.000 đ"));
-            wishlistModelList.add(new WishlistModel(R.drawable.p01, "Áo Blazer", 1, "3", 145, "790.000 đ", "1.200.000 đ"));
-            wishlistModelList.add(new WishlistModel(R.drawable.hz_product1, "Áo Blazer", 1, "3", 145, "790.000 đ", "1.200.000 đ"));
-            wishlistModelList.add(new WishlistModel(R.drawable.p03, "Áo Blazer", 0, "3", 145, "790.000 đ", "1.200.000 đ"));
-            wishlistModelList.add(new WishlistModel(R.drawable.product1, "Áo Blazer", 2, "3", 145, "790.000 đ", "1.200.000 đ"));
-            wishlistModelList.add(new WishlistModel(R.drawable.p05, "Áo Blazer", 4, "3", 145, "790.000 đ", "1.200.000 đ"));
-            wishlistModelList.add(new WishlistModel(R.drawable.p04, "Áo Blazer", 1, "3", 145, "790.000 đ", "1.200.000 đ"));
-            wishlistModelList.add(new WishlistModel(R.drawable.p01, "Áo Blazer", 1, "3", 145, "790.000 đ", "1.200.000 đ"));
 
 
             WishlistAdapter adapter = new WishlistAdapter(wishlistModelList, false);

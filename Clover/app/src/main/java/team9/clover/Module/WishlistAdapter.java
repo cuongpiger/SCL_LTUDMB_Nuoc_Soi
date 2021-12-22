@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.textview.MaterialTextView;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -40,11 +42,11 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         WishlistModel wishlistModel = wishlistModelList.get(position);
-        int resource = wishlistModel.getProductImage();
+        String resource = wishlistModel.getProductImage();
         String title = wishlistModel.getProductTitle();
-        int freeCoupens = wishlistModel.getFreeCoupens();
+        long freeCoupens = wishlistModel.getFreeCoupens();
         String rating = wishlistModel.getRating();
-        int totalRatings = wishlistModel.getTotalRatings();
+        long totalRatings = wishlistModel.getTotalRatings();
         String productPrice = wishlistModel.getProductPrice();
         String cuttedPrice = wishlistModel.getCuttedPrice();
         // int resource, String title, int freeCoupensNo, String averageRate, int totalRatingsNo, String price, String cuttedPrceValue
@@ -79,8 +81,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             totalRatings = itemView.findViewById(R.id.total_rating);
         }
 
-        private void setData(int resource, String title, int freeCoupensNo, String averageRate, int totalRatingsNo, String price, String cuttedPrceValue) {
-            productImage.setImageResource(resource);
+        private void setData(String resource, String title, long freeCoupensNo, String averageRate, long totalRatingsNo, String price, String cuttedPrceValue) {
+            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.product1)).into(productImage);
             productTitle.setText(title);
 
             if (freeCoupensNo != 0) {

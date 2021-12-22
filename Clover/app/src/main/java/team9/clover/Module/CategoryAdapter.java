@@ -6,25 +6,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
 
 import team9.clover.CategoryActivity;
 import team9.clover.Model.Category;
+import team9.clover.Model.CategoryModel;
 import team9.clover.R;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    private List<Category> categoryList;
+    List<CategoryModel> categoryList;
 
-    public CategoryAdapter(List<Category> categoryList) {
+    public CategoryAdapter(List<CategoryModel> categoryList) {
         this.categoryList = categoryList;
     }
 
@@ -37,12 +38,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
-        Category item = categoryList.get(position);
-        String icon = item.getCategoryIcon();
-        String name = item.getCategoryName();
-
-        holder.setCategory(name, position);
-        holder.setCategoryIcon(icon);
+        CategoryModel item = categoryList.get(position);
+        holder.setTitle(item.getTitle(), position);
+        holder.setImage(item.getImage());
     }
 
     @Override
@@ -52,40 +50,31 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView categoryIcon;
-        TextView categoryName;
+        ImageView mImage;
+        MaterialTextView mTitle;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            categoryIcon = itemView.findViewById(R.id.ivCategory);
-            categoryName = itemView.findViewById(R.id.tvCategoryName);
+            mImage = itemView.findViewById(R.id.ivImage);
+            mTitle = itemView.findViewById(R.id.mtvTitle);
         }
 
-        /*
-        * Thiệt lập icon cho Category RecyclerView.
-        * PARAMS:
-        *   @iconUrl: Downloaded URL được Firebase Storage cấp cho icon
-        * */
-        private void setCategoryIcon(String iconUrl) {
-            if (!iconUrl.equals("null")) {
-                Glide.with(itemView.getContext())
-                        .load(iconUrl)
-                        .apply(new RequestOptions().placeholder(R.drawable.ic_home_24))
-                        .into(categoryIcon);
-            }
+        private void setImage(String imageUrl) {
+            Glide.with(itemView.getContext())
+                    .load(imageUrl)
+                    .apply(new RequestOptions().placeholder(R.drawable.home))
+                    .into(mImage);
         }
 
-        private void setCategory(final String name, final int position) {
-            categoryName.setText(name);
-
+        private void setTitle(final String title, final int position) {
+            mTitle.setText(title);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (position != 0) {
-                        Intent categoryItent = new Intent(itemView.getContext(), CategoryActivity.class);
-                        categoryItent.putExtra("CategoryName", name);
-                        itemView.getContext().startActivity(categoryItent);
+                        Intent intent = new Intent(itemView.getContext(), CategoryActivity.class);
+                        intent.putExtra("CategoryName", title);
+                        itemView.getContext().startActivity(intent);
                     }
                 }
             });

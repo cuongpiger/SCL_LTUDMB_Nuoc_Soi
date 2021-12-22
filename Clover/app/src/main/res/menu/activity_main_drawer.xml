@@ -14,7 +14,7 @@
             android:title="Đơn hàng" />
         <item
             android:id="@+id/nbCart"
-            android:icon="@drawable/ic_cart_24"
+            android:icon="@drawable/bag"
             android:title="Giỏ hàng" />
         <item
             android:id="@+id/nbFavorite"

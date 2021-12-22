@@ -6,8 +6,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,160 +23,140 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
-import org.apache.commons.validator.routines.EmailValidator;
-
-import team9.clover.LoginActivity;
-import team9.clover.MainActivity;
+import team9.clover.LogInActivity;
+import team9.clover.Model.DatabaseModel;
+import team9.clover.Module.Reuse;
 import team9.clover.R;
-
+import team9.clover.TmpActivity;
 
 public class SignInFragment extends Fragment {
 
-    TextInputLayout tilEmail, tilPassword;
-    MaterialTextView mtvSignUp, mtvForgetPassword;
-    MaterialButton mbtSignIn;
-    ProgressBar pgbSignIn;
-    FrameLayout floLogin;
-    FirebaseAuth firebaseAuth;
-    String email, password;
+    FrameLayout mContainer;
+    MaterialTextView mSignUpFragment, mForgetPassword;
+    ProgressBar mCircle;
+    MaterialButton mSignIn;
+    TextInputLayout mEmail, mPassword;
 
-    public SignInFragment() {}
+    String email = "", password = "";
+
+    public SignInFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setValues();
-        setFirebase();
+        LogInActivity.currentFragment = SignInFragment.class.getSimpleName();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
-        referWidgets(view);
+
+        refer(view);
+        setEvents();
+
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setEvents();
-    }
-
-    private void setValues() {
-        email = "";
-        password = "";
-    }
-
-    private boolean emailValid() {
-        email = tilEmail.getEditText().getText().toString();
-        tilEmail.setErrorEnabled(true);
-        if (email.isEmpty()) {
-            tilEmail.setError(getString(R.string.email_empty)); email = "";
-        } else if (!EmailValidator.getInstance().isValid(email)) {
-            tilEmail.setError(getString(R.string.email_invalid)); email = "";
-        } else {
-            tilEmail.setErrorEnabled(false);
-            tilEmail.setError("");
-        }
-
-        return !email.isEmpty();
-    }
-
-    private boolean passwordValid() {
-        password = tilPassword.getEditText().getText().toString();
-        tilPassword.setErrorEnabled(true);
-        if (password.isEmpty()) {
-            tilPassword.setError(getString(R.string.password_empty)); password = "";
-        } else if (password.length() < 8) {
-            tilPassword.setError(getString(R.string.password_short)); password = "";
-        } else if (password.length() > 18) {
-            tilPassword.setError(getString(R.string.password_long)); password = "";
-        } else {
-            tilPassword.setErrorEnabled(false);
-            tilPassword.setError("");
-        }
-
-        return !password.isEmpty();
-    }
-
-    private void referWidgets(View view) {
-        tilEmail = view.findViewById(R.id.city);
-        tilPassword = view.findViewById(R.id.tilPassword);
-        mtvSignUp = view.findViewById(R.id.mtvSignUp);
-        mtvForgetPassword = view.findViewById(R.id.mtvForgetPassword);
-        pgbSignIn = view.findViewById(R.id.pgbSignIn);
-        mbtSignIn = view.findViewById(R.id.save_btn);
-        floLogin = getActivity().findViewById(R.id.floLogin);
+    /*
+     * Tham chiếu đến các component của activity
+     * */
+    private void refer(View view) {
+        mContainer = view.findViewById(R.id.flContainer);
+        mForgetPassword = view.findViewById(R.id.mtvForgetPassword);
+        mSignUpFragment = view.findViewById(R.id.mtvSignUp);
+        mCircle = view.findViewById(R.id.pbCircle);
+        mSignIn = view.findViewById(R.id.mbSignIn);
+        mEmail = view.findViewById(R.id.tilEmail);
+        mPassword = view.findViewById(R.id.tilPassword);
     }
 
     private void setEvents() {
-        mbtSignIn.setOnClickListener(new View.OnClickListener() {
+        /*
+         * Xử lí sự kiện user nhấn nút đăng ký tài khoản
+         * */
+        mSignUpFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (emailValid() && passwordValid()) {
-                    signIn();
-                }
+                mSignUpFragment.setTypeface(null, Typeface.BOLD); // bold text
+                Reuse.setFragment(getActivity(), new SignUpFragment(), mContainer, 1);
             }
         });
 
-        tilEmail.getEditText().addTextChangedListener(new TextWatcher() {
+        /*
+         * Xử lí sự kiện user nhấn nút forget password
+         * */
+        mForgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void onClick(View view) {
+                mForgetPassword.setTypeface(null, Typeface.BOLD); // bold text
+                Reuse.setFragment(getActivity(), new ForgetPasswordFragment(), mContainer, 1);
+            }
+        });
+
+        mEmail.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                emailValid();
+                email = Reuse.emailValid(mEmail, getActivity());
             }
         });
 
-        tilPassword.getEditText().addTextChangedListener(new TextWatcher() {
+        /*
+         * Xử lí sự kiện user nhập password để đăng kí
+         * */
+        mPassword.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                passwordValid();
+                password = Reuse.passwordValid(mPassword, getActivity());
             }
         });
 
-        mtvSignUp.setOnClickListener(new View.OnClickListener() {
+        /*
+         * Xử lí sự kiện user nhấn nút đăng nhập
+         * */
+        mSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mtvSignUp.setTypeface(null, Typeface.BOLD);
-                LoginActivity.onResetPasswordFragment = true;
-                setFragment(new SignUpFragment());
-            }
-        });
-
-        mtvForgetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mtvForgetPassword.setTypeface(null, Typeface.BOLD);
-                LoginActivity.onResetPasswordFragment = true;
-                setFragment(new ResetPasswordFragment());
+                email = Reuse.emailValid(mEmail, getActivity()); // kiểm tra email
+                password = Reuse.passwordValid(mPassword, getActivity()); // kiểm tra password
+                if (email.isEmpty() || password.isEmpty()) return;
+                signIn();
             }
         });
     }
 
+    /*
+     * Dùng cho sự kiện khi user nhấn nút đăng nhập
+     * */
     private void signIn() {
-        pgbSignIn.setVisibility(View.VISIBLE);
-        mbtSignIn.setClickable(false);
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mSignIn.setClickable(false);
+        mCircle.setVisibility(View.VISIBLE);
+
+        DatabaseModel.signIn(email, password).addOnCompleteListener(new OnCompleteListener() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            public void onComplete(@NonNull Task task) {
                 if (task.isSuccessful()) {
-                    Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                    getActivity().finish();
-                    startActivity(mainIntent);
+                    getActivity().finishAffinity();
+                    getActivity().startActivity(new Intent(getActivity(), TmpActivity.class));
+                    Reuse.startActivity(getActivity());
                 } else {
                     errorDialog();
                 }
@@ -184,28 +164,21 @@ public class SignInFragment extends Fragment {
         });
     }
 
+    /*
+     * Hiển thị dialog cảnh bảo cho user là đăng nhập không thành công
+     * */
     private void errorDialog() {
-        pgbSignIn.setVisibility(View.INVISIBLE);
-        mbtSignIn.setClickable(true);
-        new MaterialAlertDialogBuilder(getContext(), R.style.ThemeOverlay_App_MaterialAlertDialog).setTitle(getString(R.string.error_title))
-                .setMessage(getString(R.string.sign_in_failure))
+        mSignIn.setClickable(true);
+        mCircle.setVisibility(View.INVISIBLE);
+
+        new MaterialAlertDialogBuilder(getContext(), R.style.ThemeOverlay_App_MaterialAlertDialog).setTitle("Đăng nhập thất bại")
+                .setMessage("Bạn vui lòng kiểm tra lại giúp mình nha.")
                 .setCancelable(false)
-                .setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
+                .setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                     }
                 }).create().show();
-    }
-
-    private void setFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slideout_from_left);
-        fragmentTransaction.replace(floLogin.getId(), fragment);
-        fragmentTransaction.commit();
-    }
-
-    private void setFirebase() {
-        firebaseAuth = FirebaseAuth.getInstance();
     }
 }

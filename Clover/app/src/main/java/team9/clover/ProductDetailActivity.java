@@ -149,7 +149,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         } else if (itemId == R.id.abCart) {
             Intent cartIntent = new Intent(ProductDetailActivity.this, MainActivity.class);
             MainActivity.setShowCart(true);
-            finish();
             startActivity(cartIntent);
             Log.v("here", "product detail");
             return true;

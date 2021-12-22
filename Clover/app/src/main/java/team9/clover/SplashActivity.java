@@ -8,53 +8,58 @@ import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.android.material.textview.MaterialTextView;
 
-import team9.clover.Module.Config;
+import java.util.Calendar;
+
+import team9.clover.Model.DatabaseModel;
+import team9.clover.Module.Reuse;
 
 public class SplashActivity extends AppCompatActivity {
 
-    ImageView ivLogo;
-    TextView tvCopyright;
+    final int COPYRIGHT_DELAY = 800,
+            DELAY = 3000;
+
+    ImageView mLogoFull;
+    MaterialTextView mCopyright;
+
     Intent intent;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser == null) {
-            intent = new Intent(SplashActivity.this, LoginActivity.class);
-        } else {
-            intent = new Intent(SplashActivity.this, MainActivity.class);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        referWidgets();
+        refer();
         setAnimation();
 
+        /*
+         * Chờ animation hoàn tất, trong lúc chờ thực hiện một vài công việc trước
+         * */
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                checkKeepInLogIn();
                 finish();
-                startActivity(intent);
+                startActivity(intent); // tùy vào phương thức checkKeepInLogIn mà đi đến activity tương ứng
+                Reuse.startActivity(SplashActivity.this); // thiết lập animation
             }
-        }, Config.TURN_SIGN_IN_DELAY);
+        }, DELAY);
     }
 
-    private void referWidgets() {
-        tvCopyright = findViewById(R.id.tvCopyright);
-        ivLogo = findViewById(R.id.ivLogo);
+    /*
+     * Tham chiếu đến mọi component trên activity
+     * */
+    private void refer() {
+        mCopyright = findViewById(R.id.mtvCopyright);
+        mLogoFull = findViewById(R.id.ivLogoFull);
     }
 
+    /*
+     * Animation cho logo + tên nhóm
+     * */
     private void setAnimation() {
         final Animation splashScreen = AnimationUtils.loadAnimation(this, R.anim.splash_screen);
         splashScreen.setAnimationListener(new Animation.AnimationListener() {
@@ -63,21 +68,27 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                tvCopyright.setText(Config.COPYRIGHT);
-                tvCopyright.animate().alpha(1f).setDuration((Config.COPYRIGHT_DELAY));
+                mCopyright.setText(String.format(getString(R.string.copyright), Calendar.getInstance().get(Calendar.YEAR)));
+                mCopyright.animate().alpha(1f).setDuration((COPYRIGHT_DELAY));
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) { }
         });
 
-        tvCopyright.animate().alpha(0f).setDuration(0);
-        ivLogo.startAnimation(splashScreen);
+        mCopyright.animate().alpha(0f).setDuration(0);
+        mLogoFull.startAnimation(splashScreen);
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.slide_from_right, R.anim.slideout_from_left);
+    /*
+     * Kiểm tra user vẫn đang duy trì đăng nhập hay đã sign-out
+     * */
+    private void checkKeepInLogIn() {
+        DatabaseModel.getCurrentUser();
+        if (DatabaseModel.USER == null) { // nếu là new user, sign-out user thì đi đến login activity
+            intent = new Intent(SplashActivity.this, LogInActivity.class);
+        } else {
+            intent = new Intent(SplashActivity.this, MainActivity.class);
+        }
     }
 }
