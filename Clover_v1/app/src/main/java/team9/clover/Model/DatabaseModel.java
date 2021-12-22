@@ -61,6 +61,14 @@ public class DatabaseModel {
     }
 
     /*
+    * Dùng để gửi email reset password cho user
+    * */
+    public static Task resetPassword(String email) {
+        if (firebaseAuth == null) firebaseAuth = FirebaseAuth.getInstance();
+        return firebaseAuth.sendPasswordResetEmail(email);
+    }
+
+    /*
     * Đăng xuất khỏi current user
     * */
     public static void signOut() {

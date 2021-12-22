@@ -79,28 +79,6 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilRetype"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Nhập lại mật khẩu"
-            app:boxBackgroundColor="@color/white"
-            app:boxStrokeColor="@color/black"
-            app:hintTextColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/tilEmail"
-            app:layout_constraintStart_toStartOf="@+id/tilEmail"
-            app:layout_constraintTop_toBottomOf="@+id/tilPassword"
-            app:startIconDrawable="@drawable/key"
-            app:startIconTint="@color/black"
-            tools:ignore="HardcodedText">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
-
         <ProgressBar
             android:id="@+id/pbCircle"
             style="?android:attr/progressBarStyle"
@@ -111,10 +89,10 @@
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilRetype" />
+            app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/mbSignUp"
+            android:id="@+id/mbResetPassword"
             android:layout_width="220dp"
             android:layout_height="58dp"
             android:layout_marginTop="16dp"
@@ -136,7 +114,7 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mbSignUp" />
+            app:layout_constraintTop_toBottomOf="@+id/mbResetPassword" />
 
         <View
             android:layout_width="100dp"

@@ -89,22 +89,4 @@ public class Reuse {
 
         return password;
     }
-
-    /*
-    * Kiểm tra password mà user nhập lại có hợp lệ và match với mật khẩu ban đầu không
-    * */
-    public static String retypeValid(TextInputLayout til, String password, Activity activity) {
-        String retype = til.getEditText().getText().toString();
-        til.setErrorEnabled(true);
-        if (retype.isEmpty()) {
-            til.setError(activity.getString(R.string.retype_empty)); retype = "";
-        } else if (!retype.equals(password)) {
-            til.setError(activity.getString(R.string.retype_invalid)); retype = "";
-        } else {
-            til.setErrorEnabled(false);
-            til.setError("");
-        }
-
-        return retype;
-    }
 }

@@ -2,38 +2,27 @@ package team9.clover.Fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import team9.clover.LogInActivity;
 import team9.clover.MainActivity;
@@ -46,11 +35,11 @@ public class SignUpFragment extends Fragment {
 
     FrameLayout mContainer;
     MaterialTextView mSignInFragment;
-    TextInputLayout mEmail, mFullName, mPassword, mRetype;
+    TextInputLayout mEmail, mFullName, mPassword;
     ProgressBar mCircle;
     MaterialButton mSignUp;
 
-    String email = "", fullName = "", password = "", retype = "";
+    String email = "", fullName = "", password = "";
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -78,9 +67,8 @@ public class SignUpFragment extends Fragment {
         mEmail = view.findViewById(R.id.tilEmail);
         mFullName = view.findViewById(R.id.tilFullName);
         mPassword = view.findViewById(R.id.tilPassword);
-        mRetype = view.findViewById(R.id.tilRetype);
         mCircle = view.findViewById(R.id.pbCircle);
-        mSignUp = view.findViewById(R.id.mbSignUp);
+        mSignUp = view.findViewById(R.id.mbResetPassword);
     }
 
     private void setEvents() {
@@ -150,24 +138,6 @@ public class SignUpFragment extends Fragment {
         });
 
         /*
-         * Xử lí sự kiện user nhập lại mật khẩu lần nữa
-         * */
-        mRetype.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                retype = Reuse.retypeValid(mRetype, password, getActivity());
-            }
-        });
-
-        /*
          * Xử lí sự kiện user nhấn nut đăng kí người dùng mới
          * */
         mSignUp.setOnClickListener(new View.OnClickListener() {
@@ -176,8 +146,7 @@ public class SignUpFragment extends Fragment {
                 email = Reuse.emailValid(mEmail, getActivity());
                 fullName = Reuse.fullNameValid(mFullName, getActivity());
                 password = Reuse.passwordValid(mPassword, getActivity());
-                retype = Reuse.retypeValid(mRetype, password, getActivity());
-                if (email.isEmpty() || fullName.isEmpty() || password.isEmpty() || retype.isEmpty()) return;
+                if (email.isEmpty() || fullName.isEmpty() || password.isEmpty()) return;
                 addNewUser();
             }
         });
