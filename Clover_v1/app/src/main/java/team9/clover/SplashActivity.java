@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Calendar;
 
+import team9.clover.Model.DatabaseModel;
 import team9.clover.Module.Reuse;
 
 public class SplashActivity extends AppCompatActivity {
@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash);
 
         refer();
         setAnimation();
@@ -84,7 +84,8 @@ public class SplashActivity extends AppCompatActivity {
     * Kiểm tra user vẫn đang duy trì đăng nhập hay đã sign-out
     * */
     private void checkKeepInLogIn() {
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) { // nếu là new user, sign-out user thì đi đến login activity
+//        DatabaseModel.getCurrentUser();
+        if (DatabaseModel.USER == null) { // nếu là new user, sign-out user thì đi đến login activity
             intent = new Intent(SplashActivity.this, LogInActivity.class);
         } else {
             Toast.makeText(this, "keep in user", Toast.LENGTH_LONG).show();

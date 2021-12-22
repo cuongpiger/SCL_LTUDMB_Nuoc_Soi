@@ -43,6 +43,9 @@ public class SignInFragment extends Fragment {
         return view;
     }
 
+    /*
+    * Tham chiếu đến các component của activity
+    * */
     private void refer(View view) {
         mContainer = view.findViewById(R.id.flContainer);
         mForgetPassword = view.findViewById(R.id.mtvForgetPassword);

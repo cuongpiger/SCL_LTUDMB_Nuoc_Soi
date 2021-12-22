@@ -114,7 +114,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tilRetype" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/mbResetPassword"
+            android:id="@+id/mbSignUp"
             android:layout_width="220dp"
             android:layout_height="58dp"
             android:layout_marginTop="16dp"
@@ -136,7 +136,7 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mbResetPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/mbSignUp" />
 
         <View
             android:layout_width="100dp"
