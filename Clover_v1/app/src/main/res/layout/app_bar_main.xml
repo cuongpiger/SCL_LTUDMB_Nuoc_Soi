@@ -16,15 +16,18 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
-            app:popupTheme="@style/Theme.Clover.PopupOverlay"
-            style="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.Light"
+            app:titleTextColor="@color/black"
+            app:subtitleTextColor="@color/black"
+            app:popupTheme="@style/Theme.Clover.PopupOverlay">
 
             <ImageView
                 android:id="@+id/actionbar_logo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/logo"
-                android:adjustViewBounds="true"/>
+                android:adjustViewBounds="true"
+                tools:ignore="ContentDescription" />
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -6,6 +6,7 @@
         android:orderInCategory="100"
         android:icon="@drawable/search"
         android:title="Tìm kiếm"
+        app:iconTint="@color/black"
         app:showAsAction="always" />
 
     <item
@@ -13,6 +14,7 @@
         android:orderInCategory="100"
         android:icon="@drawable/bell"
         android:title="Thông báo"
+        app:iconTint="@color/black"
         app:showAsAction="always" />
 
     <item
@@ -20,5 +22,6 @@
         android:orderInCategory="100"
         android:icon="@drawable/bag"
         android:title="Giỏ hàng"
+        app:iconTint="@color/black"
         app:showAsAction="always" />
 </menu>
