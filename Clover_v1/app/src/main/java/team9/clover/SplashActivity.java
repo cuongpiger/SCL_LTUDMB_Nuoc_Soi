@@ -84,11 +84,11 @@ public class SplashActivity extends AppCompatActivity {
     * Kiểm tra user vẫn đang duy trì đăng nhập hay đã sign-out
     * */
     private void checkKeepInLogIn() {
-//        DatabaseModel.getCurrentUser();
+        DatabaseModel.getCurrentUser();
         if (DatabaseModel.USER == null) { // nếu là new user, sign-out user thì đi đến login activity
             intent = new Intent(SplashActivity.this, LogInActivity.class);
         } else {
-            Toast.makeText(this, "keep in user", Toast.LENGTH_LONG).show();
+            intent = new Intent(SplashActivity.this, MainActivity.class);
         }
     }
 }
