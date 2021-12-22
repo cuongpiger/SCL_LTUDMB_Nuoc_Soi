@@ -2,6 +2,7 @@ package team9.clover;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -52,5 +53,11 @@ public class LogInActivity extends AppCompatActivity {
     private void refer() {
         mClose = findViewById(R.id.ibClose);
         mContainer = findViewById(R.id.flContainer);
+    }
+
+    public void goToMain() {
+        finish();
+        startActivity(new Intent(LogInActivity.this, MainActivity.class));
+        Reuse.startActivity(LogInActivity.this); // thiết lập animation
     }
 }
