@@ -20,7 +20,7 @@ import team9.clover.R;
 public class SignInFragment extends Fragment {
 
     FrameLayout mContainer;
-    MaterialTextView mSignUpFragment;
+    MaterialTextView mSignUpFragment, mForgetPassword;
 
     public SignInFragment() {
         // Required empty public constructor
@@ -45,15 +45,30 @@ public class SignInFragment extends Fragment {
 
     private void refer(View view) {
         mContainer = view.findViewById(R.id.flContainer);
+        mForgetPassword = view.findViewById(R.id.mtvForgetPassword);
         mSignUpFragment = view.findViewById(R.id.mtvSignUp);
     }
 
     private void setEvents() {
+        /*
+        * Xử lí sự kiện user nhấn nút đăng ký tài khoản
+        * */
         mSignUpFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mSignUpFragment.setTypeface(null, Typeface.BOLD); // bold text
                 Reuse.setFragment(getActivity(), new SignUpFragment(), mContainer, 1);
+            }
+        });
+
+        /*
+        * Xử lí sự kiện user nhấn nút forget password
+        * */
+        mForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mForgetPassword.setTypeface(null, Typeface.BOLD); // bold text
+                Reuse.setFragment(getActivity(), new ForgetPasswordFragment(), mContainer, 1);
             }
         });
     }

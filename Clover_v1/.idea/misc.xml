@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/logo_background.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_forget_password.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/logo.xml" value="0.3729166666666667" />

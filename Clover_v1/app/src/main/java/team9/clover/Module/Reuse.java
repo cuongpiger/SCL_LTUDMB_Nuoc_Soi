@@ -14,6 +14,9 @@ public class Reuse {
         activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
+    /*
+    * Dùng để thay đổi các fragment
+    * */
     public static void setFragment(FragmentActivity activity, Fragment fragment, FrameLayout layout, int animFrom) {
         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
         if (animFrom == -1) // from left
