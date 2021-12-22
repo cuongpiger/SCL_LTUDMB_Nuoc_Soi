@@ -199,7 +199,7 @@ public class SignUpFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task task) {
                             if (task.isSuccessful()) {
-                                getActivity().finish();
+                                getActivity().finishAffinity();
                                 getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
                                 Reuse.startActivity(getActivity());
                             } else {
