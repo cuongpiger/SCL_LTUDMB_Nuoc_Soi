@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Clover</string>
+    <string name="copyright">Copyright %d - Team9</string>
+    <string name="on_back_press">Nhấn lần nữa để thoát.</string>
+    <string name="forget_password_worry">Đừng lo lắng. Hãy nhập email bạn đã đăng ký vào bên dưới.</string>
+    <string name="reset_password">Đang khôi phục mật khẩu...</string>
+</resources>
