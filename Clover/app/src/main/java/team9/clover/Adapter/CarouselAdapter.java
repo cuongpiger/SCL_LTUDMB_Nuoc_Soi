@@ -1,10 +1,14 @@
 package team9.clover.Adapter;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
@@ -26,9 +30,12 @@ public class CarouselAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        CarouselModel carouselModel = carouselModelList.get(position);
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.item_carousel, container, false);
-        RoundedImageView mImage = view.findViewById(R.id.rivImage);
-        Glide.with(container.getContext()).load(carouselModelList.get(position).getImage()).into(mImage);
+        ImageView mImage = view.findViewById(R.id.ivImage);
+        ConstraintLayout mContainer = view.findViewById(R.id.clContainer);
+        mContainer.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(carouselModel.getPadding())));
+        Glide.with(container.getContext()).load(carouselModel.getImage()).into(mImage);
         container.addView(view, 0);
         return view;
     }

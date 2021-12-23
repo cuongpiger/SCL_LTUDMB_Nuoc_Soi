@@ -4,12 +4,13 @@ public class CarouselModel {
 
     public static final String FIRESTORAGE = "Carousel";
 
-    String image;
+    String image, padding;
 
     public CarouselModel() {}
 
-    public CarouselModel(String image) {
+    public CarouselModel(String image, String padding) {
         this.image = image;
+        this.padding = padding;
     }
 
     public String getImage() {
@@ -18,5 +19,13 @@ public class CarouselModel {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getPadding() {
+        return padding;
+    }
+
+    public void setPadding(String padding) {
+        this.padding = padding;
     }
 }
