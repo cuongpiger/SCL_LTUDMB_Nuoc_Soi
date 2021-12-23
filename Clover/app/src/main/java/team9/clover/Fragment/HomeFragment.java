@@ -20,16 +20,6 @@ import team9.clover.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
-    ////////////////////////////////////////
-    private FragmentHomeBinding binding;
-
-    RecyclerView categoryRecyclerView;
-    RecyclerView rvHomePage;
-    CategoryAdapter catgoryAdapter;
-    HomePageAdapter homeadapter;
-    ImageView noInternetConnection;
-    //////////////////////////////////
-
     RecyclerView mCategory;
     RecyclerView mHomePage;
 
@@ -39,31 +29,13 @@ public class HomeFragment extends Fragment {
     public HomeFragment() {}
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        binding = FragmentHomeBinding.inflate(inflater, container, false);
-//        View root = binding.getRoot();
-//        noInternetConnection = root.findViewById(R.id.no_internet_connection);
-//
-//        // check internet connection is possible
-//        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-//
-//        if (networkInfo != null && networkInfo.isConnected()) {
-//            noInternetConnection.setVisibility(View.GONE);
-//            referWidgets(root);
-//            setViewCategory();
-//            setViewRemaining(root);
-//        } else {
-//            Glide.with(this).load(R.drawable.no_internet).into(noInternetConnection);
-//            noInternetConnection.setVisibility(View.VISIBLE);
-//        }
-//
-//        return root;
 
-        View view = FragmentHomeBinding.inflate(inflater, container, false).getRoot();
+        View view =  inflater.inflate(R.layout.fragment_home, container, false);
 
         refer(view);
         setCategory();
         setView(view);
+//        DatabaseModel.setData();
 
         return view;
     }
@@ -91,12 +63,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-//    @Override
-//    public void onDestroyView() {
-//        super.onDestroyView();
-//        binding = null;
-//    }
-
     private void setView(View view) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -111,21 +77,42 @@ public class HomeFragment extends Fragment {
             homePageAdapter.notifyDataSetChanged();
         }
     }
-
-//    private void setViewRemaining(View view) {
-//        rvHomePage = view.findViewById(R.id.rvHomePage);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        rvHomePage.setLayoutManager(linearLayoutManager);
-//
-//        homeadapter = new HomePageAdapter(homePageList);
-//        rvHomePage.setAdapter(homeadapter);
-//
-//        // load category data from firebase
-//        if (homePageList.size() == 0) {
-//            loadFragmentData(homeadapter, getContext());
-//        } else {
-//            homeadapter.notifyDataSetChanged();
-//        }
-//    }
 }
+
+/*
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+//        binding = FragmentHomeBinding.inflate(inflater, container, false);
+//        View root = binding.getRoot();
+//        noInternetConnection = root.findViewById(R.id.no_internet_connection);
+//
+//        // check internet connection is possible
+//        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+//
+//        if (networkInfo != null && networkInfo.isConnected()) {
+//            noInternetConnection.setVisibility(View.GONE);
+//            referWidgets(root);
+//            setViewCategory();
+//            setViewRemaining(root);
+//        } else {
+//            Glide.with(this).load(R.drawable.no_internet).into(noInternetConnection);
+//            noInternetConnection.setVisibility(View.VISIBLE);
+//        }
+//
+//        return root;
+
+        View view =  inflater.inflate(R.layout.fragment_home, container, false);
+
+        refer(view);
+        setCategory();
+        setView(view);
+
+        return view;
+    }
+
+    private void refer(View view) {
+        mCategory = view.findViewById(R.id.rvCategory);
+        mHomePage = view.findViewById(R.id.rvHomePage);
+    }
+* */

@@ -40,7 +40,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/free_coupens"
         app:layout_constraintStart_toStartOf="@+id/product_title"
         app:layout_constraintTop_toTopOf="@+id/free_coupens"
-        app:srcCompat="@drawable/ic_baseline_discount_24"
+        app:srcCompat="@drawable/icon_discount"
         app:tint="@color/violet_dark" />
 
     <com.google.android.material.textview.MaterialTextView

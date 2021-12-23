@@ -12,7 +12,7 @@
     <item
         android:id="@+id/abNotification"
         android:orderInCategory="100"
-        android:icon="@drawable/bell"
+        android:icon="@drawable/icon_bell"
         android:title="Thông báo"
         app:iconTint="@color/black"
         app:showAsAction="always" />

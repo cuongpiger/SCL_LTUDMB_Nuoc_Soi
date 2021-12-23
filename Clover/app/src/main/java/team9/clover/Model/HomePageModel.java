@@ -6,7 +6,8 @@ public class HomePageModel {
 
     public static final int CAROUSEL_VIEW_TYPE = 0,
             BANNER_VIEW_TYPE = 1,
-            SLIDER_PRODUCT_VIEW_TYPE = 3;
+            SLIDER_PRODUCT_VIEW_TYPE = 3,
+            GRID_PRODUCT_VIEW_TYPE = 4;
 
     int type;
 
@@ -52,7 +53,7 @@ public class HomePageModel {
     }
     //______________________________________________________________________________________________
 
-    /* Thiết lập cho phần product slider ở Fragment home ******************************************/
+    /* Thiết lập cho phần product/grid slider ở Fragment home *************************************/
     List<ProductModel> sliderProductModelList;
     int icon;
     String title;

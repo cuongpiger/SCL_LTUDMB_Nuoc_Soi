@@ -104,7 +104,7 @@
                 android:drawablePadding="8dp"
                 android:drawableTint="@color/white"
                 android:text="THANH TOÁN"
-                android:drawableEnd="@drawable/cart_check"
+                android:drawableEnd="@drawable/icon_cart_check"
                 android:padding="8dp"
                 android:gravity="center"
                 android:textSize="16sp"
