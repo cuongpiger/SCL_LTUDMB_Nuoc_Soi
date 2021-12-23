@@ -10,10 +10,13 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +25,8 @@ import java.util.TimerTask;
 
 import team9.clover.Model.BannerModel;
 import team9.clover.Model.CarouselModel;
-import team9.clover.Model.HomePage;
 import team9.clover.Model.HomePageModel;
-import team9.clover.Model.HorizontalProductScroll;
-import team9.clover.Model.Slider;
-import team9.clover.Model.WishlistModel;
-import team9.clover.Module.Config;
-import team9.clover.Module.SliderAdapter;
+import team9.clover.Model.ProductModel;
 import team9.clover.R;
 
 public class HomePageAdapter extends RecyclerView.Adapter {
@@ -51,6 +49,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             case HomePageModel.BANNER_VIEW_TYPE:
                 return new BannerViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.container_banner, parent, false));
 
+            case HomePageModel.SLIDER_PRODUCT_VIEW_TYPE:
+                return new SliderProductViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.container_slider_product, parent, false));
+
             default:
                 return null;
         }
@@ -64,6 +65,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
             case 1:
                 return HomePageModel.BANNER_VIEW_TYPE;
+
+            case 3:
+                return HomePageModel.SLIDER_PRODUCT_VIEW_TYPE;
 
             default:
                 return -1;
@@ -83,6 +87,14 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 ((BannerViewHolder) holder).set(bannerModel.getImage(), bannerModel.getPadding());
                 break;
 
+            case HomePageModel.SLIDER_PRODUCT_VIEW_TYPE:
+                HomePageModel homePageModel =  homePageModelList.get(position);
+                ((SliderProductViewHolder) holder).set(
+                        homePageModel.getSliderProductModelList(),
+                        homePageModel.getIcon(),
+                        homePageModel.getTitle());
+                break;
+
             default:
                 return;
         }
@@ -98,7 +110,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         ViewPager mContainer;
         Timer timer;
         int currentPage;
-        private List<CarouselModel> carouselModelList;
+        List<CarouselModel> carouselModelList;
 
         public CarouselViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -210,6 +222,35 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         private void set(String imageUrl, String color) {
             Glide.with(itemView.getContext()).load(imageUrl).into(mImage);
             mContainer.setBackgroundColor(Color.parseColor(color));
+        }
+    }
+
+    public class SliderProductViewHolder extends RecyclerView.ViewHolder {
+
+        MaterialTextView mTitle;
+        MaterialButton mViewAll;
+        RecyclerView mContainer;
+
+        public SliderProductViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mTitle = itemView.findViewById(R.id.mtvTitle);
+            mViewAll = itemView.findViewById(R.id.mbViewAll);
+            mContainer = itemView.findViewById(R.id.rvContainer);
+            mContainer.setRecycledViewPool(recycledViewPool);
+        }
+
+        private void set(List<ProductModel> productModelList, int icon, String title) {
+            mTitle.setText(title);
+            mTitle.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
+//            mTitle.setCompoundDrawablePadding(16);
+//            mTitle.getCompoundDrawables()[0].setTint(itemView.getContext().getColor(R.color.black));
+
+            SliderProductAdapter adapter = new SliderProductAdapter(productModelList);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(itemView.getContext());
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            mContainer.setLayoutManager(layoutManager);
+            mContainer.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         }
     }
 }

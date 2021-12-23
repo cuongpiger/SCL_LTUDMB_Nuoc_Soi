@@ -17,11 +17,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import team9.clover.ErrorActivity;
 import team9.clover.Adapter.CategoryAdapter;
 import team9.clover.Adapter.HomePageAdapter;
 import team9.clover.Module.Reuse;
+import team9.clover.R;
 
 public class DatabaseModel {
 
@@ -32,25 +34,30 @@ public class DatabaseModel {
     public static List<CategoryModel> categoryModelList = new ArrayList<>();
     public static List<HomePageModel> homePageModelList = new ArrayList<>();
 
-    public static void loadBanner(HomePageAdapter adapter, Activity activity) {
-        firebaseFirestore.collection(BannerModel.class.getSimpleName())
-                .document("0")
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    BannerModel bannerModel = task.getResult().toObject(BannerModel.class);
-                    homePageModelList.add(new HomePageModel(bannerModel));
-                    adapter.notifyDataSetChanged();
-                } else {
-                    activity.finish();
-                    activity.startActivity(new Intent(activity, ErrorActivity.class));
-                    Reuse.startActivity(activity);
-                }
-            }
-        });
-    }
 
+    public static void loadProductSlider(HomePageAdapter adapter, Activity activity) {
+        firebaseFirestore.collection(ProductModel.class.getSimpleName())
+                .whereEqualTo("screen", (long) 3)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<ProductModel> productModelList = new ArrayList<>();
+                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                productModelList.add(ProductModel.castFromFirestore(snapshot));
+                            }
+
+                            homePageModelList.add(new HomePageModel(HomePageModel.SLIDER_PRODUCT_VIEW_TYPE, R.drawable.cart_check, "Bán nhiều nhất", productModelList));
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            activity.finish();
+                            activity.startActivity(new Intent(activity, ErrorActivity.class));
+                            Reuse.startActivity(activity);
+                        }
+                    }
+                });
+    }
 
     /*
      * Load người dùng hiện tại trên thiết bị
@@ -149,49 +156,29 @@ public class DatabaseModel {
                 });
     }
 
+    public static void loadBanner(HomePageAdapter adapter, Activity activity) {
+        firebaseFirestore.collection(BannerModel.class.getSimpleName())
+                .document("0")
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    BannerModel bannerModel = task.getResult().toObject(BannerModel.class);
+                    homePageModelList.add(new HomePageModel(bannerModel));
+                    loadProductSlider(adapter, activity);
+                } else {
+                    activity.finish();
+                    activity.startActivity(new Intent(activity, ErrorActivity.class));
+                    Reuse.startActivity(activity);
+                }
+            }
+        });
+    }
+
     /*
      * Đăng xuất khỏi current user
      * */
     public static void signOut() {
         if (USER != null) firebaseAuth.signOut();
     }
-
-
-
 }
-
-
-/*
-
-    public void setData() {
-        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-        for (int i = 0; i < 7; ++i) {
-            firebaseStorage.getReference(CarouselModel.FIRESTORAGE+"/"+i+ ".jpg")
-                    .getDownloadUrl()
-                    .addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            if (task.isSuccessful()) {
-                                firebaseFirestore.collection(CarouselModel.class.getSimpleName())
-                                        .add(new CarouselModel(task.getResult().toString()));
-
-                                firebaseFirestore.collection(HomePageModel.class.getSimpleName())
-                                        .document(CategoryModel.class.getSimpleName())
-                                        .collection("Banner")
-                                        .orderBy("index")
-                                        .get()
-                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
-
-                            }
-                        }
-                    });
-        }
-    }
-
-*        firebaseFirestore.collection("Category")
-                .document("home")
-                .collection("Banner")
-                .orderBy("index")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
-* */

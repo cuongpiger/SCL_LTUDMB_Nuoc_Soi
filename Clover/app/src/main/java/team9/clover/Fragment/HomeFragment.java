@@ -32,12 +32,9 @@ public class HomeFragment extends Fragment {
 
     RecyclerView mCategory;
     RecyclerView mHomePage;
-    ViewPager mCarousel;
 
     CategoryAdapter categoryAdapter;
     HomePageAdapter homePageAdapter ;
-
-
 
     public HomeFragment() {}
 
@@ -94,34 +91,10 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void setCarousel() {
-
-    }
-
 //    @Override
 //    public void onDestroyView() {
 //        super.onDestroyView();
 //        binding = null;
-//    }
-
-//    private void referWidgets(View view) {
-//        categoryRecyclerView = view.findViewById(R.id.rvCategory);
-//    }
-
-//    private void setViewCategory() {
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        categoryRecyclerView.setLayoutManager(linearLayoutManager);
-//
-//        catgoryAdapter = new CategoryAdapter(categoryList);
-//        categoryRecyclerView.setAdapter(catgoryAdapter);
-//
-//        // load category data from firebase
-//        if (categoryList.size() == 0) {
-//            loadCategories(categoryAdapter, getContext());
-//        } else {
-//            categoryAdapter.notifyDataSetChanged();
-//        }
 //    }
 
     private void setView(View view) {
