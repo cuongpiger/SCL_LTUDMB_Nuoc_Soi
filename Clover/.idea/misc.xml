@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/drawable/ic_home_24.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/ic_search_24.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/drawable/ic_wish_24.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/navigation_item.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/navigation_side.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/navigation_side_shape.xml" value="0.1355263157894737" />
@@ -59,6 +60,7 @@
         <entry key="app/src/main/res/layout/cart_item_layout.xml" value="0.75" />
         <entry key="app/src/main/res/layout/cart_total_amount_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/category_item.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/container_carousel.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/detail_image_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_forget_password.xml" value="0.22532894736842105" />
@@ -79,6 +81,7 @@
         <entry key="app/src/main/res/layout/grid_product_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/horizontal_scroll_item_layout.xml" value="0.67" />
         <entry key="app/src/main/res/layout/horizontal_scroll_layout.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_carousel.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/my_address_layout.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/my_order_item_layout.xml" value="0.5" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.33" />
@@ -92,7 +95,7 @@
         <entry key="app/src/main/res/layout/reward_with_product_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/rewards_item_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/shipping_details_layout.xml" value="0.22532894736842105" />
-        <entry key="app/src/main/res/layout/slider_layout.xml" value="0.45036160420775806" />
+        <entry key="app/src/main/res/layout/slider_layout.xml" value="0.2" />
         <entry key="app/src/main/res/layout/sliding_ad_banner.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/sliding_ad_layout.xml" value="0.2032103825136612" />
         <entry key="app/src/main/res/layout/strip_ad_layout.xml" value="0.22532894736842105" />

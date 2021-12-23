@@ -14,12 +14,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import team9.clover.Adapter.HomePageAdapter;
 import team9.clover.Model.Category;
 import team9.clover.Model.HomePage;
 import team9.clover.Model.HorizontalProductScroll;
 import team9.clover.Model.Slider;
 import team9.clover.Model.WishlistModel;
-import team9.clover.R;
 
 public class DBqueries {
     public static  FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();

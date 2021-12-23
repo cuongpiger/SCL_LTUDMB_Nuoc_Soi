@@ -1,58 +1,22 @@
 package team9.clover.Fragment;
 
-import static team9.clover.Module.DBqueries.categoryList;
-import static team9.clover.Module.DBqueries.firebaseFirestore;
 import static team9.clover.Module.DBqueries.homePageList;
-import static team9.clover.Module.DBqueries.loadCategories;
 import static team9.clover.Module.DBqueries.loadFragmentData;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import team9.clover.Model.Category;
 import team9.clover.Model.DatabaseModel;
-import team9.clover.Model.HomePage;
-import team9.clover.Model.HorizontalProductScroll;
-import team9.clover.Model.Slider;
 import team9.clover.Module.CategoryAdapter;
-import team9.clover.Module.Config;
-import team9.clover.Module.GridProductAdapter;
-import team9.clover.Module.HomePageAdapter;
-import team9.clover.Module.HorizontalProductScrollAdapter;
-import team9.clover.Module.SliderAdapter;
+import team9.clover.Adapter.HomePageAdapter;
 import team9.clover.R;
 import team9.clover.databinding.FragmentHomeBinding;
 
@@ -69,7 +33,10 @@ public class HomeFragment extends Fragment {
     //////////////////////////////////
 
     RecyclerView mCategory;
+    RecyclerView mHomePage;
+
     CategoryAdapter categoryAdapter;
+    HomePageAdapter homePageAdapter ;
 
 
 
@@ -100,12 +67,14 @@ public class HomeFragment extends Fragment {
 
         refer(view);
         setCategory();
+        setView(view);
 
         return view;
     }
 
     private void refer(View view) {
         mCategory = view.findViewById(R.id.rvCategory);
+        mHomePage = view.findViewById(R.id.rvHomePage);
     }
 
     /*
@@ -151,6 +120,21 @@ public class HomeFragment extends Fragment {
 //            categoryAdapter.notifyDataSetChanged();
 //        }
 //    }
+
+    private void setView(View view) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mHomePage.setLayoutManager(layoutManager);
+
+        homePageAdapter = new HomePageAdapter(DatabaseModel.homePageModelList);
+        mHomePage.setAdapter(homePageAdapter);
+
+        if (DatabaseModel.homePageModelList.size() == 0) {
+            DatabaseModel.loadCarousel(homePageAdapter, getActivity());
+        } else {
+            homePageAdapter.notifyDataSetChanged();
+        }
+    }
 
 //    private void setViewRemaining(View view) {
 //        rvHomePage = view.findViewById(R.id.rvHomePage);

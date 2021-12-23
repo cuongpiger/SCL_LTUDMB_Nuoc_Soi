@@ -17,7 +17,6 @@ import com.google.android.material.textview.MaterialTextView;
 import java.util.List;
 
 import team9.clover.CategoryActivity;
-import team9.clover.Model.Category;
 import team9.clover.Model.CategoryModel;
 import team9.clover.R;
 
@@ -32,7 +31,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @NonNull
     @Override
     public CategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category, parent, false);
         return new ViewHolder(view);
     }
 

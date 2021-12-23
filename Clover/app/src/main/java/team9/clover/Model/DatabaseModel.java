@@ -1,10 +1,7 @@
 package team9.clover.Model;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -21,6 +18,7 @@ import java.util.List;
 
 import team9.clover.ErrorActivity;
 import team9.clover.Module.CategoryAdapter;
+import team9.clover.Adapter.HomePageAdapter;
 import team9.clover.Module.Reuse;
 
 public class DatabaseModel {
@@ -28,7 +26,33 @@ public class DatabaseModel {
     public static FirebaseUser USER = null;
     public static FirebaseFirestore firebaseFirestore = null;
     public static FirebaseAuth firebaseAuth = null;
-    public static List<CategoryModel> categoryModelList = new ArrayList<>();;
+
+    public static List<CategoryModel> categoryModelList = new ArrayList<>();
+    public static List<HomePageModel> homePageModelList = new ArrayList<>();
+
+    public static void loadCarousel(HomePageAdapter adapter, Activity activity) {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection(CarouselModel.class.getSimpleName())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<CarouselModel> carouselModelList = new ArrayList<>();
+                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                carouselModelList.add(snapshot.toObject(CarouselModel.class));
+                            }
+
+                            homePageModelList.add(new HomePageModel(carouselModelList));
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            activity.finish();
+                            activity.startActivity(new Intent(activity, ErrorActivity.class));
+                            Reuse.startActivity(activity);
+                        }
+                    }
+                });
+    }
 
     /*
      * Load người dùng hiện tại trên thiết bị
@@ -84,7 +108,6 @@ public class DatabaseModel {
 
                             // adapter báo cho RecyclerView => cập nhật giao diện
                             adapter.notifyDataSetChanged();
-
                         } else {
                             activity.finish();
                             activity.startActivity(new Intent(activity, ErrorActivity.class));
@@ -101,3 +124,21 @@ public class DatabaseModel {
         if (USER != null) firebaseAuth.signOut();
     }
 }
+
+
+/*
+*         for (int i = 0; i < 7; ++i) {
+            firebaseStorage.getReference(CarouselModel.FIRESTORAGE+"/"+i+ ".jpg")
+                    .getDownloadUrl()
+                    .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+                                firebaseFirestore.collection(CarouselModel.class.getSimpleName())
+                                        .add(new CarouselModel(task.getResult().toString()));
+
+                            }
+                        }
+                    });
+        }
+* */

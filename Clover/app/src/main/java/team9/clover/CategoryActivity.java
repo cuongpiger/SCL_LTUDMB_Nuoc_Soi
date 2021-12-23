@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,12 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import team9.clover.Model.Category;
 import team9.clover.Model.HomePage;
-import team9.clover.Model.HorizontalProductScroll;
-import team9.clover.Model.Slider;
-import team9.clover.Module.CategoryAdapter;
-import team9.clover.Module.HomePageAdapter;
+import team9.clover.Adapter.HomePageAdapter;
 
 public class CategoryActivity extends AppCompatActivity {
 
@@ -83,8 +78,8 @@ public class CategoryActivity extends AppCompatActivity {
         categoryRecyclerView.setLayoutManager(linearLayoutManager);
         List<HomePage> homePageList = new ArrayList<>();
 
-        HomePageAdapter adapter = new HomePageAdapter(homePageList);
-        categoryRecyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+//        HomePageAdapter adapter = new HomePageAdapter(homePageList);
+//        categoryRecyclerView.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
     }
 }
