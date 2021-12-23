@@ -4,7 +4,8 @@ import java.util.List;
 
 public class HomePageModel {
 
-    public static final int CAROUSEL_VIEW_TYPE = 0;
+    public static final int CAROUSEL_VIEW_TYPE = 0,
+            BANNER_VIEW_TYPE = 1;
 
     int type;
 
@@ -30,6 +31,23 @@ public class HomePageModel {
 
     public void setCarouselModelList(List<CarouselModel> carouselModelList) {
         this.carouselModelList = carouselModelList;
+    }
+    //______________________________________________________________________________________________
+
+    /* Thiết lập cho phần Banner của Home Fragment ************************************************/
+    BannerModel banner;
+
+    public HomePageModel(BannerModel banner) {
+        this.banner = banner;
+        this.type = BANNER_VIEW_TYPE;
+    }
+
+    public BannerModel getBanner() {
+        return banner;
+    }
+
+    public void setBanner(BannerModel banner) {
+        this.banner = banner;
     }
     //______________________________________________________________________________________________
 }

@@ -2,6 +2,7 @@ package team9.clover.Model;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -9,6 +10,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import team9.clover.ErrorActivity;
-import team9.clover.Module.CategoryAdapter;
+import team9.clover.Adapter.CategoryAdapter;
 import team9.clover.Adapter.HomePageAdapter;
 import team9.clover.Module.Reuse;
 
@@ -30,29 +32,25 @@ public class DatabaseModel {
     public static List<CategoryModel> categoryModelList = new ArrayList<>();
     public static List<HomePageModel> homePageModelList = new ArrayList<>();
 
-    public static void loadCarousel(HomePageAdapter adapter, Activity activity) {
-        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection(CarouselModel.class.getSimpleName())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            List<CarouselModel> carouselModelList = new ArrayList<>();
-                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
-                                carouselModelList.add(snapshot.toObject(CarouselModel.class));
-                            }
-
-                            homePageModelList.add(new HomePageModel(carouselModelList));
-                            adapter.notifyDataSetChanged();
-                        } else {
-                            activity.finish();
-                            activity.startActivity(new Intent(activity, ErrorActivity.class));
-                            Reuse.startActivity(activity);
-                        }
-                    }
-                });
+    public static void loadBanner(HomePageAdapter adapter, Activity activity) {
+        firebaseFirestore.collection(BannerModel.class.getSimpleName())
+                .document("0")
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    BannerModel bannerModel = task.getResult().toObject(BannerModel.class);
+                    homePageModelList.add(new HomePageModel(bannerModel));
+                    adapter.notifyDataSetChanged();
+                } else {
+                    activity.finish();
+                    activity.startActivity(new Intent(activity, ErrorActivity.class));
+                    Reuse.startActivity(activity);
+                }
+            }
+        });
     }
+
 
     /*
      * Load người dùng hiện tại trên thiết bị
@@ -93,6 +91,9 @@ public class DatabaseModel {
         return firebaseAuth.sendPasswordResetEmail(email);
     }
 
+    /*
+    * Load icon, title trên thanh category toolbar
+    * */
     public static void loadCategory(CategoryAdapter adapter, Activity activity) {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseFirestore.collection(CategoryModel.class.getSimpleName())
@@ -118,16 +119,53 @@ public class DatabaseModel {
     }
 
     /*
+    * Load ảnh carousel lên homepage
+    * */
+    public static void loadHomePage(HomePageAdapter adapter, Activity activity) {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        loadCarousel(adapter, activity);
+    }
+
+    public static void loadCarousel(HomePageAdapter adapter, Activity activity) {
+        firebaseFirestore.collection(CarouselModel.class.getSimpleName())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<CarouselModel> carouselModelList = new ArrayList<>();
+                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                carouselModelList.add(snapshot.toObject(CarouselModel.class));
+                            }
+
+                            homePageModelList.add(new HomePageModel(carouselModelList));
+                            loadBanner(adapter, activity);
+                        } else {
+                            activity.finish();
+                            activity.startActivity(new Intent(activity, ErrorActivity.class));
+                            Reuse.startActivity(activity);
+                        }
+                    }
+                });
+    }
+
+    /*
      * Đăng xuất khỏi current user
      * */
     public static void signOut() {
         if (USER != null) firebaseAuth.signOut();
     }
+
+
+
 }
 
 
 /*
-*         for (int i = 0; i < 7; ++i) {
+
+    public void setData() {
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        for (int i = 0; i < 7; ++i) {
             firebaseStorage.getReference(CarouselModel.FIRESTORAGE+"/"+i+ ".jpg")
                     .getDownloadUrl()
                     .addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -137,8 +175,23 @@ public class DatabaseModel {
                                 firebaseFirestore.collection(CarouselModel.class.getSimpleName())
                                         .add(new CarouselModel(task.getResult().toString()));
 
+                                firebaseFirestore.collection(HomePageModel.class.getSimpleName())
+                                        .document(CategoryModel.class.getSimpleName())
+                                        .collection("Banner")
+                                        .orderBy("index")
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+
                             }
                         }
                     });
         }
+    }
+
+*        firebaseFirestore.collection("Category")
+                .document("home")
+                .collection("Banner")
+                .orderBy("index")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
 * */

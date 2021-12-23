@@ -14,6 +14,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import team9.clover.Adapter.CategoryAdapter;
 import team9.clover.Adapter.HomePageAdapter;
 import team9.clover.Model.Category;
 import team9.clover.Model.HomePage;

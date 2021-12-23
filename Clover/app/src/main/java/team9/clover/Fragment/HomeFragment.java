@@ -1,8 +1,5 @@
 package team9.clover.Fragment;
 
-import static team9.clover.Module.DBqueries.homePageList;
-import static team9.clover.Module.DBqueries.loadFragmentData;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import team9.clover.Model.DatabaseModel;
-import team9.clover.Module.CategoryAdapter;
+import team9.clover.Adapter.CategoryAdapter;
 import team9.clover.Adapter.HomePageAdapter;
 import team9.clover.R;
 import team9.clover.databinding.FragmentHomeBinding;
@@ -34,6 +32,7 @@ public class HomeFragment extends Fragment {
 
     RecyclerView mCategory;
     RecyclerView mHomePage;
+    ViewPager mCarousel;
 
     CategoryAdapter categoryAdapter;
     HomePageAdapter homePageAdapter ;
@@ -95,6 +94,10 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    private void setCarousel() {
+
+    }
+
 //    @Override
 //    public void onDestroyView() {
 //        super.onDestroyView();
@@ -130,7 +133,7 @@ public class HomeFragment extends Fragment {
         mHomePage.setAdapter(homePageAdapter);
 
         if (DatabaseModel.homePageModelList.size() == 0) {
-            DatabaseModel.loadCarousel(homePageAdapter, getActivity());
+            DatabaseModel.loadHomePage(homePageAdapter, getActivity());
         } else {
             homePageAdapter.notifyDataSetChanged();
         }

@@ -1,20 +1,26 @@
 package team9.clover.Adapter;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import team9.clover.Model.BannerModel;
 import team9.clover.Model.CarouselModel;
 import team9.clover.Model.HomePage;
 import team9.clover.Model.HomePageModel;
@@ -42,6 +48,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             case HomePageModel.CAROUSEL_VIEW_TYPE:
                 return new CarouselViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.container_carousel, parent, false));
 
+            case HomePageModel.BANNER_VIEW_TYPE:
+                return new BannerViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.container_banner, parent, false));
+
             default:
                 return null;
         }
@@ -52,6 +61,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         switch (homePageModelList.get(position).getType()) {
             case 0:
                 return HomePageModel.CAROUSEL_VIEW_TYPE;
+
+            case 1:
+                return HomePageModel.BANNER_VIEW_TYPE;
 
             default:
                 return -1;
@@ -64,6 +76,11 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             case HomePageModel.CAROUSEL_VIEW_TYPE:
                 List<CarouselModel> carouselModelList = homePageModelList.get(position).getCarouselModelList();
                 ((CarouselViewHolder) holder).set(carouselModelList);
+                break;
+
+            case HomePageModel.BANNER_VIEW_TYPE:
+                BannerModel bannerModel = homePageModelList.get(position).getBanner();
+                ((BannerViewHolder) holder).set(bannerModel.getImage(), bannerModel.getPadding());
                 break;
 
             default:
@@ -176,6 +193,23 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
         private void stopCarousel() {
             timer.cancel();
+        }
+    }
+
+    public class BannerViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView mImage;
+        ConstraintLayout mContainer;
+
+        public BannerViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mImage = itemView.findViewById(R.id.ivImage);
+            mContainer = itemView.findViewById(R.id.clContainer);
+        }
+
+        private void set(String imageUrl, String color) {
+            Glide.with(itemView.getContext()).load(imageUrl).into(mImage);
+            mContainer.setBackgroundColor(Color.parseColor(color));
         }
     }
 }
