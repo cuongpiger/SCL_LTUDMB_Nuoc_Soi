@@ -15,7 +15,7 @@ public class ProductModel implements Serializable {
     public static final String FIRESTORAGE = "Product";
 
     long screen, category;
-    String title, price, cutPrice, description;
+    String title, price, cutPrice, description, id;
     ArrayList<Long> measure;
     ArrayList<String> size;
     ArrayList<String> bodyName;
@@ -24,7 +24,8 @@ public class ProductModel implements Serializable {
 
     public ProductModel() {}
 
-    public ProductModel(long screen, long category, String title, String price, String cutPrice, String description, ArrayList<String> image, ArrayList<String> size, ArrayList<String> bodyName, ArrayList<Long> measure, ArrayList<String> info) {
+    public ProductModel(String id, long screen, long category, String title, String price, String cutPrice, String description, ArrayList<String> image, ArrayList<String> size, ArrayList<String> bodyName, ArrayList<Long> measure, ArrayList<String> info) {
+        this.id = id;
         this.screen = screen;
         this.category = category;
         this.title = title;
@@ -36,6 +37,14 @@ public class ProductModel implements Serializable {
         this.bodyName = bodyName;
         this.measure = measure;
         this.info = info;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public long getScreen() {
@@ -130,48 +139,6 @@ public class ProductModel implements Serializable {
         if (this.image == null) this.image = new ArrayList<>();
         this.image.add(image);
     }
-
-    public static ProductModel castFromFirestore(QueryDocumentSnapshot snapshot) {
-        long screen = (long) snapshot.get("screen");
-        long category = (long) snapshot.get("category");
-        String title = (String) snapshot.get("title");
-        String price = (String) snapshot.get("price");
-        String cutPrice = (String) snapshot.get("cutPrice");
-        String description = (String) snapshot.get("description");
-        Map<String, String> mapImage = (Map<String, String>) snapshot.get("image");
-        ArrayList<String> size = (ArrayList<String>) snapshot.get("size");
-        ArrayList<String> bodyName = (ArrayList<String>) snapshot.get("bodyName");
-        ArrayList<Long> measure = (ArrayList<Long>) snapshot.get("measure");
-        ArrayList<String> info = (ArrayList<String>) snapshot.get("info");
-        ArrayList<String> image = new ArrayList<>();
-
-        for (int i = 0; i < mapImage.size(); ++i) {
-            image.add(mapImage.get(Integer.toString(i)));
-        }
-
-        return new ProductModel(screen, category, title, price, cutPrice, description, image, size, bodyName, measure, info);
-    }
-
-    public static ProductModel castFromFirestore2(DocumentSnapshot snapshot) {
-        long screen = (long) snapshot.get("screen");
-        long category = (long) snapshot.get("category");
-        String title = (String) snapshot.get("title");
-        String price = (String) snapshot.get("price");
-        String cutPrice = (String) snapshot.get("cutPrice");
-        String description = (String) snapshot.get("description");
-        Map<String, String> mapImage = (Map<String, String>) snapshot.get("image");
-        ArrayList<String> size = (ArrayList<String>) snapshot.get("size");
-        ArrayList<String> bodyName = (ArrayList<String>) snapshot.get("bodyName");
-        ArrayList<Long> measure = (ArrayList<Long>) snapshot.get("measure");
-        ArrayList<String> info = (ArrayList<String>) snapshot.get("info");
-        ArrayList<String> image = new ArrayList<>();
-
-        for (int i = 0; i < mapImage.size(); ++i) {
-            image.add(mapImage.get(Integer.toString(i)));
-        }
-
-        return new ProductModel(screen, category, title, price, cutPrice, description, image, size, bodyName, measure, info);
-    }
 }
 
 /*
@@ -245,5 +212,47 @@ public static void setData() {
                 }
             });
         }
+    }
+
+    public static ProductModel castFromFirestore(QueryDocumentSnapshot snapshot) {
+        long screen = (long) snapshot.get("screen");
+        long category = (long) snapshot.get("category");
+        String title = (String) snapshot.get("title");
+        String price = (String) snapshot.get("price");
+        String cutPrice = (String) snapshot.get("cutPrice");
+        String description = (String) snapshot.get("description");
+        Map<String, String> mapImage = (Map<String, String>) snapshot.get("image");
+        ArrayList<String> size = (ArrayList<String>) snapshot.get("size");
+        ArrayList<String> bodyName = (ArrayList<String>) snapshot.get("bodyName");
+        ArrayList<Long> measure = (ArrayList<Long>) snapshot.get("measure");
+        ArrayList<String> info = (ArrayList<String>) snapshot.get("info");
+        ArrayList<String> image = new ArrayList<>();
+
+        for (int i = 0; i < mapImage.size(); ++i) {
+            image.add(mapImage.get(Integer.toString(i)));
+        }
+
+        return new ProductModel(screen, category, title, price, cutPrice, description, image, size, bodyName, measure, info);
+    }
+
+    public static ProductModel castFromFirestore2(DocumentSnapshot snapshot) {
+        long screen = (long) snapshot.get("screen");
+        long category = (long) snapshot.get("category");
+        String title = (String) snapshot.get("title");
+        String price = (String) snapshot.get("price");
+        String cutPrice = (String) snapshot.get("cutPrice");
+        String description = (String) snapshot.get("description");
+        Map<String, String> mapImage = (Map<String, String>) snapshot.get("image");
+        ArrayList<String> size = (ArrayList<String>) snapshot.get("size");
+        ArrayList<String> bodyName = (ArrayList<String>) snapshot.get("bodyName");
+        ArrayList<Long> measure = (ArrayList<Long>) snapshot.get("measure");
+        ArrayList<String> info = (ArrayList<String>) snapshot.get("info");
+        ArrayList<String> image = new ArrayList<>();
+
+        for (int i = 0; i < mapImage.size(); ++i) {
+            image.add(mapImage.get(Integer.toString(i)));
+        }
+
+        return new ProductModel(screen, category, title, price, cutPrice, description, image, size, bodyName, measure, info);
     }
 * */

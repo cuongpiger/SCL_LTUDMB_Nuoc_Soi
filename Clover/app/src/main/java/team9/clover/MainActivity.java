@@ -2,7 +2,10 @@ package team9.clover;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -28,6 +31,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,7 +43,9 @@ import team9.clover.Fragment.MyCartFragment;
 import team9.clover.Fragment.MyOrdersFragment;
 import team9.clover.Fragment.MyRewardFragment;
 import team9.clover.Fragment.MyWishlistFragment;
+import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Model.DatabaseModel;
+import team9.clover.Model.ProductModel;
 import team9.clover.Module.Reuse;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     RecyclerView mCategory;
+    ActionBarDrawerToggle toggle;
+
 
     CategoryAdapter categoryAdapter;
 
@@ -64,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 //    private int currentFragment = -1;
 
-    public static String currentFragment = HomeFragment.class.getSimpleName();
+    public static String currentFragment = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +83,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setToolbar();
         setCategory();
         setNavigationView();
-        setFragment(new HomeFragment());
+
+        Reuse.setFragment(MainActivity.this, new HomeFragment(), frameLayout, 0);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("broadcast"));
     }
+
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            ProductModel productModel = (ProductModel) intent.getSerializableExtra(ProductDetailFragment.class.getSimpleName());
+
+            if (productModel != null) {
+                currentFragment = ProductDetailFragment.class.getSimpleName();
+                setFragment(new ProductDetailFragment(), productModel);
+            }
+        }
+    };
 
 
     private void refer() {
@@ -89,13 +111,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setToolbar() {
         toolbar.setTitleTextColor(Color.BLACK);
-        actionBarLogo = findViewById(R.id.actionbar_logo);
+        actionBarLogo = findViewById(R.id.ivLogo);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         DrawerArrowDrawable arrowDrawable = toggle.getDrawerArrowDrawable();
-        arrowDrawable.setColor(getResources().getColor(R.color.black));
+        arrowDrawable.setColor(getColor(R.color.black));
         toggle.setDrawerArrowDrawable(arrowDrawable);
         toggle.syncState();
         drawerLayout.addDrawerListener(toggle);
@@ -109,10 +131,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().getItem(0).setChecked(true);
     }
 
-    private void setFragment(Fragment fragment) {
+    private void setFragment(Fragment fragment, Object object) {
         if (currentFragment.equals(HomeFragment.class.getSimpleName())) {
             Reuse.setFragment(MainActivity.this, fragment, frameLayout, 0);
+        } else if (currentFragment.equals(ProductDetailFragment.class.getSimpleName())) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(MainActivity.class.getSimpleName(), (ProductModel) object);
+            fragment.setArguments(bundle);
+            mCategory.setVisibility(View.GONE);
+            actionBarLogo.setVisibility(View.GONE);
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            Reuse.setFragment(MainActivity.this, fragment, frameLayout, 1);
         }
+
+
 
 //        if (fragmentNo != currentFragment) {
 //            if (fragmentNo == REWARDS_FRAGMENT) {
@@ -146,29 +180,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        }
     }
 
-    @Override
-    public void onBackPressed() {
-//        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-//        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-//            drawerLayout.closeDrawer(GravityCompat.START);
-//        } else {
-//            if (currentFragment == HOME_FRAGMENT) {
-//                currentFragment = -1;
-//                super.onBackPressed();
-//            } else {
-//                if (showCart) {
-//                    Log.v("flow", "1");
-//                    showCart = false;
-//                    finish();
-//                } else {
-//                    actionBarLogo.setVisibility(View.VISIBLE);
-//                    invalidateOptionsMenu(); // đồng bộ hóa actionbar
-//                    setFragment(new HomeFragment(), HOME_FRAGMENT);
-//                    navigationView.getMenu().getItem(0).setChecked(true);
-//                }
-//            }
-//        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -183,6 +194,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
+         if (itemId == android.R.id.home) {
+             Toast.makeText(MainActivity.this, "clicked", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
 
 //        if (itemId == R.id.abSearch) {
 //            return true;
@@ -193,13 +209,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        } else if (itemId == R.id.abCart) {
 //            goToFragment("Giỏ hàng", new MyCartFragment(), CART_FRAGMENT);
 //            return true;
-//        } else if (itemId == android.R.id.home) {
-//            if (showCart) {
-//                Log.v("flow", "2");
-//                showCart = false;
-//                finish();
-//            }
-//        }
+//        } else
 
         return super.onOptionsItemSelected(item);
     }

@@ -44,11 +44,11 @@ public class ProductDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        productImageViewPager = findViewById(R.id.vpProductImages);
+        productImageViewPager = findViewById(R.id.vpImagesContainer);
         tlIndicator = findViewById(R.id.tlIndicator);
         addWish = findViewById(R.id.fbAddWish);
-        productDetailsViewpager = findViewById(R.id.product_details_viewpager);
-        productDetailsTabLayout = findViewById(R.id.product_details_tablayout);
+        productDetailsViewpager = findViewById(R.id.vpDescription);
+        productDetailsTabLayout = findViewById(R.id.tlDescription);
         buyNowBtn = findViewById(R.id.buy_now_btn);
 
         List<Integer> productImages = new ArrayList<>();

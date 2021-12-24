@@ -246,7 +246,7 @@ public class DatabaseModel {
             long category = categorys.get(i);
             String title = titles.get(i);
             ArrayList<String> image = new ArrayList<>();
-            ProductModel productModel = new ProductModel(screen, category, title, price, cutPrice, description, image, size, bodyName, measure, info);
+            ProductModel productModel = new ProductModel(Integer.toString(folderStart + i), screen, category, title, price, cutPrice, description, image, size, bodyName, measure, info);
             addDataRecursion(firebaseStorage, productModel, folderStart + i, 0, noImage, Integer.toString(folderStart + i));
         }
     }

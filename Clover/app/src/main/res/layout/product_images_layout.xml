@@ -9,7 +9,7 @@
     android:layout_height="wrap_content">
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vpProductImages"
+        android:id="@+id/vpImagesContainer"
         android:layout_width="0dp"
         android:layout_height="250dp"
         android:layout_marginTop="16dp"
@@ -21,12 +21,12 @@
         android:id="@+id/tlIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:tabBackground="@drawable/dot_selector"
+        app:tabBackground="@drawable/shape_indicator"
         app:tabIndicatorHeight="0dp"
         app:tabRippleColor="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vpProductImages" />
+        app:layout_constraintTop_toBottomOf="@+id/vpImagesContainer" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fbAddWish"
@@ -37,11 +37,11 @@
         app:layout_constraintEnd_toEndOf="@+id/mbt_view_all"
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="@color/violet_mid"
-        app:srcCompat="@drawable/ic_wish_24"
+        app:srcCompat="@drawable/icon_filled_heart"
         app:tint="@color/violet_light" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/productTitle"
+        android:id="@+id/mtvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -63,7 +63,7 @@
         android:paddingHorizontal="4dp"
         android:paddingVertical="2dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productTitle">
+        app:layout_constraintTop_toBottomOf="@+id/mtvTitle">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/rating"
@@ -95,7 +95,7 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/product_price"
+        android:id="@+id/mtvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -115,11 +115,11 @@
         android:layout_marginBottom="3dp"
         android:text="750.000 đ"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/product_price"
-        app:layout_constraintStart_toEndOf="@+id/product_price" />
+        app:layout_constraintBottom_toBottomOf="@+id/mtvPrice"
+        app:layout_constraintStart_toEndOf="@+id/mtvPrice" />
 
     <View
-        android:id="@+id/price_cutted_divider"
+        android:id="@+id/mtvCutPrice"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/gray_dark"

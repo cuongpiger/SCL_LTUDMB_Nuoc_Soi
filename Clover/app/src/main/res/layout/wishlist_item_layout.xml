@@ -98,7 +98,7 @@
         app:layout_constraintStart_toEndOf="@+id/linearLayout" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/product_price"
+        android:id="@+id/mtvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1.290.000 đ"
@@ -117,11 +117,11 @@
         android:text="750.000 đ"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/product_price"
-        app:layout_constraintStart_toEndOf="@+id/product_price" />
+        app:layout_constraintBottom_toBottomOf="@+id/mtvPrice"
+        app:layout_constraintStart_toEndOf="@+id/mtvPrice" />
 
     <View
-        android:id="@+id/price_cutted_divider"
+        android:id="@+id/mtvCutPrice"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/gray_dark"

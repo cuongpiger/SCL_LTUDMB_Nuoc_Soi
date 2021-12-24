@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="@+id/product_image" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/product_price"
+        android:id="@+id/mtvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="770.000 đ"
@@ -132,7 +132,7 @@
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="@+id/product_title"
         app:layout_constraintTop_toBottomOf="@+id/ordered_indicator"
-        app:srcCompat="@drawable/dot_selector"
+        app:srcCompat="@drawable/shape_indicator"
         app:tint="@color/gray_light" />
 
     <ImageView
@@ -143,7 +143,7 @@
         app:tint="@color/gray_light"
         app:layout_constraintStart_toStartOf="@+id/product_title"
         app:layout_constraintTop_toBottomOf="@+id/divider6"
-        app:srcCompat="@drawable/dot_selector" />
+        app:srcCompat="@drawable/shape_indicator" />
 
     <ImageView
         android:id="@+id/shipping_indicator"
@@ -152,7 +152,7 @@
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="@+id/product_title"
         app:layout_constraintTop_toBottomOf="@+id/packed_indicator"
-        app:srcCompat="@drawable/dot_selector"
+        app:srcCompat="@drawable/shape_indicator"
         app:tint="@color/gray_light" />
 
     <ImageView
@@ -162,7 +162,7 @@
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="@+id/product_title"
         app:layout_constraintTop_toBottomOf="@+id/shipping_indicator"
-        app:srcCompat="@drawable/dot_selector"
+        app:srcCompat="@drawable/shape_indicator"
         app:tint="@color/gray_light" />
 
     <com.google.android.material.textview.MaterialTextView

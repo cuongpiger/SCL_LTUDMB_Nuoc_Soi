@@ -1,5 +1,6 @@
 package team9.clover.Adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -14,6 +16,7 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
 
+import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Model.ProductModel;
 import team9.clover.R;
 
@@ -34,11 +37,7 @@ public class SliderProductAdapter extends RecyclerView.Adapter<SliderProductAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ProductModel productModel = productModelList.get(position);
-        holder.set(productModel.getImage().get(0),
-                productModel.getTitle(),
-                String.join("  ", productModel.getSize()),
-                productModel.getPrice());
+        holder.set(productModelList.get(position));
     }
 
     @Override
@@ -57,20 +56,22 @@ public class SliderProductAdapter extends RecyclerView.Adapter<SliderProductAdap
             mTitle = itemView.findViewById(R.id.mtvTitle);
             mSize = itemView.findViewById(R.id.mtvSize);
             mPrice = itemView.findViewById(R.id.mtvPrice);
+        }
+
+        private void set(ProductModel productModel) {
+            Glide.with(itemView.getContext()).load(productModel.getImage().get(0)).into(mImage);
+            mTitle.setText(productModel.getTitle());
+            mSize.setText(String.join("  ", productModel.getSize()));
+            mPrice.setText(productModel.getPrice());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(itemView.getContext(), "item home clicked", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent("broadcast");
+                    intent.putExtra(ProductDetailFragment.class.getSimpleName(), productModel);
+                    LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
                 }
             });
-        }
-
-        private void set(String image, String title, String size, String price) {
-            Glide.with(itemView.getContext()).load(image).into(mImage);
-            mTitle.setText(title);
-            mSize.setText(size);
-            mPrice.setText(price);
         }
     }
 }

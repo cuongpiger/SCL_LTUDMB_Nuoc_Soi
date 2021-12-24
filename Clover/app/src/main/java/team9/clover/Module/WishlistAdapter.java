@@ -72,10 +72,10 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             productImage = itemView.findViewById(R.id.product_image);
             coupenIcon = itemView.findViewById(R.id.coupen_icon);
             deleteBtn = itemView.findViewById(R.id.delete_button);
-            priceCut = itemView.findViewById(R.id.price_cutted_divider);
+            priceCut = itemView.findViewById(R.id.mtvCutPrice);
             productTitle = itemView.findViewById(R.id.product_title);
             freeCoupens = itemView.findViewById(R.id.free_coupens);
-            productPrice = itemView.findViewById(R.id.product_price);
+            productPrice = itemView.findViewById(R.id.mtvPrice);
             cuttedPrice = itemView.findViewById(R.id.cutted_price);
             rating = itemView.findViewById(R.id.rating);
             totalRatings = itemView.findViewById(R.id.total_rating);
