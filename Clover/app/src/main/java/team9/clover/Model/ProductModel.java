@@ -3,6 +3,7 @@ package team9.clover.Model;
 
 import android.util.Log;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.io.Serializable;
@@ -15,11 +16,11 @@ public class ProductModel implements Serializable {
 
     long screen, category;
     String title, price, cutPrice, description;
-    ArrayList<String> image;
+    ArrayList<Long> measure;
     ArrayList<String> size;
     ArrayList<String> bodyName;
-    ArrayList<Long> measure;
     ArrayList<String> info;
+    ArrayList<String> image = null;
 
     public ProductModel() {}
 
@@ -125,7 +126,33 @@ public class ProductModel implements Serializable {
         this.info = info;
     }
 
+    public void addImage(String image) {
+        if (this.image == null) this.image = new ArrayList<>();
+        this.image.add(image);
+    }
+
     public static ProductModel castFromFirestore(QueryDocumentSnapshot snapshot) {
+        long screen = (long) snapshot.get("screen");
+        long category = (long) snapshot.get("category");
+        String title = (String) snapshot.get("title");
+        String price = (String) snapshot.get("price");
+        String cutPrice = (String) snapshot.get("cutPrice");
+        String description = (String) snapshot.get("description");
+        Map<String, String> mapImage = (Map<String, String>) snapshot.get("image");
+        ArrayList<String> size = (ArrayList<String>) snapshot.get("size");
+        ArrayList<String> bodyName = (ArrayList<String>) snapshot.get("bodyName");
+        ArrayList<Long> measure = (ArrayList<Long>) snapshot.get("measure");
+        ArrayList<String> info = (ArrayList<String>) snapshot.get("info");
+        ArrayList<String> image = new ArrayList<>();
+
+        for (int i = 0; i < mapImage.size(); ++i) {
+            image.add(mapImage.get(Integer.toString(i)));
+        }
+
+        return new ProductModel(screen, category, title, price, cutPrice, description, image, size, bodyName, measure, info);
+    }
+
+    public static ProductModel castFromFirestore2(DocumentSnapshot snapshot) {
         long screen = (long) snapshot.get("screen");
         long category = (long) snapshot.get("category");
         String title = (String) snapshot.get("title");

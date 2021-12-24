@@ -36,30 +36,6 @@ public class DatabaseModel {
     public static List<HomePageModel> homePageModelList = new ArrayList<>();
 
 
-    private static void loadGridProduct(HomePageAdapter adapter, Activity activity) {
-        firebaseFirestore.collection(ProductModel.class.getSimpleName())
-                .whereEqualTo("screen", (long) HomePageModel.GRID_PRODUCT_VIEW_TYPE)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            List<ProductModel> productModelList = new ArrayList<>();
-                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
-                                productModelList.add(ProductModel.castFromFirestore(snapshot));
-                            }
-
-                            homePageModelList.add(new HomePageModel(HomePageModel.GRID_PRODUCT_VIEW_TYPE, R.drawable.icon_discount, "Khuyến mãi hôm nay", productModelList));
-                            adapter.notifyDataSetChanged();
-                        } else {
-                            activity.finish();
-                            activity.startActivity(new Intent(activity, ErrorActivity.class));
-                            Reuse.startActivity(activity);
-                        }
-                    }
-                });
-    }
-
     /*
      * Load người dùng hiện tại trên thiết bị
      * */
@@ -127,13 +103,16 @@ public class DatabaseModel {
     }
 
     /*
-    * Load ảnh carousel lên homepage
+    * Load ảnh các item cho màn hình Home Fragment
     * */
     public static void loadHomePage(HomePageAdapter adapter, Activity activity) {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
         loadCarousel(adapter, activity);
     }
 
+    /*
+    * Load phần Carousel cho Home Fragment
+    * */
     private static void loadCarousel(HomePageAdapter adapter, Activity activity) {
         firebaseFirestore.collection(CarouselModel.class.getSimpleName())
                 .get()
@@ -157,6 +136,9 @@ public class DatabaseModel {
                 });
     }
 
+    /*
+    * Load bannner quảng cáo ở Home Fragment
+    * */
     private static void loadBanner(HomePageAdapter adapter, Activity activity) {
         firebaseFirestore.collection(BannerModel.class.getSimpleName())
                 .document("0")
@@ -176,6 +158,9 @@ public class DatabaseModel {
         });
     }
 
+    /*
+    * Load các sản phẩm thuộc mục Bán nhiều nhất ở Home Fragment
+    * */
     private static void loadSliderProduct(HomePageAdapter adapter, Activity activity) {
         firebaseFirestore.collection(ProductModel.class.getSimpleName())
                 .whereEqualTo("screen", (long) HomePageModel.SLIDER_PRODUCT_VIEW_TYPE)
@@ -186,11 +171,38 @@ public class DatabaseModel {
                         if (task.isSuccessful()) {
                             List<ProductModel> productModelList = new ArrayList<>();
                             for (QueryDocumentSnapshot snapshot : task.getResult()) {
-                                productModelList.add(ProductModel.castFromFirestore(snapshot));
+                                productModelList.add(snapshot.toObject(ProductModel.class));
                             }
 
                             homePageModelList.add(new HomePageModel(HomePageModel.SLIDER_PRODUCT_VIEW_TYPE, R.drawable.icon_cart_check, "Bán nhiều nhất", productModelList));
                             loadGridProduct(adapter, activity);
+                        } else {
+                            activity.finish();
+                            activity.startActivity(new Intent(activity, ErrorActivity.class));
+                            Reuse.startActivity(activity);
+                        }
+                    }
+                });
+    }
+
+    /*
+    * Load các sản phẩm thuộc mục Khuyến mãi hôm nay ở Home Fragment
+    * */
+    private static void loadGridProduct(HomePageAdapter adapter, Activity activity) {
+        firebaseFirestore.collection(ProductModel.class.getSimpleName())
+                .whereEqualTo("screen", (long) HomePageModel.GRID_PRODUCT_VIEW_TYPE)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<ProductModel> productModelList = new ArrayList<>();
+                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                productModelList.add(snapshot.toObject(ProductModel.class));
+                            }
+
+                            homePageModelList.add(new HomePageModel(HomePageModel.GRID_PRODUCT_VIEW_TYPE, R.drawable.icon_discount, "Khuyến mãi hôm nay", productModelList));
+                            adapter.notifyDataSetChanged();
                         } else {
                             activity.finish();
                             activity.startActivity(new Intent(activity, ErrorActivity.class));
@@ -206,6 +218,29 @@ public class DatabaseModel {
     public static void signOut() {
         if (USER != null) firebaseAuth.signOut();
     }
+
+    //______________________________________________________________________________________________________ DANGER FUNCTION
+
+    private static void addDataRecursion(FirebaseStorage firebaseStorage, ProductModel product, int folder, int step, String documentId) {
+        if (step == 5) {
+            firebaseFirestore.collection(ProductModel.class.getSimpleName())
+                    .document(documentId)
+                    .set(product);
+        } else if (step < 5) {
+            firebaseStorage.getReference(ProductModel.FIRESTORAGE + "/" + folder + "/" + step + ".jpg")
+                    .getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        String image = task.getResult().toString();
+                        product.addImage(image);
+                        addDataRecursion(firebaseStorage, product, folder, step + 1, documentId);
+                    }
+                }
+            });
+        }
+    }
+
 
     public static void setData() {
 
