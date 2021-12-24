@@ -221,12 +221,83 @@ public class DatabaseModel {
 
     //______________________________________________________________________________________________________ DANGER FUNCTION
 
-    private static void addDataRecursion(FirebaseStorage firebaseStorage, ProductModel product, int folder, int step, String documentId) {
-        if (step == 5) {
+
+
+
+    public static void addProduct() {
+        int folderStart = 20; // index của sản [hẩm bắt đầu ghi
+        long screen = 2; // các sản phẩm này sẽ hiễn thị màn hình nào
+
+
+        ArrayList<Long> categorys = new ArrayList<>();
+        categorys.add((long) 1);
+        categorys.add((long) 1);
+        categorys.add((long) 1);
+        categorys.add((long) 1);
+        categorys.add((long) 1);
+        categorys.add((long) 1);
+
+        ArrayList<Integer> noImages = new ArrayList<>();
+        noImages.add(5);
+        noImages.add(4);
+        noImages.add(3);
+        noImages.add(4);
+        noImages.add(4);
+        noImages.add(4);
+
+        ArrayList<String> titles = new ArrayList<>();
+        titles.add("Nàng thơ");
+        titles.add("Xuận hạ thu đông");
+        titles.add("Nắng");
+        titles.add("Rạng đông");
+        titles.add("Nhật thực");
+        titles.add("Bếp lửa");
+
+
+        /* start */
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        String price = "550.000 đ",
+                cutPrice = "820.000 đ",
+                description = "Tiến Dũng là trụ cột ở hàng thủ của Việt Nam, thường xuyên đá cặp cùng Quế Ngọc Hải và Đỗ Duy Mạnh trong sơ đồ ba trung vệ. Anh được HLV Park triệu tập ở mọi giải đấu, góp phần quan trọng làm nên chiến tích ở U23 châu Á 2018, vô địch AFF Cup 2018 và vào vòng loại thứ ba World Cup 2022 - khu vực châu Á.";
+        ArrayList<String> size = new ArrayList<>(Arrays.asList("XS", "S", "L"));
+        ArrayList<String> bodyName = new ArrayList<>(Arrays.asList("Vai", "Lưng", "Dài áo"));
+        ArrayList<Long> measure = new ArrayList<>();
+        measure.add((long) 1);
+        measure.add((long) 1);
+        measure.add((long) 1);
+        measure.add((long) 1);
+        measure.add((long) 1);
+        measure.add((long) 1);
+        measure.add((long) 1);
+        measure.add((long) 1);
+        measure.add((long) 1);
+
+
+        ArrayList<String> info = new ArrayList<>();
+        info.add("Chất liêu: vài flannel");
+        info.add("Chất vải mềm mại, không quá dày");
+        info.add("Chi tiết trước & sau thêu KTS sắc nét");
+        info.add("Mạc vải đỏ đô được may bên hông túi áo");
+        info.add("Zipper HKK 2 chiều");
+        /* end*/
+
+        for (int i = 0; i < titles.size(); ++i) {
+            int noImage = noImages.get(i);
+            long category = categorys.get(i);
+            String title = titles.get(i);
+            ArrayList<String> image = new ArrayList<>();
+            ProductModel productModel = new ProductModel(screen, category, title, price, cutPrice, description, image, size, bodyName, measure, info);
+            addDataRecursion(firebaseStorage, productModel, folderStart + i, 0, noImage, Integer.toString(folderStart + i));
+        }
+    }
+
+    private static void addDataRecursion(FirebaseStorage firebaseStorage, ProductModel product, final int folder, int step, final int noImage, final String documentId) {
+        if (step == noImage) {
             firebaseFirestore.collection(ProductModel.class.getSimpleName())
                     .document(documentId)
                     .set(product);
-        } else if (step < 5) {
+        } else if (step < noImage) {
             firebaseStorage.getReference(ProductModel.FIRESTORAGE + "/" + folder + "/" + step + ".jpg")
                     .getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
@@ -234,85 +305,7 @@ public class DatabaseModel {
                     if (task.isSuccessful()) {
                         String image = task.getResult().toString();
                         product.addImage(image);
-                        addDataRecursion(firebaseStorage, product, folder, step + 1, documentId);
-                    }
-                }
-            });
-        }
-    }
-
-
-    public static void setData() {
-
-
-        int start = 9; // index của sản [hẩm bắt đầu ghi
-        long screen = 4; // các sản phẩm này sẽ hiễn thị màn hình nào
-
-        firebaseFirestore = FirebaseFirestore.getInstance();
-
-        ArrayList<Long> categorys = new ArrayList<>();
-        categorys.add((long) 1);
-        categorys.add((long) 1);
-        categorys.add((long) 1);
-        categorys.add((long) 1);
-        categorys.add((long) 6);
-
-        ArrayList<String> titles = new ArrayList<>();
-        titles.add("two-tone checkered trench coat");
-        titles.add("logo-print sleeveless dress");
-        titles.add("belted-waist midi trench coat");
-        titles.add("check cape coat");
-        titles.add("Vintage Check Ramsey sneakers");
-
-
-        for (int j = 0; j < categorys.size(); ++j, ++start) {
-
-            long category = categorys.get(j);
-            String title = titles.get(j),
-                    price = "550.000 đ",
-                    cutPrice = "820.000 đ",
-                    description = "Tiến Dũng là trụ cột ở hàng thủ của Việt Nam, thường xuyên đá cặp cùng Quế Ngọc Hải và Đỗ Duy Mạnh trong sơ đồ ba trung vệ. Anh được HLV Park triệu tập ở mọi giải đấu, góp phần quan trọng làm nên chiến tích ở U23 châu Á 2018, vô địch AFF Cup 2018 và vào vòng loại thứ ba World Cup 2022 - khu vực châu Á.";
-            ArrayList<String> image = new ArrayList<>();
-            ArrayList<String> size = new ArrayList<>(Arrays.asList("XS", "S", "L"));
-            ArrayList<String> bodyName = new ArrayList<>(Arrays.asList("Vai", "Lưng", "Dài áo"));
-            ArrayList<Long> measure = new ArrayList<>();
-            measure.add((long) 1);
-            measure.add((long) 1);
-            measure.add((long) 1);
-            measure.add((long) 1);
-            measure.add((long) 1);
-            measure.add((long) 1);
-            measure.add((long) 1);
-            measure.add((long) 1);
-            measure.add((long) 1);
-
-
-            ArrayList<String> info = new ArrayList<>();
-            info.add("Chất liêu: vài flannel");
-            info.add("Chất vải mềm mại, không quá dày");
-            info.add("Chi tiết trước & sau thêu KTS sắc nét");
-            info.add("Mạc vải đỏ đô được may bên hông túi áo");
-            info.add("Zipper HKK 2 chiều");
-            ProductModel productModel = new ProductModel(screen, category, title, price, cutPrice, description, image, size, bodyName, measure, info);
-            int finalStart = start;
-            firebaseFirestore.collection(ProductModel.class.getSimpleName()).document(Integer.toString(start)).set(productModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-                        for (int i = 0; i < 5; ++i) {
-                            int finalI = i;
-                            firebaseStorage.getReference(ProductModel.FIRESTORAGE + "/" + finalStart + "/" + i + ".jpg")
-                                    .getDownloadUrl()
-                                    .addOnCompleteListener(new OnCompleteListener<Uri>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Uri> task) {
-                                            if (task.isSuccessful()) {
-                                                firebaseFirestore.collection(ProductModel.class.getSimpleName()).document(Integer.toString(finalStart)).update(String.format("image.%d", finalI), task.getResult().toString());
-                                            }
-                                        }
-                                    });
-                        }
+                        addDataRecursion(firebaseStorage, product, folder, step + 1, noImage, documentId);
                     }
                 }
             });

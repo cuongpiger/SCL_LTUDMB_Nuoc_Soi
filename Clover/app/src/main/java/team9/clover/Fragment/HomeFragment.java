@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
         refer(view);
         setCategory();
         setView(view);
-//        DatabaseModel.setData();
+//        DatabaseModel.addProduct();
 
         return view;
     }
