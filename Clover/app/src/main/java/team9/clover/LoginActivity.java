@@ -10,10 +10,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import team9.clover.Fragment.SignInFragment;
-import team9.clover.Module.Config;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.slide_from_right, R.anim.slideout_from_left);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         setContentView(R.layout.activity_login);
 
         referWidgets();
@@ -49,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.slide_from_right, R.anim.slideout_from_left);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     private void referWidgets() {
@@ -65,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.slide_from_left, R.anim.slideout_from_right);
+        fragmentTransaction.setCustomAnimations(R.anim.slide_from_left, R.anim.slide_to_right);
         fragmentTransaction.replace(floLogin.getId(), fragment);
         fragmentTransaction.commit();
     }

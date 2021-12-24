@@ -1,11 +1,9 @@
 package team9.clover.Module;
 
 import android.app.Activity;
-import android.content.Context;
+import android.widget.Adapter;
 import android.widget.FrameLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,6 +12,12 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
+import java.util.Collections;
+import java.util.Comparator;
+
+import team9.clover.Adapter.HomePageAdapter;
+import team9.clover.Model.DatabaseModel;
+import team9.clover.Model.HomePageModel;
 import team9.clover.R;
 
 public class Reuse {
@@ -22,7 +26,7 @@ public class Reuse {
      * Thiết lập animation khi start một activity
      * */
     public static void startActivity(Activity activity) {
-        activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     /*
@@ -31,9 +35,9 @@ public class Reuse {
     public static void setFragment(FragmentActivity activity, Fragment fragment, FrameLayout layout, int animFrom) {
         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
         if (animFrom == -1) // from left
-            fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+            fragmentTransaction.setCustomAnimations(R.anim.slide_from_left, R.anim.slide_to_right);
         else if (animFrom == 1) // from right
-            fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+            fragmentTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left);
 
         fragmentTransaction.replace(layout.getId(), fragment);
         fragmentTransaction.commit();

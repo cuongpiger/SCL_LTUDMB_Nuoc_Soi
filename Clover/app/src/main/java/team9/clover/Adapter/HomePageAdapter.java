@@ -64,6 +64,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             case HomePageModel.GRID_PRODUCT_VIEW_TYPE:
                 return new GridProductViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.container_grid_product, parent, false));
 
+            case HomePageModel.FOOTER_VIEW_TYPE:
+                return new FooterViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_footer, parent, false));
+
             default:
                 return null;
         }
@@ -86,6 +89,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
             case HomePageModel.GRID_PRODUCT_VIEW_TYPE:
                 return HomePageModel.GRID_PRODUCT_VIEW_TYPE;
+
+            case HomePageModel.FOOTER_VIEW_TYPE:
+                return HomePageModel.FOOTER_VIEW_TYPE;
 
             default:
                 return -1;
@@ -352,6 +358,12 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                     Toast.makeText(itemView.getContext(), "grid product button ViewAll clicked", Toast.LENGTH_LONG).show();
                 }
             });
+        }
+    }
+
+    public class FooterViewHolder extends RecyclerView.ViewHolder {
+        public FooterViewHolder(@NonNull View itemView) {
+            super(itemView);
         }
     }
 }

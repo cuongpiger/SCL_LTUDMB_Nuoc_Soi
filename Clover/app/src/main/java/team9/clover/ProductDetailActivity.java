@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -122,13 +121,13 @@ public class ProductDetailActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        overridePendingTransition(R.anim.slide_from_right, R.anim.slideout_from_left);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slideout_from_right);
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
     @Override

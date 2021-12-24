@@ -25,7 +25,7 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
 
         refer();
-        Reuse.setFragment(LogInActivity.this, new SignInFragment(), mContainer, 0);
+        Reuse.setFragment(LogInActivity.this, new SignInFragment(), mContainer, 1);
     }
 
     /*

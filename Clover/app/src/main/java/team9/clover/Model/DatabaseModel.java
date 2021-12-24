@@ -108,7 +108,8 @@ public class DatabaseModel {
     * */
     public static void loadHomePage(HomePageAdapter adapter, Activity activity) {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
-        loadHomePageProduct(adapter, activity);
+        loadCarousel(adapter, activity);
+//        loadHomePageProduct(adapter, activity);
     }
 
     /*
@@ -140,6 +141,7 @@ public class DatabaseModel {
                             homePageModelList.add(new HomePageModel(HomePageModel.NEW_PRODUCT_VIEW_TYPE, -1, null, newProducts));
                             homePageModelList.add(new HomePageModel(HomePageModel.SLIDER_PRODUCT_VIEW_TYPE, R.drawable.icon_cart_check, "Bán nhiều nhất", sliderProducts));
                             homePageModelList.add(new HomePageModel(HomePageModel.GRID_PRODUCT_VIEW_TYPE, R.drawable.icon_discount, "Khuyến mãi hôm nay", gridProducts));
+                            homePageModelList.add(new HomePageModel(HomePageModel.FOOTER_VIEW_TYPE));
                             if (adapter != null) adapter.notifyDataSetChanged();
                         } else {
                             if (activity != null) {
@@ -190,7 +192,7 @@ public class DatabaseModel {
                 if (task.isSuccessful()) {
                     BannerModel bannerModel = task.getResult().toObject(BannerModel.class);
                     homePageModelList.add(new HomePageModel(bannerModel));
-                    loadSliderProduct(adapter, activity);
+                    loadHomePageProduct(adapter, activity);
                 } else {
                     activity.finish();
                     activity.startActivity(new Intent(activity, ErrorActivity.class));

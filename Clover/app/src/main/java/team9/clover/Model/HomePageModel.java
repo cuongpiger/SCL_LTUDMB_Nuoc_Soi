@@ -8,7 +8,9 @@ public class HomePageModel {
             BANNER_VIEW_TYPE = 1,
             NEW_PRODUCT_VIEW_TYPE = 2,
             SLIDER_PRODUCT_VIEW_TYPE = 3,
-            GRID_PRODUCT_VIEW_TYPE = 4;
+            GRID_PRODUCT_VIEW_TYPE = 4,
+            FOOTER_VIEW_TYPE = 5,
+            LOAD_DONE = 6;
 
     int type;
 
@@ -91,4 +93,8 @@ public class HomePageModel {
     }
     //______________________________________________________________________________________________
 
+    /* Thiết lập Footer ***************************************************************************/
+    public HomePageModel(int type) {
+        this.type = type;
+    }
 }

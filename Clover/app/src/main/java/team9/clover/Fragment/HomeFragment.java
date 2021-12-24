@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.Adapter.CategoryAdapter;
 import team9.clover.Adapter.HomePageAdapter;
+import team9.clover.Module.Reuse;
 import team9.clover.R;
 import team9.clover.databinding.FragmentHomeBinding;
 

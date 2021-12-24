@@ -95,6 +95,7 @@
         <entry key="app/src/main/res/layout/item_new_product.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_product_home.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/item_slider_product.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/layout_footer.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/my_address_layout.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/my_order_item_layout.xml" value="0.5" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.33" />

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import team9.clover.Model.HomePage;
-import team9.clover.Adapter.HomePageAdapter;
 
 public class CategoryActivity extends AppCompatActivity {
 
@@ -23,7 +22,7 @@ public class CategoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.slide_from_right, R.anim.slideout_from_left);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         setContentView(R.layout.activity_category);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -41,13 +40,13 @@ public class CategoryActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slideout_from_right);
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slideout_from_right);
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
     @Override

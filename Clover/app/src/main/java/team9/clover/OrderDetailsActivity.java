@@ -13,7 +13,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.slide_from_right, R.anim.slideout_from_left);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         setContentView(R.layout.activity_order_details);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -37,6 +37,6 @@ public class OrderDetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slideout_from_right);
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }
