@@ -6,6 +6,7 @@ public class HomePageModel {
 
     public static final int CAROUSEL_VIEW_TYPE = 0,
             BANNER_VIEW_TYPE = 1,
+            NEW_PRODUCT_VIEW_TYPE = 2,
             SLIDER_PRODUCT_VIEW_TYPE = 3,
             GRID_PRODUCT_VIEW_TYPE = 4;
 

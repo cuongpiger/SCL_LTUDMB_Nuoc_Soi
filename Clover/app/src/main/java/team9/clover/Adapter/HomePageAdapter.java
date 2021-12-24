@@ -35,10 +35,14 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
     List<HomePageModel> homePageModelList;
     RecyclerView.RecycledViewPool recycledViewPool;
+    RecyclerView.RecycledViewPool recycledViewPool2;
+
 
     public HomePageAdapter(List<HomePageModel> homePageModelList) {
         this.homePageModelList = homePageModelList;
         recycledViewPool = new RecyclerView.RecycledViewPool();
+        recycledViewPool2 = new RecyclerView.RecycledViewPool();
+
     }
 
     @NonNull
@@ -50,6 +54,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
             case HomePageModel.BANNER_VIEW_TYPE:
                 return new BannerViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.container_banner, parent, false));
+
+            case HomePageModel.NEW_PRODUCT_VIEW_TYPE:
+                return new NewProductViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.container_new_product, parent, false));
 
             case HomePageModel.SLIDER_PRODUCT_VIEW_TYPE:
                 return new SliderProductViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.container_slider_product, parent, false));
@@ -70,6 +77,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
             case HomePageModel.BANNER_VIEW_TYPE:
                 return HomePageModel.BANNER_VIEW_TYPE;
+
+            case HomePageModel.NEW_PRODUCT_VIEW_TYPE:
+                return HomePageModel.NEW_PRODUCT_VIEW_TYPE;
 
             case HomePageModel.SLIDER_PRODUCT_VIEW_TYPE:
                 return HomePageModel.SLIDER_PRODUCT_VIEW_TYPE;
@@ -92,6 +102,10 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             case HomePageModel.BANNER_VIEW_TYPE:
                 BannerModel bannerModel = homePageModelList.get(position).getBanner();
                 ((BannerViewHolder) holder).set(bannerModel.getImage(), bannerModel.getPadding());
+                break;
+
+            case HomePageModel.NEW_PRODUCT_VIEW_TYPE:
+                ((NewProductViewHolder) holder).set(homePageModelList.get(position).getProductModelList());
                 break;
 
             case HomePageModel.SLIDER_PRODUCT_VIEW_TYPE:
@@ -237,6 +251,26 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         private void set(String imageUrl, String color) {
             Glide.with(itemView.getContext()).load(imageUrl).into(mImage);
             mContainer.setBackgroundColor(Color.parseColor(color));
+        }
+    }
+
+    public class NewProductViewHolder extends RecyclerView.ViewHolder {
+
+        RecyclerView mContainer;
+
+        public NewProductViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mContainer = itemView.findViewById(R.id.rvContainer);
+            mContainer.setRecycledViewPool(recycledViewPool2);
+        }
+
+        private void set(List<ProductModel> productModelList) {
+            NewProductAdapter adapter = new NewProductAdapter(productModelList);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(itemView.getContext());
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            mContainer.setLayoutManager(layoutManager);
+            mContainer.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         }
     }
 

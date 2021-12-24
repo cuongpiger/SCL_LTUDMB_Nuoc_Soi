@@ -67,6 +67,7 @@
         <entry key="app/src/main/res/layout/container_banner.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/container_carousel.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/container_grid_product.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/container_new_product.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/container_slider_product.xml" value="0.33" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/detail_image_layout.xml" value="0.33" />
@@ -91,6 +92,7 @@
         <entry key="app/src/main/res/layout/item_carousel.xml" value="0.18" />
         <entry key="app/src/main/res/layout/item_category.xml" value="0.11069812540400775" />
         <entry key="app/src/main/res/layout/item_grid_product.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/item_new_product.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_product_home.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/item_slider_product.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/my_address_layout.xml" value="0.22532894736842105" />

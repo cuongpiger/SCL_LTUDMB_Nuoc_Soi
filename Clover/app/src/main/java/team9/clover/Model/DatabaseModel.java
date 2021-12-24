@@ -108,7 +108,48 @@ public class DatabaseModel {
     * */
     public static void loadHomePage(HomePageAdapter adapter, Activity activity) {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
-        loadCarousel(adapter, activity);
+        loadHomePageProduct(adapter, activity);
+    }
+
+    /*
+     * Load các sản phẫm thuộc mục sản phẩm mới ở Hame Fragment
+     * */
+    private static void loadHomePageProduct(HomePageAdapter adapter, Activity activity) {
+        firebaseFirestore.collection(ProductModel.class.getSimpleName())
+                .whereGreaterThan("screen", (long) HomePageModel.BANNER_VIEW_TYPE)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<ProductModel> newProducts = new ArrayList<>();
+                            List<ProductModel> sliderProducts = new ArrayList<>();
+                            List<ProductModel> gridProducts = new ArrayList<>();
+
+                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                ProductModel productModel = snapshot.toObject(ProductModel.class);
+                                if (productModel.getScreen() == HomePageModel.NEW_PRODUCT_VIEW_TYPE) {
+                                    newProducts.add(productModel);
+                                } else if (productModel.getScreen() == HomePageModel.SLIDER_PRODUCT_VIEW_TYPE) {
+                                    sliderProducts.add(productModel);
+                                } else if (productModel.getScreen() == HomePageModel.GRID_PRODUCT_VIEW_TYPE) {
+                                    gridProducts.add(productModel);
+                                }
+                            }
+
+                            homePageModelList.add(new HomePageModel(HomePageModel.NEW_PRODUCT_VIEW_TYPE, -1, null, newProducts));
+                            homePageModelList.add(new HomePageModel(HomePageModel.SLIDER_PRODUCT_VIEW_TYPE, R.drawable.icon_cart_check, "Bán nhiều nhất", sliderProducts));
+                            homePageModelList.add(new HomePageModel(HomePageModel.GRID_PRODUCT_VIEW_TYPE, R.drawable.icon_discount, "Khuyến mãi hôm nay", gridProducts));
+                            if (adapter != null) adapter.notifyDataSetChanged();
+                        } else {
+                            if (activity != null) {
+                                activity.finish();
+                                activity.startActivity(new Intent(activity, ErrorActivity.class));
+                                Reuse.startActivity(activity);
+                            }
+                        }
+                    }
+                });
     }
 
     /*
@@ -164,7 +205,8 @@ public class DatabaseModel {
     * */
     private static void loadSliderProduct(HomePageAdapter adapter, Activity activity) {
         firebaseFirestore.collection(ProductModel.class.getSimpleName())
-                .whereEqualTo("screen", (long) HomePageModel.SLIDER_PRODUCT_VIEW_TYPE)
+                .whereLessThanOrEqualTo("screen", (long) HomePageModel.GRID_PRODUCT_VIEW_TYPE)
+                .orderBy("screen")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
