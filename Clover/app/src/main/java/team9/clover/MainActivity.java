@@ -28,24 +28,31 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
+import team9.clover.Adapter.CategoryAdapter;
 import team9.clover.Fragment.HomeFragment;
 import team9.clover.Fragment.MyAccountFragment;
 import team9.clover.Fragment.MyCartFragment;
 import team9.clover.Fragment.MyOrdersFragment;
 import team9.clover.Fragment.MyRewardFragment;
 import team9.clover.Fragment.MyWishlistFragment;
+import team9.clover.Model.DatabaseModel;
 import team9.clover.Module.Reuse;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private FrameLayout frameLayout;
-    private NavigationView navigationView;
-    private ImageView actionBarLogo;
-    private Window window;
-    private Toolbar toolbar;
+    FrameLayout frameLayout;
+    NavigationView navigationView;
+    ImageView actionBarLogo;
+    Window window;
+    Toolbar toolbar;
     DrawerLayout drawerLayout;
+    RecyclerView mCategory;
+
+    CategoryAdapter categoryAdapter;
 
     private static final int HOME_FRAGMENT = 0;
     private static final int CART_FRAGMENT = 1;
@@ -66,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         refer();
         setToolbar();
+        setCategory();
         setNavigationView();
         setFragment(new HomeFragment());
     }
@@ -76,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         frameLayout = findViewById(R.id.main_framelayout);
+        mCategory = findViewById(R.id.rvCategory);
     }
 
     private void setToolbar() {
@@ -104,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (currentFragment.equals(HomeFragment.class.getSimpleName())) {
             Reuse.setFragment(MainActivity.this, fragment, frameLayout, 0);
         }
-
 
 //        if (fragmentNo != currentFragment) {
 //            if (fragmentNo == REWARDS_FRAGMENT) {
@@ -269,8 +277,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        }
     }
 
-    public static void setShowCart(Boolean value) {
-        showCart = value;
-        Log.v("db", " " + showCart);
+    /*
+     * Thiết lập cho thanh category
+     * */
+    private void setCategory() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL); // thiết lập recycler view theo chiều ngang
+        mCategory.setLayoutManager(layoutManager);
+
+        categoryAdapter = new CategoryAdapter(DatabaseModel.categoryModelList);
+        mCategory.setAdapter(categoryAdapter);
+
+        if (DatabaseModel.categoryModelList.size() == 0) {
+            DatabaseModel.loadCategory(categoryAdapter, MainActivity.this);
+        } else {
+            categoryAdapter.notifyDataSetChanged();
+        }
     }
 }

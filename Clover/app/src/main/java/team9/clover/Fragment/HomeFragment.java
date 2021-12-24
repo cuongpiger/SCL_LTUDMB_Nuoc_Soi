@@ -33,7 +33,6 @@ public class HomeFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
 
         refer(view);
-        setCategory();
         setView(view);
 //        DatabaseModel.addProduct();
 
@@ -41,26 +40,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void refer(View view) {
-        mCategory = view.findViewById(R.id.rvCategory);
         mHomePage = view.findViewById(R.id.rvHomePage);
-    }
-
-    /*
-    * Thiết lập cho thanh category
-    * */
-    private void setCategory() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL); // thiết lập recycler view theo chiều ngang
-        mCategory.setLayoutManager(layoutManager);
-
-        categoryAdapter = new CategoryAdapter(DatabaseModel.categoryModelList);
-        mCategory.setAdapter(categoryAdapter);
-
-        if (DatabaseModel.categoryModelList.size() == 0) {
-            DatabaseModel.loadCategory(categoryAdapter, getActivity());
-        } else {
-            categoryAdapter.notifyDataSetChanged();
-        }
     }
 
     private void setView(View view) {
@@ -78,7 +58,7 @@ public class HomeFragment extends Fragment {
         }
     }
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

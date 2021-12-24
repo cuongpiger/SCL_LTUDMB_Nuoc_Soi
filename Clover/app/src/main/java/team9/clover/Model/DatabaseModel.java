@@ -91,12 +91,13 @@ public class DatabaseModel {
                                 categoryModelList.add(snapshot.toObject(CategoryModel.class));
                             }
 
-                            // adapter báo cho RecyclerView => cập nhật giao diện
-                            adapter.notifyDataSetChanged();
+                            if (adapter != null) adapter.notifyDataSetChanged();
                         } else {
-                            activity.finish();
-                            activity.startActivity(new Intent(activity, ErrorActivity.class));
-                            Reuse.startActivity(activity);
+                            if (activity != null) {
+                                activity.finish();
+                                activity.startActivity(new Intent(activity, ErrorActivity.class));
+                                Reuse.startActivity(activity);
+                            }
                         }
                     }
                 });
