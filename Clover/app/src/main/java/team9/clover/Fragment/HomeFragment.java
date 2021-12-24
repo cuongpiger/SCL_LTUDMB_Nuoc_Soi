@@ -15,17 +15,15 @@ import androidx.viewpager.widget.ViewPager;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.Adapter.CategoryAdapter;
 import team9.clover.Adapter.HomePageAdapter;
+import team9.clover.Model.HomePageModel;
 import team9.clover.Module.Reuse;
 import team9.clover.R;
 import team9.clover.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView mCategory;
-    RecyclerView mHomePage;
-
-    CategoryAdapter categoryAdapter;
-    HomePageAdapter homePageAdapter ;
+    public static RecyclerView mHomePage;
+    public static HomePageAdapter homePageAdapter;
 
     public HomeFragment() {}
 
@@ -51,12 +49,7 @@ public class HomeFragment extends Fragment {
 
         homePageAdapter = new HomePageAdapter(DatabaseModel.homePageModelList);
         mHomePage.setAdapter(homePageAdapter);
-
-        if (DatabaseModel.homePageModelList.size() == 0) {
-            DatabaseModel.loadHomePage(homePageAdapter, getActivity());
-        } else {
-            homePageAdapter.notifyDataSetChanged();
-        }
+        homePageAdapter.notifyDataSetChanged();
     }
 }
 

@@ -75,11 +75,7 @@ public class DatabaseModel {
         return firebaseAuth.sendPasswordResetEmail(email);
     }
 
-    /*
-    * Load icon, title trên thanh category toolbar
-    * */
-    public static void loadCategory(CategoryAdapter adapter, Activity activity) {
-        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+    private static void loadCategoryData() {
         firebaseFirestore.collection(CategoryModel.class.getSimpleName())
                 .orderBy("index")
                 .get()
@@ -90,32 +86,43 @@ public class DatabaseModel {
                             for (QueryDocumentSnapshot snapshot : task.getResult()) {
                                 categoryModelList.add(snapshot.toObject(CategoryModel.class));
                             }
-
-                            if (adapter != null) adapter.notifyDataSetChanged();
-                        } else {
-                            if (activity != null) {
-                                activity.finish();
-                                activity.startActivity(new Intent(activity, ErrorActivity.class));
-                                Reuse.startActivity(activity);
-                            }
                         }
                     }
                 });
     }
 
-    /*
-    * Load ảnh các item cho màn hình Home Fragment
-    * */
-    public static void loadHomePage(HomePageAdapter adapter, Activity activity) {
-        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
-        loadCarousel(adapter, activity);
-//        loadHomePageProduct(adapter, activity);
+    private static void loadCarouselData() {
+        firebaseFirestore.collection(CarouselModel.class.getSimpleName())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<CarouselModel> carouselModelList = new ArrayList<>();
+                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                carouselModelList.add(snapshot.toObject(CarouselModel.class));
+                            }
+                            homePageModelList.add(new HomePageModel(carouselModelList));
+                        }
+                    }
+                });
     }
 
-    /*
-     * Load các sản phẫm thuộc mục sản phẩm mới ở Hame Fragment
-     * */
-    private static void loadHomePageProduct(HomePageAdapter adapter, Activity activity) {
+    private static void loadBannerData() {
+        firebaseFirestore.collection(BannerModel.class.getSimpleName())
+                .document("0")
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    BannerModel bannerModel = task.getResult().toObject(BannerModel.class);
+                    homePageModelList.add(new HomePageModel(bannerModel));
+                }
+            }
+        });
+    }
+
+    private static void loadHomePageProductData() {
         firebaseFirestore.collection(ProductModel.class.getSimpleName())
                 .whereGreaterThan("screen", (long) HomePageModel.BANNER_VIEW_TYPE)
                 .get()
@@ -142,120 +149,20 @@ public class DatabaseModel {
                             homePageModelList.add(new HomePageModel(HomePageModel.SLIDER_PRODUCT_VIEW_TYPE, R.drawable.icon_cart_check, "Bán nhiều nhất", sliderProducts));
                             homePageModelList.add(new HomePageModel(HomePageModel.GRID_PRODUCT_VIEW_TYPE, R.drawable.icon_discount, "Khuyến mãi hôm nay", gridProducts));
                             homePageModelList.add(new HomePageModel(HomePageModel.FOOTER_VIEW_TYPE));
-                            if (adapter != null) adapter.notifyDataSetChanged();
-                        } else {
-                            if (activity != null) {
-                                activity.finish();
-                                activity.startActivity(new Intent(activity, ErrorActivity.class));
-                                Reuse.startActivity(activity);
-                            }
                         }
                     }
                 });
     }
 
-    /*
-    * Load phần Carousel cho Home Fragment
-    * */
-    private static void loadCarousel(HomePageAdapter adapter, Activity activity) {
-        firebaseFirestore.collection(CarouselModel.class.getSimpleName())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            List<CarouselModel> carouselModelList = new ArrayList<>();
-                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
-                                carouselModelList.add(snapshot.toObject(CarouselModel.class));
-                            }
 
-                            homePageModelList.add(new HomePageModel(carouselModelList));
-                            loadBanner(adapter, activity);
-                        } else {
-                            activity.finish();
-                            activity.startActivity(new Intent(activity, ErrorActivity.class));
-                            Reuse.startActivity(activity);
-                        }
-                    }
-                });
+    public static void loadHomePageData() {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        loadCategoryData();
+        loadCarouselData();
+        loadBannerData();
+        loadHomePageProductData();
     }
 
-    /*
-    * Load bannner quảng cáo ở Home Fragment
-    * */
-    private static void loadBanner(HomePageAdapter adapter, Activity activity) {
-        firebaseFirestore.collection(BannerModel.class.getSimpleName())
-                .document("0")
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    BannerModel bannerModel = task.getResult().toObject(BannerModel.class);
-                    homePageModelList.add(new HomePageModel(bannerModel));
-                    loadHomePageProduct(adapter, activity);
-                } else {
-                    activity.finish();
-                    activity.startActivity(new Intent(activity, ErrorActivity.class));
-                    Reuse.startActivity(activity);
-                }
-            }
-        });
-    }
-
-    /*
-    * Load các sản phẩm thuộc mục Bán nhiều nhất ở Home Fragment
-    * */
-    private static void loadSliderProduct(HomePageAdapter adapter, Activity activity) {
-        firebaseFirestore.collection(ProductModel.class.getSimpleName())
-                .whereLessThanOrEqualTo("screen", (long) HomePageModel.GRID_PRODUCT_VIEW_TYPE)
-                .orderBy("screen")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            List<ProductModel> productModelList = new ArrayList<>();
-                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
-                                productModelList.add(snapshot.toObject(ProductModel.class));
-                            }
-
-                            homePageModelList.add(new HomePageModel(HomePageModel.SLIDER_PRODUCT_VIEW_TYPE, R.drawable.icon_cart_check, "Bán nhiều nhất", productModelList));
-                            loadGridProduct(adapter, activity);
-                        } else {
-                            activity.finish();
-                            activity.startActivity(new Intent(activity, ErrorActivity.class));
-                            Reuse.startActivity(activity);
-                        }
-                    }
-                });
-    }
-
-    /*
-    * Load các sản phẩm thuộc mục Khuyến mãi hôm nay ở Home Fragment
-    * */
-    private static void loadGridProduct(HomePageAdapter adapter, Activity activity) {
-        firebaseFirestore.collection(ProductModel.class.getSimpleName())
-                .whereEqualTo("screen", (long) HomePageModel.GRID_PRODUCT_VIEW_TYPE)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            List<ProductModel> productModelList = new ArrayList<>();
-                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
-                                productModelList.add(snapshot.toObject(ProductModel.class));
-                            }
-
-                            homePageModelList.add(new HomePageModel(HomePageModel.GRID_PRODUCT_VIEW_TYPE, R.drawable.icon_discount, "Khuyến mãi hôm nay", productModelList));
-                            adapter.notifyDataSetChanged();
-                        } else {
-                            activity.finish();
-                            activity.startActivity(new Intent(activity, ErrorActivity.class));
-                            Reuse.startActivity(activity);
-                        }
-                    }
-                });
-    }
 
     /*
      * Đăng xuất khỏi current user
@@ -263,6 +170,13 @@ public class DatabaseModel {
     public static void signOut() {
         if (USER != null) firebaseAuth.signOut();
     }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
     //______________________________________________________________________________________________________ DANGER FUNCTION
 

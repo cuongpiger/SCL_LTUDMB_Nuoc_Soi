@@ -1,6 +1,7 @@
 package team9.clover.Module;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.widget.Adapter;
 import android.widget.FrameLayout;
 
@@ -16,6 +17,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import team9.clover.Adapter.HomePageAdapter;
+import team9.clover.ErrorActivity;
+import team9.clover.Fragment.HomeFragment;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.Model.HomePageModel;
 import team9.clover.R;
@@ -95,5 +98,11 @@ public class Reuse {
         }
 
         return password;
+    }
+
+    public static void goToErrorActivity(Activity activity) {
+        activity.finishAffinity();
+        activity.startActivity(new Intent(activity, ErrorActivity.class));
+        Reuse.startActivity(activity);
     }
 }

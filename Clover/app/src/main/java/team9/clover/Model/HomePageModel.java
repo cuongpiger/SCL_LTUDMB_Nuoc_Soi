@@ -10,7 +10,7 @@ public class HomePageModel {
             SLIDER_PRODUCT_VIEW_TYPE = 3,
             GRID_PRODUCT_VIEW_TYPE = 4,
             FOOTER_VIEW_TYPE = 5,
-            LOAD_DONE = 6;
+            NO_COMPONENT = 6;
 
     int type;
 

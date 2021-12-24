@@ -287,11 +287,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         categoryAdapter = new CategoryAdapter(DatabaseModel.categoryModelList);
         mCategory.setAdapter(categoryAdapter);
-
-        if (DatabaseModel.categoryModelList.size() == 0) {
-            DatabaseModel.loadCategory(categoryAdapter, MainActivity.this);
-        } else {
-            categoryAdapter.notifyDataSetChanged();
-        }
+        categoryAdapter.notifyDataSetChanged();
     }
 }

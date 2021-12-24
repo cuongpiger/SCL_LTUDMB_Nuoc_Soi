@@ -81,6 +81,7 @@
         <entry key="app/src/main/res/layout/fragment_my_wishlist.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_orders_datail.xml" value="0.33578431372549017" />
         <entry key="app/src/main/res/layout/fragment_product_description.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/fragment_product_detail.xml" value="0.17600205549845838" />
         <entry key="app/src/main/res/layout/fragment_product_specification.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_reset_password.xml" value="0.3361138370951914" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />

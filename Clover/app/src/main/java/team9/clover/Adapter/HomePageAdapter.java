@@ -21,6 +21,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -42,7 +43,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         this.homePageModelList = homePageModelList;
         recycledViewPool = new RecyclerView.RecycledViewPool();
         recycledViewPool2 = new RecyclerView.RecycledViewPool();
-
+        this.homePageModelList.sort(Comparator.comparing(HomePageModel::getType));
     }
 
     @NonNull
