@@ -74,8 +74,8 @@
         android:layout_height="1dp"
         android:background="@color/white_blur"
         app:layout_constraintBottom_toBottomOf="@+id/glContainer"
-        app:layout_constraintEnd_toEndOf="glContainer"
-        app:layout_constraintStart_toStartOf="glContainer"
+        app:layout_constraintEnd_toEndOf="@+id/glContainer"
+        app:layout_constraintStart_toStartOf="@+id/glContainer"
         app:layout_constraintTop_toTopOf="@+id/glContainer" />
 
     <View

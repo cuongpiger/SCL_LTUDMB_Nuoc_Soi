@@ -7,9 +7,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.gridlayout.widget.GridLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -84,8 +86,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (homePageModelList.get(position).getType()) {
             case HomePageModel.CAROUSEL_VIEW_TYPE:
-                List<CarouselModel> carouselModelList = homePageModelList.get(position).getCarouselModelList();
-                ((CarouselViewHolder) holder).set(carouselModelList);
+                ((CarouselViewHolder) holder).set(homePageModelList.get(position).getCarouselModelList());
                 break;
 
             case HomePageModel.BANNER_VIEW_TYPE:
@@ -94,11 +95,19 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 break;
 
             case HomePageModel.SLIDER_PRODUCT_VIEW_TYPE:
-                HomePageModel homePageModel =  homePageModelList.get(position);
+                HomePageModel sliderProduct = homePageModelList.get(position);
                 ((SliderProductViewHolder) holder).set(
-                        homePageModel.getSliderProductModelList(),
-                        homePageModel.getIcon(),
-                        homePageModel.getTitle());
+                        sliderProduct.getProductModelList(),
+                        sliderProduct.getIcon(),
+                        sliderProduct.getTitle());
+                break;
+
+            case HomePageModel.GRID_PRODUCT_VIEW_TYPE:
+                HomePageModel gridProduct = homePageModelList.get(position);
+                ((GridProductViewHolder) holder).set(
+                        gridProduct.getProductModelList(),
+                        gridProduct.getIcon(),
+                        gridProduct.getTitle());
                 break;
 
             default:
@@ -260,61 +269,53 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
     public class GridProductViewHolder extends RecyclerView.ViewHolder {
 
-        ConstraintLayout container;
-        MaterialTextView titleLayout;
-        MaterialButton buttonLayout;
-        GridLayout gridProductLayout;
+        MaterialTextView mTitle;
+        MaterialButton mViewAll;
+        GridLayout mContainer;
 
         public GridProductViewHolder(@NonNull View itemView) {
             super(itemView);
-            container = itemView.findViewById(R.id.container);
-            titleLayout = itemView.findViewById(R.id.mtvGridTitle);
-            buttonLayout = itemView.findViewById(R.id.mbt_view_all);
-            gridProductLayout = itemView.findViewById(R.id.grid_layout);
+            mTitle = itemView.findViewById(R.id.mtvTitle);
+            mViewAll = itemView.findViewById(R.id.mbViewAll);
+            mContainer = itemView.findViewById(R.id.glContainer);
         }
 
-        public void setGridProductLayout(List<HorizontalProductScroll> horizontalProductScrollList, String title, int icon, String color) {
-            // R.drawable.ic_new_product_24
-            container.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(color)));
-            titleLayout.setText(title);
-            titleLayout.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
-            titleLayout.setCompoundDrawablePadding(Config.PADDING_ICON_DRAWABLE);
-            titleLayout.getCompoundDrawables()[0].setTint(itemView.getResources().getColor(R.color.black));
+        public void set(List<ProductModel> productModelList, int icon, String title) {
+            mTitle.setText(title);
+            mTitle.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
 
-            for (int x = 0; x < 4; ++x) {
-                View child = gridProductLayout.getChildAt(x);
-                ImageView productImage = child.findViewById(R.id.ivProduct);
-                MaterialTextView productTitle = child.findViewById(R.id.mtvProductTitle),
-                        productSize = child.findViewById(R.id.mtvSize),
-                        productPrice = child.findViewById(R.id.mtvPrice);
+            for (int i = 0; i < 4; ++i) {
+                View mChild = mContainer.getChildAt(i);
+                ImageView mImageItem = mChild.findViewById(R.id.ivImage);
+                MaterialTextView mTitleItem = mChild.findViewById(R.id.mtvTitle),
+                        mSizeItem = mChild.findViewById(R.id.mtvSize),
+                        mPriceItem = mChild.findViewById(R.id.mtvPrice);
 
-                HorizontalProductScroll product = horizontalProductScrollList.get(x);
-                Glide.with(itemView.getContext()).load(horizontalProductScrollList.get(x).getImage()).apply(new RequestOptions().placeholder(R.drawable.product1)).into(productImage);
+                ProductModel productModel = productModelList.get(i);
+                Glide.with(itemView.getContext()).load(productModel.getImage().get(0)).into(mImageItem);
+                mTitleItem.setText(productModel.getTitle());
+                mSizeItem.setText(String.join("  ", productModel.getSize()));
+                mPriceItem.setText(productModel.getPrice());
 
-                productTitle.setText(product.getTitle());
-                productSize.setText(product.getStuff());
-                productPrice.setText(product.getPrice() + " đ");
-
-                child.setBackgroundColor(itemView.getContext().getColor(R.color.white));
-                gridProductLayout.getChildAt(x).setOnClickListener(new View.OnClickListener() {
+                /*
+                * Sự kiện khi user nhấn vào sản phẩm tương ứng sẽ đưa user đến trang chi tiết của sản phẩm đó
+                * */
+                mChild.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent productDetailsIntent = new Intent(itemView.getContext(), ProductDetailActivity.class);
-                        itemView.getContext().startActivity(productDetailsIntent);
+                        Toast.makeText(itemView.getContext(), "grid product clicked", Toast.LENGTH_LONG).show();
                     }
                 });
 
             }
 
-            // button view all of grid product layout
-            buttonLayout.setOnClickListener(new View.OnClickListener() {
+            /*
+            * Sự kiện khi user nhấn vào button xem thêm
+            * */
+            mViewAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ViewAllActivity.horizontalProductScrollList = horizontalProductScrollList; // assign data for view all activity
-                    Intent viewAllIntent = new Intent(itemView.getContext(), ViewAllActivity.class);
-                    viewAllIntent.putExtra("layout_code", 1);
-                    viewAllIntent.putExtra("title", title);
-                    itemView.getContext().startActivity(viewAllIntent);
+                    Toast.makeText(itemView.getContext(), "grid product button ViewAll clicked", Toast.LENGTH_LONG).show();
                 }
             });
         }

@@ -54,23 +54,23 @@ public class HomePageModel {
     //______________________________________________________________________________________________
 
     /* Thiết lập cho phần product/grid slider ở Fragment home *************************************/
-    List<ProductModel> sliderProductModelList;
+    List<ProductModel> productModelList;
     int icon;
     String title;
 
-    public HomePageModel(int type, int icon, String title, List<ProductModel> sliderProductModelList) {
+    public HomePageModel(int type, int icon, String title, List<ProductModel> productModelList) {
         this.type = type;
         this.icon = icon;
         this.title = title;
-        this.sliderProductModelList = sliderProductModelList;
+        this.productModelList = productModelList;
     }
 
-    public List<ProductModel> getSliderProductModelList() {
-        return sliderProductModelList;
+    public List<ProductModel> getProductModelList() {
+        return productModelList;
     }
 
-    public void setSliderProductModelList(List<ProductModel> sliderProductModelList) {
-        this.sliderProductModelList = sliderProductModelList;
+    public void setProductModelList(List<ProductModel> productModelList) {
+        this.productModelList = productModelList;
     }
 
     public String getTitle() {
