@@ -8,7 +8,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:background="@color/white_blur"
-        android:id="@+id/tlDescription"
+        android:id="@+id/tlMore"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,12 +35,12 @@
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vpDescription"
+        android:id="@+id/vpMore"
         android:layout_width="0dp"
         android:layout_height="250dp"
         android:background="@color/white_blur"
         android:paddingVertical="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tlDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/tlMore" />
 </androidx.constraintlayout.widget.ConstraintLayout>

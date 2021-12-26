@@ -47,8 +47,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         productImageViewPager = findViewById(R.id.vpImagesContainer);
         tlIndicator = findViewById(R.id.tlIndicator);
         addWish = findViewById(R.id.fbAddWish);
-        productDetailsViewpager = findViewById(R.id.vpDescription);
-        productDetailsTabLayout = findViewById(R.id.tlDescription);
+        productDetailsViewpager = findViewById(R.id.vpMore);
+        productDetailsTabLayout = findViewById(R.id.tlMore);
         buyNowBtn = findViewById(R.id.buy_now_btn);
 
         List<Integer> productImages = new ArrayList<>();

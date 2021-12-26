@@ -2,19 +2,22 @@ package team9.clover.Fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
 
+import team9.clover.Adapter.ProductDetailAdapter;
 import team9.clover.Adapter.ProductImageAdapter;
 import team9.clover.MainActivity;
 import team9.clover.Model.ProductModel;
@@ -22,14 +25,13 @@ import team9.clover.R;
 
 public class ProductDetailFragment extends Fragment {
 
-    ViewPager mImageViewPager, mDescriptionViewPager;
-    TabLayout mIndicator, mDescription;
+    ViewPager mImageViewPager, mMoreViewPager;
+    TabLayout mIndicator, mMore;
     FloatingActionButton mFavourite;
     MaterialTextView mTitle, mSize, mPrice, mCutPrice;
     MaterialButton mAddCart;
 
     ProductModel productModel;
-    static boolean ALREADY_ADDED_TO_WISH_LIST = false;
 
     public ProductDetailFragment() {}
 
@@ -42,7 +44,8 @@ public class ProductDetailFragment extends Fragment {
         }
 
         refer(view);
-        setView();
+        setView1();
+        setView2();
 
         return view;
     }
@@ -55,15 +58,42 @@ public class ProductDetailFragment extends Fragment {
         mPrice = view.findViewById(R.id.mtvPrice);
         mCutPrice = view.findViewById(R.id.mtvCutPrice);
         mFavourite = view.findViewById(R.id.fabFavorite);
-        mDescription = view.findViewById(R.id.tlDescription);
-        mDescriptionViewPager = view.findViewById(R.id.vpDescription);
+        mMore = view.findViewById(R.id.tlMore);
+        mMoreViewPager = view.findViewById(R.id.vpMore);
         mAddCart = view.findViewById(R.id.mbAddCart);
     }
 
-    private void setView() {
+    private void setView1() {
         ProductImageAdapter adapter = new ProductImageAdapter(productModel.getImage());
         mImageViewPager.setAdapter(adapter);
-
         mIndicator.setupWithViewPager(mImageViewPager, true);
+
+        mTitle.setText(productModel.getTitle());
+        mSize.setText(String.join("  ", productModel.getSize()));
+        mPrice.setText(productModel.getPrice());
+
+
+        if (productModel.getPrice() != null && !productModel.getCutPrice().isEmpty()) {
+            mCutPrice.setText(productModel.getCutPrice());
+        } else {
+            mCutPrice.setVisibility(View.GONE);
+        }
+    }
+
+    private void setView2() {
+        mMoreViewPager.setAdapter(new ProductDetailAdapter(getParentFragmentManager(), mMore.getTabCount(), productModel));
+        mMoreViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mMore));
+        mMore.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mMoreViewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) { }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) { }
+        });
     }
 }

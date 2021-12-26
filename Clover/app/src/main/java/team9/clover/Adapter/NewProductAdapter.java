@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.textview.MaterialTextView;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
@@ -45,12 +46,12 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView mInage;
+        RoundedImageView mInage;
         MaterialTextView mTitle;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mInage = itemView.findViewById(R.id.ivImage);
+            mInage = itemView.findViewById(R.id.rivImage);
             mTitle = itemView.findViewById(R.id.mtvTitle);
         }
 

@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import team9.clover.Fragment.ProductDescriptionFragment;
+import team9.clover.Fragment.ProductDescriptionsFragment;
 import team9.clover.Fragment.ProductSpecificationFragment;
 
 public class ProductDetailsAdapter extends FragmentPagerAdapter {
@@ -21,14 +21,14 @@ public class ProductDetailsAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int i) {
         switch (i) {
             case 0:
-                ProductDescriptionFragment productDescriptionFragment1 = new ProductDescriptionFragment();
+                ProductDescriptionsFragment productDescriptionFragment1 = new ProductDescriptionsFragment();
                 return productDescriptionFragment1;
             case 1:
                 ProductSpecificationFragment productSpecificationFragment = new ProductSpecificationFragment();
                 return productSpecificationFragment;
 
             case 2:
-                ProductDescriptionFragment productDescriptionFragment2 = new ProductDescriptionFragment();
+                ProductDescriptionsFragment productDescriptionFragment2 = new ProductDescriptionsFragment();
                 return productDescriptionFragment2;
             default:
                 return null;

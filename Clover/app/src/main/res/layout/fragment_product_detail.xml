@@ -22,7 +22,7 @@
 
             <include layout="@layout/container_product_detail_image" />
 
-            <include layout="@layout/container_product_detail_description" />
+            <include layout="@layout/container_product_detail_more" />
         </LinearLayout>
     </ScrollView>
 

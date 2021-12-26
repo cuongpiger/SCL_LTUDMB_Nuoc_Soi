@@ -15,9 +15,10 @@ tools:context=".MainActivity">
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/Theme.AppCompat.Light"
+        android:theme = "@android:style/ThemeOverlay.Material.Light"
         android:backgroundTint="@color/white"
         android:elevation="-3dp"
+
         app:titleTextColor="@color/black"
         app:popupTheme="@style/Theme.Clover.PopupOverlay">
 
