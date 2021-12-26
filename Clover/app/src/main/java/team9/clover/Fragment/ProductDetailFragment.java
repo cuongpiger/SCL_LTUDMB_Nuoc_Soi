@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -47,6 +48,7 @@ public class ProductDetailFragment extends Fragment {
         refer(view);
         setView1();
         setView2();
+        setEvent();
 
         return view;
     }
@@ -81,15 +83,35 @@ public class ProductDetailFragment extends Fragment {
 
         if (DatabaseModel.masterUser.getFavorite().contains((String) productModel.getId())) {
             mFavourite.setImageResource(R.drawable.icon_filled_heart);
+            mFavourite.setTag(1);
+        } else {
+            mFavourite.setTag(0);
         }
     }
 
     private void setView2() {
         mMoreViewPager.setAdapter(new ProductDetailAdapter(getParentFragmentManager(), mMore.getTabCount(), productModel));
         mMoreViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mMore));
+    }
+
+    private void setEvent() {
+        mFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((int) mFavourite.getTag() == 0) {
+                    mFavourite.setTag(1);
+                    mFavourite.setImageResource(R.drawable.icon_filled_heart);
+                } else {
+                    mFavourite.setTag(0);
+                    mFavourite.setImageResource(R.drawable.icon_empty_heart);
+                }
+            }
+        });
+
         mMore.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                Toast.makeText(getContext(), "" + tab.getPosition(), Toast.LENGTH_LONG).show();
                 mMoreViewPager.setCurrentItem(tab.getPosition());
             }
 

@@ -1,12 +1,15 @@
 package team9.clover.Module;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.util.DisplayMetrics;
 import android.widget.Adapter;
 import android.widget.FrameLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -35,14 +38,17 @@ public class Reuse {
     /*
      * Dùng để thay đổi các fragment
      * */
-    public static void setFragment(FragmentActivity activity, Fragment fragment, FrameLayout layout, int animFrom) {
-        FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+    public static void setFragment(FragmentManager fragmentManager, Fragment fragment, FrameLayout layout, int animFrom) {
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
         if (animFrom == -1) // from left
             fragmentTransaction.setCustomAnimations(R.anim.slide_from_left, R.anim.slide_to_right);
         else if (animFrom == 1) // from right
             fragmentTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left);
 
-        fragmentTransaction.replace(layout.getId(), fragment);
+        fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
+        fragmentTransaction.add(layout.getId(), fragment);
         fragmentTransaction.commit();
     }
 
@@ -104,5 +110,10 @@ public class Reuse {
         activity.finishAffinity();
         activity.startActivity(new Intent(activity, ErrorActivity.class));
         Reuse.startActivity(activity);
+    }
+
+    public static int dp2Px(Context contex, int dp) {
+        DisplayMetrics displayMetrics = contex.getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 }

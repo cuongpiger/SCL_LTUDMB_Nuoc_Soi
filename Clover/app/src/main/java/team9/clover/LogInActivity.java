@@ -1,6 +1,7 @@
 package team9.clover;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ public class LogInActivity extends AppCompatActivity {
 
     ImageButton mClose;
     FrameLayout mContainer;
+    FragmentManager mFragmentManager;
     public static String currentFragment = SignInFragment.class.getSimpleName(); // giữ fragment hiện đang thực thi
 
     @Override
@@ -25,7 +27,7 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
 
         refer();
-        Reuse.setFragment(LogInActivity.this, new SignInFragment(), mContainer, 1);
+        Reuse.setFragment(mFragmentManager, new SignInFragment(), mContainer, 1);
     }
 
     /*
@@ -36,7 +38,7 @@ public class LogInActivity extends AppCompatActivity {
         if (currentFragment.equals(SignUpFragment.class.getSimpleName())
                 || currentFragment.equals(ForgetPasswordFragment.class.getSimpleName())) {
             // nếu user đang ở fragment sign-up hoặc fragment forget password thì cho về fragmen sign-in
-            Reuse.setFragment(LogInActivity.this, new SignInFragment(), mContainer, -1);
+            Reuse.setFragment(mFragmentManager, new SignInFragment(), mContainer, -1);
         } else if (currentFragment.equals(SignInFragment.class.getSimpleName())){
             // nếu user đang ở fragment sign-in thì hỏi user có "thực sự muốn thoát ứng dụng không"
             currentFragment = null;
@@ -53,6 +55,7 @@ public class LogInActivity extends AppCompatActivity {
     private void refer() {
         mClose = findViewById(R.id.ibClose);
         mContainer = findViewById(R.id.flContainer);
+        mFragmentManager = getSupportFragmentManager();
     }
 
     public void goToMain() {

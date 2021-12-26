@@ -81,7 +81,7 @@ public class SignInFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mSignUpFragment.setTypeface(null, Typeface.BOLD); // bold text
-                Reuse.setFragment(getActivity(), new SignUpFragment(), mContainer, 1);
+                Reuse.setFragment(getActivity().getSupportFragmentManager(), new SignUpFragment(), mContainer, 1);
             }
         });
 
@@ -92,7 +92,7 @@ public class SignInFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mForgetPassword.setTypeface(null, Typeface.BOLD); // bold text
-                Reuse.setFragment(getActivity(), new ForgetPasswordFragment(), mContainer, 1);
+                Reuse.setFragment(getActivity().getSupportFragmentManager(), new ForgetPasswordFragment(), mContainer, 1);
             }
         });
 

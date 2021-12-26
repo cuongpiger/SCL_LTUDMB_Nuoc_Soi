@@ -79,7 +79,7 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mSignInFragment.setTypeface(null, Typeface.BOLD); // bold text
-                Reuse.setFragment(getActivity(), new SignInFragment(), mContainer, -1);
+                Reuse.setFragment(getActivity().getSupportFragmentManager(), new SignInFragment(), mContainer, -1);
             }
         });
 

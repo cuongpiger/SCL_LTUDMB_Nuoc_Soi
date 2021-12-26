@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawerLayout;
     RecyclerView mCategory;
     ActionBarDrawerToggle toggle;
+    FragmentManager mFragmentManager;
+
 
     CategoryAdapter categoryAdapter;
 
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity
         navigationView = findViewById(R.id.nav_view);
         frameLayout = findViewById(R.id.main_framelayout);
         mCategory = findViewById(R.id.rvCategory);
+        mFragmentManager = getSupportFragmentManager();
     }
 
     private void setToolbar() {
@@ -96,7 +99,7 @@ public class MainActivity extends AppCompatActivity
 
     private void setFragment(Fragment fragment, Object object) {
         if (currentFragment.equals(HomeFragment.class.getSimpleName())) {
-            Reuse.setFragment(MainActivity.this, fragment, frameLayout, 0);
+            Reuse.setFragment(mFragmentManager, fragment, frameLayout, 0);
         } else if (currentFragment.equals(ProductDetailFragment.class.getSimpleName())) {
             Bundle bundle = new Bundle();
             bundle.putSerializable(MainActivity.class.getSimpleName(), (ProductModel) object);
@@ -111,11 +114,11 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     returnHomePageFragment();
-                    Reuse.setFragment(MainActivity.this, new HomeFragment(), frameLayout, -1);
+                    Reuse.setFragment(mFragmentManager, new HomeFragment(), frameLayout, -1);
                 }
             });
 
-            Reuse.setFragment(MainActivity.this, fragment, frameLayout, 1);
+            Reuse.setFragment(mFragmentManager, fragment, frameLayout, 1);
         }
     }
 
@@ -179,5 +182,13 @@ public class MainActivity extends AppCompatActivity
 
         currentFragment = HomeFragment.class.getSimpleName();
         actionBarLogo.setVisibility(View.VISIBLE); // hiển thị lại logo trên action bar
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (currentFragment.equals(ProductDetailFragment.class.getSimpleName())) {
+            returnHomePageFragment();
+            Reuse.setFragment(mFragmentManager, new HomeFragment(), frameLayout, -1);
+        }
     }
 }
