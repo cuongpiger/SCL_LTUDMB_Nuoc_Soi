@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    returnHomePageFragment();
                     onBackPressed();
                 }
             });
