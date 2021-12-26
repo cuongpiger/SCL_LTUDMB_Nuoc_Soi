@@ -81,7 +81,9 @@ public class ProductDetailMoreFragment extends Fragment {
     }
 
     private void setInformationTab(GridView mContainer) {
-        mContainer.setAdapter(new ProductDetailMoreAdapter(getContext(), R.layout.item_product_detail_more, tab,  infoList));
+        List<String> infoData = new ArrayList<>(infoList);
+        ProductDetailMoreAdapter adapter = new ProductDetailMoreAdapter(getContext(), R.layout.item_product_detail_more, 1, infoData);
+        mContainer.setAdapter(adapter);
     }
 
     private void setSizeTab(GridView mContainer) {
@@ -96,7 +98,7 @@ public class ProductDetailMoreFragment extends Fragment {
                 sizeData.add(Long.toString(measureList.get(n*i + j)));
             }
         }
-        ProductDetailMoreAdapter adapter = new ProductDetailMoreAdapter(getContext(), R.layout.item_product_detail_more, tab, sizeData);
+        ProductDetailMoreAdapter adapter = new ProductDetailMoreAdapter(getContext(), R.layout.item_product_detail_more, 2, sizeData);
         mContainer.setAdapter(adapter);
     }
 }

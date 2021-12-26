@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +28,8 @@ import team9.clover.R;
 
 public class ProductDetailFragment extends Fragment {
 
-    ViewPager mImageViewPager, mMoreViewPager;
+    ViewPager mImageViewPager;
+    ViewPager2 mMoreViewPager;
     TabLayout mIndicator, mMore;
     FloatingActionButton mFavourite;
     MaterialTextView mTitle, mSize, mPrice, mCutPrice;
@@ -90,8 +92,7 @@ public class ProductDetailFragment extends Fragment {
     }
 
     private void setView2() {
-        mMoreViewPager.setAdapter(new ProductDetailAdapter(getParentFragmentManager(), mMore.getTabCount(), productModel));
-        mMoreViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mMore));
+        mMoreViewPager.setAdapter(new ProductDetailAdapter(getChildFragmentManager(), getLifecycle(), mMore.getTabCount(), productModel));
     }
 
     private void setEvent() {
@@ -111,7 +112,6 @@ public class ProductDetailFragment extends Fragment {
         mMore.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Toast.makeText(getContext(), "" + tab.getPosition(), Toast.LENGTH_LONG).show();
                 mMoreViewPager.setCurrentItem(tab.getPosition());
             }
 
@@ -120,6 +120,13 @@ public class ProductDetailFragment extends Fragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
+        });
+
+        mMoreViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                mMore.selectTab(mMore.getTabAt(position));
+            }
         });
     }
 }

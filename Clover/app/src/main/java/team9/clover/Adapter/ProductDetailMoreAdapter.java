@@ -29,7 +29,6 @@ public class ProductDetailMoreAdapter extends ArrayAdapter<String> {
         this.tab = tab;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MaterialTextView mItem;

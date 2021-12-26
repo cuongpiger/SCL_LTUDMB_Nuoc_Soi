@@ -30,6 +30,7 @@ public class ProductDetailsAdapter extends FragmentPagerAdapter {
             case 2:
                 ProductDescriptionsFragment productDescriptionFragment2 = new ProductDescriptionsFragment();
                 return productDescriptionFragment2;
+
             default:
                 return null;
         }

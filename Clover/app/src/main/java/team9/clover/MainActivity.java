@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,8 +35,9 @@ import team9.clover.Model.DatabaseModel;
 import team9.clover.Model.ProductModel;
 import team9.clover.Module.Reuse;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static String FIRST_RUN = "0";
 
     FrameLayout frameLayout;
     NavigationView navigationView;
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawerLayout;
     RecyclerView mCategory;
     ActionBarDrawerToggle toggle;
-    FragmentManager mFragmentManager;
+    FragmentManager fragmentManager;
 
 
     CategoryAdapter categoryAdapter;
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity
         setCategory();
         setNavigationView();
         setBroadcast();
-        setFragment(new HomeFragment(), null);
+        setFirstFragment();
     }
 
 
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         navigationView = findViewById(R.id.nav_view);
         frameLayout = findViewById(R.id.main_framelayout);
         mCategory = findViewById(R.id.rvCategory);
-        mFragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
     }
 
     private void setToolbar() {
@@ -97,9 +99,16 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
     }
 
+
+    private void setFirstFragment() {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.main_framelayout, new HomeFragment(), null);
+        transaction.commit();
+    }
+
     private void setFragment(Fragment fragment, Object object) {
         if (currentFragment.equals(HomeFragment.class.getSimpleName())) {
-            Reuse.setFragment(mFragmentManager, fragment, frameLayout, 0);
+            Reuse.setFragment(fragmentManager, fragment, frameLayout, 0);
         } else if (currentFragment.equals(ProductDetailFragment.class.getSimpleName())) {
             Bundle bundle = new Bundle();
             bundle.putSerializable(MainActivity.class.getSimpleName(), (ProductModel) object);
@@ -114,13 +123,15 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     returnHomePageFragment();
-                    Reuse.setFragment(mFragmentManager, new HomeFragment(), frameLayout, -1);
+                    onBackPressed();
                 }
             });
 
-            Reuse.setFragment(mFragmentManager, fragment, frameLayout, 1);
+            Reuse.setFragment(fragmentManager, R.id.main_framelayout, fragment, null);
         }
     }
+
+
 
 
     @Override
@@ -188,7 +199,8 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         if (currentFragment.equals(ProductDetailFragment.class.getSimpleName())) {
             returnHomePageFragment();
-            Reuse.setFragment(mFragmentManager, new HomeFragment(), frameLayout, -1);
         }
+
+        super.onBackPressed();
     }
 }

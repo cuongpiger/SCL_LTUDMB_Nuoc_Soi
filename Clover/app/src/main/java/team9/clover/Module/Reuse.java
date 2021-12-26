@@ -52,6 +52,14 @@ public class Reuse {
         fragmentTransaction.commit();
     }
 
+    public static void setFragment(FragmentManager manager, int layoutId, Fragment fragment, String name) {
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left, R.anim.slide_from_left, R.anim.slide_to_right);
+        transaction.replace(layoutId, fragment);
+        transaction.addToBackStack(name);
+        transaction.commit();
+    }
+
     /*
      * Kiểm tra email user nhập vào có hợp lệ không
      * */
