@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.ProductDetailFragment">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,7 @@
 
             <include layout="@layout/container_product_detail_more" />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/linearLayout5"
