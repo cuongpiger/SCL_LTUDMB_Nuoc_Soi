@@ -1,7 +1,5 @@
 package team9.clover.Model;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
@@ -14,24 +12,22 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import team9.clover.ErrorActivity;
-import team9.clover.Adapter.CategoryAdapter;
-import team9.clover.Adapter.HomePageAdapter;
-import team9.clover.Module.Reuse;
 import team9.clover.R;
 
 public class DatabaseModel {
 
-    public static FirebaseUser USER = null;
+    public static FirebaseUser firebaseUser = null;
     public static FirebaseFirestore firebaseFirestore = null;
     public static FirebaseAuth firebaseAuth = null;
 
+    public static UserModel masterUser = null;
     public static List<CategoryModel> categoryModelList = new ArrayList<>();
     public static List<HomePageModel> homePageModelList = new ArrayList<>();
 
@@ -40,15 +36,16 @@ public class DatabaseModel {
      * Load người dùng hiện tại trên thiết bị
      * */
     public static void getCurrentUser() {
-        USER = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     /*
      * Thêm thông tin new user vào Firestore với key là email
      * */
-    public static Task addNewUser(String email, UserModel newUser) {
+    public static Task addNewUser(UserModel newUser) {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
-        return firebaseFirestore.collection(UserModel.class.getSimpleName()).document(email).set(newUser);
+        String uid = firebaseAuth.getUid();
+        return firebaseFirestore.collection(UserModel.class.getSimpleName()).document(uid).set(newUser);
     }
 
     /*
@@ -163,12 +160,29 @@ public class DatabaseModel {
         loadHomePageProductData();
     }
 
+    public static void loadMasterUser() {
+        if (masterUser == null && firebaseUser != null) {
+            if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+            firebaseFirestore.collection(UserModel.class.getSimpleName())
+                    .document(firebaseUser.getUid())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                masterUser = task.getResult().toObject(UserModel.class);
+                            }
+                        }
+                    });
+        }
+    }
+
 
     /*
      * Đăng xuất khỏi current user
      * */
     public static void signOut() {
-        if (USER != null) firebaseAuth.signOut();
+        if (firebaseUser != null) firebaseAuth.signOut();
     }
 
 

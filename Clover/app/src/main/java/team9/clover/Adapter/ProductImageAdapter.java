@@ -24,7 +24,7 @@ public class ProductImageAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         RoundedImageView productImage = new RoundedImageView(container.getContext());
-        productImage.setCornerRadius((float) 50);
+        productImage.setCornerRadius((float) 30);
         Glide.with(container.getContext()).load(productImageList.get(position)).into(productImage);
         container.addView(productImage, 0);
         return productImage;

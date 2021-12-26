@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import team9.clover.Fragment.ProductDescriptionFragment;
+import team9.clover.Fragment.ProductInformationFragment;
 import team9.clover.Model.ProductModel;
 
 public class ProductDetailAdapter extends FragmentPagerAdapter {
@@ -29,7 +30,7 @@ public class ProductDetailAdapter extends FragmentPagerAdapter {
             case 0:
                 return new ProductDescriptionFragment(product.getDescription());
             case 1:
-                return new ProductDescriptionFragment(product.getTitle());
+                return new ProductInformationFragment(product.getInfo());
             case 2: return new ProductDescriptionFragment(product.getPrice());
 
             default: return null;

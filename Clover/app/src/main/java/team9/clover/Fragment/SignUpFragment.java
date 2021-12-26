@@ -164,7 +164,7 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task task) {
                 if (task.isSuccessful()) {
-                    DatabaseModel.addNewUser(email, newUser).addOnCompleteListener(new OnCompleteListener() {
+                    DatabaseModel.addNewUser(newUser).addOnCompleteListener(new OnCompleteListener() {
                         @Override
                         public void onComplete(@NonNull Task task) {
                             if (task.isSuccessful()) {

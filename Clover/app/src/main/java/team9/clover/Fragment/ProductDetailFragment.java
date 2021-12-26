@@ -20,6 +20,7 @@ import com.google.android.material.textview.MaterialTextView;
 import team9.clover.Adapter.ProductDetailAdapter;
 import team9.clover.Adapter.ProductImageAdapter;
 import team9.clover.MainActivity;
+import team9.clover.Model.DatabaseModel;
 import team9.clover.Model.ProductModel;
 import team9.clover.R;
 
@@ -72,11 +73,14 @@ public class ProductDetailFragment extends Fragment {
         mSize.setText(String.join("  ", productModel.getSize()));
         mPrice.setText(productModel.getPrice());
 
-
         if (productModel.getPrice() != null && !productModel.getCutPrice().isEmpty()) {
             mCutPrice.setText(productModel.getCutPrice());
         } else {
             mCutPrice.setVisibility(View.GONE);
+        }
+
+        if (DatabaseModel.masterUser.getFavorite().contains((String) productModel.getId())) {
+            mFavourite.setImageResource(R.drawable.icon_filled_heart);
         }
     }
 

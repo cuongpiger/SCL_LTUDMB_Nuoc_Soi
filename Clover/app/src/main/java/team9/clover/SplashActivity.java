@@ -8,9 +8,9 @@ import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Calendar;
 
@@ -86,9 +86,10 @@ public class SplashActivity extends AppCompatActivity {
      * */
     private void checkKeepInLogIn() {
         DatabaseModel.getCurrentUser();
-        if (DatabaseModel.USER == null) { // nếu là new user, sign-out user thì đi đến login activity
+        if (DatabaseModel.firebaseUser == null) { // nếu là new user, sign-out user thì đi đến login activity
             intent = new Intent(SplashActivity.this, LogInActivity.class);
         } else {
+            DatabaseModel.loadMasterUser();
             intent = new Intent(SplashActivity.this, MainActivity.class);
         }
     }

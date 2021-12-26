@@ -1,10 +1,26 @@
 package team9.clover.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserModel {
-    private String fullName;
+
+    List<String> favorite;
+    String fullName;
+
+    public UserModel() { }
 
     public UserModel(String fullName) {
         this.fullName = fullName;
+        this.favorite = new ArrayList<>();
+    }
+
+    public List<String> getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(List<String> favorite) {
+        this.favorite = favorite;
     }
 
     public String getFullName() {
