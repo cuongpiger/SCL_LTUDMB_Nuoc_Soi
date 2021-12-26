@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     android:layout_marginHorizontal="4dp">
 
     <com.makeramen.roundedimageview.RoundedImageView
@@ -23,10 +26,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white_blur"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:elevation="3dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/mtvTitle"

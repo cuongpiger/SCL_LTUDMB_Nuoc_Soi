@@ -1,5 +1,6 @@
 package team9.clover.Adapter;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -15,6 +17,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
+import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Model.ProductModel;
 import team9.clover.R;
 
@@ -35,8 +38,7 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ProductModel productModel = productModelList.get(position);
-        holder.set(productModel.getImage().get(0), productModel.getTitle());
+        holder.set(productModelList.get(position));
     }
 
     @Override
@@ -55,9 +57,18 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.Vi
             mTitle = itemView.findViewById(R.id.mtvTitle);
         }
 
-        private void set(String image, String title) {
-            Glide.with(itemView.getContext()).load(image).into(mInage);
-            mTitle.setText(title);
+        private void set(ProductModel productModel) {
+            Glide.with(itemView.getContext()).load(productModel.getImage().get(0)).into(mInage);
+            mTitle.setText(productModel.getTitle());
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent("broadcast");
+                    intent.putExtra(ProductDetailFragment.class.getSimpleName(), productModel);
+                    LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
+                }
+            });
         }
     }
 }

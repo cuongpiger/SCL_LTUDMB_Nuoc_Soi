@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout;
     RecyclerView mCategory;
     ActionBarDrawerToggle toggle;
-    FragmentManager fragmentManager;
 
 
     CategoryAdapter categoryAdapter;
@@ -66,6 +66,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setFirstFragment();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        currentFragment = HomeFragment.class.getSimpleName();
+    }
 
     private void refer() {
         toolbar = findViewById(R.id.toolbar);
@@ -73,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         frameLayout = findViewById(R.id.main_framelayout);
         mCategory = findViewById(R.id.rvCategory);
-        fragmentManager = getSupportFragmentManager();
     }
 
     private void setToolbar() {
@@ -101,14 +105,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void setFirstFragment() {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.main_framelayout, new HomeFragment(), null);
         transaction.commit();
     }
 
     private void setFragment(Fragment fragment, Object object) {
         if (currentFragment.equals(HomeFragment.class.getSimpleName())) {
-            Reuse.setFragment(fragmentManager, fragment, frameLayout, 0);
+            Reuse.setFragment(getSupportFragmentManager(), fragment, frameLayout, 0);
         } else if (currentFragment.equals(ProductDetailFragment.class.getSimpleName())) {
             Bundle bundle = new Bundle();
             bundle.putSerializable(MainActivity.class.getSimpleName(), (ProductModel) object);
@@ -127,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
 
-            Reuse.setFragment(fragmentManager, R.id.main_framelayout, fragment, null);
+            Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, null);
         }
     }
 
@@ -199,8 +203,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         if (currentFragment.equals(ProductDetailFragment.class.getSimpleName())) {
             returnHomePageFragment();
+            super.onBackPressed();
+        } else if (currentFragment.equals(HomeFragment.class.getSimpleName())) {
+            currentFragment = MainActivity.class.getSimpleName();
+            Toast.makeText(this, getString(R.string.on_back_press), Toast.LENGTH_SHORT).show();
+        } else if (currentFragment.equals(MainActivity.class.getSimpleName())) {
+            finishAffinity();
+            System.exit(0);
+        } else {
+            super.onBackPressed();
         }
-
-        super.onBackPressed();
     }
 }

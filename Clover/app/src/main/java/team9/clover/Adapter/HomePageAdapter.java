@@ -1,5 +1,6 @@
 package team9.clover.Adapter;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.gridlayout.widget.GridLayout;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -26,6 +28,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Model.BannerModel;
 import team9.clover.Model.CarouselModel;
 import team9.clover.Model.HomePageModel;
@@ -344,7 +347,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 mChild.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(itemView.getContext(), "grid product clicked", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent("broadcast");
+                        intent.putExtra(ProductDetailFragment.class.getSimpleName(), productModel);
+                        LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
                     }
                 });
 

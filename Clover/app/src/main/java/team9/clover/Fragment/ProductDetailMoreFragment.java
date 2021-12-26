@@ -2,14 +2,12 @@ package team9.clover.Fragment;
 
 import android.os.Bundle;
 
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.google.android.material.textview.MaterialTextView;
 
@@ -17,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import team9.clover.Adapter.ProductDetailMoreAdapter;
-import team9.clover.Adapter.ProductSizeAdapter;
 import team9.clover.R;
 
 public class ProductDetailMoreFragment extends Fragment {

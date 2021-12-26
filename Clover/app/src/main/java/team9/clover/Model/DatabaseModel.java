@@ -154,6 +154,8 @@ public class DatabaseModel {
 
     public static void loadHomePageData() {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        if (categoryModelList.size() != 0) return;
+
         loadCategoryData();
         loadCarouselData();
         loadBannerData();
