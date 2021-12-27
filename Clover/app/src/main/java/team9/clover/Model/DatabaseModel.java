@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -170,7 +171,10 @@ public class DatabaseModel {
         loadHomePageProductData();
     }
 
-    public static void loadMasterUser() {
+    /*
+    * Load thông tin của user từ data base lên
+    * */
+    public static void loadMasterUser(MaterialTextView fullName, MaterialTextView email) {
         if (masterUser == null && firebaseUser != null) {
             if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
             firebaseFirestore.collection(UserModel.class.getSimpleName())
@@ -181,6 +185,8 @@ public class DatabaseModel {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 masterUser = task.getResult().toObject(UserModel.class);
+                                fullName.setText(masterUser.getFullName());
+                                email.setText(firebaseUser.getEmail());
                             }
                         }
                     });

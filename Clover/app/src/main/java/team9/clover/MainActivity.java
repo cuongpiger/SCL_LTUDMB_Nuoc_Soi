@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,11 +16,16 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -37,6 +43,7 @@ import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Fragment.SpecificProductFragment;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.Model.ProductModel;
+import team9.clover.Model.UserModel;
 import team9.clover.Module.Reuse;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -102,8 +109,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     * Hàm này giúp hamburger có animation, đồng thời chỉnh background cho selected item view
     * */
     private void setNavigationView() {
+        View view =  navigationView.getHeaderView(0);
+        MaterialTextView fullName = view.findViewById(R.id.mtvFullName),
+                email = view.findViewById(R.id.mtvEmail);
+        DatabaseModel.loadMasterUser(fullName, email);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
+
     }
 
 
@@ -167,8 +179,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
-
-
 
 
     @Override

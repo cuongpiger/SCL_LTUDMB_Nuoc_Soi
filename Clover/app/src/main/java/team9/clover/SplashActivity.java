@@ -89,7 +89,6 @@ public class SplashActivity extends AppCompatActivity {
         if (DatabaseModel.firebaseUser == null) { // nếu là new user, sign-out user thì đi đến login activity
             intent = new Intent(SplashActivity.this, LogInActivity.class);
         } else {
-            DatabaseModel.loadMasterUser();
             intent = new Intent(SplashActivity.this, MainActivity.class);
         }
     }

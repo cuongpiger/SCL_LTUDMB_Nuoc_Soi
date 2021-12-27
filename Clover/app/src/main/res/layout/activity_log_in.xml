@@ -7,7 +7,7 @@
     tools:context=".LogInActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/rivAvatar"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:src="@drawable/logo_full"
@@ -37,6 +37,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"/>
+        app:layout_constraintTop_toBottomOf="@+id/rivAvatar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

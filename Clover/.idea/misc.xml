@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/app_icon_background.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/drawable/bag.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/bell.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/border_background.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/border_left_background.xml" value="0.2355263157894737" />
@@ -33,9 +34,11 @@
         <entry key="app/src/main/res/drawable/ic_search_24.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/ic_wish_24.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/icon_discount.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/drawable/icon_order.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/navigation_item.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/navigation_side.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/navigation_side_shape.xml" value="0.1355263157894737" />
+        <entry key="app/src/main/res/drawable/person.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/product_detail.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/rating_bar.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/rating_empty.xml" value="0.2355263157894737" />

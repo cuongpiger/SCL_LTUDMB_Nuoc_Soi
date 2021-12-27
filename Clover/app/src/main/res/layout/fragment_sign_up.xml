@@ -47,7 +47,7 @@
             app:layout_constraintEnd_toEndOf="@+id/tilEmail"
             app:layout_constraintStart_toStartOf="@+id/tilEmail"
             app:layout_constraintTop_toBottomOf="@+id/tilEmail"
-            app:startIconDrawable="@drawable/person"
+            app:startIconDrawable="@drawable/icon_person"
             app:startIconTint="@color/black"
             tools:ignore="HardcodedText">
 

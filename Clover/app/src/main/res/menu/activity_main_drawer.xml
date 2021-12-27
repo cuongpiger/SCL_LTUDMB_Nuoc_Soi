@@ -6,38 +6,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nbMall"
-            android:icon="@drawable/ic_store_24"
+            android:icon="@drawable/icon_store"
             android:title="Cửa hàng" />
         <item
             android:id="@+id/nbOrder"
-            android:icon="@drawable/ic_mall_24"
+            android:icon="@drawable/icon_order"
             android:title="Đơn hàng" />
         <item
             android:id="@+id/nbCart"
-            android:icon="@drawable/bag"
+            android:icon="@drawable/icon_bag"
             android:title="Giỏ hàng" />
         <item
             android:id="@+id/nbFavorite"
-            android:icon="@drawable/ic_favorite_24"
+            android:icon="@drawable/icon_empty_heart"
             android:title="Yêu thích" />
         <item
-            android:id="@+id/nbReward"
-            android:icon="@drawable/ic_reward_24"
-            android:title="Khuyến mãi" />
+            android:id="@+id/nbProfile"
+            android:icon="@drawable/icon_person"
+            android:title="Tài khoản" />
     </group>
-
-    <item android:title="Cá nhân">
-        <menu>
-            <item
-                android:id="@+id/nbProfile"
-                android:icon="@drawable/ic_profile_24"
-                android:title="Tài khoản" />
-            <item
-                android:id="@+id/nbLogOut"
-                android:icon="@drawable/ic_logout_24"
-                android:title="Đăng xuất" />
-        </menu>
-
-    </item>
-
 </menu>
