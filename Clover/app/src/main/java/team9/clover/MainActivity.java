@@ -1,11 +1,13 @@
 package team9.clover;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -39,8 +41,6 @@ import team9.clover.Module.Reuse;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static String FIRST_RUN = "0";
-
     FrameLayout frameLayout;
     NavigationView navigationView;
     ImageView actionBarLogo;
@@ -52,13 +52,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     CategoryAdapter categoryAdapter;
 
-    public static String currentFragment = HomeFragment.class.getSimpleName();
     public static int previousCategory = 0;
+    private static boolean quitApp = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        quitApp = false;
 
         refer();
         setToolbar();
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        currentFragment = HomeFragment.class.getSimpleName();
+        quitApp = false;
     }
 
     private void refer() {
@@ -112,32 +113,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transaction.commit();
     }
 
-    private void setFragment(Fragment fragment, Object object) {
-        if (currentFragment.equals(HomeFragment.class.getSimpleName())) {
-            Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, null, (int) object);
-        } else if (currentFragment.equals(ProductDetailFragment.class.getSimpleName())) {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(MainActivity.class.getSimpleName(), (ProductModel) object);
-            fragment.setArguments(bundle);
-            mCategory.setVisibility(View.GONE); // ẩn recycler view category
-            actionBarLogo.setVisibility(View.GONE); // ẩn logo thương hiệu
+    private void hideCategory() {
+        mCategory.setVisibility(View.GONE); // ẩn recycler view category
+        actionBarLogo.setVisibility(View.GONE); // ẩn logo thương hiệu
 
-            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-            toggle.setDrawerIndicatorEnabled(false);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBackPressed();
-                }
-            });
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        toggle.setDrawerIndicatorEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
 
-            Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, null, 0);
-        } else if (currentFragment.equals(SpecificProductFragment.class.getSimpleName())) {
-            Bundle bundle = new Bundle();
-            bundle.putInt(MainActivity.class.getSimpleName(), (int) object);
-            fragment.setArguments(bundle);
-            Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, null, 1);
+    private void showCategory() {
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false); // xóa button go-back
+        toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
+        toggle.setToolbarNavigationClickListener(null);
+        mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
+        actionBarLogo.setVisibility(View.VISIBLE); // hiển thị lại logo trên action bar
+    }
+
+    private void setFragment(int fragmentId, Fragment fragment, Object object, boolean showCategory) {
+        if (showCategory) { // hiển thị category recycler
+            if (fragmentId == HomeFragment.ID) {
+                // nếu là trang home fragment hoặc là trang hiển thị sản phẩm theo danh mục
+                Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, 1);
+            }  else if (fragmentId == SpecificProductFragment.CATEGORY_ID) {
+                // nếu là trang hiển thị sản phẩm theo danh mục
+                Bundle bundle = new Bundle();
+                bundle.putInt("category", (int) object);
+                fragment.setArguments(bundle);
+                Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, 1);
+            }
+        } else { // ẩn category recycler view
+            hideCategory(); // ẩn category, logo, tắt navigation view ở action bar
+            if (fragmentId == ProductDetailFragment.ID) {
+                // nếu là fragment hiển thị chi tiết sản phẩm
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("product", (ProductModel) object);
+                fragment.setArguments(bundle);
+                Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, 0);
+            } else if (fragmentId == SpecificProductFragment.VIEW_ALL_ID) {
+
+            }
         }
     }
 
@@ -169,24 +191,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         BroadcastReceiver broadcast = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+                // nếu là data gửi cho trang product detail fragment
                 ProductModel productModel = (ProductModel) intent.getSerializableExtra(ProductDetailFragment.class.getSimpleName());
 
                 int specificId = intent.getIntExtra(SpecificProductFragment.class.getSimpleName(), -3);
 
+                // đi đến trang chi tiết sản phẩm
                 if (productModel != null) {
-                    currentFragment = ProductDetailFragment.class.getSimpleName();
-                    setFragment(new ProductDetailFragment(), productModel);
+                    quitApp = false;
+                    setFragment(ProductDetailFragment.ID, new ProductDetailFragment(), productModel, false);
                 }
 
                 if (specificId != -3) {
                     if (specificId >= 0 && specificId != previousCategory) {
                         previousCategory = specificId;
-                        if (specificId == 0) {
-                            currentFragment = HomeFragment.class.getSimpleName();
-                            setFragment(new HomeFragment(), 1);
-                        } else {
-                            currentFragment = SpecificProductFragment.class.getSimpleName();
-                            setFragment(new SpecificProductFragment(), specificId);
+                        quitApp = false;
+                        if (specificId == 0) { // quay về trang home fragment
+                            setFragment(HomeFragment.ID, new HomeFragment(), null, true);
+                        } else { // đi đến trang danh mục sản phẩm
+                            setFragment(SpecificProductFragment.CATEGORY_ID, new SpecificProductFragment(), specificId, true);
                         }
                     }
                 }
@@ -210,30 +233,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         categoryAdapter.notifyDataSetChanged();
     }
 
-    private void returnHomePageFragment() {
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false); // xóa button go-back
-        toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
-        toggle.setToolbarNavigationClickListener(null);
-        mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
-
-        currentFragment = HomeFragment.class.getSimpleName();
-        actionBarLogo.setVisibility(View.VISIBLE); // hiển thị lại logo trên action bar
-    }
-
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBackPressed() {
-        if (currentFragment.equals(ProductDetailFragment.class.getSimpleName())) {
-            returnHomePageFragment();
-            super.onBackPressed();
-        } else if (currentFragment.equals(HomeFragment.class.getSimpleName())) {
-            currentFragment = MainActivity.class.getSimpleName();
-            Toast.makeText(this, getString(R.string.on_back_press), Toast.LENGTH_SHORT).show();
-        } else if (currentFragment.equals(MainActivity.class.getSimpleName())) {
+        if (quitApp) {
+            quitApp = false;
             finishAffinity();
             System.exit(0);
         } else {
-            super.onBackPressed();
+            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                quitApp = true;
+                Toast.makeText(this, getString(R.string.on_back_press), Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(ProductDetailFragment.class.getSimpleName())) {
+                    showCategory();
+                    super.onBackPressed();
+                } else if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(SpecificProductFragment.class.getSimpleName())) {
+                    getSupportFragmentManager().popBackStack(SpecificProductFragment.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    CategoryAdapter.currentTab = 0;
+                    categoryAdapter.notifyDataSetChanged();
+                }
+            }
         }
     }
 }

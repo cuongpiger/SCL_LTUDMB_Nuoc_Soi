@@ -28,6 +28,8 @@ import team9.clover.R;
 
 public class ProductDetailFragment extends Fragment {
 
+    public static int ID = 3;
+
     ViewPager mImageViewPager;
     ViewPager2 mMoreViewPager;
     TabLayout mIndicator, mMore;
@@ -43,9 +45,7 @@ public class ProductDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_detail, container, false);
 
-        if (MainActivity.currentFragment.equals(this.getClass().getSimpleName())) {
-            productModel = (ProductModel) getArguments().getSerializable(MainActivity.class.getSimpleName());
-        }
+        productModel = (ProductModel) getArguments().getSerializable("product");
 
         refer(view);
         setView1();

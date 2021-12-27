@@ -28,6 +28,8 @@ import team9.clover.R;
 
 public class SpecificProductFragment extends Fragment {
 
+    public static int CATEGORY_ID = 1, VIEW_ALL_ID = 2;
+
     int specificId;
     GridView mContainer;
     SpecificProductAdapter adapter = null;
@@ -40,9 +42,7 @@ public class SpecificProductFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_specific_product, container, false);
 
-        if (MainActivity.currentFragment.equals(this.getClass().getSimpleName())) {
-            specificId = getArguments().getInt(MainActivity.class.getSimpleName());
-        }
+        specificId = getArguments().getInt("category");
 
         refer(view);
         setData();

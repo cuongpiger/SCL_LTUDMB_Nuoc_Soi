@@ -52,14 +52,14 @@ public class Reuse {
         fragmentTransaction.commit();
     }
 
-    public static void setFragment(FragmentManager manager, int layoutId, Fragment fragment, String name, int animStyle) {
+    public static void setFragment(FragmentManager manager, int layoutId, Fragment fragment, int animStyle) {
         FragmentTransaction transaction = manager.beginTransaction();
 
         if (animStyle == 0) transaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left, R.anim.slide_from_left, R.anim.slide_to_right);
-        else transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_out, R.anim.fade_in);
+        else transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
 
         transaction.replace(layoutId, fragment);
-        transaction.addToBackStack(name);
+        transaction.addToBackStack(fragment.getClass().getSimpleName());
         transaction.commit();
     }
 
@@ -126,5 +126,11 @@ public class Reuse {
     public static int dp2Px(Context contex, int dp) {
         DisplayMetrics displayMetrics = contex.getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+
+    public static String getLastFragmentName(FragmentManager manager) {
+        int index = manager.getBackStackEntryCount() - 1;
+        FragmentManager.BackStackEntry backEntry = manager.getBackStackEntryAt(index);
+        return backEntry.getName();
     }
 }

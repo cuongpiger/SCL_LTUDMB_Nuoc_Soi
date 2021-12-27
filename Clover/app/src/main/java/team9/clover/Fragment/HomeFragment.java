@@ -22,6 +22,8 @@ import team9.clover.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
+    public static int ID = 0;
+
     public static RecyclerView mHomePage;
     public static HomePageAdapter homePageAdapter;
 

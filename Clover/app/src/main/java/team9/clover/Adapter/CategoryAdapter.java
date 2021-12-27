@@ -31,7 +31,7 @@ import team9.clover.R;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     List<CategoryModel> categoryList;
-    int currentTab = 0;
+    public static int currentTab = 0;
 
     public CategoryAdapter(List<CategoryModel> categoryList) {
         this.categoryList = categoryList;
@@ -112,12 +112,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                     Intent intent = new Intent("broadcast");
                     intent.putExtra(SpecificProductFragment.class.getSimpleName(), position);
                     LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
-
-//                    if (position != 0) {
-//                        Intent intent = new Intent(itemView.getContext(), CategoryActivity.class);
-//                        intent.putExtra("CategoryName", title);
-//                        itemView.getContext().startActivity(intent);
-//                    }
                 }
             });
         }
