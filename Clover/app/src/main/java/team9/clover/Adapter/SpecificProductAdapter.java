@@ -48,7 +48,7 @@ public class SpecificProductAdapter extends BaseAdapter {
     public View getView(int position, View contentView, ViewGroup viewGroup) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_grid_product, null);
         ImageView mImage = view.findViewById(R.id.ivImage);
-        MaterialTextView mTitle = view.findViewById(R.id.mtvTitle),
+        MaterialTextView mTitle = view.findViewById(R.id.mtvProductTitle),
                 mSize = view.findViewById(R.id.mtvSize),
                 mPrice = view.findViewById(R.id.mtvPrice);
 

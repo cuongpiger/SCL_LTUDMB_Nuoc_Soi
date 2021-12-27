@@ -11,10 +11,10 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout5">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,6 +24,12 @@
             <include layout="@layout/container_product_detail_image" />
 
             <include layout="@layout/container_product_detail_more" />
+
+            <include layout="@layout/container_slider_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginBottom="86dp"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -32,7 +38,6 @@
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:orientation="horizontal"
-        android:background="@color/white"
         android:paddingHorizontal="16dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"

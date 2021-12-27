@@ -247,8 +247,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return;
             } else {
                 if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(ProductDetailFragment.class.getSimpleName())) {
-                    showCategory();
                     super.onBackPressed();
+
+                    if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                        showCategory();
+                    }
                 } else if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(SpecificProductFragment.class.getSimpleName())) {
                     getSupportFragmentManager().popBackStack(SpecificProductFragment.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     CategoryAdapter.currentTab = 0;

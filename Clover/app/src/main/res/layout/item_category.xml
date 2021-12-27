@@ -26,14 +26,14 @@
             android:layout_marginTop="3dp"
             android:layout_marginEnd="2dp"
             android:scaleType="fitCenter"
-            app:layout_constraintBottom_toTopOf="@+id/mtvTitle"
+            app:layout_constraintBottom_toTopOf="@+id/mtvProductTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/home" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mtvTitle"
+            android:id="@+id/mtvProductTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"

@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -53,7 +52,7 @@ public class SliderProductAdapter extends RecyclerView.Adapter<SliderProductAdap
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mImage = itemView.findViewById(R.id.ivImage);
-            mTitle = itemView.findViewById(R.id.mtvTitle);
+            mTitle = itemView.findViewById(R.id.mtvProductTitle);
             mSize = itemView.findViewById(R.id.mtvSize);
             mPrice = itemView.findViewById(R.id.mtvPrice);
         }

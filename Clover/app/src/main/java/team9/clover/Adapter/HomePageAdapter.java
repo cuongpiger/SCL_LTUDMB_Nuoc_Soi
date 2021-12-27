@@ -319,7 +319,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
         public GridProductViewHolder(@NonNull View itemView) {
             super(itemView);
-            mTitle = itemView.findViewById(R.id.mtvTitle);
+            mTitle = itemView.findViewById(R.id.mtvProductTitle);
             mViewAll = itemView.findViewById(R.id.mbViewAll);
             mContainer = itemView.findViewById(R.id.glContainer);
         }
@@ -331,7 +331,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             for (int i = 0; i < 4; ++i) {
                 View mChild = mContainer.getChildAt(i);
                 ImageView mImageItem = mChild.findViewById(R.id.ivImage);
-                MaterialTextView mTitleItem = mChild.findViewById(R.id.mtvTitle),
+                MaterialTextView mTitleItem = mChild.findViewById(R.id.mtvProductTitle),
                         mSizeItem = mChild.findViewById(R.id.mtvSize),
                         mPriceItem = mChild.findViewById(R.id.mtvPrice);
 

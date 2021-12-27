@@ -1,11 +1,9 @@
 package team9.clover.Adapter;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -54,7 +52,7 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.Vi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mInage = itemView.findViewById(R.id.rivImage);
-            mTitle = itemView.findViewById(R.id.mtvTitle);
+            mTitle = itemView.findViewById(R.id.mtvProductTitle);
         }
 
         private void set(ProductModel productModel) {

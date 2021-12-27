@@ -21,11 +21,8 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
 
-import team9.clover.CategoryActivity;
-import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Fragment.SpecificProductFragment;
 import team9.clover.Model.CategoryModel;
-import team9.clover.Model.ProductModel;
 import team9.clover.R;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
@@ -66,7 +63,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mImage = itemView.findViewById(R.id.ivImage);
-            mTitle = itemView.findViewById(R.id.mtvTitle);
+            mTitle = itemView.findViewById(R.id.mtvProductTitle);
         }
 
         private void set(CategoryModel category, int position) {
