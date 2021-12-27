@@ -6,8 +6,8 @@
     android:layout_margin="4dp"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"
-    android:elevation="3dp">
+    android:background="@color/white"
+    android:foreground="?attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/ivImage"
@@ -19,8 +19,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/hz_product1" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/mtvTitle"
@@ -29,7 +28,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Paradiso blazer"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="12sp"
@@ -45,7 +43,6 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
-        android:text="XS S M L"
         android:textAlignment="center"
         android:textSize="11sp"
         android:textStyle="bold"
@@ -61,7 +58,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="1.390.000 đ"
         android:textAlignment="center"
         android:textColor="@color/red"
         android:textSize="11sp"

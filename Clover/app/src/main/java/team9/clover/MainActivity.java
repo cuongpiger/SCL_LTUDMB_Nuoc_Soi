@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import team9.clover.Adapter.CategoryAdapter;
 import team9.clover.Fragment.HomeFragment;
 import team9.clover.Fragment.ProductDetailFragment;
+import team9.clover.Fragment.SpecificProductFragment;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.Model.ProductModel;
 import team9.clover.Module.Reuse;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     CategoryAdapter categoryAdapter;
 
     public static String currentFragment = HomeFragment.class.getSimpleName();
+    public static int previousCategory = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setFragment(Fragment fragment, Object object) {
         if (currentFragment.equals(HomeFragment.class.getSimpleName())) {
-            Reuse.setFragment(getSupportFragmentManager(), fragment, frameLayout, 0);
+            Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, null, (int) object);
         } else if (currentFragment.equals(ProductDetailFragment.class.getSimpleName())) {
             Bundle bundle = new Bundle();
             bundle.putSerializable(MainActivity.class.getSimpleName(), (ProductModel) object);
@@ -130,7 +132,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
 
-            Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, null);
+            Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, null, 0);
+        } else if (currentFragment.equals(SpecificProductFragment.class.getSimpleName())) {
+            Bundle bundle = new Bundle();
+            bundle.putInt(MainActivity.class.getSimpleName(), (int) object);
+            fragment.setArguments(bundle);
+            Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, null, 1);
         }
     }
 
@@ -164,9 +171,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onReceive(Context context, Intent intent) {
                 ProductModel productModel = (ProductModel) intent.getSerializableExtra(ProductDetailFragment.class.getSimpleName());
 
+                int specificId = intent.getIntExtra(SpecificProductFragment.class.getSimpleName(), -3);
+
                 if (productModel != null) {
                     currentFragment = ProductDetailFragment.class.getSimpleName();
                     setFragment(new ProductDetailFragment(), productModel);
+                }
+
+                if (specificId != -3) {
+                    if (specificId >= 0 && specificId != previousCategory) {
+                        previousCategory = specificId;
+                        if (specificId == 0) {
+                            currentFragment = HomeFragment.class.getSimpleName();
+                            setFragment(new HomeFragment(), 1);
+                        } else {
+                            currentFragment = SpecificProductFragment.class.getSimpleName();
+                            setFragment(new SpecificProductFragment(), specificId);
+                        }
+                    }
                 }
             }
         };

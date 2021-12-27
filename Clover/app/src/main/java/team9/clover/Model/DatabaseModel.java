@@ -18,6 +18,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import team9.clover.R;
 
@@ -151,6 +152,13 @@ public class DatabaseModel {
                 });
     }
 
+    public static Task<QuerySnapshot> loadProduct(String field, long value) {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        return firebaseFirestore.collection(ProductModel.class.getSimpleName())
+                .whereEqualTo(field, (long) value)
+                .get();
+    }
+
 
     public static void loadHomePageData() {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
@@ -201,32 +209,32 @@ public class DatabaseModel {
 
     public static void addProduct() {
         int folderStart = 20; // index của sản [hẩm bắt đầu ghi
-        long screen = 2; // các sản phẩm này sẽ hiễn thị màn hình nào
+        long screen = -1; // các sản phẩm này sẽ hiễn thị màn hình nào
 
 
         ArrayList<Long> categorys = new ArrayList<>();
-        categorys.add((long) 1);
-        categorys.add((long) 1);
-        categorys.add((long) 1);
-        categorys.add((long) 1);
-        categorys.add((long) 1);
-        categorys.add((long) 1);
+        categorys.add((long) 7);
+//        categorys.add((long) 1);
+//        categorys.add((long) 1);
+//        categorys.add((long) 1);
+//        categorys.add((long) 1);
+//        categorys.add((long) 1);
 
         ArrayList<Integer> noImages = new ArrayList<>();
         noImages.add(5);
-        noImages.add(4);
-        noImages.add(3);
-        noImages.add(4);
-        noImages.add(4);
-        noImages.add(4);
+//        noImages.add(4);
+//        noImages.add(3);
+//        noImages.add(4);
+//        noImages.add(4);
+//        noImages.add(4);
 
         ArrayList<String> titles = new ArrayList<>();
-        titles.add("Nàng thơ");
-        titles.add("Xuận hạ thu đông");
-        titles.add("Nắng");
-        titles.add("Rạng đông");
-        titles.add("Nhật thực");
-        titles.add("Bếp lửa");
+        titles.add("One-Pocket logo-lettering phone case");
+//        titles.add("Xuận hạ thu đông");
+//        titles.add("Nắng");
+//        titles.add("Rạng đông");
+//        titles.add("Nhật thực");
+//        titles.add("Bếp lửa");
 
 
         /* start */

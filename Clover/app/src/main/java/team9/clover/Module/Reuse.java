@@ -52,9 +52,12 @@ public class Reuse {
         fragmentTransaction.commit();
     }
 
-    public static void setFragment(FragmentManager manager, int layoutId, Fragment fragment, String name) {
+    public static void setFragment(FragmentManager manager, int layoutId, Fragment fragment, String name, int animStyle) {
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left, R.anim.slide_from_left, R.anim.slide_to_right);
+
+        if (animStyle == 0) transaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left, R.anim.slide_from_left, R.anim.slide_to_right);
+        else transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_out, R.anim.fade_in);
+
         transaction.replace(layoutId, fragment);
         transaction.addToBackStack(name);
         transaction.commit();

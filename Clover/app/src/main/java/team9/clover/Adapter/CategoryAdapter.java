@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +18,8 @@ import com.google.android.material.textview.MaterialTextView;
 import java.util.List;
 
 import team9.clover.CategoryActivity;
+import team9.clover.Fragment.ProductDetailFragment;
+import team9.clover.Fragment.SpecificProductFragment;
 import team9.clover.Model.CategoryModel;
 import team9.clover.R;
 
@@ -70,11 +73,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (position != 0) {
-                        Intent intent = new Intent(itemView.getContext(), CategoryActivity.class);
-                        intent.putExtra("CategoryName", title);
-                        itemView.getContext().startActivity(intent);
-                    }
+                    Intent intent = new Intent("broadcast");
+                    intent.putExtra(SpecificProductFragment.class.getSimpleName(), position);
+                    LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
+
+//                    if (position != 0) {
+//                        Intent intent = new Intent(itemView.getContext(), CategoryActivity.class);
+//                        intent.putExtra("CategoryName", title);
+//                        itemView.getContext().startActivity(intent);
+//                    }
                 }
             });
         }

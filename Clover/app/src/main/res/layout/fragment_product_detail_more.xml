@@ -25,9 +25,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:nestedScrollingEnabled="true"
-        android:background="@color/white"
+        android:background="@color/white_blur"
         android:layout_marginHorizontal="16dp"
-        android:backgroundTint="@color/white_blur"
+        android:paddingEnd="-1dp"
         android:horizontalSpacing="1dp"
         android:verticalSpacing="1dp" />
 </FrameLayout>
