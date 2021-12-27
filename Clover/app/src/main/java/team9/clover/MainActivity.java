@@ -193,6 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setDisplayHomeAsUpEnabled(false); // xóa button go-back
         toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
         toggle.setToolbarNavigationClickListener(null);
+        mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
 
         currentFragment = HomeFragment.class.getSimpleName();
         actionBarLogo.setVisibility(View.VISIBLE); // hiển thị lại logo trên action bar
