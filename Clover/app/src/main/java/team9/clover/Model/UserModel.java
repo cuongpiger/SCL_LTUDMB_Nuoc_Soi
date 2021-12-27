@@ -30,4 +30,12 @@ public class UserModel {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
+    public void addFavorite(String productId) {
+        favorite.add(productId);
+    }
+
+    public void removeFavorite(String productId) {
+        favorite.remove(productId);
+    }
 }

@@ -1,5 +1,7 @@
 package team9.clover.Fragment;
 
+import static team9.clover.Model.DatabaseModel.masterUser;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -84,6 +86,7 @@ public class ProductDetailFragment extends Fragment {
         mTitle.setText(productModel.getTitle());
         mSize.setText(String.join("  ", productModel.getSize()));
         mPrice.setText(productModel.getPrice());
+        mFavourite.setTag(0);
 
         mMoreViewPager.setAdapter(new ProductDetailAdapter(getChildFragmentManager(), getLifecycle(), mMore.getTabCount(), productModel));
 
@@ -93,11 +96,9 @@ public class ProductDetailFragment extends Fragment {
             mCutPrice.setVisibility(View.GONE);
         }
 
-        if (DatabaseModel.masterUser.getFavorite().contains((String) productModel.getId())) {
+        if (masterUser != null && masterUser.getFavorite().contains((String) productModel.getId())) {
             mFavourite.setImageResource(R.drawable.icon_filled_heart);
             mFavourite.setTag(1);
-        } else {
-            mFavourite.setTag(0);
         }
     }
 
@@ -163,5 +164,17 @@ public class ProductDetailFragment extends Fragment {
                 mMore.selectTab(mMore.getTabAt(position));
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if ((int) mFavourite.getTag() == 1 && !masterUser.getFavorite().contains(productModel.getId())) {
+            masterUser.addFavorite(productModel.getId());
+            DatabaseModel.updateMasterUser();
+        } else if ((int) mFavourite.getTag() == 0 && masterUser.getFavorite().contains(productModel.getId())) {
+            masterUser.removeFavorite(productModel.getId());
+            DatabaseModel.updateMasterUser();
+        }
     }
 }

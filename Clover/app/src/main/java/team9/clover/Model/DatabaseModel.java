@@ -171,6 +171,7 @@ public class DatabaseModel {
         loadHomePageProductData();
     }
 
+    // ________________________________________________________________________________________________________ USER
     /*
     * Load thông tin của user từ data base lên
     * */
@@ -191,6 +192,13 @@ public class DatabaseModel {
                         }
                     });
         }
+    }
+
+    public static void updateMasterUser() {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection(UserModel.class.getSimpleName())
+                .document(firebaseUser.getUid())
+                .set(masterUser);
     }
 
 
