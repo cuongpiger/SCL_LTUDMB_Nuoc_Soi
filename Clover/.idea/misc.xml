@@ -44,6 +44,8 @@
         <entry key="app/src/main/res/drawable/rubbish.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/selected_dot.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/shape_border.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/drawable/shape_border_transparent.xml" value="0.2355263157894737" />
+        <entry key="app/src/main/res/drawable/shape_default_indicator.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/shape_indicator.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.2355263157894737" />
         <entry key="app/src/main/res/drawable/slider_background.xml" value="0.2355263157894737" />
@@ -101,8 +103,8 @@
         <entry key="app/src/main/res/layout/horizontal_scroll_item_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/horizontal_scroll_layout.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_carousel.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/item_category.xml" value="0.11069812540400775" />
-        <entry key="app/src/main/res/layout/item_grid_product.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/item_category.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_grid_product.xml" value="0.75" />
         <entry key="app/src/main/res/layout/item_new_product.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_product_detail_more.xml" value="0.11069812540400775" />
         <entry key="app/src/main/res/layout/item_product_home.xml" value="0.22532894736842105" />
