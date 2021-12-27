@@ -29,6 +29,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import team9.clover.Fragment.ProductDetailFragment;
+import team9.clover.Fragment.SpecificProductFragment;
 import team9.clover.Model.BannerModel;
 import team9.clover.Model.CarouselModel;
 import team9.clover.Model.HomePageModel;
@@ -308,6 +309,15 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             mContainer.setLayoutManager(layoutManager);
             mContainer.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+
+            mViewAll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent("broadcast");
+                    intent.putExtra(SpecificProductFragment.class.getSimpleName(), -1);
+                    LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
+                }
+            });
         }
     }
 
@@ -361,7 +371,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             mViewAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(itemView.getContext(), "grid product button ViewAll clicked", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent("broadcast");
+                    intent.putExtra(SpecificProductFragment.class.getSimpleName(), -2);
+                    LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
                 }
             });
         }

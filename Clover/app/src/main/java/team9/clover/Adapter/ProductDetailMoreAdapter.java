@@ -2,6 +2,7 @@ package team9.clover.Adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,25 +21,20 @@ public class ProductDetailMoreAdapter extends ArrayAdapter<String> {
 
     List<String> itemData;
     Context context;
-    int tab;
+    int tab, n;
 
-    public ProductDetailMoreAdapter(Context context, int itemId, int tab, List<String> itemData) {
+    public ProductDetailMoreAdapter(Context context, int itemId, int tab, List<String> itemData, int n) {
         super(context, itemId, itemData);
         this.context = context;
         this.itemData = itemData;
         this.tab = tab;
+        this.n = n;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MaterialTextView mItem;
-        if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            mItem = (MaterialTextView) inflater.inflate(R.layout.item_product_detail_more,parent,false);
-        } else {
-            mItem = (MaterialTextView) convertView;
-        }
-
+        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        MaterialTextView mItem = (MaterialTextView) inflater.inflate(R.layout.item_product_detail_more,parent,false);
         setData(position, mItem);
         return mItem;
     }
@@ -51,15 +47,10 @@ public class ProductDetailMoreAdapter extends ArrayAdapter<String> {
         if (tab == 1) {
             mItem.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         } else {
-            if (!NumberUtils.isParsable(itemText)) {
-                mItem.setTextColor(getContext().getColor(R.color.black));
+            if (position < n || position % n == 0) {
                 mItem.setTypeface(null, Typeface.BOLD);
-
-                if (StringUtils.isAllUpperCase(itemText)) {
-                    mItem.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                } else {
-                    mItem.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-                }
+                mItem.setTextColor(getContext().getColor(R.color.black));
+                mItem.setTextAlignment(position == 0 ? View.TEXT_ALIGNMENT_TEXT_START : View.TEXT_ALIGNMENT_CENTER);
             } else {
                 mItem.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             }

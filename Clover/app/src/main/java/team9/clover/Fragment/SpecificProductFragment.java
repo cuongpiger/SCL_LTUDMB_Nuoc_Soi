@@ -76,7 +76,26 @@ public class SpecificProductFragment extends Fragment {
                             }
                         }
                     });
+        } else {
+            DatabaseModel.loadProduct("screen", (long) (specificId == -1 ? 3 : 4))
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                productList = new ArrayList<>();
+                                for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                    productList.add(snapshot.toObject(ProductModel.class));
+                                }
 
+                                if (productList.size() % 2 == 1) {
+                                    productList.add(new ProductModel());
+                                }
+
+                                adapter = new SpecificProductAdapter(productList);
+                                mContainer.setAdapter(adapter);
+                            }
+                        }
+                    });
         }
     }
 }

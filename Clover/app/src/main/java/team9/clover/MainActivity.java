@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void showCategory() {
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false); // xóa button go-back
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
         toggle.setToolbarNavigationClickListener(null);
         mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
@@ -158,7 +159,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragment.setArguments(bundle);
                 Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, 0);
             } else if (fragmentId == SpecificProductFragment.VIEW_ALL_ID) {
-
+                hideCategory();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("category", (int) object);
+                fragment.setArguments(bundle);
+                Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, 0);
             }
         }
     }
@@ -211,6 +216,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         } else { // đi đến trang danh mục sản phẩm
                             setFragment(SpecificProductFragment.CATEGORY_ID, new SpecificProductFragment(), specificId, true);
                         }
+                    } else {
+                        quitApp = false;
+                        setFragment(SpecificProductFragment.VIEW_ALL_ID, new SpecificProductFragment(), specificId, false);
+                        getSupportActionBar().setTitle( specificId == -1 ? "Bán nhiều nhất" : "Khuyến mãi");
+                        getSupportActionBar().setDisplayShowTitleEnabled(true);
                     }
                 }
             }
@@ -218,7 +228,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcast, new IntentFilter("broadcast"));
     }
-
 
     /*
      * Thiết lập cho thanh category
@@ -256,6 +265,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportFragmentManager().popBackStack(SpecificProductFragment.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     CategoryAdapter.currentTab = 0;
                     categoryAdapter.notifyDataSetChanged();
+                    showCategory();
                 }
             }
         }
