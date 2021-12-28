@@ -1,7 +1,9 @@
 package team9.clover.Fragment;
 
+import static team9.clover.Model.DatabaseModel.firebaseUser;
 import static team9.clover.Model.DatabaseModel.masterUser;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,13 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.text.InputFilter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialDialogs;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
@@ -50,6 +61,10 @@ public class ProductDetailFragment extends Fragment {
     MaterialButton mAddCart;
     RecyclerView mMoreProductContainer;
     ActionBar actionBar;
+
+    String selectedSize;
+    int quantity;
+    boolean isChanged = false;
 
     ProductModel productModel;
 
@@ -142,6 +157,11 @@ public class ProductDetailFragment extends Fragment {
         mFavourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (firebaseUser == null) {
+                    Toast.makeText(getContext(), "Bạn chưa đăng nhập để dùng chức năng này.", Toast.LENGTH_SHORT);
+                    return;
+                }
+
                 if ((int) mFavourite.getTag() == 0) {
                     mFavourite.setTag(1);
                     mFavourite.setImageResource(R.drawable.icon_filled_heart);
@@ -171,6 +191,54 @@ public class ProductDetailFragment extends Fragment {
                 mMore.selectTab(mMore.getTabAt(position));
             }
         });
+
+        mAddCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showChooseForm();
+            }
+        });
+    }
+
+    private void showChooseForm() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.dialog_add_cart);
+
+        final Spinner spinner = dialog.findViewById(R.id.spSize);
+        final EditText editText = dialog.findViewById(R.id.etQuantity);
+        final MaterialButton button = dialog.findViewById(R.id.mbConfirm);
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, productModel.getSize());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedSize = spinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                quantity = Integer.parseInt(editText.getText().toString());
+                if (quantity > 0)
+                    dialog.dismiss();
+                    masterUser.addCart(productModel.getId(), quantity);
+                    isChanged = true;
+                }
+            }
+        );
+
+        dialog.show();
     }
 
     @Override
@@ -178,9 +246,13 @@ public class ProductDetailFragment extends Fragment {
         super.onPause();
         if ((int) mFavourite.getTag() == 1 && !masterUser.getFavorite().contains(productModel.getId())) {
             masterUser.addFavorite(productModel.getId());
-            DatabaseModel.updateMasterUser();
+            isChanged = true;
         } else if ((int) mFavourite.getTag() == 0 && masterUser.getFavorite().contains(productModel.getId())) {
             masterUser.removeFavorite(productModel.getId());
+            isChanged = true;
+        }
+
+        if (isChanged) {
             DatabaseModel.updateMasterUser();
         }
     }
@@ -189,6 +261,7 @@ public class ProductDetailFragment extends Fragment {
     public void onResume() {
         super.onResume();
         setActionBar();
+        isChanged = false;
     }
 
     private void setActionBar() {
