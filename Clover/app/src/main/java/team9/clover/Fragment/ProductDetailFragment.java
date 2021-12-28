@@ -5,6 +5,7 @@ import static team9.clover.Model.DatabaseModel.masterUser;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,13 +31,16 @@ import java.util.List;
 import team9.clover.Adapter.ProductDetailAdapter;
 import team9.clover.Adapter.ProductImageAdapter;
 import team9.clover.Adapter.SliderProductAdapter;
+import team9.clover.MainActivity;
 import team9.clover.Model.DatabaseModel;
+import team9.clover.Model.HomePageModel;
 import team9.clover.Model.ProductModel;
 import team9.clover.R;
 
 public class ProductDetailFragment extends Fragment {
 
-    public static int ID = 3;
+    public final static String NAME = "ProductDetail";
+    public final static int ID = 3;
 
     ViewPager mImageViewPager;
     ViewPager2 mMoreViewPager;
@@ -45,16 +49,20 @@ public class ProductDetailFragment extends Fragment {
     MaterialTextView mTitle, mSize, mPrice, mCutPrice;
     MaterialButton mAddCart;
     RecyclerView mMoreProductContainer;
+    ActionBar actionBar;
 
     ProductModel productModel;
 
-    public ProductDetailFragment() {}
+    public ProductDetailFragment(ActionBar actionBar) {
+        this.actionBar = actionBar;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_detail, container, false);
 
-        productModel = (ProductModel) getArguments().getSerializable("product");
+        productModel = (ProductModel) getArguments().getSerializable(NAME);
+        setActionBar();
 
         refer(view);
         setView1();
@@ -176,5 +184,18 @@ public class ProductDetailFragment extends Fragment {
             masterUser.removeFavorite(productModel.getId());
             DatabaseModel.updateMasterUser();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setActionBar();
+    }
+
+    private void setActionBar() {
+        actionBar.setDisplayShowTitleEnabled(false);
+        MainActivity.actionBarLogo.setVisibility(View.GONE);
+        MainActivity.displayActionBarMenu(true);
+        MainActivity.displayCategory(false);
     }
 }

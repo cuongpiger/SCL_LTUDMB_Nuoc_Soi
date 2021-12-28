@@ -46,10 +46,6 @@ public class FavoriteFragment extends Fragment {
     }
 
     public void setData() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        mContainer.setLayoutManager(layoutManager);
-
         DatabaseModel.loadProduct("id", DatabaseModel.masterUser.getFavorite())
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -59,8 +55,12 @@ public class FavoriteFragment extends Fragment {
                             for (QueryDocumentSnapshot snapshot : task.getResult())
                                 products.add(snapshot.toObject(ProductModel.class));
 
+                            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                             FavoriteAdapter adapter = new FavoriteAdapter(products);
+                            mContainer.setLayoutManager(layoutManager);
                             mContainer.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
                         }
                     }
                 });

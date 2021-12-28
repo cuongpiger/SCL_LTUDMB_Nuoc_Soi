@@ -3,14 +3,15 @@ package team9.clover.Fragment;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,8 +20,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Stack;
 
 import team9.clover.Adapter.SpecificProductAdapter;
 import team9.clover.MainActivity;
@@ -29,30 +28,30 @@ import team9.clover.Model.HomePageModel;
 import team9.clover.Model.ProductModel;
 import team9.clover.R;
 
-public class SpecificProductFragment extends Fragment {
 
-    public static final String NAME = "SpecificProduct";
-    public static final int ID = 1;
+public class ViewMoreFragment extends Fragment {
 
+    public final static String NAME = "ViewMore";
+    public final static int ID = 5;
 
-    int category;
-    ActionBar actionBar;
+    int screen;
     GridView mContainer;
     SpecificProductAdapter adapter = null;
+    ActionBar actionBar;
 
     List<ProductModel> productList;
 
-    public SpecificProductFragment(ActionBar actionBar) {
+    public ViewMoreFragment(ActionBar actionBar) {
         this.actionBar = actionBar;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_specific_product, container, false);
+        View view = inflater.inflate(R.layout.fragment_view_more, container, false);
 
-        category = getArguments().getInt(NAME);
+        screen = getArguments().getInt(NAME);
+
         setActionBar();
-
         refer(view);
         setData();
 
@@ -65,7 +64,7 @@ public class SpecificProductFragment extends Fragment {
     }
 
     private void setData() {
-        DatabaseModel.loadProduct("category", (long) category)
+        DatabaseModel.loadProduct("screen", (long) screen)
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -93,9 +92,10 @@ public class SpecificProductFragment extends Fragment {
     }
 
     private void setActionBar() {
-        actionBar.setDisplayShowTitleEnabled(false);
-        MainActivity.actionBarLogo.setVisibility(View.VISIBLE);
+        actionBar.setTitle(screen == HomePageModel.SLIDER_PRODUCT_VIEW_TYPE ? "Bán nhiều nhất" : "Khuyến mãi");
+        actionBar.setDisplayShowTitleEnabled(true);
+        MainActivity.actionBarLogo.setVisibility(View.GONE);
         MainActivity.displayActionBarMenu(true);
-        MainActivity.displayCategory(true);
+        MainActivity.displayCategory(false);
     }
 }

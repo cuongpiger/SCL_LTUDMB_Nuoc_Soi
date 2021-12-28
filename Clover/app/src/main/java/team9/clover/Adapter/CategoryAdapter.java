@@ -4,6 +4,7 @@ package team9.clover.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +45,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
         CategoryModel item = categoryList.get(position);
-        holder.setTitle(item.getTitle(), position);
-        holder.setImage(item.getImage());
         holder.set(categoryList.get(position), position);
 
     }
@@ -78,9 +77,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent("broadcast");
-                    intent.putExtra(SpecificProductFragment.class.getSimpleName(), position);
-                    LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
+                    if (position != 0) {
+                        Intent intent = new Intent("broadcast");
+                        intent.putExtra(SpecificProductFragment.NAME, position);
+                        LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
+                    }
+
                     currentTab = position;
                     notifyDataSetChanged();
                 }
@@ -92,25 +94,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             } else {
                 layout.setBackgroundColor(Color.WHITE);
             }
-        }
-
-        private void setImage(String imageUrl) {
-            Glide.with(itemView.getContext())
-                    .load(imageUrl)
-                    .apply(new RequestOptions().placeholder(R.drawable.home))
-                    .into(mImage);
-        }
-
-        private void setTitle(final String title, final int position) {
-            mTitle.setText(title);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent("broadcast");
-                    intent.putExtra(SpecificProductFragment.class.getSimpleName(), position);
-                    LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
-                }
-            });
         }
     }
 }

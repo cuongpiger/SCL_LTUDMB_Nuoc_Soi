@@ -68,7 +68,7 @@ public class SliderProductAdapter extends RecyclerView.Adapter<SliderProductAdap
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent("broadcast");
-                    intent.putExtra(ProductDetailFragment.class.getSimpleName(), productModel);
+                    intent.putExtra(ProductDetailFragment.NAME, productModel);
                     LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
                 }
             });

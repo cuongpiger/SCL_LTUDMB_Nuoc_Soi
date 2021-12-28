@@ -63,7 +63,7 @@ public class SpecificProductAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent("broadcast");
-                    intent.putExtra(ProductDetailFragment.class.getSimpleName(), product);
+                    intent.putExtra(ProductDetailFragment.NAME, product);
                     LocalBroadcastManager.getInstance(view.getContext()).sendBroadcast(intent);
                 }
             });

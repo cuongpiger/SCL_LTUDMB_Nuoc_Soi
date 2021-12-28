@@ -30,6 +30,7 @@ import java.util.TimerTask;
 
 import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Fragment.SpecificProductFragment;
+import team9.clover.Fragment.ViewMoreFragment;
 import team9.clover.Model.BannerModel;
 import team9.clover.Model.CarouselModel;
 import team9.clover.Model.HomePageModel;
@@ -314,7 +315,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent("broadcast");
-                    intent.putExtra(SpecificProductFragment.class.getSimpleName(), -1);
+                    intent.putExtra(ViewMoreFragment.NAME, (int) productModelList.get(0).getScreen());
                     LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
                 }
             });
@@ -358,7 +359,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent("broadcast");
-                        intent.putExtra(ProductDetailFragment.class.getSimpleName(), productModel);
+                        intent.putExtra(ProductDetailFragment.NAME, productModel);
                         LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
                     }
                 });

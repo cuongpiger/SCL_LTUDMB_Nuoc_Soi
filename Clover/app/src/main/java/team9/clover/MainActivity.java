@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
 import androidx.appcompat.widget.Toolbar;
@@ -36,6 +38,7 @@ import team9.clover.Fragment.FavoriteFragment;
 import team9.clover.Fragment.HomeFragment;
 import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Fragment.SpecificProductFragment;
+import team9.clover.Fragment.ViewMoreFragment;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.Model.ProductModel;
 import team9.clover.Module.Reuse;
@@ -44,14 +47,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     FrameLayout frameLayout;
     NavigationView navigationView;
-    ImageView actionBarLogo;
-    Toolbar toolbar;
-    DrawerLayout drawerLayout;
-    RecyclerView mCategory;
-    ActionBarDrawerToggle toggle;
-    MenuItem mSearch, mBell, mBag;
+    public static ActionBarDrawerToggle toggle;
+    public static DrawerLayout drawerLayout;
+    public static RecyclerView mCategory;
+    public static ImageView actionBarLogo;
+    public static MenuItem mSearch, mBell, mBag;
+    public static Toolbar toolbar;
 
     CategoryAdapter categoryAdapter;
+    HomeFragment homeFragment;
 
     private static int previousCategory = 0;
     private static int previousNavigation = 0;
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (fragmentId == HomeFragment.ID) {
                 // nếu là trang home fragment hoặc là trang hiển thị sản phẩm theo danh mục
                 Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, 1);
-            }  else if (fragmentId == SpecificProductFragment.CATEGORY_ID) {
+            }  else if (fragmentId == SpecificProductFragment.ID) {
                 // nếu là trang hiển thị sản phẩm theo danh mục
                 Bundle bundle = new Bundle();
                 bundle.putInt("category", (int) object);
@@ -90,12 +94,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else { // ẩn category recycler view
             if (fragmentId == ProductDetailFragment.ID) {
                 // nếu là fragment hiển thị chi tiết sản phẩm
+                getSupportActionBar().setTitle("");
                 hideCategory(true); // ẩn category, logo, tắt navigation view ở action bar
+                displayActionBarMenu(true);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("product", (ProductModel) object);
                 fragment.setArguments(bundle);
                 Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, 0);
-            } else if (fragmentId == SpecificProductFragment.VIEW_ALL_ID) {
+            } else if (fragmentId == SpecificProductFragment.ID) {
                 hideCategory(true); // ẩn category, logo, tắt navigation view ở action bar
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("category", (int) object);
@@ -105,14 +111,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // nếu là trang hiển thĩ danh mục sản phâm yêu thích của khách
                 hideCategory(false); // ẩn category, logo, tắt navigation view ở action bar
                 quitApp = false;
-                hideActionBarMenu();
+                displayActionBarMenu(false);
                 getSupportActionBar().setTitle("Yêu thích");
                 getSupportActionBar().setDisplayShowTitleEnabled(true);
+                Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, 0);
+            } else if (fragmentId == ViewMoreFragment.ID) {
+                activeBackButton();
+                Bundle bundle = new Bundle();
+                bundle.putInt(ViewMoreFragment.NAME, (int) object);
+                fragment.setArguments(bundle);
                 Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, 0);
             }
         }
     }
 
+    private void setFragment(int fragmentId, Fragment fragment, Object object) {
+        if (fragmentId == ProductDetailFragment.ID) {
+            activeBackButton();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(ProductDetailFragment.NAME, (ProductModel) object);
+            fragment.setArguments(bundle);
+            Reuse.setFragment(getSupportFragmentManager(), fragment, ProductDetailFragment.NAME, R.id.main_framelayout, 0);
+        } else if (fragmentId == SpecificProductFragment.ID) {
+            Bundle bundle = new Bundle();
+            bundle.putInt(SpecificProductFragment.NAME, (int) object);
+            fragment.setArguments(bundle);
+            Reuse.setFragment(getSupportFragmentManager(), fragment, SpecificProductFragment.NAME, R.id.main_framelayout, 1);
+        }
+    }
 
 
     /*
@@ -136,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (itemId == R.id.nvMall) {
             if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
                 getSupportFragmentManager().popBackStack();
-                showCategory();
+                resetToolbarAndCategory();
                 previousNavigation = itemId;
             }
         } else if (itemId == R.id.nvFavorite && itemId != previousNavigation) {
@@ -181,24 +207,71 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
                 quitApp = true;
                 Toast.makeText(this, getString(R.string.on_back_press), Toast.LENGTH_SHORT).show();
-                return;
             } else {
-                if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(ProductDetailFragment.class.getSimpleName())) {
-                    super.onBackPressed();
-                    showCategory();
-
-                    if (getSupportFragmentManager().getBackStackEntryCount() != 0 &&
-                            Reuse.getLastFragmentName(getSupportFragmentManager()).equals(FavoriteFragment.class.getSimpleName())) {
-                        hideCategory(false);
-                    }
-                } else if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(SpecificProductFragment.class.getSimpleName())) {
-                    getSupportFragmentManager().popBackStack(SpecificProductFragment.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(ProductDetailFragment.NAME)) {
+                    getSupportFragmentManager().popBackStack();
+                } else if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(SpecificProductFragment.NAME)) {
+                    getSupportFragmentManager().popBackStack(SpecificProductFragment.NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     CategoryAdapter.currentTab = 0;
                     categoryAdapter.notifyDataSetChanged();
-                    showCategory();
+                }
+
+                if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                    resetToolbarAndCategory();
                 }
             }
         }
+
+
+
+
+
+//        if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(ViewMoreFragment.class.getSimpleName())) {
+//            getSupportFragmentManager().popBackStack(ViewMoreFragment.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//            return;
+//        }
+//
+//        if (quitApp) {
+//            quitApp = false;
+//            finishAffinity();
+//            System.exit(0);
+//        } else {
+//            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+//                quitApp = true;
+//                Toast.makeText(this, getString(R.string.on_back_press), Toast.LENGTH_SHORT).show();
+//                return;
+//            } else {
+//                if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(ProductDetailFragment.class.getSimpleName())) {
+////                    super.onBackPressed();
+//                    getSupportFragmentManager().popBackStack();
+//                    showCategory();
+//
+//                    String fragmentName = Reuse.getLastFragmentName(getSupportFragmentManager());
+//                    if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
+//                        if (fragmentName.equals(FavoriteFragment.class.getSimpleName())) {
+//                            hideCategory(false);
+//                        } else if (fragmentName.equals(SpecificProductFragment.class.getSimpleName())) {
+//                            CategoryAdapter.currentTab = 0;
+//                            categoryAdapter.notifyDataSetChanged();
+//                            showCategory();
+//                        }
+//                    }
+//                } else if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(SpecificProductFragment.class.getSimpleName())) {
+//                    getSupportFragmentManager().popBackStack(SpecificProductFragment.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//                    CategoryAdapter.currentTab = 0;
+//                    categoryAdapter.notifyDataSetChanged();
+//                    showCategory();
+//                }
+//            }
+//        }
+//
+//        if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
+//            if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(FavoriteFragment.class.getSimpleName())) {
+//                displayActionBarMenu(true);
+//                getSupportActionBar().setTitle("Yêu thích");
+//                getSupportActionBar().setDisplayShowTitleEnabled(true);
+//            }
+//        }
     }
 
     @Override
@@ -261,7 +334,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void showCategory() {
+    public void activeBackButton() {
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        toggle.setDrawerIndicatorEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    public void resetToolbarAndCategory() {
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false); // xóa button go-back
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -270,21 +355,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
         actionBarLogo.setVisibility(View.VISIBLE); // hiển thị lại logo trên action bar
 
-        mSearch.setVisible(true);
-        mBell.setVisible(true);
-        mBag.setVisible(true);
+        displayActionBarMenu(true);
     }
 
+
     private void setFirstFragment() {
+        homeFragment = new HomeFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.main_framelayout, new HomeFragment(), null);
+        transaction.add(R.id.main_framelayout, homeFragment, null);
         transaction.commit();
     }
 
-    private void hideActionBarMenu() {
-        mSearch.setVisible(false);
-        mBell.setVisible(false);
-        mBag.setVisible(false);
+    public static void displayActionBarMenu(boolean show) {
+        if (show) {
+            mSearch.setVisible(true);
+            mBell.setVisible(true);
+            mBag.setVisible(true);
+        } else {
+            mSearch.setVisible(false);
+            mBell.setVisible(false);
+            mBag.setVisible(false);
+        }
+    }
+
+    public static void displayCategory(boolean show) {
+        if (show)
+            mCategory.setVisibility(View.VISIBLE);
+        else
+            mCategory.setVisibility(View.GONE);
     }
 
     /*============================================================================================== THIẾT LẬP MENU TRÊN ACTION BAR
@@ -298,6 +396,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mSearch = menu.getItem(0);
         mBell = menu.getItem(1);
         mBag = menu.getItem(2);
+        homeFragment.setActionBar(getSupportActionBar());
 
         return true;
 
@@ -309,31 +408,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onReceive(Context context, Intent intent) {
                 // nếu là data gửi cho trang product detail fragment
-                ProductModel productModel = (ProductModel) intent.getSerializableExtra(ProductDetailFragment.class.getSimpleName());
+//                ProductModel productModel = (ProductModel) intent.getSerializableExtra(ProductDetailFragment.class.getSimpleName());
+//
+//
+//                int specificId = intent.getIntExtra(SpecificProductFragment.class.getSimpleName(), -3);
+//                Log.v("db", "asad" + specificId);
+//
+//
+//                // đi đến trang chi tiết sản phẩm
+//                if (productModel != null) {
+//                    quitApp = false;
+//                    setFragment(ProductDetailFragment.ID, new ProductDetailFragment(getSupportActionBar()), productModel, false);
+//                }
+//
+//                if (specificId != -3) {
+//                    if (specificId >= 0 && specificId != previousCategory) {
+//                        previousCategory = specificId;
+//                        quitApp = false;
+//                        if (specificId == 0) { // quay về trang home fragment
+//                            setFragment(HomeFragment.ID, new HomeFragment(), null, true);
+//                        } else { // đi đến trang danh mục sản phẩm
+//                            setFragment(SpecificProductFragment.ID, new SpecificProductFragment(getSupportActionBar()), specificId, true);
+//                        }
+//                    } else {
+//                        quitApp = false;
+//                        setFragment(SpecificProductFragment.ID, new SpecificProductFragment(getSupportActionBar()), specificId, false);
+//                        getSupportActionBar().setTitle( specificId == -1 ? "Bán nhiều nhất" : "Khuyến mãi");
+//                        getSupportActionBar().setDisplayShowTitleEnabled(true);
+//                    }
+//                }
 
-                int specificId = intent.getIntExtra(SpecificProductFragment.class.getSimpleName(), -3);
-
-                // đi đến trang chi tiết sản phẩm
-                if (productModel != null) {
+                int screen = intent.getIntExtra(ViewMoreFragment.NAME, -1);
+                if (screen != -1) {
                     quitApp = false;
-                    setFragment(ProductDetailFragment.ID, new ProductDetailFragment(), productModel, false);
+                    setFragment(ViewMoreFragment.ID, new ViewMoreFragment(getSupportActionBar()), screen, false);
                 }
 
-                if (specificId != -3) {
-                    if (specificId >= 0 && specificId != previousCategory) {
-                        previousCategory = specificId;
-                        quitApp = false;
-                        if (specificId == 0) { // quay về trang home fragment
-                            setFragment(HomeFragment.ID, new HomeFragment(), null, true);
-                        } else { // đi đến trang danh mục sản phẩm
-                            setFragment(SpecificProductFragment.CATEGORY_ID, new SpecificProductFragment(), specificId, true);
-                        }
-                    } else {
-                        quitApp = false;
-                        setFragment(SpecificProductFragment.VIEW_ALL_ID, new SpecificProductFragment(), specificId, false);
-                        getSupportActionBar().setTitle( specificId == -1 ? "Bán nhiều nhất" : "Khuyến mãi");
-                        getSupportActionBar().setDisplayShowTitleEnabled(true);
-                    }
+                int category = intent.getIntExtra(SpecificProductFragment.NAME, -1);
+                if (category != -1) {
+                    quitApp = false;
+                    setFragment(SpecificProductFragment.ID, new SpecificProductFragment(getSupportActionBar()), (int) category);
+                }
+
+                ProductModel productBroadcast = (ProductModel) intent.getSerializableExtra(ProductDetailFragment.NAME);
+                if (productBroadcast != null) {
+                    quitApp = false;
+                    setFragment(ProductDetailFragment.ID, new ProductDetailFragment(getSupportActionBar()), productBroadcast);
                 }
             }
         };

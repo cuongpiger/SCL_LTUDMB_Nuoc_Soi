@@ -1,17 +1,27 @@
 package team9.clover.Fragment;
 
+import static team9.clover.MainActivity.actionBarLogo;
+import static team9.clover.MainActivity.displayActionBarMenu;
+import static team9.clover.MainActivity.drawerLayout;
+import static team9.clover.MainActivity.mCategory;
+import static team9.clover.MainActivity.toggle;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import team9.clover.MainActivity;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.Adapter.CategoryAdapter;
 import team9.clover.Adapter.HomePageAdapter;
@@ -22,17 +32,21 @@ import team9.clover.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
-    public static int ID = 0;
+    public final static String NAME = "Home";
+    public final static int ID = 0;
 
-    public static RecyclerView mHomePage;
-    public static HomePageAdapter homePageAdapter;
+    RecyclerView mHomePage;
+    HomePageAdapter homePageAdapter;
+    ActionBar actionBar = null;
 
-    public HomeFragment() {}
+
+    public HomeFragment() { }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
 
+//        setActionBar();
         refer(view);
         setView(view);
 //        DatabaseModel.addProduct();
@@ -52,6 +66,30 @@ public class HomeFragment extends Fragment {
         homePageAdapter = new HomePageAdapter(DatabaseModel.homePageModelList);
         mHomePage.setAdapter(homePageAdapter);
         homePageAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setActionBar();
+    }
+
+    private void setActionBar() {
+        if (actionBar != null) {
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            actionBar.setDisplayHomeAsUpEnabled(false); // xóa button go-back
+            actionBar.setDisplayShowTitleEnabled(false);
+            toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
+            toggle.setToolbarNavigationClickListener(null);
+            mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
+            actionBarLogo.setVisibility(View.VISIBLE); // hiển thị lại logo trên action bar
+
+            displayActionBarMenu(true);
+        }
+    }
+
+    public void setActionBar(ActionBar actionBar) {
+        this.actionBar = actionBar;
     }
 }
 

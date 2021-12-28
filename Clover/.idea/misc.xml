@@ -103,6 +103,7 @@
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_specific_product.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/fragment_view_more.xml" value="0.1401315789473684" />
         <entry key="app/src/main/res/layout/grid_product_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/horizontal_scroll_item_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/horizontal_scroll_layout.xml" value="0.22" />
