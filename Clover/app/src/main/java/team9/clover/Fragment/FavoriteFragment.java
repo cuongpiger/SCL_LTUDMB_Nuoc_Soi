@@ -5,6 +5,7 @@ import static team9.clover.Model.DatabaseModel.masterUser;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,17 +23,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import team9.clover.Adapter.FavoriteAdapter;
+import team9.clover.MainActivity;
 import team9.clover.Model.DatabaseModel;
+import team9.clover.Model.HomePageModel;
 import team9.clover.Model.ProductModel;
 import team9.clover.R;
 
 public class FavoriteFragment extends Fragment {
 
-    public static int ID = 4;
+    public static final String NAME = "Favorite";
+    public static final int ID = 4;
     public static boolean isChanged;
 
     RecyclerView mContainer;
+    ActionBar actionBar;
 
+    public FavoriteFragment(ActionBar actionBar) {
+        this.actionBar = actionBar;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,5 +79,19 @@ public class FavoriteFragment extends Fragment {
         super.onPause();
         if (isChanged)
             DatabaseModel.updateMasterUser();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setActionBar();
+    }
+
+    private void setActionBar() {
+        actionBar.setTitle("Yêu thích");
+        actionBar.setDisplayShowTitleEnabled(true);
+        MainActivity.actionBarLogo.setVisibility(View.GONE);
+        MainActivity.displayActionBarMenu(false);
+        MainActivity.displayCategory(false);
     }
 }

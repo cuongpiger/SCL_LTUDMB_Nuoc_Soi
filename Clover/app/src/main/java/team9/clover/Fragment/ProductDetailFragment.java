@@ -62,7 +62,6 @@ public class ProductDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product_detail, container, false);
 
         productModel = (ProductModel) getArguments().getSerializable(NAME);
-        setActionBar();
 
         refer(view);
         setView1();

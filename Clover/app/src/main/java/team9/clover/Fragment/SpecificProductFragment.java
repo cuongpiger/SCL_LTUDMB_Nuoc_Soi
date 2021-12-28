@@ -51,7 +51,6 @@ public class SpecificProductFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_specific_product, container, false);
 
         category = getArguments().getInt(NAME);
-        setActionBar();
 
         refer(view);
         setData();

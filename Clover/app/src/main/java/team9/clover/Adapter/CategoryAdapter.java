@@ -77,14 +77,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onClick(View view) {
-                    if (position != 0) {
+                    if (currentTab != position) {
+                        currentTab = position;
                         Intent intent = new Intent("broadcast");
                         intent.putExtra(SpecificProductFragment.NAME, position);
                         LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
+                        notifyDataSetChanged();
                     }
-
-                    currentTab = position;
-                    notifyDataSetChanged();
                 }
             });
 

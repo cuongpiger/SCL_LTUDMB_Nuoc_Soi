@@ -51,7 +51,6 @@ public class ViewMoreFragment extends Fragment {
 
         screen = getArguments().getInt(NAME);
 
-        setActionBar();
         refer(view);
         setData();
 

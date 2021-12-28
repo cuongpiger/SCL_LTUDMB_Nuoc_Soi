@@ -315,7 +315,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent("broadcast");
-                    intent.putExtra(ViewMoreFragment.NAME, (int) productModelList.get(0).getScreen());
+                    intent.putExtra(ViewMoreFragment.NAME, HomePageModel.SLIDER_PRODUCT_VIEW_TYPE);
                     LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
                 }
             });
@@ -363,7 +363,6 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                         LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
                     }
                 });
-
             }
 
             /*
@@ -373,7 +372,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent("broadcast");
-                    intent.putExtra(SpecificProductFragment.class.getSimpleName(), -2);
+                    intent.putExtra(ViewMoreFragment.NAME, HomePageModel.GRID_PRODUCT_VIEW_TYPE);
                     LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
                 }
             });

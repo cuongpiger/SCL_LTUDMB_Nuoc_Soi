@@ -26,11 +26,9 @@ import team9.clover.R;
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
 
     List<ProductModel> productList;
-    int noProducts;
 
     public FavoriteAdapter(List<ProductModel> productList) {
         this.productList = productList;
-        this.noProducts = productList.size();
     }
 
     @NonNull
@@ -83,14 +81,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                     if ((int) mFavorite.getTag() == 0) {
                         masterUser.removeFavorite(product.getId());
                         mFavorite.setImageResource(R.drawable.icon_empty_heart);
-                        noProducts -= 1;
                     } else {
                         masterUser.addFavorite(product.getId());
                         mFavorite.setImageResource(R.drawable.icon_filled_heart);
-                        noProducts += 1;
                     }
 
-                    FavoriteFragment.isChanged = (noProducts != masterUser.getFavorite().size());
+                    FavoriteFragment.isChanged = (productList.size() != masterUser.getFavorite().size());
                 }
             });
 
