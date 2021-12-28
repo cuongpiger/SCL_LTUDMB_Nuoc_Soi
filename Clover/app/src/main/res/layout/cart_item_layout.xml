@@ -10,7 +10,7 @@
     android:layout_height="wrap_content">
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/product_image"
+        android:id="@+id/rivImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/product_title"
+        android:id="@+id/mtvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -29,15 +29,15 @@
         android:textStyle="bold"
         android:textSize="16sp"
         android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@+id/product_image"
-        app:layout_constraintTop_toTopOf="@+id/product_image" />
+        app:layout_constraintStart_toEndOf="@+id/rivImage"
+        app:layout_constraintTop_toTopOf="@+id/rivImage" />
 
     <ImageView
         android:id="@+id/coupen_icon"
         android:layout_width="15dp"
         android:layout_height="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/free_coupens"
-        app:layout_constraintStart_toStartOf="@+id/product_title"
+        app:layout_constraintStart_toStartOf="@+id/mtvTitle"
         app:layout_constraintTop_toTopOf="@+id/free_coupens"
         app:srcCompat="@drawable/icon_discount"
         app:tint="@color/violet_dark" />
@@ -52,7 +52,7 @@
         android:textColor="@color/violet_dark"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/coupen_icon"
-        app:layout_constraintTop_toBottomOf="@+id/product_title" />
+        app:layout_constraintTop_toBottomOf="@+id/mtvTitle" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/mtvPrice"
@@ -68,7 +68,7 @@
         app:layout_constraintTop_toBottomOf="@+id/free_coupens" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/cutted_price"
+        android:id="@+id/mtvCutPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -81,14 +81,14 @@
         app:layout_constraintVertical_bias="0.8" />
 
     <View
-        android:id="@+id/mtvCutPrice"
+        android:id="@+id/cutBar"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/gray_dark"
-        app:layout_constraintBottom_toBottomOf="@+id/cutted_price"
-        app:layout_constraintEnd_toEndOf="@+id/cutted_price"
-        app:layout_constraintStart_toStartOf="@+id/cutted_price"
-        app:layout_constraintTop_toTopOf="@+id/cutted_price" />
+        app:layout_constraintBottom_toBottomOf="@+id/mtvCutPrice"
+        app:layout_constraintEnd_toEndOf="@+id/mtvCutPrice"
+        app:layout_constraintStart_toStartOf="@+id/mtvCutPrice"
+        app:layout_constraintTop_toTopOf="@+id/mtvCutPrice" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/offers_applied"
@@ -122,9 +122,9 @@
         android:paddingStart="6dp"
         android:text="SL: 1"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/product_image"
-        app:layout_constraintStart_toStartOf="@+id/product_title"
-        app:layout_constraintTop_toBottomOf="@+id/cutted_price" />
+        app:layout_constraintBottom_toBottomOf="@+id/rivImage"
+        app:layout_constraintStart_toStartOf="@+id/mtvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/mtvCutPrice" />
 
     <LinearLayout
         android:id="@+id/coupen_redemption_layout"

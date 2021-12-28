@@ -10,7 +10,7 @@
     android:layout_height="wrap_content">
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/product_image"
+        android:id="@+id/rivImage"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="16dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/product_title"
+        android:id="@+id/mtvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -30,7 +30,7 @@
         android:textStyle="bold"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/product_image" />
+        app:layout_constraintTop_toTopOf="@+id/rivImage" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/deliveryStatus"
@@ -41,9 +41,9 @@
         android:layout_marginEnd="16dp"
         android:drawablePadding="4dp"
         android:text="Giao hàng thành công vào ngày 13/12/2021"
-        app:layout_constraintEnd_toStartOf="@+id/product_image"
+        app:layout_constraintEnd_toStartOf="@+id/rivImage"
         app:layout_constraintStart_toEndOf="@+id/deliveryDot"
-        app:layout_constraintTop_toBottomOf="@+id/product_title" />
+        app:layout_constraintTop_toBottomOf="@+id/mtvTitle" />
 
     <TextView
         android:id="@+id/user_email"
@@ -54,7 +54,7 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/rate_now_container"
-        app:layout_constraintStart_toStartOf="@+id/product_title"
+        app:layout_constraintStart_toStartOf="@+id/mtvTitle"
         app:layout_constraintTop_toTopOf="@+id/rate_now_container" />
 
     <LinearLayout
@@ -106,7 +106,7 @@
         android:layout_height="12dp"
         app:tint="@color/red"
         app:layout_constraintBottom_toBottomOf="@+id/deliveryStatus"
-        app:layout_constraintStart_toStartOf="@+id/product_title"
+        app:layout_constraintStart_toStartOf="@+id/mtvTitle"
         app:layout_constraintTop_toTopOf="@+id/deliveryStatus"
         app:srcCompat="@drawable/dot" />
 </androidx.constraintlayout.widget.ConstraintLayout>

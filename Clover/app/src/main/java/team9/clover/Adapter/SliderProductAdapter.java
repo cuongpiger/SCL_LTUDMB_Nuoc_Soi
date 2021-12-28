@@ -36,7 +36,8 @@ public class SliderProductAdapter extends RecyclerView.Adapter<SliderProductAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.set(productModelList.get(position));
+        if (position < productModelList.size())
+            holder.set(productModelList.get(position));
     }
 
     @Override

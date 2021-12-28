@@ -32,7 +32,7 @@
         android:layout_marginEnd="16dp"
         android:clickable="true"
         app:backgroundTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/mtvCutPrice"
+        app:layout_constraintBottom_toBottomOf="@+id/cutBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tlIndicator"
         app:rippleColor="@color/violet_mid"
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/materialTextView4" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mtvCutPrice"
+        android:id="@+id/cutBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -102,8 +102,8 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/gray_dark"
-        app:layout_constraintBottom_toBottomOf="@+id/mtvCutPrice"
-        app:layout_constraintEnd_toEndOf="@+id/mtvCutPrice"
-        app:layout_constraintStart_toStartOf="@+id/mtvCutPrice"
-        app:layout_constraintTop_toTopOf="@+id/mtvCutPrice" />
+        app:layout_constraintBottom_toBottomOf="@+id/cutBar"
+        app:layout_constraintEnd_toEndOf="@+id/cutBar"
+        app:layout_constraintStart_toStartOf="@+id/cutBar"
+        app:layout_constraintTop_toTopOf="@+id/cutBar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

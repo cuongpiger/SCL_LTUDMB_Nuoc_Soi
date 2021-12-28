@@ -108,6 +108,7 @@
         <entry key="app/src/main/res/layout/horizontal_scroll_layout.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_carousel.xml" value="0.18" />
         <entry key="app/src/main/res/layout/item_category.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_favorite.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_grid_product.xml" value="0.75" />
         <entry key="app/src/main/res/layout/item_new_product.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_product_detail_more.xml" value="0.11069812540400775" />

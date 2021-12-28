@@ -99,12 +99,12 @@ public class CartAdapter extends RecyclerView.Adapter {
 
         public CartItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            productImage = itemView.findViewById(R.id.product_image);
-            productTitle = itemView.findViewById(R.id.product_title);
+            productImage = itemView.findViewById(R.id.rivImage);
+            productTitle = itemView.findViewById(R.id.mtvTitle);
             freeCoupenIcon = itemView.findViewById(R.id.coupen_icon);
             freeCoupens = itemView.findViewById(R.id.free_coupens);
             productPrice = itemView.findViewById(R.id.mtvPrice);
-            cuttedPrice = itemView.findViewById(R.id.cutted_price);
+            cuttedPrice = itemView.findViewById(R.id.mtvCutPrice);
             offersApplied = itemView.findViewById(R.id.offers_applied);
             coupensApplied = itemView.findViewById(R.id.coupens_applied);
             productQuantity = itemView.findViewById(R.id.product_quantity);

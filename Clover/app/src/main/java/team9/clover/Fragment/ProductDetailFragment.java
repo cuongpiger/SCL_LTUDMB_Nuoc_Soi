@@ -70,7 +70,7 @@ public class ProductDetailFragment extends Fragment {
         mTitle = view.findViewById(R.id.mtvProductTitle);
         mSize = view.findViewById(R.id.mtvSize);
         mPrice = view.findViewById(R.id.mtvPrice);
-        mCutPrice = view.findViewById(R.id.mtvCutPrice);
+        mCutPrice = view.findViewById(R.id.cutBar);
         mFavourite = view.findViewById(R.id.fabFavorite);
         mMore = view.findViewById(R.id.tlMore);
         mMoreViewPager = view.findViewById(R.id.vpMore);

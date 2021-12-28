@@ -153,14 +153,6 @@ public class DatabaseModel {
                 });
     }
 
-    public static Task<QuerySnapshot> loadProduct(String field, long value) {
-        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
-        return firebaseFirestore.collection(ProductModel.class.getSimpleName())
-                .whereEqualTo(field, (long) value)
-                .get();
-    }
-
-
     public static void loadHomePageData() {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
         if (categoryModelList.size() != 0) return;
@@ -171,7 +163,22 @@ public class DatabaseModel {
         loadHomePageProductData();
     }
 
-    // ________________________________________________________________________________________________________ USER
+//================================================================================================== PRODUCT
+    public static Task<QuerySnapshot> loadProduct(String field, long value) {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        return firebaseFirestore.collection(ProductModel.class.getSimpleName())
+                .whereEqualTo(field, (long) value).get();
+    }
+
+    public static Task<QuerySnapshot> loadProduct(String field, List<String> valueList) {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        return firebaseFirestore.collection(ProductModel.class.getSimpleName())
+                .whereIn(field, valueList).get();
+    }
+
+
+
+//================================================================================================== USER
     /*
     * Load thông tin của user từ data base lên
     * */

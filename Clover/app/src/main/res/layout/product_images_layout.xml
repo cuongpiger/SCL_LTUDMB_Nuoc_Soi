@@ -107,7 +107,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/cutted_price"
+        android:id="@+id/mtvCutPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="bottom"
@@ -119,14 +119,14 @@
         app:layout_constraintStart_toEndOf="@+id/mtvPrice" />
 
     <View
-        android:id="@+id/mtvCutPrice"
+        android:id="@+id/cutBar"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/gray_dark"
-        app:layout_constraintBottom_toBottomOf="@+id/cutted_price"
-        app:layout_constraintEnd_toEndOf="@+id/cutted_price"
-        app:layout_constraintStart_toStartOf="@+id/cutted_price"
-        app:layout_constraintTop_toTopOf="@+id/cutted_price" />
+        app:layout_constraintBottom_toBottomOf="@+id/mtvCutPrice"
+        app:layout_constraintEnd_toEndOf="@+id/mtvCutPrice"
+        app:layout_constraintStart_toStartOf="@+id/mtvCutPrice"
+        app:layout_constraintTop_toTopOf="@+id/mtvCutPrice" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbt_view_all"
@@ -138,7 +138,7 @@
         android:textColor="@color/black"
         app:backgroundTint="@color/white"
         app:cornerRadius="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cutted_price"
+        app:layout_constraintBottom_toBottomOf="@+id/mtvCutPrice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tlIndicator"
         app:strokeColor="@color/black"
@@ -153,7 +153,7 @@
         android:textColor="@color/violet_mid"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/cutted_price"
+        app:layout_constraintBottom_toBottomOf="@+id/mtvCutPrice"
         app:layout_constraintEnd_toEndOf="@+id/mbt_view_all"
         app:layout_constraintStart_toStartOf="@+id/mbt_view_all"
         app:layout_constraintTop_toBottomOf="@+id/mbt_view_all" />
@@ -170,7 +170,7 @@
         android:paddingHorizontal="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cutted_price">
+        app:layout_constraintTop_toBottomOf="@+id/mtvCutPrice">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_coupen_redemption"

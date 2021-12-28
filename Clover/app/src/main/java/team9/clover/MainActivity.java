@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -17,16 +14,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -39,12 +32,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import team9.clover.Adapter.CategoryAdapter;
+import team9.clover.Fragment.FavoriteFragment;
 import team9.clover.Fragment.HomeFragment;
 import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Fragment.SpecificProductFragment;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.Model.ProductModel;
-import team9.clover.Model.UserModel;
 import team9.clover.Module.Reuse;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -60,8 +53,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     CategoryAdapter categoryAdapter;
 
-    public static int previousCategory = 0;
+    private static int previousCategory = 0;
+    private static int previousNavigation = 0;
     private static boolean quitApp = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,15 +134,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawers();
 
         if (itemId == R.id.nvMall) {
-            if (getSupportFragmentManager().getBackStackEntryCount() != 0)
-                onBackPressed();
-        } else if (itemId == R.id.nvFavorite) {
+            if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
+                getSupportFragmentManager().popBackStack();
+                showCategory();
+                previousNavigation = itemId;
+            }
+        } else if (itemId == R.id.nvFavorite && itemId != previousNavigation) {
             // nếu user nhấp vào mục sản phẩm yêu thích
             if (DatabaseModel.firebaseUser != null) {
+                previousNavigation = itemId;
                 setFragment(FavoriteFragment.ID, new FavoriteFragment(), null, false);
             } else {
                 Toast.makeText(MainActivity.this, "Vui lòng đăng nhập để sử dụng tính năng này.", Toast.LENGTH_LONG).show();
+                navigationView.getMenu().findItem(previousNavigation).setChecked(true);
             }
+
         }
 
         return true;
@@ -184,17 +185,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } else {
                 if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(ProductDetailFragment.class.getSimpleName())) {
                     super.onBackPressed();
+                    showCategory();
 
-                    if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-                        showCategory();
+                    if (getSupportFragmentManager().getBackStackEntryCount() != 0 &&
+                            Reuse.getLastFragmentName(getSupportFragmentManager()).equals(FavoriteFragment.class.getSimpleName())) {
+                        hideCategory(false);
                     }
                 } else if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(SpecificProductFragment.class.getSimpleName())) {
                     getSupportFragmentManager().popBackStack(SpecificProductFragment.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     CategoryAdapter.currentTab = 0;
                     categoryAdapter.notifyDataSetChanged();
-                    showCategory();
-                } else if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(FavoriteFragment.class.getSimpleName())) {
-                    getSupportFragmentManager().popBackStack();
                     showCategory();
                 }
             }

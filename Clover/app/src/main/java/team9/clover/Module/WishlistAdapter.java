@@ -69,14 +69,14 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            productImage = itemView.findViewById(R.id.product_image);
+            productImage = itemView.findViewById(R.id.rivImage);
             coupenIcon = itemView.findViewById(R.id.coupen_icon);
             deleteBtn = itemView.findViewById(R.id.delete_button);
-            priceCut = itemView.findViewById(R.id.mtvCutPrice);
-            productTitle = itemView.findViewById(R.id.product_title);
+            priceCut = itemView.findViewById(R.id.cutBar);
+            productTitle = itemView.findViewById(R.id.mtvTitle);
             freeCoupens = itemView.findViewById(R.id.free_coupens);
             productPrice = itemView.findViewById(R.id.mtvPrice);
-            cuttedPrice = itemView.findViewById(R.id.cutted_price);
+            cuttedPrice = itemView.findViewById(R.id.mtvCutPrice);
             rating = itemView.findViewById(R.id.rating);
             totalRatings = itemView.findViewById(R.id.total_rating);
         }
