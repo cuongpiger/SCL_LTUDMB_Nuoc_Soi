@@ -2,6 +2,7 @@ package team9.clover.Fragment;
 
 import static team9.clover.Model.DatabaseModel.firebaseUser;
 import static team9.clover.Model.DatabaseModel.masterUser;
+import static team9.clover.Model.DatabaseModel.masterCart;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -43,9 +44,11 @@ import team9.clover.Adapter.ProductDetailAdapter;
 import team9.clover.Adapter.ProductImageAdapter;
 import team9.clover.Adapter.SliderProductAdapter;
 import team9.clover.MainActivity;
+import team9.clover.Model.CartModel;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.Model.HomePageModel;
 import team9.clover.Model.ProductModel;
+import team9.clover.Module.Reuse;
 import team9.clover.R;
 
 public class ProductDetailFragment extends Fragment {
@@ -107,12 +110,12 @@ public class ProductDetailFragment extends Fragment {
 
         mTitle.setText(productModel.getTitle());
         mSize.setText(String.join("  ", productModel.getSize()));
-        mPrice.setText(productModel.getPrice());
+        mPrice.setText(Reuse.vietnameseCurrency(productModel.getPrice()));
         mFavourite.setTag(0);
 
         mMoreViewPager.setAdapter(new ProductDetailAdapter(getChildFragmentManager(), getLifecycle(), mMore.getTabCount(), productModel));
 
-        if (productModel.getPrice() != null && !productModel.getCutPrice().isEmpty()) {
+        if (!productModel.getCutPrice().isEmpty()) {
             mCutPrice.setText(productModel.getCutPrice());
         } else {
             mCutPrice.setVisibility(View.GONE);
@@ -232,7 +235,8 @@ public class ProductDetailFragment extends Fragment {
                 quantity = Integer.parseInt(editText.getText().toString());
                 if (quantity > 0)
                     dialog.dismiss();
-                    masterUser.addCart(productModel.getId(), quantity);
+                    CartModel cart = new CartModel(productModel.getId(), selectedSize, (long) quantity);
+                    cart.addCart(masterCart);
                     isChanged = true;
                 }
             }
@@ -246,14 +250,14 @@ public class ProductDetailFragment extends Fragment {
         super.onPause();
         if ((int) mFavourite.getTag() == 1 && !masterUser.getFavorite().contains(productModel.getId())) {
             masterUser.addFavorite(productModel.getId());
-            isChanged = true;
+            DatabaseModel.updateMasterUser();
         } else if ((int) mFavourite.getTag() == 0 && masterUser.getFavorite().contains(productModel.getId())) {
             masterUser.removeFavorite(productModel.getId());
-            isChanged = true;
+            DatabaseModel.updateMasterUser();
         }
 
         if (isChanged) {
-            DatabaseModel.updateMasterUser();
+            DatabaseModel.updateMasterCart();
         }
     }
 

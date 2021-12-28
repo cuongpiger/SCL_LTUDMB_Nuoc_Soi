@@ -144,4 +144,20 @@ public class Reuse {
         FragmentManager.BackStackEntry backEntry = manager.getBackStackEntryAt(index);
         return backEntry.getName();
     }
+
+    public static String vietnameseCurrency(long price) {
+        String m = Long.toString(price);
+        String res = "";
+        int j = m.length() % 3;
+        j = 3 - j + 1;
+
+        for (int i = 0; i < m.length(); ++i) {
+            res += m.charAt(i);
+            if ((i + j) % 3 == 0 && i + 1 != m.length()) {
+                res += ".";
+            }
+        }
+
+        return res + " đ";
+    }
 }

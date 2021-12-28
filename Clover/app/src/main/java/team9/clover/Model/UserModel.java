@@ -9,7 +9,6 @@ public class UserModel {
 
     List<String> favorite;
     List<String> orders;
-    Map<String, Integer> cart;
     String fullName;
 
     public UserModel() { }
@@ -18,7 +17,6 @@ public class UserModel {
         // dùng để tạo new user trong database
         this.fullName = fullName;
         this.favorite = new ArrayList<>();
-        this.cart = new HashMap<>();
         this.orders = new ArrayList<>();
     }
 
@@ -28,14 +26,6 @@ public class UserModel {
 
     public void setFavorite(List<String> favorite) {
         this.favorite = favorite;
-    }
-
-    public Map<String, Integer> getCart() {
-        return cart;
-    }
-
-    public void setCart(Map<String, Integer> cart) {
-        this.cart = cart;
     }
 
     public List<String> getOrders() {
@@ -60,14 +50,5 @@ public class UserModel {
 
     public void removeFavorite(String productId) {
         favorite.remove(productId);
-    }
-
-    public void addCart(String key, int value) {
-        if (cart.containsKey(key)) {
-            int oldQty = (int) cart.get(key);
-            cart.put(key, oldQty + value);
-        } else {
-            cart.put(key, value);
-        }
     }
 }

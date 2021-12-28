@@ -21,6 +21,7 @@ import java.util.List;
 import team9.clover.Fragment.FavoriteFragment;
 import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Model.ProductModel;
+import team9.clover.Module.Reuse;
 import team9.clover.R;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
@@ -68,7 +69,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             Glide.with(itemView.getContext()).load(product.getImage().get(0)).into(mImage);
             mTitle.setText(product.getTitle());
             mSize.setText(String.join("  ", product.getSize()));
-            mPrice.setText(product.getPrice());
+            mPrice.setText(Reuse.vietnameseCurrency(product.getPrice()));
             mCutPrice.setText(product.getCutPrice());
             mFavorite.setTag(1);
 

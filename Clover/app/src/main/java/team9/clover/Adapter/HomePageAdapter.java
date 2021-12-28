@@ -35,6 +35,7 @@ import team9.clover.Model.BannerModel;
 import team9.clover.Model.CarouselModel;
 import team9.clover.Model.HomePageModel;
 import team9.clover.Model.ProductModel;
+import team9.clover.Module.Reuse;
 import team9.clover.R;
 
 public class HomePageAdapter extends RecyclerView.Adapter {
@@ -350,7 +351,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 Glide.with(itemView.getContext()).load(productModel.getImage().get(0)).into(mImageItem);
                 mTitleItem.setText(productModel.getTitle());
                 mSizeItem.setText(String.join("  ", productModel.getSize()));
-                mPriceItem.setText(productModel.getPrice());
+                mPriceItem.setText(Reuse.vietnameseCurrency(productModel.getPrice()));
 
                 /*
                 * Sự kiện khi user nhấn vào sản phẩm tương ứng sẽ đưa user đến trang chi tiết của sản phẩm đó

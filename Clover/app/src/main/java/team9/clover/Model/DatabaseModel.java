@@ -9,6 +9,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -30,6 +31,7 @@ public class DatabaseModel {
     public static FirebaseAuth firebaseAuth = null;
 
     public static UserModel masterUser = null;
+    public static List<CartModel> masterCart = null;
     public static List<CategoryModel> categoryModelList = new ArrayList<>();
     public static List<HomePageModel> homePageModelList = new ArrayList<>();
 
@@ -195,6 +197,19 @@ public class DatabaseModel {
                                 masterUser = task.getResult().toObject(UserModel.class);
                                 fullName.setText(masterUser.getFullName());
                                 email.setText(firebaseUser.getEmail());
+                                firebaseFirestore.collection(UserModel.class.getSimpleName())
+                                        .document(firebaseUser.getUid()).collection(CartModel.class.getSimpleName())
+                                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            masterCart = new ArrayList<>();
+                                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                                masterCart.add(snapshot.toObject(CartModel.class));
+                                            }
+                                        }
+                                    }
+                                });
                             }
                         }
                     });
@@ -206,6 +221,16 @@ public class DatabaseModel {
         firebaseFirestore.collection(UserModel.class.getSimpleName())
                 .document(firebaseUser.getUid())
                 .set(masterUser);
+    }
+
+    public static void updateMasterCart() {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        CollectionReference reference = firebaseFirestore.collection(UserModel.class.getSimpleName())
+                .document(firebaseUser.getUid())
+                .collection(CartModel.class.getSimpleName());
+        for (CartModel cart : masterCart) {
+            reference.document(cart.genKey()).set(cart);
+        }
     }
 
 
@@ -259,10 +284,10 @@ public class DatabaseModel {
 
 
         /* start */
+        long price = 550000;
         firebaseFirestore = FirebaseFirestore.getInstance();
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-        String price = "550.000 đ",
-                cutPrice = "820.000 đ",
+        String cutPrice = "820.000 đ",
                 description = "Tiến Dũng là trụ cột ở hàng thủ của Việt Nam, thường xuyên đá cặp cùng Quế Ngọc Hải và Đỗ Duy Mạnh trong sơ đồ ba trung vệ. Anh được HLV Park triệu tập ở mọi giải đấu, góp phần quan trọng làm nên chiến tích ở U23 châu Á 2018, vô địch AFF Cup 2018 và vào vòng loại thứ ba World Cup 2022 - khu vực châu Á.";
         ArrayList<String> size = new ArrayList<>(Arrays.asList("XS", "S", "L"));
         ArrayList<String> bodyName = new ArrayList<>(Arrays.asList("Vai", "Lưng", "Dài áo"));

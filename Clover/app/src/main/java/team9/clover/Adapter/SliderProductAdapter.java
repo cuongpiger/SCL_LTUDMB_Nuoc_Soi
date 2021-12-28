@@ -17,6 +17,7 @@ import java.util.List;
 
 import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Model.ProductModel;
+import team9.clover.Module.Reuse;
 import team9.clover.R;
 
 public class SliderProductAdapter extends RecyclerView.Adapter<SliderProductAdapter.ViewHolder> {
@@ -62,7 +63,7 @@ public class SliderProductAdapter extends RecyclerView.Adapter<SliderProductAdap
             Glide.with(itemView.getContext()).load(productModel.getImage().get(0)).into(mImage);
             mTitle.setText(productModel.getTitle());
             mSize.setText(String.join("  ", productModel.getSize()));
-            mPrice.setText(productModel.getPrice());
+            mPrice.setText(Reuse.vietnameseCurrency(productModel.getPrice()));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

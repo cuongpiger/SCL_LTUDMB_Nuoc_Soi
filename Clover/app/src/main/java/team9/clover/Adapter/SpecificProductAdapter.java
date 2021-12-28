@@ -17,6 +17,7 @@ import java.util.List;
 
 import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Model.ProductModel;
+import team9.clover.Module.Reuse;
 import team9.clover.R;
 
 public class SpecificProductAdapter extends BaseAdapter {
@@ -56,7 +57,7 @@ public class SpecificProductAdapter extends BaseAdapter {
         if (product.getImage() != null) {
             Glide.with(view.getContext()).load(product.getImage().get(0)).into(mImage);
             mTitle.setText(product.getTitle());
-            mPrice.setText(product.getPrice());
+            mPrice.setText(Reuse.vietnameseCurrency(product.getPrice()));
             mSize.setText(String.join("  ", product.getSize()));
 
             view.setOnClickListener(new View.OnClickListener() {

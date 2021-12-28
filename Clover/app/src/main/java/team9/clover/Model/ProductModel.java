@@ -14,8 +14,8 @@ public class ProductModel implements Serializable {
 
     public static final String FIRESTORAGE = "Product";
 
-    long screen, category;
-    String title, price, cutPrice, description, id;
+    long screen, category, price;
+    String title, cutPrice, description, id;
     ArrayList<Long> measure;
     ArrayList<String> size;
     ArrayList<String> bodyName;
@@ -24,7 +24,7 @@ public class ProductModel implements Serializable {
 
     public ProductModel() {}
 
-    public ProductModel(String id, long screen, long category, String title, String price, String cutPrice, String description, ArrayList<String> image, ArrayList<String> size, ArrayList<String> bodyName, ArrayList<Long> measure, ArrayList<String> info) {
+    public ProductModel(String id, long screen, long category, String title, long price, String cutPrice, String description, ArrayList<String> image, ArrayList<String> size, ArrayList<String> bodyName, ArrayList<Long> measure, ArrayList<String> info) {
         this.id = id;
         this.screen = screen;
         this.category = category;
@@ -71,11 +71,11 @@ public class ProductModel implements Serializable {
         this.title = title;
     }
 
-    public String getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 
