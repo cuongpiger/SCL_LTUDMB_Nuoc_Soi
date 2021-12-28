@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout;
     RecyclerView mCategory;
     ActionBarDrawerToggle toggle;
-
+    MenuItem mSearch, mBell, mBag;
 
     CategoryAdapter categoryAdapter;
 
@@ -76,80 +77,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setFirstFragment();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        quitApp = false;
-    }
-
-    private void refer() {
-        toolbar = findViewById(R.id.toolbar);
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
-        frameLayout = findViewById(R.id.main_framelayout);
-        mCategory = findViewById(R.id.rvCategory);
-    }
-
-    private void setToolbar() {
-        toolbar.setTitleTextColor(Color.BLACK);
-        actionBarLogo = findViewById(R.id.ivLogo);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_arrow_left);
-
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        DrawerArrowDrawable arrowDrawable = toggle.getDrawerArrowDrawable();
-        arrowDrawable.setColor(getColor(R.color.black));
-        toggle.setDrawerArrowDrawable(arrowDrawable);
-        toggle.syncState();
-        drawerLayout.addDrawerListener(toggle);
-    }
-
-    /*
-    * Hàm này giúp hamburger có animation, đồng thời chỉnh background cho selected item view
+    /*============================================================================================== THIẾT LẬP CÁC FRAGMENT SẼ HIỂN THỊ TRÊN MÀN HÌNH
+    *
     * */
-    private void setNavigationView() {
-        View view =  navigationView.getHeaderView(0);
-        MaterialTextView fullName = view.findViewById(R.id.mtvFullName),
-                email = view.findViewById(R.id.mtvEmail);
-        DatabaseModel.loadMasterUser(fullName, email);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(0).setChecked(true);
-
-    }
-
-
-    private void setFirstFragment() {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.main_framelayout, new HomeFragment(), null);
-        transaction.commit();
-    }
-
-    private void hideCategory() {
-        mCategory.setVisibility(View.GONE); // ẩn recycler view category
-        actionBarLogo.setVisibility(View.GONE); // ẩn logo thương hiệu
-
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        toggle.setDrawerIndicatorEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-    }
-
-    private void showCategory() {
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false); // xóa button go-back
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
-        toggle.setToolbarNavigationClickListener(null);
-        mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
-        actionBarLogo.setVisibility(View.VISIBLE); // hiển thị lại logo trên action bar
-    }
-
     private void setFragment(int fragmentId, Fragment fragment, Object object, boolean showCategory) {
         if (showCategory) { // hiển thị category recycler
             if (fragmentId == HomeFragment.ID) {
@@ -163,31 +93,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, 1);
             }
         } else { // ẩn category recycler view
-            hideCategory(); // ẩn category, logo, tắt navigation view ở action bar
             if (fragmentId == ProductDetailFragment.ID) {
                 // nếu là fragment hiển thị chi tiết sản phẩm
+                hideCategory(true); // ẩn category, logo, tắt navigation view ở action bar
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("product", (ProductModel) object);
                 fragment.setArguments(bundle);
                 Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, 0);
             } else if (fragmentId == SpecificProductFragment.VIEW_ALL_ID) {
-                hideCategory();
+                hideCategory(true); // ẩn category, logo, tắt navigation view ở action bar
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("category", (int) object);
                 fragment.setArguments(bundle);
+                Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, 0);
+            } else if (fragmentId == FavoriteFragment.ID) {
+                // nếu là trang hiển thĩ danh mục sản phâm yêu thích của khách
+                hideCategory(false); // ẩn category, logo, tắt navigation view ở action bar
+                quitApp = false;
+                hideActionBarMenu();
+                getSupportActionBar().setTitle("Yêu thích");
+                getSupportActionBar().setDisplayShowTitleEnabled(true);
                 Reuse.setFragment(getSupportFragmentManager(), R.id.main_framelayout, fragment, 0);
             }
         }
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
 
-    }
-
+    /*
+    *
+    * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
@@ -195,13 +130,180 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+    /*============================================================================================== THIẾT LẬP ITEM CLICKING TRÊN NAVIGATION VIEW
+    *
+    * */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int itemId = item.getItemId();
+        drawerLayout.closeDrawers();
+
+        if (itemId == R.id.nvMall) {
+            if (getSupportFragmentManager().getBackStackEntryCount() != 0)
+                onBackPressed();
+        } else if (itemId == R.id.nvFavorite) {
+            // nếu user nhấp vào mục sản phẩm yêu thích
+            if (DatabaseModel.firebaseUser != null) {
+                setFragment(FavoriteFragment.ID, new FavoriteFragment(), null, false);
+            } else {
+                Toast.makeText(MainActivity.this, "Vui lòng đăng nhập để sử dụng tính năng này.", Toast.LENGTH_LONG).show();
+            }
+        }
 
         return true;
     }
 
+    /*============================================================================================== THIẾT LẬP CATEGORY RECYCLER VIEW
+     * Thiết lập cho thanh category
+     * */
+    private void setCategory() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mCategory.setLayoutManager(layoutManager);
+
+        categoryAdapter = new CategoryAdapter(DatabaseModel.categoryModelList);
+        mCategory.setAdapter(categoryAdapter);
+        categoryAdapter.notifyDataSetChanged();
+    }
+
+    /*============================================================================================== KHI USER NHẤN BUTTON BACK
+    *
+    * */
+    @SuppressLint("NotifyDataSetChanged")
+    @Override
+    public void onBackPressed() {
+        if (quitApp) {
+            quitApp = false;
+            finishAffinity();
+            System.exit(0);
+        } else {
+            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                quitApp = true;
+                Toast.makeText(this, getString(R.string.on_back_press), Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(ProductDetailFragment.class.getSimpleName())) {
+                    super.onBackPressed();
+
+                    if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                        showCategory();
+                    }
+                } else if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(SpecificProductFragment.class.getSimpleName())) {
+                    getSupportFragmentManager().popBackStack(SpecificProductFragment.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    CategoryAdapter.currentTab = 0;
+                    categoryAdapter.notifyDataSetChanged();
+                    showCategory();
+                } else if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(FavoriteFragment.class.getSimpleName())) {
+                    getSupportFragmentManager().popBackStack();
+                    showCategory();
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        quitApp = false;
+    }
+
+    //============================================================================================== THAM CHIẾU ĐẾN CÁC COMPONENT CỦA ACTIVITY
+    private void refer() {
+        toolbar = findViewById(R.id.toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        frameLayout = findViewById(R.id.main_framelayout);
+        mCategory = findViewById(R.id.rvCategory);
+    }
+
+    //============================================================================================== THIẾT LẬP CHO TOOLBAR
+    private void setToolbar() {
+        toolbar.setTitleTextColor(Color.BLACK);
+        actionBarLogo = findViewById(R.id.ivLogo);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_arrow_left); // thiết lập icon trở về
+
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        DrawerArrowDrawable arrowDrawable = toggle.getDrawerArrowDrawable();
+        arrowDrawable.setColor(getColor(R.color.black));
+        toggle.setDrawerArrowDrawable(arrowDrawable);
+        toggle.syncState();
+        drawerLayout.addDrawerListener(toggle);
+    }
+
+    /*============================================================================================== THIẾT LẬP NAVIGATION VIEW
+     * Hàm này giúp hamburger có animation, đồng thời chỉnh background cho selected item view
+     * */
+    private void setNavigationView() {
+        View view =  navigationView.getHeaderView(0);
+        MaterialTextView fullName = view.findViewById(R.id.mtvFullName),
+                email = view.findViewById(R.id.mtvEmail);
+        DatabaseModel.loadMasterUser(fullName, email);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(0).setChecked(true);
+    }
+
+    private void hideCategory(boolean lock) {
+        mCategory.setVisibility(View.GONE); // ẩn recycler view category
+        actionBarLogo.setVisibility(View.GONE); // ẩn logo thương hiệu
+
+        if (lock) {
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            toggle.setDrawerIndicatorEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+        }
+    }
+
+    private void showCategory() {
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false); // xóa button go-back
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
+        toggle.setToolbarNavigationClickListener(null);
+        mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
+        actionBarLogo.setVisibility(View.VISIBLE); // hiển thị lại logo trên action bar
+
+        mSearch.setVisible(true);
+        mBell.setVisible(true);
+        mBag.setVisible(true);
+    }
+
+    private void setFirstFragment() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.main_framelayout, new HomeFragment(), null);
+        transaction.commit();
+    }
+
+    private void hideActionBarMenu() {
+        mSearch.setVisible(false);
+        mBell.setVisible(false);
+        mBag.setVisible(false);
+    }
+
+    /*============================================================================================== THIẾT LẬP MENU TRÊN ACTION BAR
+     *
+     * */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        // tham chiếu đến các item trên menu của action bar
+        mSearch = menu.getItem(0);
+        mBell = menu.getItem(1);
+        mBag = menu.getItem(2);
+
+        return true;
+
+    }
+
+    //============================================================================================== THIẾT LẬP BROADCAST
     private void setBroadcast() {
         BroadcastReceiver broadcast = new BroadcastReceiver() {
             @Override
@@ -237,47 +339,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         };
 
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcast, new IntentFilter("broadcast"));
-    }
-
-    /*
-     * Thiết lập cho thanh category
-     * */
-    private void setCategory() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL); // thiết lập recycler view theo chiều ngang
-        mCategory.setLayoutManager(layoutManager);
-
-        categoryAdapter = new CategoryAdapter(DatabaseModel.categoryModelList);
-        mCategory.setAdapter(categoryAdapter);
-        categoryAdapter.notifyDataSetChanged();
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    @Override
-    public void onBackPressed() {
-        if (quitApp) {
-            quitApp = false;
-            finishAffinity();
-            System.exit(0);
-        } else {
-            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-                quitApp = true;
-                Toast.makeText(this, getString(R.string.on_back_press), Toast.LENGTH_SHORT).show();
-                return;
-            } else {
-                if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(ProductDetailFragment.class.getSimpleName())) {
-                    super.onBackPressed();
-
-                    if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-                        showCategory();
-                    }
-                } else if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(SpecificProductFragment.class.getSimpleName())) {
-                    getSupportFragmentManager().popBackStack(SpecificProductFragment.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    CategoryAdapter.currentTab = 0;
-                    categoryAdapter.notifyDataSetChanged();
-                    showCategory();
-                }
-            }
-        }
     }
 }

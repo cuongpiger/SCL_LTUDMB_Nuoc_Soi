@@ -5,23 +5,23 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nbMall"
+            android:id="@+id/nvMall"
             android:icon="@drawable/icon_store"
             android:title="Cửa hàng" />
         <item
-            android:id="@+id/nbOrder"
+            android:id="@+id/nvOrder"
             android:icon="@drawable/icon_order"
             android:title="Đơn hàng" />
         <item
-            android:id="@+id/nbCart"
+            android:id="@+id/nvCart"
             android:icon="@drawable/icon_bag"
             android:title="Giỏ hàng" />
         <item
-            android:id="@+id/nbFavorite"
+            android:id="@+id/nvFavorite"
             android:icon="@drawable/icon_empty_heart"
             android:title="Yêu thích" />
         <item
-            android:id="@+id/nbProfile"
+            android:id="@+id/nvProfile"
             android:icon="@drawable/icon_person"
             android:title="Tài khoản" />
     </group>

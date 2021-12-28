@@ -10,7 +10,7 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/abNotification"
+        android:id="@+id/abBell"
         android:orderInCategory="100"
         android:icon="@drawable/icon_bell"
         android:title="Thông báo"
@@ -18,7 +18,7 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/abCart"
+        android:id="@+id/abBag"
         android:orderInCategory="100"
         android:icon="@drawable/icon_bag"
         android:title="Giỏ hàng"

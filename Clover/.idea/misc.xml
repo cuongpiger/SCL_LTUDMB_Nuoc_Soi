@@ -81,6 +81,7 @@
         <entry key="app/src/main/res/layout/container_slider_product.xml" value="0.33" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/detail_image_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_forget_password.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
