@@ -96,7 +96,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent("broadcast");
-                    intent.putExtra(ProductDetailFragment.class.getSimpleName(), product);
+                    intent.putExtra(ProductDetailFragment.NAME, product);
                     LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
                 }
             });

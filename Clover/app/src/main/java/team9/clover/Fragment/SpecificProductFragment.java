@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -93,6 +94,9 @@ public class SpecificProductFragment extends Fragment {
 
     private void setActionBar() {
         actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        MainActivity.toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
+        MainActivity.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         MainActivity.actionBarLogo.setVisibility(View.VISIBLE);
         MainActivity.displayActionBarMenu(true);
         MainActivity.displayCategory(true);

@@ -9,6 +9,7 @@ public class UserModel {
 
     List<String> favorite;
     List<String> orders;
+    List<String> address;
     String fullName;
 
     public UserModel() { }
@@ -18,6 +19,7 @@ public class UserModel {
         this.fullName = fullName;
         this.favorite = new ArrayList<>();
         this.orders = new ArrayList<>();
+        this.address = new ArrayList<>();
     }
 
     public List<String> getFavorite() {
@@ -42,6 +44,14 @@ public class UserModel {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public List<String> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<String> address) {
+        this.address = address;
     }
 
     public void addFavorite(String productId) {

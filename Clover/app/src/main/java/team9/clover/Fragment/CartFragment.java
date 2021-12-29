@@ -1,9 +1,13 @@
 package team9.clover.Fragment;
 
 import androidx.appcompat.app.ActionBar;
+
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,7 +49,7 @@ public class CartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
         refer(view);
-//        setEvent();
+        setEvent();
         setData();
         
         return view;
@@ -70,14 +74,18 @@ public class CartFragment extends Fragment {
 
     private void refer(View view) {
         mContainer = view.findViewById(R.id.rvContainer);
-        mContinue = view.findViewById(R.id.mbConfirm);
+        mContinue = view.findViewById(R.id.mbCheck);
     }
 
     private void setEvent() {
         mContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (DatabaseModel.firebaseUser != null) {
+                    Intent intent = new Intent("broadcast");
+                    intent.putExtra("Fragment", ID);
+                    LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+                }
             }
         });
     }
@@ -85,6 +93,9 @@ public class CartFragment extends Fragment {
     private void setActionBar() {
         actionBar.setTitle("Giỏ hàng");
         actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        MainActivity.toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
+        MainActivity.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         MainActivity.actionBarLogo.setVisibility(View.GONE);
         MainActivity.displayActionBarMenu(false);
         MainActivity.displayCategory(false);

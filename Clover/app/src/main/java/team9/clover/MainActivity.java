@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static ImageView actionBarLogo;
     public static MenuItem mSearch, mBell, mBag;
     public static Toolbar toolbar;
+    public static DrawerArrowDrawable arrowDrawable;
 
     CategoryAdapter categoryAdapter;
     HomeFragment homeFragment;
@@ -135,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (itemId != previousNavigation) {
             if (itemId == R.id.nvMall) {
                 clearBackStack();
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
                 previousNavigation = itemId;
             } else if (itemId == R.id.nvFavorite) {
                 // nếu user nhấp vào mục sản phẩm yêu thích
@@ -222,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_arrow_left); // thiết lập icon trở về
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        DrawerArrowDrawable arrowDrawable = toggle.getDrawerArrowDrawable();
+        arrowDrawable = toggle.getDrawerArrowDrawable();
         arrowDrawable.setColor(getColor(R.color.black));
         toggle.setDrawerArrowDrawable(arrowDrawable);
         toggle.syncState();
@@ -296,6 +299,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    public void resetToolbarAndCategory() {
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false); // xóa button go-back
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
+        toggle.setToolbarNavigationClickListener(null);
+        mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
+        actionBarLogo.setVisibility(View.VISIBLE); // hiển thị lại logo trên action bar
+
+        displayActionBarMenu(true);
+    }
+
     //============================================================================================== THIẾT LẬP BROADCAST
     private void setBroadcast() {
         BroadcastReceiver broadcast = new BroadcastReceiver() {
@@ -320,6 +335,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (productBroadcast != null) {
                     setFragment(ProductDetailFragment.ID, new ProductDetailFragment(getSupportActionBar()), productBroadcast);
                 }
+
+                int fragmentId = intent.getIntExtra("Fragment", -1);
+
             }
         };
 

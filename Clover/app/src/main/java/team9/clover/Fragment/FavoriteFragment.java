@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -89,6 +90,8 @@ public class FavoriteFragment extends Fragment {
     private void setActionBar() {
         actionBar.setTitle("Yêu thích");
         actionBar.setDisplayShowTitleEnabled(true);
+        MainActivity.toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
+        MainActivity.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         MainActivity.actionBarLogo.setVisibility(View.GONE);
         MainActivity.displayActionBarMenu(false);
         MainActivity.displayCategory(false);
