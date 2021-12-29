@@ -90,6 +90,7 @@ public class FavoriteFragment extends Fragment {
     private void setActionBar() {
         actionBar.setTitle("Yêu thích");
         actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
         MainActivity.toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
         MainActivity.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         MainActivity.actionBarLogo.setVisibility(View.GONE);
