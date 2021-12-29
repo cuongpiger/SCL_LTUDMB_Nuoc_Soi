@@ -16,8 +16,7 @@ import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
 import java.util.List;
 
-import team9.clover.Fragment.MyCartFragment;
-import team9.clover.Model.CartItemModel;
+import team9.clover.Model.CartItemModell;
 import team9.clover.Module.CartAdapter;
 
 public class DeliveryActivity extends AppCompatActivity {
@@ -48,12 +47,12 @@ public class DeliveryActivity extends AppCompatActivity {
 
         deliveryRecyclerView.setLayoutManager(layoutManager);
 
-        List<CartItemModel> cartItemModelList = new ArrayList<>();
+        List<CartItemModell> cartItemModelList = new ArrayList<>();
 //        int type, String productTitle, String productPrice, String cuttedPrice, int productImage, int freeCoupens, int productQuantity, int offersApplied, int coupensApplied
-        cartItemModelList.add(new CartItemModel(0, R.drawable.p01, "CARO Croptop", 2, "520.000 đ", "720.000 đ", 1, 0, 0));
-        cartItemModelList.add(new CartItemModel(0, R.drawable.hz_product1, "Pink blazer", 0, "520.000 đ", "720.000 đ", 1, 1, 0));
-        cartItemModelList.add(new CartItemModel(0, R.drawable.product1, "Tree Dress", 2, "520.000 đ", "720.000 đ", 1, 2, 0));
-        cartItemModelList.add(new CartItemModel(1, "Tổng tiền (3 sản phẩm)", "1.930.000 đ", "Miễn phí", "1.930.000 đ", "Bạn tiết kiệm được 123.000 đ"));
+        cartItemModelList.add(new CartItemModell(0, R.drawable.p01, "CARO Croptop", 2, "520.000 đ", "720.000 đ", 1, 0, 0));
+        cartItemModelList.add(new CartItemModell(0, R.drawable.hz_product1, "Pink blazer", 0, "520.000 đ", "720.000 đ", 1, 1, 0));
+        cartItemModelList.add(new CartItemModell(0, R.drawable.product1, "Tree Dress", 2, "520.000 đ", "720.000 đ", 1, 2, 0));
+        cartItemModelList.add(new CartItemModell(1, "Tổng tiền (3 sản phẩm)", "1.930.000 đ", "Miễn phí", "1.930.000 đ", "Bạn tiết kiệm được 123.000 đ"));
 
         CartAdapter cartAdapter = new CartAdapter(cartItemModelList);
         deliveryRecyclerView.setAdapter(cartAdapter);

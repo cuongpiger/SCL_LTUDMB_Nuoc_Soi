@@ -13,14 +13,14 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
-import team9.clover.Model.CartItemModel;
+import team9.clover.Model.CartItemModell;
 import team9.clover.R;
 
 public class CartAdapter extends RecyclerView.Adapter {
 
-    List<CartItemModel> cartItemModelList;
+    List<CartItemModell> cartItemModelList;
 
-    public CartAdapter(List<CartItemModel> cartItemModelList) {
+    public CartAdapter(List<CartItemModell> cartItemModelList) {
         this.cartItemModelList = cartItemModelList;
     }
 
@@ -28,10 +28,10 @@ public class CartAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         switch (cartItemModelList.get(position).getType()) {
             case 0:
-                return CartItemModel.CART_ITEM;
+                return CartItemModell.CART_ITEM;
 
             case 1:
-                return CartItemModel.TOTAL_MOUNT;
+                return CartItemModell.TOTAL_MOUNT;
 
             default:
                 return -1;
@@ -42,11 +42,11 @@ public class CartAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
-            case CartItemModel.CART_ITEM:
+            case CartItemModell.CART_ITEM:
                 View cartItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item_layout, parent, false);
                 return new CartItemViewHolder(cartItemView);
 
-            case CartItemModel.TOTAL_MOUNT:
+            case CartItemModell.TOTAL_MOUNT:
                 View cartTotalView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_total_amount_layout, parent, false);
                 return new CartTotalAmountViewHolder(cartTotalView);
 
@@ -58,8 +58,8 @@ public class CartAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (cartItemModelList.get(position).getType()) {
-            case CartItemModel.CART_ITEM:
-                CartItemModel item = cartItemModelList.get(position);
+            case CartItemModell.CART_ITEM:
+                CartItemModell item = cartItemModelList.get(position);
                 int resource = item.getProductImage();
                 int freeCoupens = item.getFreeCoupens();
                 int offersApplied = item.getOffersApplied();
@@ -70,8 +70,8 @@ public class CartAdapter extends RecyclerView.Adapter {
                 ((CartItemViewHolder) holder).setItemDetails(resource, title, freeCoupens, productPrice, cuttedPrice, offersApplied);
                 break;
 
-            case CartItemModel.TOTAL_MOUNT:
-                CartItemModel item1 = cartItemModelList.get(position);
+            case CartItemModell.TOTAL_MOUNT:
+                CartItemModell item1 = cartItemModelList.get(position);
                 String totalItems = item1.getTotalItems();
                 String totalItemPrice = item1.getTotalItemPrice();
                 String deliveryPrice = item1.getDeliveryPrice();
@@ -103,8 +103,8 @@ public class CartAdapter extends RecyclerView.Adapter {
             productTitle = itemView.findViewById(R.id.mtvTitle);
             freeCoupenIcon = itemView.findViewById(R.id.coupen_icon);
             freeCoupens = itemView.findViewById(R.id.free_coupens);
-            productPrice = itemView.findViewById(R.id.mtvPrice);
-            cuttedPrice = itemView.findViewById(R.id.mtvCutPrice);
+            productPrice = itemView.findViewById(R.id.mtvTotal);
+            cuttedPrice = itemView.findViewById(R.id.mtvPrice);
             offersApplied = itemView.findViewById(R.id.offers_applied);
             coupensApplied = itemView.findViewById(R.id.coupens_applied);
             productQuantity = itemView.findViewById(R.id.product_quantity);

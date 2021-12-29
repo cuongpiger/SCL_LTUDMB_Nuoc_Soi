@@ -1,14 +1,9 @@
 package team9.clover.Module;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.util.DisplayMetrics;
-import android.widget.Adapter;
 import android.widget.FrameLayout;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -16,14 +11,11 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.List;
 
-import team9.clover.Adapter.HomePageAdapter;
-import team9.clover.ErrorActivity;
-import team9.clover.Fragment.HomeFragment;
+import team9.clover.Model.CartItemModel;
 import team9.clover.Model.DatabaseModel;
-import team9.clover.Model.HomePageModel;
 import team9.clover.R;
 
 public class Reuse {
@@ -50,17 +42,6 @@ public class Reuse {
         fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
         fragmentTransaction.add(layout.getId(), fragment);
         fragmentTransaction.commit();
-    }
-
-    public static void setFragment(FragmentManager manager, int layoutId, Fragment fragment, int animStyle) {
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        if (animStyle == 0) transaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left, R.anim.slide_from_left, R.anim.slide_to_right);
-        else transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
-
-        transaction.replace(layoutId, fragment);
-        transaction.addToBackStack(fragment.getClass().getSimpleName());
-        transaction.commit();
     }
 
     public static void setFragment(FragmentManager manager, Fragment fragment, String name, int layoutId, int animStyle) {
@@ -128,17 +109,6 @@ public class Reuse {
         return password;
     }
 
-    public static void goToErrorActivity(Activity activity) {
-        activity.finishAffinity();
-        activity.startActivity(new Intent(activity, ErrorActivity.class));
-        Reuse.startActivity(activity);
-    }
-
-    public static int dp2Px(Context contex, int dp) {
-        DisplayMetrics displayMetrics = contex.getResources().getDisplayMetrics();
-        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-    }
-
     public static String getLastFragmentName(FragmentManager manager) {
         int index = manager.getBackStackEntryCount() - 1;
         FragmentManager.BackStackEntry backEntry = manager.getBackStackEntryAt(index);
@@ -159,5 +129,30 @@ public class Reuse {
         }
 
         return res + " đ";
+    }
+
+    public static List<String> getCartIds() {
+        List<String> res = new ArrayList<>();
+        for (CartItemModel cart : DatabaseModel.masterCart) {
+            res.add(cart.getId());
+        }
+
+        return res;
+    }
+
+    public static boolean updateMasterCart(String id, String size, long quantity, CartItemModel newCart) {
+        if (newCart != null) {
+            DatabaseModel.masterCart.add(newCart);
+            return true;
+        }
+
+        for (CartItemModel cart : DatabaseModel.masterCart) {
+            if (cart.getId().equals(id)) {
+                cart.addCart(size, quantity);
+                return true;
+            }
+        }
+
+        return false;
     }
 }

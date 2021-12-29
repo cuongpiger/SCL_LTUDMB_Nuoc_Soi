@@ -60,8 +60,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             mImage = itemView.findViewById(R.id.rivImage);
             mTitle = itemView.findViewById(R.id.mtvTitle);
             mSize = itemView.findViewById(R.id.mtvSize);
-            mPrice = itemView.findViewById(R.id.mtvPrice);
-            mCutPrice = itemView.findViewById(R.id.mtvCutPrice);
+            mPrice = itemView.findViewById(R.id.mtvTotal);
+            mCutPrice = itemView.findViewById(R.id.mtvPrice);
             mFavorite = itemView.findViewById(R.id.fabFavorite);
         }
 

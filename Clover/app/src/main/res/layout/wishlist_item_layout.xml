@@ -98,7 +98,7 @@
         app:layout_constraintStart_toEndOf="@+id/linearLayout" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mtvPrice"
+        android:id="@+id/mtvTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1.290.000 đ"
@@ -109,7 +109,7 @@
         app:layout_constraintStart_toStartOf="@+id/mtvTitle" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mtvCutPrice"
+        android:id="@+id/mtvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -117,18 +117,18 @@
         android:text="750.000 đ"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/mtvPrice"
-        app:layout_constraintStart_toEndOf="@+id/mtvPrice" />
+        app:layout_constraintBottom_toBottomOf="@+id/mtvTotal"
+        app:layout_constraintStart_toEndOf="@+id/mtvTotal" />
 
     <View
         android:id="@+id/cutBar"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/gray_dark"
-        app:layout_constraintBottom_toBottomOf="@+id/mtvCutPrice"
-        app:layout_constraintEnd_toEndOf="@+id/mtvCutPrice"
-        app:layout_constraintStart_toStartOf="@+id/mtvCutPrice"
-        app:layout_constraintTop_toTopOf="@+id/mtvCutPrice" />
+        app:layout_constraintBottom_toBottomOf="@+id/mtvPrice"
+        app:layout_constraintEnd_toEndOf="@+id/mtvPrice"
+        app:layout_constraintStart_toStartOf="@+id/mtvPrice"
+        app:layout_constraintTop_toTopOf="@+id/mtvPrice" />
 
     <ImageButton
         android:id="@+id/delete_button"
@@ -141,5 +141,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/rivImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rivImage"
-        app:srcCompat="@drawable/rubbish" />
+        app:srcCompat="@drawable/icon_rubbish" />
 </androidx.constraintlayout.widget.ConstraintLayout>

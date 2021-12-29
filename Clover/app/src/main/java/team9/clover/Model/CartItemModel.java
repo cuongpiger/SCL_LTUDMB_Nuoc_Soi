@@ -1,152 +1,103 @@
 package team9.clover.Model;
 
+import android.annotation.SuppressLint;
+import android.util.Pair;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 public class CartItemModel {
+    String id, image, title, order;
+    Map<String, Long> choice;
+    long price, total;
 
-    public static final int CART_ITEM = 0;
-    public static final int TOTAL_MOUNT = 1;
+    public CartItemModel() { }
 
-    private int type;
-
-    public int getType() {
-        return type;
+    public CartItemModel(String id, String title, String image, long price, String size, long quantity) {
+        this.id = id;
+        this.title = title;
+        this.image = image;
+        this.price = price;
+        this.choice = Collections.singletonMap(size, quantity);
+        this.total = price * quantity;
+        this.order = "";
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public String getId() {
+        return id;
     }
 
-    /********************************************************************************** Cart item */
-    String productTitle, productPrice, cuttedPrice;
-    int productImage, freeCoupens, productQuantity, offersApplied, coupensApplied;
-
-    public CartItemModel(int type, int productImage, String productTitle, int freeCoupens, String productPrice, String cuttedPrice, int productQuantity, int offersApplied, int coupensApplied) {
-        this.type = type;
-        this.productTitle = productTitle;
-        this.productPrice = productPrice;
-        this.cuttedPrice = cuttedPrice;
-        this.productImage = productImage;
-        this.freeCoupens = freeCoupens;
-        this.productQuantity = productQuantity;
-        this.offersApplied = offersApplied;
-        this.coupensApplied = coupensApplied;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getProductTitle() {
-        return productTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setProductTitle(String productTitle) {
-        this.productTitle = productTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getProductPrice() {
-        return productPrice;
+    public String getImage() {
+        return image;
     }
 
-    public void setProductPrice(String productPrice) {
-        this.productPrice = productPrice;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getCuttedPrice() {
-        return cuttedPrice;
+    public String getOrder() {
+        return order;
     }
 
-    public void setCuttedPrice(String cuttedPrice) {
-        this.cuttedPrice = cuttedPrice;
+    public void setOrder(String order) {
+        this.order = order;
     }
 
-    public int getProductImage() {
-        return productImage;
+    public Map<String, Long> getChoice() {
+        return choice;
     }
 
-    public void setProductImage(int productImage) {
-        this.productImage = productImage;
+    public void setChoice(Map<String, Long> choice) {
+        this.choice = choice;
     }
 
-    public int getFreeCoupens() {
-        return freeCoupens;
+    public long getPrice() {
+        return price;
     }
 
-    public void setFreeCoupens(int freeCoupens) {
-        this.freeCoupens = freeCoupens;
+    public void setPrice(long price) {
+        this.price = price;
     }
 
-    public int getProductQuantity() {
-        return productQuantity;
+    public long getTotal() {
+        return total;
     }
 
-    public void setProductQuantity(int productQuantity) {
-        this.productQuantity = productQuantity;
+    public void setTotal(long total) {
+        this.total = total;
     }
 
-    public int getOffersApplied() {
-        return offersApplied;
+    @SuppressLint("DefaultLocale")
+    public Pair<String, Long> takeSize() {
+        List<String> arr = new ArrayList<>();
+        long quantity = 0;
+
+        for (Map.Entry<String, Long> entry : choice.entrySet()){
+            arr.add(String.format("%s (x%d) ", entry.getKey(), entry.getValue()));
+            quantity += entry.getValue();
+        }
+
+        return new Pair<String, Long>(String.join(", ", arr), quantity);
     }
 
-    public void setOffersApplied(int offersApplied) {
-        this.offersApplied = offersApplied;
+    public void addCart(String size, long quantity) {
+        total = 0;
+        choice.put(size, choice.getOrDefault(size, (long) 0) + quantity);
+        choice.forEach((key, value) -> total += (price * value));
     }
-
-    public int getCoupensApplied() {
-        return coupensApplied;
-    }
-
-    public void setCoupensApplied(int coupensApplied) {
-        this.coupensApplied = coupensApplied;
-    }
-    /**********************************************************************************************/
-
-    /********************************************************************************* Cart Total */
-    private String totalItems, totalItemPrice, deliveryPrice, savedAmount, totalAmount;
-
-    public CartItemModel(int type, String totalItems, String totalItemPrice, String deliveryPrice, String totalAmount, String savedAmount) {
-        this.type = type;
-        this.totalItems = totalItems;
-        this.totalItemPrice = totalItemPrice;
-        this.deliveryPrice = deliveryPrice;
-        this.totalAmount = totalAmount;
-        this.savedAmount = savedAmount;
-    }
-
-    public String getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(String totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public String getTotalItems() {
-        return totalItems;
-    }
-
-    public void setTotalItems(String totalItems) {
-        this.totalItems = totalItems;
-    }
-
-    public String getTotalItemPrice() {
-        return totalItemPrice;
-    }
-
-    public void setTotalItemPrice(String totalItemPrice) {
-        this.totalItemPrice = totalItemPrice;
-    }
-
-    public String getDeliveryPrice() {
-        return deliveryPrice;
-    }
-
-    public void setDeliveryPrice(String deliveryPrice) {
-        this.deliveryPrice = deliveryPrice;
-    }
-
-    public String getSavedAmount() {
-        return savedAmount;
-    }
-
-    public void setSavedAmount(String savedAmount) {
-        this.savedAmount = savedAmount;
-    }
-
-    /**********************************************************************************************/
 }

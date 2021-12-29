@@ -14,14 +14,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
+import team9.clover.Module.CartAdapter;
 import team9.clover.R;
 
 public class DatabaseModel {
@@ -31,7 +30,7 @@ public class DatabaseModel {
     public static FirebaseAuth firebaseAuth = null;
 
     public static UserModel masterUser = null;
-    public static List<CartModel> masterCart = null;
+    public static List<CartItemModel> masterCart = null;
     public static List<CategoryModel> categoryModelList = new ArrayList<>();
     public static List<HomePageModel> homePageModelList = new ArrayList<>();
 
@@ -172,6 +171,12 @@ public class DatabaseModel {
                 .whereEqualTo(field, (long) value).get();
     }
 
+    public static Task<DocumentSnapshot> loadSingleProduct(String value) {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        return firebaseFirestore.collection(ProductModel.class.getSimpleName())
+                .document(value).get();
+    }
+
     public static Task<QuerySnapshot> loadProduct(String field, List<String> valueList) {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
         return firebaseFirestore.collection(ProductModel.class.getSimpleName())
@@ -198,14 +203,14 @@ public class DatabaseModel {
                                 fullName.setText(masterUser.getFullName());
                                 email.setText(firebaseUser.getEmail());
                                 firebaseFirestore.collection(UserModel.class.getSimpleName())
-                                        .document(firebaseUser.getUid()).collection(CartModel.class.getSimpleName())
+                                        .document(firebaseUser.getUid()).collection(CartItemModel.class.getSimpleName())
                                         .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if (task.isSuccessful()) {
                                             masterCart = new ArrayList<>();
                                             for (QueryDocumentSnapshot snapshot : task.getResult()) {
-                                                masterCart.add(snapshot.toObject(CartModel.class));
+                                                masterCart.add(snapshot.toObject(CartItemModel.class));
                                             }
                                         }
                                     }
@@ -227,10 +232,20 @@ public class DatabaseModel {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
         CollectionReference reference = firebaseFirestore.collection(UserModel.class.getSimpleName())
                 .document(firebaseUser.getUid())
-                .collection(CartModel.class.getSimpleName());
-        for (CartModel cart : masterCart) {
-            reference.document(cart.genKey()).set(cart);
+                .collection(CartItemModel.class.getSimpleName());
+
+        for (CartItemModel cart : masterCart) {
+            reference.document(cart.getId()).set(cart);
         }
+    }
+
+    public static Task<Void> removeMasterCard(String documentId) {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+
+        return firebaseFirestore.collection(UserModel.class.getSimpleName())
+                    .document(firebaseUser.getUid())
+                    .collection(CartItemModel.class.getSimpleName())
+                    .document(documentId).delete();
     }
 
 

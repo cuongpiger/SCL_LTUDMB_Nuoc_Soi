@@ -25,7 +25,6 @@ import java.util.List;
 import team9.clover.Adapter.FavoriteAdapter;
 import team9.clover.MainActivity;
 import team9.clover.Model.DatabaseModel;
-import team9.clover.Model.HomePageModel;
 import team9.clover.Model.ProductModel;
 import team9.clover.R;
 

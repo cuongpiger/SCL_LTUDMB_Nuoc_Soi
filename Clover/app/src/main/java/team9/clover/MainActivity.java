@@ -33,7 +33,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import java.util.Stack;
+
 import team9.clover.Adapter.CategoryAdapter;
+import team9.clover.Fragment.CartFragment;
 import team9.clover.Fragment.FavoriteFragment;
 import team9.clover.Fragment.HomeFragment;
 import team9.clover.Fragment.ProductDetailFragment;
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private static int previousNavigation = 0;
     private static boolean quitApp = false;
+    private static Stack<Integer> stackNavi = new Stack<>();
 
 
     @Override
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     * */
     private void setFragment(int fragmentId, Fragment fragment, Object object) {
         Bundle bundle = new Bundle();
+        quitApp = false;
         if (fragmentId == ProductDetailFragment.ID) {
             activeBackButton();
             bundle.putSerializable(ProductDetailFragment.NAME, (ProductModel) object);
@@ -96,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Reuse.setFragment(getSupportFragmentManager(), fragment, ViewMoreFragment.NAME, R.id.main_framelayout, 0);
         } else if (fragmentId == FavoriteFragment.ID) {
             Reuse.setFragment(getSupportFragmentManager(), fragment, FavoriteFragment.NAME, R.id.main_framelayout, 0);
+        } else if (fragmentId == CartFragment.ID) {
+            Reuse.setFragment(getSupportFragmentManager(), fragment, CartFragment.NAME, R.id.main_framelayout, 0);
         }
     }
 
@@ -105,6 +112,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
+
+        if (itemId == R.id.abBag) {
+            // user chọn giỏ hàng
+            clearBackStack();
+            previousNavigation = R.id.nvCart;
+            navigationView.getMenu().findItem(previousNavigation).setChecked(true);
+            setFragment(CartFragment.ID, new CartFragment(getSupportActionBar()), null);
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -131,7 +146,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Toast.makeText(MainActivity.this, "Vui lòng đăng nhập để sử dụng tính năng này.", Toast.LENGTH_LONG).show();
                     navigationView.getMenu().findItem(previousNavigation).setChecked(true);
                 }
-
+            } else if (itemId == R.id.nvCart) {
+                clearBackStack();
+                previousNavigation = R.id.nvCart;
+                setFragment(CartFragment.ID, new CartFragment(getSupportActionBar()), null);
             }
         }
 
@@ -170,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (lastFragmentName.equals(ProductDetailFragment.NAME) ||
                         lastFragmentName.equals(ViewMoreFragment.NAME)) {
                     getSupportFragmentManager().popBackStack();
-                } else if (Reuse.getLastFragmentName(getSupportFragmentManager()).equals(SpecificProductFragment.NAME)) {
+                } else if (lastFragmentName.equals(SpecificProductFragment.NAME)) {
                     getSupportFragmentManager().popBackStack(SpecificProductFragment.NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     CategoryAdapter.currentTab = 0;
                     categoryAdapter.notifyDataSetChanged();
@@ -235,19 +253,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    public void resetToolbarAndCategory() {
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false); // xóa button go-back
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
-        toggle.setToolbarNavigationClickListener(null);
-        mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
-        actionBarLogo.setVisibility(View.VISIBLE); // hiển thị lại logo trên action bar
-
-        displayActionBarMenu(true);
-    }
-
-
     private void setFirstFragment() {
         homeFragment = new HomeFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -299,13 +304,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 int screen = intent.getIntExtra(ViewMoreFragment.NAME, -1);
                 if (screen != -1) {
-                    quitApp = false;
                     setFragment(ViewMoreFragment.ID, new ViewMoreFragment(getSupportActionBar()), (int) screen);
                 }
 
                 int category = intent.getIntExtra(SpecificProductFragment.NAME, -1);
                 if (category != -1) {
-                    quitApp = false;
                     if (category == 0) {
                         clearBackStack();
                     } else {
@@ -315,7 +318,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 ProductModel productBroadcast = (ProductModel) intent.getSerializableExtra(ProductDetailFragment.NAME);
                 if (productBroadcast != null) {
-                    quitApp = false;
                     setFragment(ProductDetailFragment.ID, new ProductDetailFragment(getSupportActionBar()), productBroadcast);
                 }
             }

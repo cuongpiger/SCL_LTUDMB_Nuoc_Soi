@@ -75,8 +75,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             priceCut = itemView.findViewById(R.id.cutBar);
             productTitle = itemView.findViewById(R.id.mtvTitle);
             freeCoupens = itemView.findViewById(R.id.free_coupens);
-            productPrice = itemView.findViewById(R.id.mtvPrice);
-            cuttedPrice = itemView.findViewById(R.id.mtvCutPrice);
+            productPrice = itemView.findViewById(R.id.mtvTotal);
+            cuttedPrice = itemView.findViewById(R.id.mtvPrice);
             rating = itemView.findViewById(R.id.rating);
             totalRatings = itemView.findViewById(R.id.total_rating);
         }

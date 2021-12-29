@@ -74,7 +74,7 @@
         app:layout_constraintTop_toTopOf="@+id/materialTextView4" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mtvPrice"
+        android:id="@+id/mtvTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -94,8 +94,8 @@
         android:gravity="bottom"
         android:text="750.000 đ"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/mtvPrice"
-        app:layout_constraintStart_toEndOf="@+id/mtvPrice" />
+        app:layout_constraintBottom_toBottomOf="@+id/mtvTotal"
+        app:layout_constraintStart_toEndOf="@+id/mtvTotal" />
 
     <View
         android:id="@+id/vCutBar"

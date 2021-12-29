@@ -56,7 +56,7 @@ public class SliderProductAdapter extends RecyclerView.Adapter<SliderProductAdap
             mImage = itemView.findViewById(R.id.ivImage);
             mTitle = itemView.findViewById(R.id.mtvProductTitle);
             mSize = itemView.findViewById(R.id.mtvSize);
-            mPrice = itemView.findViewById(R.id.mtvPrice);
+            mPrice = itemView.findViewById(R.id.mtvTotal);
         }
 
         private void set(ProductModel productModel) {

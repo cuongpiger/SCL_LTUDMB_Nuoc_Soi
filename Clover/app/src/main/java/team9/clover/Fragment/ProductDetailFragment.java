@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.text.InputFilter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +28,6 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.dialog.MaterialDialogs;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
@@ -38,15 +35,15 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import team9.clover.Adapter.ProductDetailAdapter;
 import team9.clover.Adapter.ProductImageAdapter;
 import team9.clover.Adapter.SliderProductAdapter;
 import team9.clover.MainActivity;
-import team9.clover.Model.CartModel;
+import team9.clover.Model.CartItemModel;
 import team9.clover.Model.DatabaseModel;
-import team9.clover.Model.HomePageModel;
 import team9.clover.Model.ProductModel;
 import team9.clover.Module.Reuse;
 import team9.clover.R;
@@ -94,7 +91,7 @@ public class ProductDetailFragment extends Fragment {
         mIndicator = view.findViewById(R.id.tlIndicator);
         mTitle = view.findViewById(R.id.mtvProductTitle);
         mSize = view.findViewById(R.id.mtvSize);
-        mPrice = view.findViewById(R.id.mtvPrice);
+        mPrice = view.findViewById(R.id.mtvTotal);
         mCutPrice = view.findViewById(R.id.cutBar);
         mFavourite = view.findViewById(R.id.fabFavorite);
         mMore = view.findViewById(R.id.tlMore);
@@ -233,14 +230,25 @@ public class ProductDetailFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 quantity = Integer.parseInt(editText.getText().toString());
-                if (quantity > 0)
+                if (quantity > 0) {
                     dialog.dismiss();
-                    CartModel cart = new CartModel(productModel.getId(), selectedSize, (long) quantity);
-                    cart.addCart(masterCart);
+                    Toast.makeText(getContext(), "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_LONG).show();
                     isChanged = true;
+
+                    if (!Reuse.updateMasterCart(productModel.getId(), selectedSize, (long) quantity, null)) {
+                        CartItemModel newCart = new CartItemModel(
+                                productModel.getId(),
+                                productModel.getTitle(),
+                                productModel.getImage().get(0),
+                                productModel.getPrice(), selectedSize, (long) quantity);
+
+                        Reuse.updateMasterCart(productModel.getId(), selectedSize, (long) quantity, newCart);
+                    }
+                } else {
+                    editText.setError("> 0");
                 }
             }
-        );
+        });
 
         dialog.show();
     }

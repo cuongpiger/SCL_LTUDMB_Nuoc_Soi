@@ -60,7 +60,7 @@ public class GridProductAdapter extends BaseAdapter {
             ImageView productImage = view.findViewById(R.id.ivProduct);
             MaterialTextView productTitle = view.findViewById(R.id.mtvProductTitle);
             MaterialTextView productStuff = view.findViewById(R.id.mtvSize);
-            MaterialTextView productPrice = view.findViewById(R.id.mtvPrice);
+            MaterialTextView productPrice = view.findViewById(R.id.mtvTotal);
 
             HorizontalProductScroll product = horizontalProductScrollList.get(position);
             Glide.with(view.getContext()).load(product.getImage()).apply(new RequestOptions().placeholder(R.drawable.product1)).into(productImage);

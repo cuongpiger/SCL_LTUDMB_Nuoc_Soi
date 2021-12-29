@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/mtvTitle" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mtvPrice"
+        android:id="@+id/mtvTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -68,16 +68,16 @@
         app:layout_constraintTop_toBottomOf="@+id/free_coupens" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mtvCutPrice"
+        android:id="@+id/mtvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:gravity="bottom"
         android:text="750.000 đ"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/mtvPrice"
-        app:layout_constraintEnd_toStartOf="@+id/mtvPrice"
-        app:layout_constraintTop_toTopOf="@+id/mtvPrice"
+        app:layout_constraintBottom_toBottomOf="@+id/mtvTotal"
+        app:layout_constraintEnd_toStartOf="@+id/mtvTotal"
+        app:layout_constraintTop_toTopOf="@+id/mtvTotal"
         app:layout_constraintVertical_bias="0.8" />
 
     <View
@@ -85,10 +85,10 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/gray_dark"
-        app:layout_constraintBottom_toBottomOf="@+id/mtvCutPrice"
-        app:layout_constraintEnd_toEndOf="@+id/mtvCutPrice"
-        app:layout_constraintStart_toStartOf="@+id/mtvCutPrice"
-        app:layout_constraintTop_toTopOf="@+id/mtvCutPrice" />
+        app:layout_constraintBottom_toBottomOf="@+id/mtvPrice"
+        app:layout_constraintEnd_toEndOf="@+id/mtvPrice"
+        app:layout_constraintStart_toStartOf="@+id/mtvPrice"
+        app:layout_constraintTop_toTopOf="@+id/mtvPrice" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/offers_applied"
@@ -97,8 +97,8 @@
         android:text="Giá niêm yết"
         android:textColor="@color/green"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/mtvPrice"
-        app:layout_constraintTop_toBottomOf="@+id/mtvPrice" />
+        app:layout_constraintEnd_toEndOf="@+id/mtvTotal"
+        app:layout_constraintTop_toBottomOf="@+id/mtvTotal" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/coupens_applied"
@@ -108,7 +108,7 @@
         android:text="Giá khuyến mãi"
         android:textColor="@color/red"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/mtvPrice"
+        app:layout_constraintEnd_toEndOf="@+id/mtvTotal"
         app:layout_constraintTop_toBottomOf="@+id/offers_applied" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -124,7 +124,7 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/rivImage"
         app:layout_constraintStart_toStartOf="@+id/mtvTitle"
-        app:layout_constraintTop_toBottomOf="@+id/mtvCutPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/mtvPrice" />
 
     <LinearLayout
         android:id="@+id/coupen_redemption_layout"
@@ -184,7 +184,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:drawableStart="@drawable/rubbish"
+            android:drawableStart="@drawable/icon_rubbish"
             android:drawableTint="@color/black"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,7 +51,7 @@ public class SpecificProductAdapter extends BaseAdapter {
         ImageView mImage = view.findViewById(R.id.ivImage);
         MaterialTextView mTitle = view.findViewById(R.id.mtvProductTitle),
                 mSize = view.findViewById(R.id.mtvSize),
-                mPrice = view.findViewById(R.id.mtvPrice);
+                mPrice = view.findViewById(R.id.mtvTotal);
 
         ProductModel product = productList.get(position);
         if (product.getImage() != null) {

@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -29,7 +28,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import team9.clover.Fragment.ProductDetailFragment;
-import team9.clover.Fragment.SpecificProductFragment;
 import team9.clover.Fragment.ViewMoreFragment;
 import team9.clover.Model.BannerModel;
 import team9.clover.Model.CarouselModel;
@@ -345,7 +343,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 ImageView mImageItem = mChild.findViewById(R.id.ivImage);
                 MaterialTextView mTitleItem = mChild.findViewById(R.id.mtvProductTitle),
                         mSizeItem = mChild.findViewById(R.id.mtvSize),
-                        mPriceItem = mChild.findViewById(R.id.mtvPrice);
+                        mPriceItem = mChild.findViewById(R.id.mtvTotal);
 
                 ProductModel productModel = productModelList.get(i);
                 Glide.with(itemView.getContext()).load(productModel.getImage().get(0)).into(mImageItem);
