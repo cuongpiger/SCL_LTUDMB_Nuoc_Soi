@@ -15,8 +15,10 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
@@ -280,9 +282,15 @@ public class DatabaseModel {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
 
         return firebaseFirestore.collection(UserModel.class.getSimpleName())
-                    .document(firebaseUser.getUid())
+                    .document(masterUid)
                     .collection(CartItemModel.class.getSimpleName())
                     .document(documentId).delete();
+    }
+
+    public static Task<QuerySnapshot> loadOrders() {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        return firebaseFirestore.collection(UserModel.class.getSimpleName()).document(masterUid)
+                .collection(OrderModel.class.getSimpleName()).orderBy("order",  Query.Direction.DESCENDING).get();
     }
 
 

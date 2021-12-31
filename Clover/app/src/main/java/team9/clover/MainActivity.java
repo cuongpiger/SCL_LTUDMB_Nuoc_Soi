@@ -40,6 +40,7 @@ import team9.clover.Fragment.CartFragment;
 import team9.clover.Fragment.DeliveryFragment;
 import team9.clover.Fragment.FavoriteFragment;
 import team9.clover.Fragment.HomeFragment;
+import team9.clover.Fragment.OrdersFragment;
 import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Fragment.SpecificProductFragment;
 import team9.clover.Fragment.ViewMoreFragment;
@@ -108,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (fragmentId == DeliveryFragment.ID) {
             activeBackButton();
             Reuse.setFragment(getSupportFragmentManager(), fragment, DeliveryFragment.NAME, R.id.main_framelayout, 0);
+        } else if (fragmentId == OrdersFragment.ID) {
+            Reuse.setFragment(getSupportFragmentManager(), fragment, OrdersFragment.NAME, R.id.main_framelayout, 0);
         }
     }
 
@@ -157,6 +160,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 clearBackStack();
                 previousNavigation = R.id.nvCart;
                 setFragment(CartFragment.ID, new CartFragment(getSupportActionBar()), null);
+            } else if (itemId == R.id.nvOrder) {
+                clearBackStack();
+                previousNavigation = R.id.nvOrder;
+                setFragment(OrdersFragment.ID, new OrdersFragment(getSupportActionBar()), null);
             }
         }
 

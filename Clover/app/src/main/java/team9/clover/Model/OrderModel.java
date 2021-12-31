@@ -4,6 +4,7 @@ import com.google.firebase.Timestamp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class OrderModel {
     String id, address, fullName, phone;
@@ -97,11 +98,31 @@ public class OrderModel {
         this.order = order;
     }
 
+    public String takeId() {
+        return id.substring(0, 8).toUpperCase();
+    }
+
     public long takeShipTotal() {
         return total + ship;
     }
 
     public void addDate(String newDate) {
         date.add(newDate);
+    }
+
+    public String takeStatus() {
+        if (date.size() == 3) {
+            return "Giao hàng thành công.";
+        } else if (date.size() == 2) {
+            return "Đang giao hàng.";
+        } else if (date.size() == 1){
+            return "Đang xử lý.";
+        } else {
+            return"Sự cố.";
+        }
+    }
+
+    public int takeSize() {
+        return date.size();
     }
 }

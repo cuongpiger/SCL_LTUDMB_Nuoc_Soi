@@ -64,8 +64,8 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             super(itemView);
             productImage = itemView.findViewById(R.id.rivImage);
             productTitle = itemView.findViewById(R.id.mtvTitle);
-            deliveryStatus = itemView.findViewById(R.id.deliveryStatus);
-            deliveryDot = itemView.findViewById(R.id.deliveryDot);
+            deliveryStatus = itemView.findViewById(R.id.mtvStatus);
+            deliveryDot = itemView.findViewById(R.id.ivDot);
             rateNowContainer = itemView.findViewById(R.id.rate_now_container);
 
             itemView.setOnClickListener(new View.OnClickListener() {
