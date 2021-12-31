@@ -2,7 +2,6 @@ package team9.clover.Fragment;
 
 import static team9.clover.Model.DatabaseModel.firebaseUser;
 import static team9.clover.Model.DatabaseModel.masterUser;
-import static team9.clover.Model.DatabaseModel.masterCart;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -236,14 +235,14 @@ public class ProductDetailFragment extends Fragment {
                     Toast.makeText(getContext(), "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_LONG).show();
                     isChanged = true;
 
-                    if (!Reuse.updateMasterCart(productModel.getId(), selectedSize, (long) quantity, null)) {
+                    if (!Reuse.updateMasterCart(productModel.getId(), selectedSize, quantity, null)) {
                         CartItemModel newCart = new CartItemModel(
                                 productModel.getId(),
                                 productModel.getTitle(),
                                 productModel.getImage().get(0),
-                                productModel.getPrice(), selectedSize, (long) quantity);
+                                productModel.getPrice(), selectedSize, quantity);
 
-                        Reuse.updateMasterCart(productModel.getId(), selectedSize, (long) quantity, newCart);
+                        Reuse.updateMasterCart(productModel.getId(), selectedSize, quantity, newCart);
                     }
                 } else {
                     editText.setError("> 0");

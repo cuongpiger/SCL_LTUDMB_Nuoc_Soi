@@ -6,11 +6,12 @@ import android.util.Pair;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CartItemModel {
-    String id, image, title, order;
+    String id, image, title;
     Map<String, Long> choice;
     long price, total;
 
@@ -21,9 +22,9 @@ public class CartItemModel {
         this.title = title;
         this.image = image;
         this.price = price;
-        this.choice = Collections.singletonMap(size, quantity);
+        this.choice = new HashMap<>();
+        this.choice.put(size, quantity);
         this.total = price * quantity;
-        this.order = "";
     }
 
     public String getId() {
@@ -34,14 +35,6 @@ public class CartItemModel {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getImage() {
         return image;
     }
@@ -50,12 +43,12 @@ public class CartItemModel {
         this.image = image;
     }
 
-    public String getOrder() {
-        return order;
+    public String getTitle() {
+        return title;
     }
 
-    public void setOrder(String order) {
-        this.order = order;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Map<String, Long> getChoice() {

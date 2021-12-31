@@ -1,5 +1,7 @@
 package team9.clover.Fragment;
 
+import static team9.clover.Model.DatabaseModel.masterOrder;
+
 import androidx.appcompat.app.ActionBar;
 
 import android.content.Intent;
@@ -15,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
@@ -35,6 +38,7 @@ public class CartFragment extends Fragment {
 
     RecyclerView mContainer;
     MaterialButton mContinue;
+    MaterialTextView mTotalCart;
 
     ActionBar actionBar;
 
@@ -56,9 +60,12 @@ public class CartFragment extends Fragment {
     }
 
     private void setData() {
+        DatabaseModel.refreshMasterOrder();
+        mTotalCart.setText(Reuse.vietnameseCurrency(masterOrder.getTotal()));
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        CartAdapter adapter = new CartAdapter(DatabaseModel.masterCart);
+        CartAdapter adapter = new CartAdapter(DatabaseModel.masterCart, mTotalCart);
         mContainer.setLayoutManager(layoutManager);
         mContainer.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -75,6 +82,7 @@ public class CartFragment extends Fragment {
     private void refer(View view) {
         mContainer = view.findViewById(R.id.rvContainer);
         mContinue = view.findViewById(R.id.mbCheck);
+        mTotalCart = view.findViewById(R.id.mtvTotalCart);
     }
 
     private void setEvent() {
@@ -82,8 +90,13 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (DatabaseModel.firebaseUser != null) {
+                    if (masterOrder.getTotal() == 0) {
+                        Toast.makeText(getContext(), "Giỏ hàng trống", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
                     Intent intent = new Intent("broadcast");
-                    intent.putExtra("Fragment", ID);
+                    intent.putExtra("Fragment", DeliveryFragment.ID);
                     LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
                 }
             }

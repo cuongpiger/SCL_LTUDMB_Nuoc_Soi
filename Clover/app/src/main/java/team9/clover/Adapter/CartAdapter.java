@@ -1,5 +1,7 @@
 package team9.clover.Adapter;
 
+import static team9.clover.Model.DatabaseModel.masterOrder;
+
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,9 +41,11 @@ import team9.clover.R;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     List<CartItemModel> productList;
+    MaterialTextView mTotalCart;
 
-    public CartAdapter(List<CartItemModel> productList) {
+    public CartAdapter(List<CartItemModel> productList, MaterialTextView mTotalCart) {
         this.productList = productList;
+        this.mTotalCart = mTotalCart;
     }
 
     @NonNull
@@ -101,6 +105,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                                            if (task.isSuccessful()) {
                                                productList.remove(position);
                                                notifyDataSetChanged();
+                                               mTotalCart.setText(Reuse.vietnameseCurrency(masterOrder.getTotal()));
                                            }
                                         });
                                 dialogInterface.dismiss();
@@ -179,6 +184,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                     Reuse.updateMasterCart(cart.getId(), selectedSize, (-1*cart.getChoice().get(selectedSize) + quantity), null);
                     notifyDataSetChanged();
                     Toast.makeText(itemView.getContext(), "Cập nhật thành công.", Toast.LENGTH_LONG).show();
+                    mTotalCart.setText(Reuse.vietnameseCurrency(masterOrder.getTotal()));
                 }
             });
 

@@ -85,6 +85,7 @@
         <entry key="app/src/main/res/layout/content_main.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/detail_image_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/dialog_add_cart.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/dialog_address.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_delivery.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.22532894736842105" />

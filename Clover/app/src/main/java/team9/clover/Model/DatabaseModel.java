@@ -1,5 +1,6 @@
 package team9.clover.Model;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
@@ -7,9 +8,11 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -18,6 +21,7 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import team9.clover.Module.CartAdapter;
@@ -29,10 +33,13 @@ public class DatabaseModel {
     public static FirebaseFirestore firebaseFirestore = null;
     public static FirebaseAuth firebaseAuth = null;
 
+    public static String masterUid = "";
     public static UserModel masterUser = null;
-    public static List<CartItemModel> masterCart = null;
+    public static OrderModel masterOrder = null;
+    public static List<CartItemModel> masterCart = new ArrayList<>();
     public static List<CategoryModel> categoryModelList = new ArrayList<>();
     public static List<HomePageModel> homePageModelList = new ArrayList<>();
+
 
 
     /*
@@ -40,6 +47,9 @@ public class DatabaseModel {
      * */
     public static void getCurrentUser() {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            masterUid = firebaseUser.getUid();
+        }
     }
 
     /*
@@ -190,49 +200,76 @@ public class DatabaseModel {
     * Load thông tin của user từ data base lên
     * */
     public static void loadMasterUser(MaterialTextView fullName, MaterialTextView email) {
-        if (masterUser == null && firebaseUser != null) {
-            if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
-            firebaseFirestore.collection(UserModel.class.getSimpleName())
-                    .document(firebaseUser.getUid())
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                masterUser = task.getResult().toObject(UserModel.class);
-                                fullName.setText(masterUser.getFullName());
-                                email.setText(firebaseUser.getEmail());
-                                firebaseFirestore.collection(UserModel.class.getSimpleName())
-                                        .document(firebaseUser.getUid()).collection(CartItemModel.class.getSimpleName())
-                                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            masterCart = new ArrayList<>();
-                                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
-                                                masterCart.add(snapshot.toObject(CartItemModel.class));
-                                            }
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    });
+        if (!masterUid.isEmpty()) {
+            if (firebaseFirestore != null) firebaseFirestore = FirebaseFirestore.getInstance();
+            DocumentReference dr = firebaseFirestore.collection(UserModel.class.getSimpleName()).document(masterUid);
+            dr.get().addOnSuccessListener(task1 -> {
+                masterUser = task1.toObject(UserModel.class);
+
+                dr.collection(OrderModel.class.getSimpleName()).document(masterUser.getOrder())
+                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful())
+                            masterOrder = task.getResult().toObject(OrderModel.class);
+                    }
+                });
+
+                dr.collection(OrderModel.class.getSimpleName()).document(masterUser.getOrder())
+                        .collection(CartItemModel.class.getSimpleName())
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful())
+                            for (QueryDocumentSnapshot snapshot : task.getResult())
+                                masterCart.add(snapshot.toObject(CartItemModel.class));
+                    }
+                });
+            });
         }
+    }
+
+    public static Task<DocumentReference> addNewOrder() {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        OrderModel newOrder = new OrderModel(true);
+        return firebaseFirestore.collection(UserModel.class.getSimpleName())
+                .document(masterUid).collection(OrderModel.class.getSimpleName())
+                .add(newOrder);
+    }
+
+    public static void refreshMasterOrder() {
+        long noProducts = 0, total = 0;
+        for (CartItemModel cart : DatabaseModel.masterCart) {
+            for (Long value : cart.getChoice().values()) {
+                noProducts += value;
+            }
+
+            total += cart.getTotal();
+        }
+
+        masterOrder.setNoProducts(noProducts);
+        masterOrder.setTotal(total);
     }
 
     public static void updateMasterUser() {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseFirestore.collection(UserModel.class.getSimpleName())
-                .document(firebaseUser.getUid())
+                .document(masterUid)
                 .set(masterUser);
+    }
+
+    public static Task<Void> updateMasterOrder() {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        return firebaseFirestore.collection(UserModel.class.getSimpleName())
+                .document(masterUid).collection(OrderModel.class.getSimpleName())
+                .document(masterUser.getOrder()).set(masterOrder);
     }
 
     public static void updateMasterCart() {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
         CollectionReference reference = firebaseFirestore.collection(UserModel.class.getSimpleName())
-                .document(firebaseUser.getUid())
-                .collection(CartItemModel.class.getSimpleName());
+                .document(masterUid).collection(OrderModel.class.getSimpleName())
+                .document(masterUser.order).collection(CartItemModel.class.getSimpleName());
 
         for (CartItemModel cart : masterCart) {
             reference.document(cart.getId()).set(cart);

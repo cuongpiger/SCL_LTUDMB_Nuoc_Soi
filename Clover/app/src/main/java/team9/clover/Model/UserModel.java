@@ -8,9 +8,8 @@ import java.util.Map;
 public class UserModel {
 
     List<String> favorite;
-    List<String> orders;
     List<String> address;
-    String fullName;
+    String fullName, phone, order;
 
     public UserModel() { }
 
@@ -18,8 +17,17 @@ public class UserModel {
         // dùng để tạo new user trong database
         this.fullName = fullName;
         this.favorite = new ArrayList<>();
-        this.orders = new ArrayList<>();
         this.address = new ArrayList<>();
+        this.order = "";
+        this.phone = "";
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public List<String> getFavorite() {
@@ -30,12 +38,12 @@ public class UserModel {
         this.favorite = favorite;
     }
 
-    public List<String> getOrders() {
-        return orders;
+    public String getOrder() {
+        return order;
     }
 
-    public void setOrders(List<String> orders) {
-        this.orders = orders;
+    public void setOrder(String order) {
+        this.order = order;
     }
 
     public String getFullName() {

@@ -37,6 +37,7 @@ import java.util.Stack;
 
 import team9.clover.Adapter.CategoryAdapter;
 import team9.clover.Fragment.CartFragment;
+import team9.clover.Fragment.DeliveryFragment;
 import team9.clover.Fragment.FavoriteFragment;
 import team9.clover.Fragment.HomeFragment;
 import team9.clover.Fragment.ProductDetailFragment;
@@ -104,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Reuse.setFragment(getSupportFragmentManager(), fragment, FavoriteFragment.NAME, R.id.main_framelayout, 0);
         } else if (fragmentId == CartFragment.ID) {
             Reuse.setFragment(getSupportFragmentManager(), fragment, CartFragment.NAME, R.id.main_framelayout, 0);
+        } else if (fragmentId == DeliveryFragment.ID) {
+            activeBackButton();
+            Reuse.setFragment(getSupportFragmentManager(), fragment, DeliveryFragment.NAME, R.id.main_framelayout, 0);
         }
     }
 
@@ -189,7 +193,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } else {
                 String lastFragmentName = Reuse.getLastFragmentName(getSupportFragmentManager());
                 if (lastFragmentName.equals(ProductDetailFragment.NAME) ||
-                        lastFragmentName.equals(ViewMoreFragment.NAME)) {
+                        lastFragmentName.equals(ViewMoreFragment.NAME) ||
+                        lastFragmentName.equals(DeliveryFragment.NAME)) {
                     getSupportFragmentManager().popBackStack();
                 } else if (lastFragmentName.equals(SpecificProductFragment.NAME)) {
                     getSupportFragmentManager().popBackStack(SpecificProductFragment.NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -326,6 +331,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (category != -1) {
                     if (category == 0) {
                         clearBackStack();
+                        navigationView.getMenu().findItem(R.id.nvMall).setChecked(true);
+                        previousNavigation = R.id.nvMall;
                     } else {
                         setFragment(SpecificProductFragment.ID, new SpecificProductFragment(getSupportActionBar()), (int) category);
                     }
@@ -337,6 +344,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 int fragmentId = intent.getIntExtra("Fragment", -1);
+                if (fragmentId == DeliveryFragment.ID) {
+                    setFragment(DeliveryFragment.ID, new DeliveryFragment(getSupportActionBar()), productBroadcast);
+                }
 
             }
         };
