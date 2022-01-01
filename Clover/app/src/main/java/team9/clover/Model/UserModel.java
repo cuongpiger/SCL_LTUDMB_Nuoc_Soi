@@ -1,6 +1,7 @@
 package team9.clover.Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,5 +69,9 @@ public class UserModel {
 
     public void removeFavorite(String productId) {
         favorite.remove(productId);
+    }
+
+    public void updateAddress(String city, String district, String village, String street) {
+        address = new ArrayList<>(Arrays.asList(street, village, district, city));
     }
 }

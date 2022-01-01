@@ -36,6 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Stack;
 
 import team9.clover.Adapter.CategoryAdapter;
+import team9.clover.Fragment.AccountFragment;
 import team9.clover.Fragment.CartFragment;
 import team9.clover.Fragment.DeliveryFragment;
 import team9.clover.Fragment.FavoriteFragment;
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (fragmentId == OrderDetailFragment.ID) {
             activeBackButton();
             Reuse.setFragment(getSupportFragmentManager(), fragment, OrderDetailFragment.NAME, R.id.main_framelayout, 0);
+        } else if (fragmentId == AccountFragment.ID) {
+            Reuse.setFragment(getSupportFragmentManager(), fragment, AccountFragment.NAME, R.id.main_framelayout, 0);
         }
     }
 
@@ -169,6 +172,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 clearBackStack();
                 previousNavigation = R.id.nvOrder;
                 setFragment(OrdersFragment.ID, new OrdersFragment(getSupportActionBar()), null);
+            } else if (itemId == R.id.nvProfile) {
+                clearBackStack();
+                previousNavigation = R.id.nvProfile;
+                setFragment(AccountFragment.ID, new AccountFragment(getSupportActionBar()), null);
             }
         }
 

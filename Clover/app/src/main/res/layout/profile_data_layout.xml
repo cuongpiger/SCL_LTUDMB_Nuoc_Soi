@@ -42,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/settings_btn">
+        app:layout_constraintTop_toTopOf="@+id/fabLogOut">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/username"
@@ -66,7 +66,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/settings_btn"
+        android:id="@+id/fabLogOut"
         android:layout_width="48dp"
         android:layout_height="48dp"
         app:fabCustomSize="48dp"
