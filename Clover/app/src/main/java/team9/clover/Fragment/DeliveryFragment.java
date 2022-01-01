@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.Timestamp;
 
@@ -119,49 +120,40 @@ public class DeliveryFragment extends Fragment {
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.dialog_address);
 
-//        final Spinner spinner = dialog.findViewById(R.id.spSize);
-//        final EditText editText = dialog.findViewById(R.id.etQuantity);
-//        final MaterialButton button = dialog.findViewById(R.id.mbConfirm);
-//
-//
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, productModel.getSize());
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                selectedSize = spinner.getSelectedItem().toString();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-//
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                quantity = Integer.parseInt(editText.getText().toString());
-//                if (quantity > 0) {
-//                    dialog.dismiss();
-//                    Toast.makeText(getContext(), "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_LONG).show();
-//                    isChanged = true;
-//
-//                    if (!Reuse.updateMasterCart(productModel.getId(), selectedSize, (long) quantity, null)) {
-//                        CartItemModel newCart = new CartItemModel(
-//                                productModel.getId(),
-//                                productModel.getTitle(),
-//                                productModel.getImage().get(0),
-//                                productModel.getPrice(), selectedSize, (long) quantity);
-//
-//                        Reuse.updateMasterCart(productModel.getId(), selectedSize, (long) quantity, newCart);
-//                    }
-//                } else {
-//                    editText.setError("> 0");
-//                }
-//            }
-//        });
+        final TextInputLayout mName, mPhoneNumber, mCity, mDistrict, mVillage, mStreet;
+        final MaterialButton mSave;
+
+        mName = dialog.findViewById(R.id.tilFullName);
+        mPhoneNumber = dialog.findViewById(R.id.tilPhone);
+        mCity = dialog.findViewById(R.id.tilCity);
+        mDistrict = dialog.findViewById(R.id.tilDistrict);
+        mVillage = dialog.findViewById(R.id.tilVillage);
+        mStreet = dialog.findViewById(R.id.tilStreet);
+        mSave = dialog.findViewById(R.id.mbSave);
+
+        mName.getEditText().setText(masterUser.getFullName());
+        mPhoneNumber.getEditText().setText(masterUser.getPhone());
+        mCity.getEditText().setText(masterUser.getAddress().get(3));
+        mDistrict.getEditText().setText(masterUser.getAddress().get(2));
+        mVillage.getEditText().setText(masterUser.getAddress().get(1));
+        mStreet.getEditText().setText(masterUser.getAddress().get(0));
+
+        mSave.setOnClickListener(v -> {
+            masterOrder.setFullName(mName.getEditText().getText().toString());
+            masterOrder.setPhone(mPhoneNumber.getEditText().getText().toString());
+            masterOrder.setAddress(
+                    mStreet.getEditText().getText().toString() + ", " +
+                    mVillage.getEditText().getText().toString() + ", " +
+                    mDistrict.getEditText().getText().toString() + ", " +
+                    mCity.getEditText().getText().toString());
+
+            Toast.makeText(getContext(), "Cập nhật thông tin giao hàng thành công.", Toast.LENGTH_LONG).show();
+            dialog.dismiss();
+
+            mFullName.setText(masterOrder.getFullName());
+            mPhone.setText(masterOrder.getPhone());
+            mAddress.setText(masterOrder.getAddress());
+        });
 
         dialog.show();
     }
