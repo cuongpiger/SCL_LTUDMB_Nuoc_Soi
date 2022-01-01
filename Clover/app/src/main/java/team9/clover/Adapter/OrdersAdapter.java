@@ -2,7 +2,6 @@ package team9.clover.Adapter;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.textview.MaterialTextView;
-import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
-import team9.clover.Fragment.ProductDetailFragment;
+import team9.clover.Fragment.OrderDetailFragment;
 import team9.clover.Model.OrderModel;
 import team9.clover.Module.Reuse;
 import team9.clover.R;
@@ -74,11 +71,11 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             if (order.takeSize() == 3) mDot.setImageTintList(ColorStateList.valueOf(itemView.getContext().getColor(R.color.black)));
             else if (order.takeSize() == 4) mDot.setImageTintList(ColorStateList.valueOf(itemView.getContext().getColor(R.color.red)));
 
-//            itemView.setOnClickListener(v -> {
-//                Intent intent = new Intent("broadcast");
-//                intent.putExtra(ProductDetailFragment.NAME, order.getId());
-//                LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
-//            });
+            itemView.setOnClickListener(v -> {
+                Intent intent = new Intent("broadcast");
+                intent.putExtra(OrderDetailFragment.NAME, order);
+                LocalBroadcastManager.getInstance(itemView.getContext()).sendBroadcast(intent);
+            });
         }
     }
 }

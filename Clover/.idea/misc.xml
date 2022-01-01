@@ -98,6 +98,7 @@
         <entry key="app/src/main/res/layout/fragment_my_reward.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_my_wishlist.xml" value="0.22532894736842105" />
         <entry key="app/src/main/res/layout/fragment_order.xml" value="0.22532894736842105" />
+        <entry key="app/src/main/res/layout/fragment_order_detail.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.20218579234972678" />
         <entry key="app/src/main/res/layout/fragment_orders_datail.xml" value="0.33578431372549017" />
         <entry key="app/src/main/res/layout/fragment_product_description.xml" value="0.22532894736842105" />

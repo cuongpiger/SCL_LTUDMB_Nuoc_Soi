@@ -293,6 +293,13 @@ public class DatabaseModel {
                 .collection(OrderModel.class.getSimpleName()).orderBy("order",  Query.Direction.DESCENDING).get();
     }
 
+    public static Task<QuerySnapshot> loadOrderDetail(String orderId) {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        return firebaseFirestore.collection(UserModel.class.getSimpleName()).document(masterUid)
+                .collection(OrderModel.class.getSimpleName()).document(orderId)
+                .collection(CartItemModel.class.getSimpleName()).get();
+    }
+
 
     /*
      * Đăng xuất khỏi current user

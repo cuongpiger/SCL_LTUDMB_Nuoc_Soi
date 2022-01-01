@@ -2,11 +2,12 @@ package team9.clover.Model;
 
 import com.google.firebase.Timestamp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class OrderModel {
+public class OrderModel implements Serializable {
     String id, address, fullName, phone;
     List<String> date;
     Timestamp order;
@@ -114,7 +115,7 @@ public class OrderModel {
         if (date.size() == 3) {
             return "Giao hàng thành công.";
         } else if (date.size() == 2) {
-            return "Đang giao hàng.";
+            return "Đang vận chuyển.";
         } else if (date.size() == 1){
             return "Đang xử lý.";
         } else {

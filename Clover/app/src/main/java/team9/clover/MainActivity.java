@@ -40,11 +40,13 @@ import team9.clover.Fragment.CartFragment;
 import team9.clover.Fragment.DeliveryFragment;
 import team9.clover.Fragment.FavoriteFragment;
 import team9.clover.Fragment.HomeFragment;
+import team9.clover.Fragment.OrderDetailFragment;
 import team9.clover.Fragment.OrdersFragment;
 import team9.clover.Fragment.ProductDetailFragment;
 import team9.clover.Fragment.SpecificProductFragment;
 import team9.clover.Fragment.ViewMoreFragment;
 import team9.clover.Model.DatabaseModel;
+import team9.clover.Model.OrderModel;
 import team9.clover.Model.ProductModel;
 import team9.clover.Module.Reuse;
 
@@ -111,6 +113,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Reuse.setFragment(getSupportFragmentManager(), fragment, DeliveryFragment.NAME, R.id.main_framelayout, 0);
         } else if (fragmentId == OrdersFragment.ID) {
             Reuse.setFragment(getSupportFragmentManager(), fragment, OrdersFragment.NAME, R.id.main_framelayout, 0);
+        } else if (fragmentId == OrderDetailFragment.ID) {
+            activeBackButton();
+            Reuse.setFragment(getSupportFragmentManager(), fragment, OrderDetailFragment.NAME, R.id.main_framelayout, 0);
         }
     }
 
@@ -201,7 +206,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String lastFragmentName = Reuse.getLastFragmentName(getSupportFragmentManager());
                 if (lastFragmentName.equals(ProductDetailFragment.NAME) ||
                         lastFragmentName.equals(ViewMoreFragment.NAME) ||
-                        lastFragmentName.equals(DeliveryFragment.NAME)) {
+                        lastFragmentName.equals(DeliveryFragment.NAME) ||
+                        lastFragmentName.equals(OrderDetailFragment.NAME)) {
                     getSupportFragmentManager().popBackStack();
                 } else if (lastFragmentName.equals(SpecificProductFragment.NAME)) {
                     getSupportFragmentManager().popBackStack(SpecificProductFragment.NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -355,6 +361,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     setFragment(DeliveryFragment.ID, new DeliveryFragment(getSupportActionBar()), productBroadcast);
                 }
 
+                OrderModel orderModel = (OrderModel) intent.getSerializableExtra(OrderDetailFragment.NAME);
+                if (orderModel != null) {
+                    setFragment(OrderDetailFragment.ID, new OrderDetailFragment(getSupportActionBar(), orderModel), null);
+                }
             }
         };
 
