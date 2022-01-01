@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:startIconDrawable="@drawable/email"
+            app:startIconDrawable="@drawable/icon_email"
             app:startIconTint="@color/black"
             tools:ignore="HardcodedText">
 
@@ -121,7 +121,7 @@
             android:textColor="@color/black"
             app:backgroundTint="@color/white"
             app:cornerRadius="50dp"
-            app:icon="@drawable/facebook"
+            app:icon="@drawable/icon_facebook"
             app:iconTint="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/mbSignIn"
             app:layout_constraintStart_toStartOf="@+id/mbSignIn"

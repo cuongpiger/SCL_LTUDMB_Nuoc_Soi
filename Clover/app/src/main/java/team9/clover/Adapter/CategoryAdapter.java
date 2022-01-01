@@ -68,7 +68,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         private void set(CategoryModel category, int position) {
             Glide.with(itemView.getContext())
                     .load(category.getImage())
-                    .apply(new RequestOptions().placeholder(R.drawable.home))
                     .into(mImage);
 
             mTitle.setText(category.getTitle());

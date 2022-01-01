@@ -108,6 +108,7 @@ public class OrderDetailFragment extends Fragment {
             mImage2.setImageTintList(ColorStateList.valueOf(getContext().getColor(R.color.black)));
 
             if (dateSize > 2) {
+                mDelivery.setText("Hoàn thành");
                 mDone.setText("Giao hàng thành công");
                 mDone.setTextColor(getContext().getColor(R.color.black));
                 mDoneDate.setText(orderModel.getDate().get(2));

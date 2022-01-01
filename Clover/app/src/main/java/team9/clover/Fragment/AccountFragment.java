@@ -6,6 +6,7 @@ import static team9.clover.Model.DatabaseModel.masterUser;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -23,12 +24,14 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
 import team9.clover.MainActivity;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.R;
+import team9.clover.SplashActivity;
 
 
 public class AccountFragment extends Fragment {
@@ -39,6 +42,7 @@ public class AccountFragment extends Fragment {
     ActionBar actionBar;
     MaterialTextView mEmail, mFullName, mAddress, mPhone;
     ImageButton mEdit1, mEdit2;
+    FloatingActionButton mExit;
 
     public AccountFragment(ActionBar actionBar) {
         this.actionBar = actionBar;
@@ -76,6 +80,25 @@ public class AccountFragment extends Fragment {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
                     }
+            }).create().show();
+        });
+
+        mExit.setOnClickListener(v -> {
+            new MaterialAlertDialogBuilder(getContext(), R.style.ThemeOverlay_App_MaterialAlertDialog).setTitle("Đặng xuất tài khoản")
+                    .setMessage("Bạn thực sự muốn đăng xuất tài khoản không?")
+                    .setCancelable(true)
+                    .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            DatabaseModel.signOut();
+                            getActivity().finishAffinity();
+                            getActivity().startActivity(new Intent(getActivity(), SplashActivity.class));
+                        }
+                    }).setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
             }).create().show();
         });
     }
@@ -138,6 +161,7 @@ public class AccountFragment extends Fragment {
         mPhone = view.findViewById(R.id.mtvPhone);
         mEdit1 = view.findViewById(R.id.ibEdit1);
         mEdit2 = view.findViewById(R.id.ibEdit2);
+        mExit = view.findViewById(R.id.fabLogOut);
     }
 
     @Override

@@ -14,34 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Clover">
         <activity
-            android:name=".TmpActivity"
-            android:exported="true" />
-        <activity
             android:name=".ErrorActivity"
             android:exported="true" />
         <activity
             android:name=".LogInActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ViewAllActivity"
-            android:exported="true" />
-        <activity
-            android:name=".MyAddressActivity"
-            android:exported="true" />
-        <activity
-            android:name=".AddressActivity"
-            android:exported="true" />
-        <activity
-            android:name=".DeliveryActivity"
-            android:exported="true" />
-        <activity
-            android:name=".OrderDetailsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ProductDetailActivity"
-            android:exported="true" />
-        <activity
-            android:name=".CategoryActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

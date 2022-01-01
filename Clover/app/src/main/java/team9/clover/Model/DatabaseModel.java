@@ -1,6 +1,5 @@
 package team9.clover.Model;
 
-import android.app.ProgressDialog;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
@@ -8,7 +7,6 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -18,15 +16,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
-import team9.clover.Module.CartAdapter;
 import team9.clover.R;
 
 public class DatabaseModel {
@@ -305,7 +300,8 @@ public class DatabaseModel {
      * Đăng xuất khỏi current user
      * */
     public static void signOut() {
-        if (firebaseUser != null) firebaseAuth.signOut();
+        if (firebaseUser != null)
+            firebaseAuth.signOut();
     }
 
 

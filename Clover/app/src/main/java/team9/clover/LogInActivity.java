@@ -57,10 +57,4 @@ public class LogInActivity extends AppCompatActivity {
         mContainer = findViewById(R.id.flContainer);
         mFragmentManager = getSupportFragmentManager();
     }
-
-    public void goToMain() {
-        finish();
-        startActivity(new Intent(LogInActivity.this, TmpActivity.class));
-        Reuse.startActivity(LogInActivity.this); // thiết lập animation
-    }
 }

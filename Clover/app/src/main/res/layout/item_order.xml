@@ -99,7 +99,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/mtvStatus"
         app:layout_constraintStart_toStartOf="@+id/mtvTitle"
         app:layout_constraintTop_toTopOf="@+id/mtvStatus"
-        app:srcCompat="@drawable/dot" />
+        app:srcCompat="@drawable/icon_dot" />
 
     <LinearLayout
         android:layout_width="wrap_content"

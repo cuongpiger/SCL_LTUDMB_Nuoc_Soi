@@ -25,11 +25,11 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
 import team9.clover.LogInActivity;
+import team9.clover.MainActivity;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.Model.UserModel;
 import team9.clover.Module.Reuse;
 import team9.clover.R;
-import team9.clover.TmpActivity;
 
 public class SignUpFragment extends Fragment {
 
@@ -169,7 +169,7 @@ public class SignUpFragment extends Fragment {
                         public void onComplete(@NonNull Task task) {
                             if (task.isSuccessful()) {
                                 getActivity().finishAffinity();
-                                getActivity().startActivity(new Intent(getActivity(), TmpActivity.class));
+                                getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
                                 Reuse.startActivity(getActivity());
                             } else {
                                 errorDialog();
