@@ -62,7 +62,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         }
 
         private void set(OrderModel order) {
-            mDate.setText("dặt hàng\n" + order.getDate().get(0));
+            mDate.setText("đặt hàng\n" + order.getDate().get(0));
             mCode.setText("#" + order.takeId());
             mNoProducts.setText(""+order.getNoProducts());
             mTotal.setText(Reuse.vietnameseCurrency(order.getTotal()));
