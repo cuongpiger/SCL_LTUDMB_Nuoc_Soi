@@ -38,7 +38,7 @@ public class DatabaseModel {
     public static List<CategoryModel> categoryModelList = new ArrayList<>();
     public static List<HomePageModel> homePageModelList = new ArrayList<>();
 
-
+    private static CollectionReference pirate = null;
 
     /*
      * Load người dùng hiện tại trên thiết bị
@@ -341,6 +341,15 @@ public class DatabaseModel {
                 .collection(OrderModel.class.getSimpleName()).document(orderId)
                 .collection(CartItemModel.class.getSimpleName()).get();
     }
+
+
+
+    public static Task<QuerySnapshot> searchProduct(List<String> keyword) {
+        if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        if (pirate == null) pirate = firebaseFirestore.collection(ProductModel.class.getSimpleName());
+        return pirate.whereArrayContainsAny("search", keyword).get();
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -415,7 +424,7 @@ public class DatabaseModel {
             long category = categorys.get(i);
             String title = titles.get(i);
             ArrayList<String> image = new ArrayList<>();
-            ProductModel productModel = new ProductModel(Integer.toString(folderStart + i), screen, category, title, price, cutPrice, description, image, size, bodyName, measure, info);
+            ProductModel productModel = new ProductModel(Integer.toString(folderStart + i), screen, category, title, price, cutPrice, description, image, size, bodyName, measure, info, new ArrayList<>());
             addDataRecursion(firebaseStorage, productModel, folderStart + i, 0, noImage, Integer.toString(folderStart + i));
         }
     }

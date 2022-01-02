@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -40,6 +41,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Stack;
 
 import team9.clover.Adapter.CategoryAdapter;
+import team9.clover.Adapter.SearchAdapter;
 import team9.clover.Fragment.AccountFragment;
 import team9.clover.Fragment.CartFragment;
 import team9.clover.Fragment.DeliveryFragment;
@@ -48,6 +50,7 @@ import team9.clover.Fragment.HomeFragment;
 import team9.clover.Fragment.OrderDetailFragment;
 import team9.clover.Fragment.OrdersFragment;
 import team9.clover.Fragment.ProductDetailFragment;
+import team9.clover.Fragment.SearchFragment;
 import team9.clover.Fragment.SpecificProductFragment;
 import team9.clover.Fragment.ViewMoreFragment;
 import team9.clover.Model.DatabaseModel;
@@ -57,14 +60,17 @@ import team9.clover.Module.Reuse;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    FrameLayout frameLayout;
-    NavigationView navigationView;
+    public static NavigationView navigationView;
+    public static FrameLayout frameLayout;
     public static ActionBarDrawerToggle toggle;
     public static DrawerLayout drawerLayout;
     public static RecyclerView mCategory;
     public static MenuItem mSearch, mBell, mBag;
     public static Toolbar toolbar;
     public static DrawerArrowDrawable arrowDrawable;
+    public static SearchView searchView;
+    public static SearchAdapter searchAdapter = new SearchAdapter();
+    public static InputMethodManager keyboard;
 
     CategoryAdapter categoryAdapter;
     HomeFragment homeFragment;
@@ -114,6 +120,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setFragment(fragment, OrderDetailFragment.NAME, 0);
         } else if (fragmentId == AccountFragment.ID) {
             setFragment(fragment, AccountFragment.NAME, 0);
+        } else if (fragmentId == SearchFragment.ID) {
+            activeBackButton();
+            setFragment(fragment, SearchFragment.NAME, 0);
         }
     }
 
@@ -151,6 +160,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (itemId != previousNavigation) {
             if (itemId == R.id.nvMall) {
                 clearBackStack();
+                CategoryAdapter.currentTab = 0;
+                categoryAdapter.notifyDataSetChanged();
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
                 previousNavigation = itemId;
@@ -256,6 +267,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportFragmentManager().popBackStack(SpecificProductFragment.NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     CategoryAdapter.currentTab = 0;
                     categoryAdapter.notifyDataSetChanged();
+                } else if (lastFragmentName.equals(SearchFragment.NAME)) {
+                    getSupportFragmentManager().popBackStack();
+                    searchView.setIconified(true); // tắt search view đi
                 }
             }
         }
@@ -275,6 +289,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         frameLayout = findViewById(R.id.main_framelayout);
         mCategory = findViewById(R.id.rvCategory);
+
+        keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     //============================================================================================== THIẾT LẬP CHO TOOLBAR
@@ -358,9 +374,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         homeFragment.setActionBar(getSupportActionBar());
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.abSearch).getActionView();
+        searchView = (SearchView) menu.findItem(R.id.abSearch).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        searchView.setOnSearchClickListener(view -> {
+            setFragment(SearchFragment.ID, new SearchFragment(getSupportActionBar(), searchAdapter));
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         return true;
 
@@ -425,6 +459,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             transaction.commit();
         }
     }
+
 
     @Override
     protected void onPause() {

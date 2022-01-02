@@ -284,5 +284,7 @@ public class ProductDetailFragment extends Fragment {
         MainActivity.toggle.setDrawerIndicatorEnabled(false);
         MainActivity.displayActionBarMenu(true);
         MainActivity.displayCategory(false);
+
+        MainActivity.keyboard.hideSoftInputFromWindow(MainActivity.frameLayout.getWindowToken(), 0);
     }
 }

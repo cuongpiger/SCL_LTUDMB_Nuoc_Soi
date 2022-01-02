@@ -21,10 +21,11 @@ public class ProductModel implements Serializable {
     ArrayList<String> bodyName;
     ArrayList<String> info;
     ArrayList<String> image = null;
+    ArrayList<String> search;
 
     public ProductModel() {}
 
-    public ProductModel(String id, long screen, long category, String title, long price, String cutPrice, String description, ArrayList<String> image, ArrayList<String> size, ArrayList<String> bodyName, ArrayList<Long> measure, ArrayList<String> info) {
+    public ProductModel(String id, long screen, long category, String title, long price, String cutPrice, String description, ArrayList<String> image, ArrayList<String> size, ArrayList<String> bodyName, ArrayList<Long> measure, ArrayList<String> info, ArrayList<String> search) {
         this.id = id;
         this.screen = screen;
         this.category = category;
@@ -37,6 +38,7 @@ public class ProductModel implements Serializable {
         this.bodyName = bodyName;
         this.measure = measure;
         this.info = info;
+        this.search = search;
     }
 
     public String getId() {
@@ -133,6 +135,14 @@ public class ProductModel implements Serializable {
 
     public void setInfo(ArrayList<String> info) {
         this.info = info;
+    }
+
+    public ArrayList<String> getSearch() {
+        return search;
+    }
+
+    public void setSearch(ArrayList<String> search) {
+        this.search = search;
     }
 
     public void addImage(String image) {
