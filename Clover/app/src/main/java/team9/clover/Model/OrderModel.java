@@ -5,7 +5,6 @@ import com.google.firebase.Timestamp;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class OrderModel implements Serializable {
     String id, address, fullName, phone;

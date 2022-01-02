@@ -1,14 +1,7 @@
 package team9.clover.Model;
 
-
-import android.util.Log;
-
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class ProductModel implements Serializable {
 

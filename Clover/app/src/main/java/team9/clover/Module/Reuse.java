@@ -13,16 +13,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import team9.clover.Model.CartItemModel;
-import team9.clover.Model.DatabaseModel;
 import team9.clover.R;
 
 public class Reuse {

@@ -17,7 +17,6 @@ import android.widget.ProgressBar;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,6 @@ import team9.clover.MainActivity;
 import team9.clover.Model.CartItemModel;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.Model.OrderModel;
-import team9.clover.Model.ProductModel;
 import team9.clover.Module.Reuse;
 import team9.clover.R;
 
