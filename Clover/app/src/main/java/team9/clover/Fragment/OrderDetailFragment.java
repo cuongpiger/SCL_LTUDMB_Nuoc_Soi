@@ -135,8 +135,8 @@ public class OrderDetailFragment extends Fragment {
         actionBar.setTitle("Chi tiết đơn hàng");
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(false);
         MainActivity.toggle.setDrawerIndicatorEnabled(false);
-        MainActivity.actionBarLogo.setVisibility(View.GONE);
         MainActivity.displayActionBarMenu(false);
         MainActivity.displayCategory(false);
     }

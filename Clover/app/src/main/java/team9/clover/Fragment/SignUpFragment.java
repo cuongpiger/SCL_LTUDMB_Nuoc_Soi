@@ -171,6 +171,7 @@ public class SignUpFragment extends Fragment {
                                 getActivity().finishAffinity();
                                 getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
                                 Reuse.startActivity(getActivity());
+
                             } else {
                                 errorDialog();
                             }

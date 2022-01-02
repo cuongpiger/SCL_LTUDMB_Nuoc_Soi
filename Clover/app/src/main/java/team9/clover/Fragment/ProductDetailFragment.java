@@ -157,17 +157,16 @@ public class ProductDetailFragment extends Fragment {
         mFavourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (firebaseUser == null) {
-                    Toast.makeText(getContext(), "Bạn chưa đăng nhập để dùng chức năng này.", Toast.LENGTH_SHORT);
-                    return;
-                }
-
-                if ((int) mFavourite.getTag() == 0) {
-                    mFavourite.setTag(1);
-                    mFavourite.setImageResource(R.drawable.icon_filled_heart);
+                if (DatabaseModel.masterUid.isEmpty()) {
+                    Toast.makeText(getContext(), "Bạn chưa đăng nhập.", Toast.LENGTH_SHORT).show();
                 } else {
-                    mFavourite.setTag(0);
-                    mFavourite.setImageResource(R.drawable.icon_empty_heart);
+                    if ((int) mFavourite.getTag() == 0) {
+                        mFavourite.setTag(1);
+                        mFavourite.setImageResource(R.drawable.icon_filled_heart);
+                    } else {
+                        mFavourite.setTag(0);
+                        mFavourite.setImageResource(R.drawable.icon_empty_heart);
+                    }
                 }
             }
         });
@@ -195,7 +194,11 @@ public class ProductDetailFragment extends Fragment {
         mAddCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showChooseForm();
+                if (DatabaseModel.masterUid.isEmpty()) {
+                    Toast.makeText(getContext(), "Bạn chưa đăng nhập.", Toast.LENGTH_SHORT).show();
+                } else {
+                    showChooseForm();
+                }
             }
         });
     }
@@ -256,16 +259,18 @@ public class ProductDetailFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if ((int) mFavourite.getTag() == 1 && !masterUser.getFavorite().contains(productModel.getId())) {
-            masterUser.addFavorite(productModel.getId());
-            DatabaseModel.updateMasterUser();
-        } else if ((int) mFavourite.getTag() == 0 && masterUser.getFavorite().contains(productModel.getId())) {
-            masterUser.removeFavorite(productModel.getId());
-            DatabaseModel.updateMasterUser();
-        }
+        if (!DatabaseModel.masterUid.isEmpty()) {
+            if ((int) mFavourite.getTag() == 1 && !masterUser.getFavorite().contains(productModel.getId())) {
+                masterUser.addFavorite(productModel.getId());
+                DatabaseModel.updateMasterUser();
+            } else if ((int) mFavourite.getTag() == 0 && masterUser.getFavorite().contains(productModel.getId())) {
+                masterUser.removeFavorite(productModel.getId());
+                DatabaseModel.updateMasterUser();
+            }
 
-        if (isChanged) {
-            DatabaseModel.updateMasterCart();
+            if (isChanged) {
+                DatabaseModel.updateMasterCart();
+            }
         }
     }
 
@@ -279,8 +284,8 @@ public class ProductDetailFragment extends Fragment {
     private void setActionBar() {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(false);
         MainActivity.toggle.setDrawerIndicatorEnabled(false);
-        MainActivity.actionBarLogo.setVisibility(View.GONE);
         MainActivity.displayActionBarMenu(true);
         MainActivity.displayCategory(false);
     }

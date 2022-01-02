@@ -95,9 +95,9 @@ public class SpecificProductFragment extends Fragment {
     private void setActionBar() {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayUseLogoEnabled(true);
         MainActivity.toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
         MainActivity.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        MainActivity.actionBarLogo.setVisibility(View.VISIBLE);
         MainActivity.displayActionBarMenu(true);
         MainActivity.displayCategory(true);
     }

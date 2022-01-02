@@ -1,6 +1,5 @@
 package team9.clover.Fragment;
 
-import static team9.clover.MainActivity.actionBarLogo;
 import static team9.clover.MainActivity.displayActionBarMenu;
 import static team9.clover.MainActivity.drawerLayout;
 import static team9.clover.MainActivity.mCategory;
@@ -10,8 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -19,16 +16,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
-import team9.clover.MainActivity;
 import team9.clover.Model.DatabaseModel;
-import team9.clover.Adapter.CategoryAdapter;
 import team9.clover.Adapter.HomePageAdapter;
-import team9.clover.Model.HomePageModel;
-import team9.clover.Module.Reuse;
 import team9.clover.R;
-import team9.clover.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
@@ -77,10 +68,10 @@ public class HomeFragment extends Fragment {
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             actionBar.setDisplayHomeAsUpEnabled(false); // xóa button go-back
             actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayUseLogoEnabled(true);
             toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
             toggle.setToolbarNavigationClickListener(null);
             mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
-            actionBarLogo.setVisibility(View.VISIBLE); // hiển thị lại logo trên action bar
 
             displayActionBarMenu(true);
         }

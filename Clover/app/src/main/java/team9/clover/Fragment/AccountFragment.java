@@ -174,9 +174,9 @@ public class AccountFragment extends Fragment {
         actionBar.setTitle("Tài khoản");
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayUseLogoEnabled(false);
         MainActivity.toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
         MainActivity.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        MainActivity.actionBarLogo.setVisibility(View.GONE);
         MainActivity.displayActionBarMenu(false);
         MainActivity.displayCategory(false);
     }

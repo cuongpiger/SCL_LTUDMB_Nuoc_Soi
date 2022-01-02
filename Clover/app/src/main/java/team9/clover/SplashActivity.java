@@ -32,9 +32,9 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        DatabaseModel.loadHomePageData();
-        refer();
-        setAnimation();
+        DatabaseModel.loadHomePageData(); // trong thời gian 3s, tranh thủ load hình ảnh, dữ liệu ở home fragment
+        refer(); // tham chiếu đến các component ở view
+        setAnimation(); // thiếp lập animation
 
         /*
          * Chờ animation hoàn tất, trong lúc chờ thực hiện một vài công việc trước

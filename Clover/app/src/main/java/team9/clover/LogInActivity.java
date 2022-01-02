@@ -27,6 +27,7 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
 
         refer();
+        setEvent();
         Reuse.setFragment(mFragmentManager, new SignInFragment(), mContainer, 1);
     }
 
@@ -56,5 +57,13 @@ public class LogInActivity extends AppCompatActivity {
         mClose = findViewById(R.id.ibClose);
         mContainer = findViewById(R.id.flContainer);
         mFragmentManager = getSupportFragmentManager();
+    }
+
+    private void setEvent() {
+        mClose.setOnClickListener(v -> {
+            finish();
+            startActivity(new Intent(LogInActivity.this, MainActivity.class));
+            Reuse.startActivity(LogInActivity.this); // thiết lập animation
+        });
     }
 }

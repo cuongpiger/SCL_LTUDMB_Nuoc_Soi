@@ -1,6 +1,7 @@
 package team9.clover.Model;
 
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -54,8 +55,8 @@ public class DatabaseModel {
      * */
     public static Task addNewUser(UserModel newUser) {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
-        String uid = firebaseAuth.getUid();
-        return firebaseFirestore.collection(UserModel.class.getSimpleName()).document(uid).set(newUser);
+        masterUid = firebaseAuth.getUid();
+        return firebaseFirestore.collection(UserModel.class.getSimpleName()).document(masterUid).set(newUser);
     }
 
     /*
@@ -203,27 +204,40 @@ public class DatabaseModel {
             dr.get().addOnSuccessListener(task1 -> {
                 masterUser = task1.toObject(UserModel.class);
 
-                dr.collection(OrderModel.class.getSimpleName()).document(masterUser.getOrder())
-                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful())
-                            masterOrder = task.getResult().toObject(OrderModel.class);
-                    }
-                });
+                if (!masterUser.getOrder().isEmpty()) {
+                    dr.collection(OrderModel.class.getSimpleName()).document(masterUser.getOrder())
+                            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful())
+                                masterOrder = task.getResult().toObject(OrderModel.class);
+                        }
+                    });
 
-                dr.collection(OrderModel.class.getSimpleName()).document(masterUser.getOrder())
-                        .collection(CartItemModel.class.getSimpleName())
-                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful())
-                            for (QueryDocumentSnapshot snapshot : task.getResult())
-                                masterCart.add(snapshot.toObject(CartItemModel.class));
-                    }
-                });
+                    dr.collection(OrderModel.class.getSimpleName()).document(masterUser.getOrder())
+                            .collection(CartItemModel.class.getSimpleName())
+                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful())
+                                for (QueryDocumentSnapshot snapshot : task.getResult())
+                                    masterCart.add(snapshot.toObject(CartItemModel.class));
+                        }
+                    });
+                } else {
+                    masterOrder = new OrderModel();
+                }
             });
         }
+    }
+
+    /*
+     * Đăng xuất khỏi current user (đăng nhập bằng email và password)
+     * */
+    public static void signOut() {
+        // kiểm tra firebase authentication đã được khởi tạo chưa, nếu chưa thì khởi tạo
+        if (firebaseAuth == null) firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signOut();
     }
 
     public static Task<DocumentReference> addNewOrder() {
@@ -264,12 +278,22 @@ public class DatabaseModel {
 
     public static void updateMasterCart() {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
-        CollectionReference reference = firebaseFirestore.collection(UserModel.class.getSimpleName())
-                .document(masterUid).collection(OrderModel.class.getSimpleName())
-                .document(masterUser.order).collection(CartItemModel.class.getSimpleName());
 
-        for (CartItemModel cart : masterCart) {
-            reference.document(cart.getId()).set(cart);
+        if (masterUser.getOrder().isEmpty()) {
+            firebaseFirestore.collection(UserModel.class.getSimpleName())
+                    .document(masterUid).collection(OrderModel.class.getSimpleName())
+                    .add(masterOrder).addOnSuccessListener(task -> {
+                masterUser.setOrder(task.getId());
+                updateMasterCart();
+            });
+        } else {
+            CollectionReference reference = firebaseFirestore.collection(UserModel.class.getSimpleName())
+                    .document(masterUid).collection(OrderModel.class.getSimpleName())
+                    .document(masterUser.order).collection(CartItemModel.class.getSimpleName());
+
+            for (CartItemModel cart : masterCart) {
+                reference.document(cart.getId()).set(cart);
+            }
         }
     }
 
@@ -294,17 +318,6 @@ public class DatabaseModel {
                 .collection(OrderModel.class.getSimpleName()).document(orderId)
                 .collection(CartItemModel.class.getSimpleName()).get();
     }
-
-
-    /*
-     * Đăng xuất khỏi current user
-     * */
-    public static void signOut() {
-        if (firebaseUser != null)
-            firebaseAuth.signOut();
-    }
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

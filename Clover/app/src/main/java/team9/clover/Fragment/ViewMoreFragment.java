@@ -93,7 +93,7 @@ public class ViewMoreFragment extends Fragment {
     private void setActionBar() {
         actionBar.setTitle(screen == HomePageModel.SLIDER_PRODUCT_VIEW_TYPE ? "Bán nhiều nhất" : "Khuyến mãi");
         actionBar.setDisplayShowTitleEnabled(true);
-        MainActivity.actionBarLogo.setVisibility(View.GONE);
+        actionBar.setDisplayUseLogoEnabled(false);
         MainActivity.displayActionBarMenu(true);
         MainActivity.displayCategory(false);
     }

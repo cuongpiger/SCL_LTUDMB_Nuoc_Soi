@@ -191,8 +191,8 @@ public class DeliveryFragment extends Fragment {
         actionBar.setTitle("Thanh toán");
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(false);
         MainActivity.toggle.setDrawerIndicatorEnabled(false);
-        MainActivity.actionBarLogo.setVisibility(View.GONE);
         MainActivity.displayActionBarMenu(false);
         MainActivity.displayCategory(false);
     }

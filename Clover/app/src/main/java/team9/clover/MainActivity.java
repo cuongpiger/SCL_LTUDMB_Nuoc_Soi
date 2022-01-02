@@ -1,8 +1,12 @@
 package team9.clover;
 
+import static team9.clover.Model.DatabaseModel.firebaseUser;
+
 import android.annotation.SuppressLint;
+import android.app.SearchManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
@@ -18,8 +22,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -58,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static ActionBarDrawerToggle toggle;
     public static DrawerLayout drawerLayout;
     public static RecyclerView mCategory;
-    public static ImageView actionBarLogo;
     public static MenuItem mSearch, mBell, mBag;
     public static Toolbar toolbar;
     public static DrawerArrowDrawable arrowDrawable;
@@ -68,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private static int previousNavigation = 0;
     private static boolean quitApp = false;
-    private static Stack<Integer> stackNavi = new Stack<>();
 
 
     @Override
@@ -130,6 +134,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int itemId = item.getItemId();
 
         if (itemId == R.id.abBag) {
+            if (DatabaseModel.masterUid.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
             // user chọn giỏ hàng
             clearBackStack();
             previousNavigation = R.id.nvCart;
@@ -156,26 +165,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 previousNavigation = itemId;
             } else if (itemId == R.id.nvFavorite) {
                 // nếu user nhấp vào mục sản phẩm yêu thích
-                if (DatabaseModel.firebaseUser != null) {
                     clearBackStack();
+                if (DatabaseModel.masterUid.isEmpty()) {
+                    navigationView.setCheckedItem(R.id.nvMall);
+                    Toast.makeText(MainActivity.this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
+                    return false;
+                } else {
                     previousNavigation = itemId;
                     setFragment(FavoriteFragment.ID, new FavoriteFragment(getSupportActionBar()), null);
-                } else {
-                    Toast.makeText(MainActivity.this, "Vui lòng đăng nhập để sử dụng tính năng này.", Toast.LENGTH_LONG).show();
-                    navigationView.getMenu().findItem(previousNavigation).setChecked(true);
                 }
             } else if (itemId == R.id.nvCart) {
                 clearBackStack();
-                previousNavigation = R.id.nvCart;
-                setFragment(CartFragment.ID, new CartFragment(getSupportActionBar()), null);
+                if (DatabaseModel.masterUid.isEmpty()) {
+                    navigationView.setCheckedItem(R.id.nvMall);
+                    Toast.makeText(MainActivity.this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
+                    return false;
+                } else {
+                    previousNavigation = R.id.nvCart;
+                    setFragment(CartFragment.ID, new CartFragment(getSupportActionBar()), null);
+                }
             } else if (itemId == R.id.nvOrder) {
                 clearBackStack();
-                previousNavigation = R.id.nvOrder;
-                setFragment(OrdersFragment.ID, new OrdersFragment(getSupportActionBar()), null);
+                if (DatabaseModel.masterUid.isEmpty()) {
+                    navigationView.setCheckedItem(R.id.nvMall);
+                    Toast.makeText(MainActivity.this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
+                    return false;
+                } else {
+                    previousNavigation = R.id.nvOrder;
+                    setFragment(OrdersFragment.ID, new OrdersFragment(getSupportActionBar()), null);
+                }
             } else if (itemId == R.id.nvProfile) {
                 clearBackStack();
-                previousNavigation = R.id.nvProfile;
-                setFragment(AccountFragment.ID, new AccountFragment(getSupportActionBar()), null);
+                if (DatabaseModel.masterUid.isEmpty()) {
+                    new MaterialAlertDialogBuilder(MainActivity.this, R.style.ThemeOverlay_App_MaterialAlertDialog)
+                            .setMessage("Bạn có muốn đăng nhập không?")
+                            .setCancelable(true)
+                            .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                    finish();
+                                    startActivity(new Intent(MainActivity.this, LogInActivity.class));
+                                    Reuse.startActivity(MainActivity.this);
+                                }
+                            }).setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    }).create().show();
+
+                    navigationView.setCheckedItem(R.id.nvMall);
+                    return false;
+                } else {
+                    previousNavigation = R.id.nvProfile;
+                    setFragment(AccountFragment.ID, new AccountFragment(getSupportActionBar()), null);
+                }
             }
         }
 
@@ -244,10 +289,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //============================================================================================== THIẾT LẬP CHO TOOLBAR
     private void setToolbar() {
         toolbar.setTitleTextColor(Color.BLACK);
-        actionBarLogo = findViewById(R.id.ivLogo);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_arrow_left); // thiết lập icon trở về
+        getSupportActionBar().setLogo(R.drawable.actionbar_logo);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         arrowDrawable = toggle.getDrawerArrowDrawable();
@@ -320,20 +366,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mBag = menu.getItem(2);
         homeFragment.setActionBar(getSupportActionBar());
 
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.abSearch).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
         return true;
 
-    }
-
-    public void resetToolbarAndCategory() {
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false); // xóa button go-back
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
-        toggle.setToolbarNavigationClickListener(null);
-        mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
-        actionBarLogo.setVisibility(View.VISIBLE); // hiển thị lại logo trên action bar
-
-        displayActionBarMenu(true);
     }
 
     //============================================================================================== THIẾT LẬP BROADCAST
