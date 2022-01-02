@@ -286,6 +286,7 @@ public class DatabaseModel {
 
     public static void updateMasterUser() {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
+        if (masterUid.isEmpty()) return;
         firebaseFirestore.collection(UserModel.class.getSimpleName())
                 .document(masterUid)
                 .set(masterUser);
