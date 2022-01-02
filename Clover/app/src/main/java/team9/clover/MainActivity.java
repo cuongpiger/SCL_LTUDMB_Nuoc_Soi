@@ -413,14 +413,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void setFragment(Fragment fragment, String name, int animStyle) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (!fragmentManager.isDestroyed()) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.main_framelayout, fragment);
+            transaction.addToBackStack(name);
 
-        if (animStyle == 0) transaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left, R.anim.slide_from_left, R.anim.slide_to_right);
-        else transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
+            if (animStyle == 0) transaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left, R.anim.slide_from_left, R.anim.slide_to_right);
+            else transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
 
-        transaction.replace(R.id.main_framelayout, fragment);
-        transaction.addToBackStack(name);
-        transaction.commit();
+            transaction.commit();
+        }
     }
 
     @Override
@@ -429,5 +432,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DatabaseModel.updateMasterUser();
         DatabaseModel.updateMasterOrder();
         DatabaseModel.updateMasterCart();
+
+        if (DatabaseModel.firebaseUser == null) {
+            DatabaseModel.signOut();
+            DatabaseModel.masterUid = "";
+        }
+
+        DatabaseModel.firebaseUser = null;
     }
 }

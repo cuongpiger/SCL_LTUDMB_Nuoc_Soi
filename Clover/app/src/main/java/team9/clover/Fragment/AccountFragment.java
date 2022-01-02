@@ -90,8 +90,6 @@ public class AccountFragment extends Fragment {
                     .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            DatabaseModel.signOut();
-                            DatabaseModel.masterUid = "";
                             DatabaseModel.firebaseUser = null;
                             getActivity().finishAffinity();
                             getActivity().startActivity(new Intent(getActivity(), SplashActivity.class));

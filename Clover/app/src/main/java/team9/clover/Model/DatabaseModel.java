@@ -199,7 +199,7 @@ public class DatabaseModel {
     * */
     public static void loadMasterUser(MaterialTextView fullName, MaterialTextView email) {
         if (!masterUid.isEmpty()) {
-            if (firebaseFirestore != null) firebaseFirestore = FirebaseFirestore.getInstance();
+            if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
             DocumentReference dr = firebaseFirestore.collection(UserModel.class.getSimpleName()).document(masterUid);
             dr.get().addOnSuccessListener(task1 -> {
                 masterUser = task1.toObject(UserModel.class);
