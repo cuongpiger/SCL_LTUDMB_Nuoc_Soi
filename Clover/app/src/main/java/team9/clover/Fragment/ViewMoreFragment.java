@@ -41,15 +41,14 @@ public class ViewMoreFragment extends Fragment {
 
     List<ProductModel> productList;
 
-    public ViewMoreFragment(ActionBar actionBar) {
+    public ViewMoreFragment(ActionBar actionBar, int screen) {
         this.actionBar = actionBar;
+        this.screen = screen;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_view_more, container, false);
-
-        screen = getArguments().getInt(NAME);
 
         refer(view);
         setData();

@@ -1,5 +1,7 @@
 package team9.clover.Module;
 
+import static team9.clover.Model.DatabaseModel.masterUser;
+
 import android.app.Activity;
 import android.widget.FrameLayout;
 
@@ -47,17 +49,6 @@ public class Reuse {
         fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
         fragmentTransaction.add(layout.getId(), fragment);
         fragmentTransaction.commit();
-    }
-
-    public static void setFragment(FragmentManager manager, Fragment fragment, String name, int layoutId, int animStyle) {
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        if (animStyle == 0) transaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left, R.anim.slide_from_left, R.anim.slide_to_right);
-        else transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
-
-        transaction.replace(layoutId, fragment);
-        transaction.addToBackStack(name);
-        transaction.commit();
     }
 
     /*
@@ -136,34 +127,11 @@ public class Reuse {
         return res + " đ";
     }
 
-    public static List<String> getCartIds() {
-        List<String> res = new ArrayList<>();
-        for (CartItemModel cart : DatabaseModel.masterCart) {
-            res.add(cart.getId());
-        }
-
-        return res;
-    }
-
-    public static boolean updateMasterCart(String id, String size, long quantity, CartItemModel newCart) {
-        if (newCart != null) {
-            DatabaseModel.masterCart.add(newCart);
-            return true;
-        }
-
-        for (CartItemModel cart : DatabaseModel.masterCart) {
-            if (cart.getId().equals(id)) {
-                cart.addCart(size, quantity);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public static String getCurrentDate() {
-        Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return dateFormat.format(date);
+        return new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+    }
+
+    public static boolean userCanCheck() {
+        return !(masterUser.getAddress().size() == 0 || masterUser.getPhone().isEmpty());
     }
 }

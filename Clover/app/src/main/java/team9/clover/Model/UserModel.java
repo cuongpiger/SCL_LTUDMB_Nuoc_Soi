@@ -10,17 +10,26 @@ public class UserModel {
 
     List<String> favorite;
     List<String> address;
-    String fullName, phone, order;
+    String fullName, phone, order, email;
 
     public UserModel() { }
 
-    public UserModel(String fullName) {
+    public UserModel(String fullName, String email) {
         // dùng để tạo new user trong database
         this.fullName = fullName;
         this.favorite = new ArrayList<>();
         this.address = new ArrayList<>();
         this.order = "";
         this.phone = "";
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPhone() {

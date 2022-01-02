@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingVertical="4dp"
-    android:background="@color/white"
+    android:background="@color/white_blur"
     tools:context=".Fragment.CartFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/white_blur"
         app:layout_constraintBottom_toTopOf="@+id/divider10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,10 +29,10 @@
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="0dp"
+        android:background="@color/white"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="16dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

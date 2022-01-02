@@ -43,15 +43,14 @@ public class SpecificProductFragment extends Fragment {
 
     List<ProductModel> productList;
 
-    public SpecificProductFragment(ActionBar actionBar) {
+    public SpecificProductFragment(ActionBar actionBar, int category) {
         this.actionBar = actionBar;
+        this.category = category;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_specific_product, container, false);
-
-        category = getArguments().getInt(NAME);
 
         refer(view);
         setData();

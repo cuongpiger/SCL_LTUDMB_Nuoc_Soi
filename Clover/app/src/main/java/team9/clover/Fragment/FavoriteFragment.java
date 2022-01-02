@@ -54,24 +54,26 @@ public class FavoriteFragment extends Fragment {
     }
 
     public void setData() {
-        DatabaseModel.loadProduct("id", DatabaseModel.masterUser.getFavorite())
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            List<ProductModel> products = new ArrayList<>();
-                            for (QueryDocumentSnapshot snapshot : task.getResult())
-                                products.add(snapshot.toObject(ProductModel.class));
+        if (masterUser.getFavorite() != null && masterUser.getFavorite().size() > 0) {
+            DatabaseModel.loadProduct("id", DatabaseModel.masterUser.getFavorite())
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                List<ProductModel> products = new ArrayList<>();
+                                for (QueryDocumentSnapshot snapshot : task.getResult())
+                                    products.add(snapshot.toObject(ProductModel.class));
 
-                            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-                            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                            FavoriteAdapter adapter = new FavoriteAdapter(products);
-                            mContainer.setLayoutManager(layoutManager);
-                            mContainer.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
+                                LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                                layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                                FavoriteAdapter adapter = new FavoriteAdapter(products);
+                                mContainer.setLayoutManager(layoutManager);
+                                mContainer.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     @Override

@@ -1,7 +1,5 @@
 package team9.clover.Fragment;
 
-import static team9.clover.Model.DatabaseModel.firebaseUser;
-import static team9.clover.Model.DatabaseModel.masterOrder;
 import static team9.clover.Model.DatabaseModel.masterUser;
 
 import android.app.Dialog;
@@ -30,6 +28,7 @@ import com.google.android.material.textview.MaterialTextView;
 
 import team9.clover.MainActivity;
 import team9.clover.Model.DatabaseModel;
+import team9.clover.Module.Reuse;
 import team9.clover.R;
 import team9.clover.SplashActivity;
 
@@ -43,6 +42,7 @@ public class AccountFragment extends Fragment {
     MaterialTextView mEmail, mFullName, mAddress, mPhone;
     ImageButton mEdit1, mEdit2;
     FloatingActionButton mExit;
+    boolean canFill;
 
     public AccountFragment(ActionBar actionBar) {
         this.actionBar = actionBar;
@@ -71,7 +71,7 @@ public class AccountFragment extends Fragment {
                     .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            DatabaseModel.resetPassword(firebaseUser.getEmail());
+                            DatabaseModel.resetPassword(masterUser.getEmail());
                             Toast.makeText(getContext(), "Mail đặt lại mật khẩu đã được gửi.", Toast.LENGTH_LONG).show();
                             dialogInterface.dismiss();
                         }
@@ -91,6 +91,8 @@ public class AccountFragment extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             DatabaseModel.signOut();
+                            DatabaseModel.masterUid = "";
+                            DatabaseModel.firebaseUser = null;
                             getActivity().finishAffinity();
                             getActivity().startActivity(new Intent(getActivity(), SplashActivity.class));
                         }
@@ -120,12 +122,14 @@ public class AccountFragment extends Fragment {
         mStreet = dialog.findViewById(R.id.tilStreet);
         mSave = dialog.findViewById(R.id.mbSave);
 
-        mName.getEditText().setText(masterUser.getFullName());
-        mPhoneNumber.getEditText().setText(masterUser.getPhone());
-        mCity.getEditText().setText(masterUser.getAddress().get(3));
-        mDistrict.getEditText().setText(masterUser.getAddress().get(2));
-        mVillage.getEditText().setText(masterUser.getAddress().get(1));
-        mStreet.getEditText().setText(masterUser.getAddress().get(0));
+        if (canFill) {
+            mName.getEditText().setText(masterUser.getFullName());
+            mPhoneNumber.getEditText().setText(masterUser.getPhone());
+            mCity.getEditText().setText(masterUser.getAddress().get(3));
+            mDistrict.getEditText().setText(masterUser.getAddress().get(2));
+            mVillage.getEditText().setText(masterUser.getAddress().get(1));
+            mStreet.getEditText().setText(masterUser.getAddress().get(0));
+        }
 
         mSave.setOnClickListener(v -> {
             masterUser.setFullName(mName.getEditText().getText().toString());
@@ -148,10 +152,11 @@ public class AccountFragment extends Fragment {
     }
 
     private void setData() {
-        mEmail.setText(firebaseUser.getEmail());
+        mEmail.setText(masterUser.getEmail());
         mFullName.setText(masterUser.getFullName());
         mAddress.setText(String.join(", ", masterUser.getAddress()));
         mPhone.setText(masterUser.getPhone());
+        canFill = Reuse.userCanCheck();
     }
 
     private void refer(View view) {
@@ -168,6 +173,12 @@ public class AccountFragment extends Fragment {
     public void onResume() {
         super.onResume();
         setActionBar();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        DatabaseModel.updateMasterUser();
     }
 
     private void setActionBar() {

@@ -1,6 +1,5 @@
 package team9.clover.Fragment;
 
-import static team9.clover.Model.DatabaseModel.firebaseUser;
 import static team9.clover.Model.DatabaseModel.masterUser;
 
 import android.app.Dialog;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +33,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import team9.clover.Adapter.ProductDetailAdapter;
@@ -68,15 +65,14 @@ public class ProductDetailFragment extends Fragment {
 
     ProductModel productModel;
 
-    public ProductDetailFragment(ActionBar actionBar) {
+    public ProductDetailFragment(ActionBar actionBar, ProductModel productModel) {
         this.actionBar = actionBar;
+        this.productModel = productModel;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_detail, container, false);
-
-        productModel = (ProductModel) getArguments().getSerializable(NAME);
 
         refer(view);
         setView1();
@@ -238,14 +234,14 @@ public class ProductDetailFragment extends Fragment {
                     Toast.makeText(getContext(), "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_LONG).show();
                     isChanged = true;
 
-                    if (!Reuse.updateMasterCart(productModel.getId(), selectedSize, quantity, null)) {
+                    if (!DatabaseModel.updateMasterCart(productModel.getId(), selectedSize, quantity, null)) {
                         CartItemModel newCart = new CartItemModel(
                                 productModel.getId(),
                                 productModel.getTitle(),
                                 productModel.getImage().get(0),
                                 productModel.getPrice(), selectedSize, quantity);
 
-                        Reuse.updateMasterCart(productModel.getId(), selectedSize, quantity, newCart);
+                        DatabaseModel.updateMasterCart(productModel.getId(), selectedSize, quantity, newCart);
                     }
                 } else {
                     editText.setError("> 0");

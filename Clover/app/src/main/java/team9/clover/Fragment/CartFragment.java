@@ -89,7 +89,7 @@ public class CartFragment extends Fragment {
         mContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (DatabaseModel.firebaseUser != null) {
+                if (!DatabaseModel.masterUid.isEmpty()) {
                     if (masterOrder.getTotal() == 0) {
                         Toast.makeText(getContext(), "Giỏ hàng trống", Toast.LENGTH_LONG).show();
                         return;

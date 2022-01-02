@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingVertical="4dp"
+    android:background="@color/white_blur"
     tools:context=".Fragment.FavoriteFragment">
 
     <androidx.recyclerview.widget.RecyclerView

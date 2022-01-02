@@ -108,6 +108,7 @@ public class OrderModel implements Serializable {
     }
 
     public void addDate(String newDate) {
+        if (date == null) date = new ArrayList<>();
         date.add(newDate);
     }
 

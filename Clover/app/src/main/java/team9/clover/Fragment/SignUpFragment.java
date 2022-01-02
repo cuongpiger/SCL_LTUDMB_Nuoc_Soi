@@ -159,7 +159,7 @@ public class SignUpFragment extends Fragment {
         mSignUp.setClickable(false);
         mCircle.setVisibility(View.VISIBLE);
 
-        UserModel newUser = new UserModel(fullName);
+        UserModel newUser = new UserModel(fullName, email);
         DatabaseModel.signUp(email, password).addOnCompleteListener(new OnCompleteListener() { // đắng kí tài khoản
             @Override
             public void onComplete(@NonNull Task task) {
@@ -168,7 +168,7 @@ public class SignUpFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task task) {
                             if (task.isSuccessful()) {
-                                getActivity().finishAffinity();
+                                getActivity().finish();
                                 getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
                                 Reuse.startActivity(getActivity());
 

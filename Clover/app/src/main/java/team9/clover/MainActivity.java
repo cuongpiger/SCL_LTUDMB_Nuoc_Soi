@@ -1,7 +1,5 @@
 package team9.clover;
 
-import static team9.clover.Model.DatabaseModel.firebaseUser;
-
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
@@ -92,37 +90,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     /*============================================================================================== THIẾT LẬP CÁC FRAGMENT SẼ HIỂN THỊ TRÊN MÀN HÌNH
     *
     * */
-    private void setFragment(int fragmentId, Fragment fragment, Object object) {
-        Bundle bundle = new Bundle();
+    private void setFragment(int fragmentId, Fragment fragment) {
         quitApp = false;
         if (fragmentId == ProductDetailFragment.ID) {
             activeBackButton();
-            bundle.putSerializable(ProductDetailFragment.NAME, (ProductModel) object);
-            fragment.setArguments(bundle);
-            Reuse.setFragment(getSupportFragmentManager(), fragment, ProductDetailFragment.NAME, R.id.main_framelayout, 0);
+            setFragment(fragment, ProductDetailFragment.NAME, 0);
         } else if (fragmentId == SpecificProductFragment.ID) {
-            bundle.putInt(SpecificProductFragment.NAME, (int) object);
-            fragment.setArguments(bundle);
-            Reuse.setFragment(getSupportFragmentManager(), fragment, SpecificProductFragment.NAME, R.id.main_framelayout, 1);
+            setFragment(fragment, SpecificProductFragment.NAME, 1);
         } else if (fragmentId == ViewMoreFragment.ID) {
             activeBackButton();
-            bundle.putInt(ViewMoreFragment.NAME, (int) object);
-            fragment.setArguments(bundle);
-            Reuse.setFragment(getSupportFragmentManager(), fragment, ViewMoreFragment.NAME, R.id.main_framelayout, 0);
+            setFragment(fragment, ViewMoreFragment.NAME, 0);
         } else if (fragmentId == FavoriteFragment.ID) {
-            Reuse.setFragment(getSupportFragmentManager(), fragment, FavoriteFragment.NAME, R.id.main_framelayout, 0);
+            setFragment(fragment, FavoriteFragment.NAME, 0);
         } else if (fragmentId == CartFragment.ID) {
-            Reuse.setFragment(getSupportFragmentManager(), fragment, CartFragment.NAME, R.id.main_framelayout, 0);
+            setFragment(fragment, CartFragment.NAME, 0);
         } else if (fragmentId == DeliveryFragment.ID) {
             activeBackButton();
-            Reuse.setFragment(getSupportFragmentManager(), fragment, DeliveryFragment.NAME, R.id.main_framelayout, 0);
+            setFragment(fragment, DeliveryFragment.NAME, 0);
         } else if (fragmentId == OrdersFragment.ID) {
-            Reuse.setFragment(getSupportFragmentManager(), fragment, OrdersFragment.NAME, R.id.main_framelayout, 0);
+            setFragment(fragment, OrdersFragment.NAME, 0);
         } else if (fragmentId == OrderDetailFragment.ID) {
             activeBackButton();
-            Reuse.setFragment(getSupportFragmentManager(), fragment, OrderDetailFragment.NAME, R.id.main_framelayout, 0);
+            setFragment(fragment, OrderDetailFragment.NAME, 0);
         } else if (fragmentId == AccountFragment.ID) {
-            Reuse.setFragment(getSupportFragmentManager(), fragment, AccountFragment.NAME, R.id.main_framelayout, 0);
+            setFragment(fragment, AccountFragment.NAME, 0);
         }
     }
 
@@ -143,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             clearBackStack();
             previousNavigation = R.id.nvCart;
             navigationView.getMenu().findItem(previousNavigation).setChecked(true);
-            setFragment(CartFragment.ID, new CartFragment(getSupportActionBar()), null);
+            setFragment(CartFragment.ID, new CartFragment(getSupportActionBar()));
         }
 
         return super.onOptionsItemSelected(item);
@@ -172,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return false;
                 } else {
                     previousNavigation = itemId;
-                    setFragment(FavoriteFragment.ID, new FavoriteFragment(getSupportActionBar()), null);
+                    setFragment(FavoriteFragment.ID, new FavoriteFragment(getSupportActionBar()));
                 }
             } else if (itemId == R.id.nvCart) {
                 clearBackStack();
@@ -182,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return false;
                 } else {
                     previousNavigation = R.id.nvCart;
-                    setFragment(CartFragment.ID, new CartFragment(getSupportActionBar()), null);
+                    setFragment(CartFragment.ID, new CartFragment(getSupportActionBar()));
                 }
             } else if (itemId == R.id.nvOrder) {
                 clearBackStack();
@@ -192,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return false;
                 } else {
                     previousNavigation = R.id.nvOrder;
-                    setFragment(OrdersFragment.ID, new OrdersFragment(getSupportActionBar()), null);
+                    setFragment(OrdersFragment.ID, new OrdersFragment(getSupportActionBar()));
                 }
             } else if (itemId == R.id.nvProfile) {
                 clearBackStack();
@@ -219,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return false;
                 } else {
                     previousNavigation = R.id.nvProfile;
-                    setFragment(AccountFragment.ID, new AccountFragment(getSupportActionBar()), null);
+                    setFragment(AccountFragment.ID, new AccountFragment(getSupportActionBar()));
                 }
             }
         }
@@ -383,7 +374,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 int screen = intent.getIntExtra(ViewMoreFragment.NAME, -1);
                 if (screen != -1) {
-                    setFragment(ViewMoreFragment.ID, new ViewMoreFragment(getSupportActionBar()), (int) screen);
+                    setFragment(ViewMoreFragment.ID, new ViewMoreFragment(getSupportActionBar(), (int) screen));
                 }
 
                 int category = intent.getIntExtra(SpecificProductFragment.NAME, -1);
@@ -393,23 +384,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         navigationView.getMenu().findItem(R.id.nvMall).setChecked(true);
                         previousNavigation = R.id.nvMall;
                     } else {
-                        setFragment(SpecificProductFragment.ID, new SpecificProductFragment(getSupportActionBar()), (int) category);
+                        setFragment(SpecificProductFragment.ID, new SpecificProductFragment(getSupportActionBar(), (int) category));
                     }
                 }
 
                 ProductModel productBroadcast = (ProductModel) intent.getSerializableExtra(ProductDetailFragment.NAME);
                 if (productBroadcast != null) {
-                    setFragment(ProductDetailFragment.ID, new ProductDetailFragment(getSupportActionBar()), productBroadcast);
+                    setFragment(ProductDetailFragment.ID, new ProductDetailFragment(getSupportActionBar(), productBroadcast));
                 }
 
                 int fragmentId = intent.getIntExtra("Fragment", -1);
                 if (fragmentId == DeliveryFragment.ID) {
-                    setFragment(DeliveryFragment.ID, new DeliveryFragment(getSupportActionBar()), productBroadcast);
+                    setFragment(DeliveryFragment.ID, new DeliveryFragment(getSupportActionBar()));
                 }
 
                 OrderModel orderModel = (OrderModel) intent.getSerializableExtra(OrderDetailFragment.NAME);
                 if (orderModel != null) {
-                    setFragment(OrderDetailFragment.ID, new OrderDetailFragment(getSupportActionBar(), orderModel), null);
+                    setFragment(OrderDetailFragment.ID, new OrderDetailFragment(getSupportActionBar(), orderModel));
                 }
             }
         };
@@ -419,5 +410,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void clearBackStack() {
         getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
+    public void setFragment(Fragment fragment, String name, int animStyle) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        if (animStyle == 0) transaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left, R.anim.slide_from_left, R.anim.slide_to_right);
+        else transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
+
+        transaction.replace(R.id.main_framelayout, fragment);
+        transaction.addToBackStack(name);
+        transaction.commit();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        DatabaseModel.updateMasterUser();
+        DatabaseModel.updateMasterOrder();
+        DatabaseModel.updateMasterCart();
     }
 }

@@ -85,6 +85,7 @@ public class SplashActivity extends AppCompatActivity {
      * Kiểm tra user vẫn đang duy trì đăng nhập hay đã sign-out
      * */
     private void checkKeepInLogIn() {
+//        FirebaseAuth.getInstance().signOut();
         DatabaseModel.getCurrentUser();
         if (DatabaseModel.firebaseUser == null) { // nếu là new user, sign-out user thì đi đến login activity
             intent = new Intent(SplashActivity.this, LogInActivity.class);

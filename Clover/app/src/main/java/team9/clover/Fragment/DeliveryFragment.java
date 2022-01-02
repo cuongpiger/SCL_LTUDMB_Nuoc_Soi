@@ -53,6 +53,7 @@ public class DeliveryFragment extends Fragment {
     ImageButton mEdit;
     MaterialButton mCheck, mGoHone;
     ConstraintLayout mSuccess;
+    boolean canCheck;
 
 
     public DeliveryFragment(ActionBar actionBar) {
@@ -79,31 +80,35 @@ public class DeliveryFragment extends Fragment {
         * User nhấn vào button Hoàn tất để xác nhận mua hàng
         * */
         mCheck.setOnClickListener(v -> {
-            masterOrder.addDate(Reuse.getCurrentDate()); // thêm ngày hiện tại làm ngày đặt hàng
-            masterOrder.setFullName(mFullName.getText().toString().trim());
-            masterOrder.setPhone(mPhone.getText().toString().trim());
-            masterOrder.setAddress(mAddress.getText().toString().trim());
-            masterOrder.setId(masterUser.getOrder());
-            masterOrder.setOrder(new Timestamp(new Date()));
+            if (canCheck) {
+                masterOrder.addDate(Reuse.getCurrentDate()); // thêm ngày hiện tại làm ngày đặt hàng
+                masterOrder.setFullName(mFullName.getText().toString().trim());
+                masterOrder.setPhone(mPhone.getText().toString().trim());
+                masterOrder.setAddress(mAddress.getText().toString().trim());
+                masterOrder.setId(masterUser.getOrder());
+                masterOrder.setOrder(new Timestamp(new Date()));
 
-            ProgressDialog pd = new ProgressDialog(getContext(), R.style.MyAlertDialogStyle);
-            pd.setMessage("Đang xử lý...");
-            pd.show();
-            DatabaseModel.updateMasterOrder().addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        DatabaseModel.addNewOrder().addOnSuccessListener(task1 -> {
-                            pd.dismiss();
-                            actionBar.setDisplayHomeAsUpEnabled(false);
-                            mSuccess.setVisibility(View.VISIBLE);
-                            masterUser.setOrder(task1.getId());
-                            DatabaseModel.updateMasterUser();
-                            DatabaseModel.masterCart = new ArrayList<>();
-                        });
+                ProgressDialog pd = new ProgressDialog(getContext(), R.style.MyAlertDialogStyle);
+                pd.setMessage("Đang xử lý...");
+                pd.show();
+                DatabaseModel.updateMasterOrder().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            DatabaseModel.addNewOrder().addOnSuccessListener(task1 -> {
+                                pd.dismiss();
+                                actionBar.setDisplayHomeAsUpEnabled(false);
+                                mSuccess.setVisibility(View.VISIBLE);
+                                masterUser.setOrder(task1.getId());
+                                DatabaseModel.updateMasterUser();
+                                DatabaseModel.masterCart = new ArrayList<>();
+                            });
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                Toast.makeText(getContext(), "Vui lòng thêm địa chỉ giao hàng.", Toast.LENGTH_SHORT).show();
+            }
         });
 
         mGoHone.setOnClickListener(v -> {
@@ -131,12 +136,14 @@ public class DeliveryFragment extends Fragment {
         mStreet = dialog.findViewById(R.id.tilStreet);
         mSave = dialog.findViewById(R.id.mbSave);
 
-        mName.getEditText().setText(masterUser.getFullName());
-        mPhoneNumber.getEditText().setText(masterUser.getPhone());
-        mCity.getEditText().setText(masterUser.getAddress().get(3));
-        mDistrict.getEditText().setText(masterUser.getAddress().get(2));
-        mVillage.getEditText().setText(masterUser.getAddress().get(1));
-        mStreet.getEditText().setText(masterUser.getAddress().get(0));
+        if (canCheck) {
+            mName.getEditText().setText(masterUser.getFullName());
+            mPhoneNumber.getEditText().setText(masterUser.getPhone());
+            mCity.getEditText().setText(masterUser.getAddress().get(3));
+            mDistrict.getEditText().setText(masterUser.getAddress().get(2));
+            mVillage.getEditText().setText(masterUser.getAddress().get(1));
+            mStreet.getEditText().setText(masterUser.getAddress().get(0));
+        }
 
         mSave.setOnClickListener(v -> {
             masterOrder.setFullName(mName.getEditText().getText().toString());
@@ -147,12 +154,13 @@ public class DeliveryFragment extends Fragment {
                     mDistrict.getEditText().getText().toString() + ", " +
                     mCity.getEditText().getText().toString());
 
-            Toast.makeText(getContext(), "Cập nhật thông tin giao hàng thành công.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Cập nhật thông tin giao hàng thành công.", Toast.LENGTH_SHORT).show();
             dialog.dismiss();
 
             mFullName.setText(masterOrder.getFullName());
             mPhone.setText(masterOrder.getPhone());
             mAddress.setText(masterOrder.getAddress());
+            canCheck = true;
         });
 
         dialog.show();
@@ -163,8 +171,17 @@ public class DeliveryFragment extends Fragment {
         mTotal.setText(Reuse.vietnameseCurrency(masterOrder.getTotal()));
         mOriTotal.setText(mTotal.getText());
         mFullName.setText(masterUser.getFullName());
-        mPhone.setText(masterUser.getPhone());
-        mAddress.setText(String.join(", ", masterUser.getAddress()));
+
+        canCheck = Reuse.userCanCheck();
+
+        if (canCheck) {
+            mPhone.setText(masterUser.getPhone());
+            mAddress.setText(String.join(", ", masterUser.getAddress()));
+        } else {
+            mPhone.setText("");
+            mAddress.setText("");
+        }
+
     }
 
     private void refer(View view) {

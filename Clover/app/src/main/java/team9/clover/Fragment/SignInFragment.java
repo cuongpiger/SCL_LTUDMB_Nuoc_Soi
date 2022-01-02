@@ -55,7 +55,7 @@ public class SignInFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
         refer(view);
-        setEvents();
+        setEvent();
 
         return view;
     }
@@ -73,7 +73,7 @@ public class SignInFragment extends Fragment {
         mPassword = view.findViewById(R.id.tilPassword);
     }
 
-    private void setEvents() {
+    private void setEvent() {
         /*
          * Xử lí sự kiện user nhấn nút đăng ký tài khoản
          * */
@@ -154,6 +154,7 @@ public class SignInFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task task) {
                 if (task.isSuccessful()) {
+                    DatabaseModel.getCurrentUser();
                     getActivity().finishAffinity();
                     getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
                     Reuse.startActivity(getActivity());

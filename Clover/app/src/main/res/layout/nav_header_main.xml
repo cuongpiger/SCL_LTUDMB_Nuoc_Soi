@@ -23,24 +23,27 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/mtvFullName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/nav_header_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBottom_toTopOf="@+id/mtvEmail"
+        app:layout_constraintEnd_toEndOf="@+id/mtvEmail"
         app:layout_constraintStart_toEndOf="@+id/rivAvatar"
         app:layout_constraintTop_toTopOf="@+id/rivAvatar" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/mtvEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/nav_header_subtitle"
         app:layout_constraintBottom_toBottomOf="@+id/rivAvatar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rivAvatar"
         app:layout_constraintTop_toTopOf="@+id/rivAvatar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

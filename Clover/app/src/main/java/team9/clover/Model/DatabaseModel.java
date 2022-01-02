@@ -203,14 +203,17 @@ public class DatabaseModel {
             DocumentReference dr = firebaseFirestore.collection(UserModel.class.getSimpleName()).document(masterUid);
             dr.get().addOnSuccessListener(task1 -> {
                 masterUser = task1.toObject(UserModel.class);
+                fullName.setText(masterUser.getFullName()); // set data cho navigation view
+                email.setText(masterUser.getEmail()); // set data cho navigation view
 
                 if (!masterUser.getOrder().isEmpty()) {
                     dr.collection(OrderModel.class.getSimpleName()).document(masterUser.getOrder())
                             .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful())
+                            if (task.isSuccessful()) {
                                 masterOrder = task.getResult().toObject(OrderModel.class);
+                            }
                         }
                     });
 
@@ -225,10 +228,29 @@ public class DatabaseModel {
                         }
                     });
                 } else {
-                    masterOrder = new OrderModel();
+                    masterOrder = new OrderModel(true);
+                    dr.collection(OrderModel.class.getSimpleName()).add(masterOrder).addOnSuccessListener(task2 -> {
+                        masterUser.setOrder(task2.getId());
+                    });
                 }
             });
         }
+    }
+
+    public static boolean updateMasterCart(String id, String size, long quantity, CartItemModel newCart) {
+        if (newCart != null) {
+            DatabaseModel.masterCart.add(newCart);
+            return true;
+        }
+
+        for (CartItemModel cart : DatabaseModel.masterCart) {
+            if (cart.getId().equals(id)) {
+                cart.addCart(size, quantity);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /*
@@ -242,10 +264,10 @@ public class DatabaseModel {
 
     public static Task<DocumentReference> addNewOrder() {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
-        OrderModel newOrder = new OrderModel(true);
+        masterOrder = new OrderModel(true);
         return firebaseFirestore.collection(UserModel.class.getSimpleName())
                 .document(masterUid).collection(OrderModel.class.getSimpleName())
-                .add(newOrder);
+                .add(masterOrder);
     }
 
     public static void refreshMasterOrder() {
@@ -289,7 +311,7 @@ public class DatabaseModel {
         } else {
             CollectionReference reference = firebaseFirestore.collection(UserModel.class.getSimpleName())
                     .document(masterUid).collection(OrderModel.class.getSimpleName())
-                    .document(masterUser.order).collection(CartItemModel.class.getSimpleName());
+                    .document(masterUser.getOrder()).collection(CartItemModel.class.getSimpleName());
 
             for (CartItemModel cart : masterCart) {
                 reference.document(cart.getId()).set(cart);

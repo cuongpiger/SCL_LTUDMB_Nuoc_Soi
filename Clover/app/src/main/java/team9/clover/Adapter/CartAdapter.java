@@ -181,7 +181,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                     CartFragment.isChanged = true;
                     dialog.dismiss();
                     quantity = Integer.parseInt(editText.getText().toString());
-                    Reuse.updateMasterCart(cart.getId(), selectedSize, (-1*cart.getChoice().get(selectedSize) + quantity), null);
+                    DatabaseModel.updateMasterCart(cart.getId(), selectedSize, (-1*cart.getChoice().get(selectedSize) + quantity), null);
+                    DatabaseModel.refreshMasterOrder();
                     notifyDataSetChanged();
                     Toast.makeText(itemView.getContext(), "Cập nhật thành công.", Toast.LENGTH_LONG).show();
                     mTotalCart.setText(Reuse.vietnameseCurrency(masterOrder.getTotal()));

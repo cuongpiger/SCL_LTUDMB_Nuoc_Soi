@@ -49,7 +49,7 @@ public class OrdersFragment extends Fragment {
                 List<OrderModel> orderList = new ArrayList<>();
                 for (QueryDocumentSnapshot snapshot : task.getResult()) {
                     OrderModel order = snapshot.toObject(OrderModel.class);
-                    if (order.getId().isEmpty()) continue;
+                    if (order == null || order.getId().isEmpty()) continue;
                     orderList.add(order);
                 }
                 mContainer.setAdapter(new OrdersAdapter(orderList));
