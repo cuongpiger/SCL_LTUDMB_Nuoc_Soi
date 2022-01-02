@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     /*
-    *
+    * These events occur when users click on top-right menu items on action bar
     * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
             }
 
-            // user chọn giỏ hàng
+            // user choose icon bag shopping
             clearBackStack();
             previousNavigation = R.id.nvCart;
             navigationView.getMenu().findItem(previousNavigation).setChecked(true);
