@@ -66,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="Mật khẩu"
+            app:passwordToggleEnabled="true"
             app:boxBackgroundColor="@color/white"
             app:boxStrokeColor="@color/black"
             app:hintTextColor="@color/black"
