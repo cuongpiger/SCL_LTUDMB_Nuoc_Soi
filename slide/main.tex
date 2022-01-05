@@ -16,6 +16,7 @@
 \lstset{language=Java,
         basicstyle=\footnotesize\ttfamily,
         keywordstyle=\footnotesize\color{blue}\ttfamily}
+        
 
 \title[Phát triển phần mềm cho thiết bị di động]{Clover - Ứng dụng mua sắm thời trang}
 \author{\textbf{Nhóm 09}}
@@ -59,7 +60,7 @@
 \subsection{Các package}
 \subsection{Các dịch vụ bên thứ ba}
 
-\section{Các màn hình và chức năng kèm theo + mã nguồn}
+\section{Các màn hình và chức năng kèm theo}
 
 \section{Chạy thử ứng dụng}
 
@@ -127,7 +128,7 @@
 
 % ============================================================================ Slide 6
 \begin{frame}
-    \frametitle{Các màn hình và chức năng kèm theo + mã nguồn (1)}
+    \frametitle{Các màn hình và chức năng kèm theo (1)}
     \framesubtitle{Nội dung}
     \begin{flushleft}
         \large{\textbf{Trình bày: } 19424013 - Dương Trọng Đức}
@@ -158,7 +159,7 @@
 
 % ============================================================================ Slide 7
 \begin{frame}
-    \frametitle{Các màn hình và chức năng kèm theo + mã nguồn (2)}
+    \frametitle{Các màn hình và chức năng kèm theo (2)}
     \framesubtitle{Màn hình + chức năng đăng nhập}
 
     \begin{columns}
@@ -198,14 +199,12 @@
             \item \textbf{7}: Button - nhấn vào để đăng nhập.
             \item \textbf{8}: Progress Circle - luôn ẩn đi, chỉ hiển thị khi người dùng nhấn vào \textbf{7} để cho người dùng biết rằng hệ thống vẫn chạy và đang trong quá trình kiểm tra đăng nhập.
         \end{itemize}
-
-        \href{https://github.com/cuongpiger/Sharing/blob/main/Clover/SignInFragment.java}{\color{blue} Mã nguồn.}
     \end{columns}
 \end{frame}
 
 % ============================================================================ Slide 9
 \begin{frame}
-    \frametitle{Các màn hình và chức năng kèm theo + mã nguồn (3)}
+    \frametitle{Các màn hình và chức năng kèm theo (3)}
     \framesubtitle{Màn hình chi tiết sản phẩm và chức năng kèm theo}
 
     \begin{columns}
@@ -242,8 +241,8 @@
         \begin{itemize}
             \item \textbf{5}: Menu item Search - nhấn vào để thực hiện chức năng tìm kiếm.
             \item \textbf{6}: Menu item Cart - nhấn vào để đến fragment giỏ hàng.
-            \item \textbf{7}: TabLayout + View Pager 2 - hiển thị các thông tin thêm về sản phẩm. Bên trong tab "Mô tả" là một Text View, bên trong tab "Thông tin" và "Kích thước" là các GridView.
-            \item \textbf{8}: Button - nhấn vào sẽ hiện một Dialog để người dùng có thể chọn size và số lượng sản phẩm để thêm vào giỏ hàng.     
+            \item \textbf{7}: TabLayout + View Pager 2 - bên trong tab "Mô tả" là một Text View.
+            \item \textbf{8}: Button - nhấn vào sẽ hiện một Dialog để người dùng có thể chọn size và số lượng sản phẩm để thêm vào giỏ hàng.
         \end{itemize}
     \end{columns}
 \end{frame}
@@ -254,8 +253,28 @@
         \column{0.3\linewidth}
         \begin{figure}
             \centering
-            \includegraphics[height=0.7\textheight]{images/04.png}
+            \includegraphics[height=0.7\textheight]{images/05.png}
             \caption{\centering\tiny{Hình 4: Màn hình chi tiết sản phẩm 2}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{Các thành phần và chức năng kèm theo trên màn hình:}
+        \begin{itemize}
+            \item \textbf{9}: TabLayout + View Pager 2 - bên trong tab "Thông tin" và "Kích thước" là các GridView.
+            \item \textbf{10}: Horizontal Recycler View - hiển thị tám sản phẩm nằm cùng danh mục mới sản phẩm hiện tại.
+
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+% =========================================================================== Slide 12
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/04.png}
+            \caption{\centering\tiny{Hình 5: Màn hình chi tiết sản phẩm 3}}
 
         \end{figure}
         \column{0.7\linewidth}
@@ -263,95 +282,139 @@
         \begin{itemize}
             \item \textbf{11}: Spinner - cho phép người dùng chọn các size của sản phẩm.
             \item \textbf{12}: Text input - để người dùng nhập số lượng sản phẩm cần mua cho size tương ứng.
-            \item \textbf{13}: Button - khi click vào sản phẩm sẽ được thêm vào giỏ hàng cùng size và số lượng đã chọn.         
+            \item \textbf{13}: Button - khi click vào sản phẩm sẽ được thêm vào giỏ hàng cùng size và số lượng đã chọn.
         \end{itemize}
+    \end{columns}
+\end{frame}
 
-        \href{https://github.com/cuongpiger/Sharing/blob/main/Clover/SignInFragment.java}{\color{blue} Mã nguồn 1 - View Pager.}
+% =========================================================================== Slide 13
+\begin{frame}
+    \frametitle{Các màn hình và chức năng kèm theo (4)}
+    \framesubtitle{Màn hình chính của ứng dụng}
 
-        \href{https://github.com/cuongpiger/Sharing/blob/main/Clover/SignInFragment.java}{\color{blue} Mã nguồn 2 - Thêm sản phẩm vào giỏ hàng.}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/06.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{Các thành phần và chức năng kèm theo trên màn hình:}
+        \begin{itemize}
+            \item \textbf{1}: Action bar - chứa các thành phần từ trái qua phải như sau:
+                  \begin{itemize}
+                      \item Hamburger toggle - nhấn vào để mở navigation view.
+                      \item Actionbar logo - hiển thị logo của ứng dụng.
+                      \item Menu item Search - chức năng tìm kiếm.
+                      \item Menu item Notification - chức năng thông báo (chưa hỗ trợ do ứng dụng chưa có web service + server xử lí).
+                      \item Menu item Cart - bấm vào để đi đến fragment giỏ hàng.
+                  \end{itemize}
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+% =========================================================================== Slide 12
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/06.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{Các thành phần và chức năng kèm theo trên màn hình:}
+        \begin{itemize}
+            \item \textbf{2}: Horizontal Recycler View - hiển thị các sản phẩm theo danh mục.
+            \item \textbf{3}: Carousel (Horizontal Recycler View) - hiển thị các chương trình, khuyến mãi của cửa hàng. Sau ba giây sẽ tự chuyển.
+            \item \textbf{4}: Banner (Image View) - dùng để chèn quảng cáo.
+            \item \textbf{5}: Slider (Horizontal Recycler View) - hiển thị các sản phẩm mới nhất.
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+% =========================================================================== Slide 12
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/07.png}
+            \caption{\centering\tiny{Hình 7: Màn hình chính của ứng dụng 2}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{Các thành phần và chức năng kèm theo trên màn hình:}
+        \begin{itemize}
+            \item \textbf{6}: Horizontal Recycler View - hiển thị tám các sản phẩm bán chạy hiện tại. Nhấn vào item sẽ đưa đến trang chi tiết sản phẩm tương ứng.
+            \item \textbf{7}: Button - đưa đến một fragment khác hiển thị nhiều hơn tám sản phẩm bán chạy dưới dạng GridView.
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+% =========================================================================== Slide 12
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/08.png}
+            \caption{\centering\tiny{Hình 8: Màn hình chính của ứng dụng 3}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{Các thành phần và chức năng kèm theo trên màn hình:}
+        \begin{itemize}
+            \item \textbf{8}: GridView - hiển thị bốn sản phẩm được khuyến mãi hôm nay. Nhấn vào item sẽ đứa đến trang chi tiết sản phẩm tương ứng.
+            \item \textbf{9}: Button - nhấn vào sẽ đưa đến một fragment khác hiển thị nhiều sản phẩm khuyến mãi hơn dưới dạng GridView.
+            \item \textbf{10}: Footer - thể hiện địa chỉ, số điện thoại, các chính sách đổi trả, bảo hành của nhãn hàng.
+            \item \textbf{11}: Hamburger toggle - nhấn vào để mở navigation view.
+        \end{itemize}
     \end{columns}
 \end{frame}
 
 \begin{frame}
-    \frametitle{}
-    \begin{block}{ - Mối đe dọa từ chối và phá hủy}
+    \frametitle{Các màn hình và chức năng kèm theo (5)}
+    \framesubtitle{Chức năng tìm kiếm}
 
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/09.png}
+            \caption{\centering\tiny{Hình 9: Chức năng tìm kiếm sản phẩm}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{Các thành phần và chức năng kèm theo trên màn hình:}
         \begin{itemize}
-            \item Các mối đe dọa từ chối hoặc phá hủy làm cho tài sản hoặc tài nguyên không có sẵn hoặc không thể sử dụng được.
-            \item Vi phạm nguyên lý sẵn có của bảo mật thông tin.
-            \item Một cuộc tấn công từ chối hoặc phá hủy thành công khi nó ngăn người dùng được ủy quyền truy cập tài nguyên tạm thời hoặc vĩnh viễn.
-            \item Tấn công DoS là một ví dụ về mối đe dọa từ chối hoặc phá hủy.
+            \item Khi người dùng nhấn vào bất kì một menu item search nào, một search box như hình trên sẽ hiển thị ra, đồng thời người dùng sẽ được đưa đến một fragment khác, nơi các sản phẩm được tìm kiểm sẽ hiển thị dưới dạng một GridView.
+            \item Ở đây, nhóm tìm kiếm các sản phẩm dựa vào ba từ khóa là \textsf{\color{teal} dress}, \textsf{\color{teal} isola} và \textsf{\color{teal} hồi}, thì toàn bộ các sản phẩm được tìm ra bên dưới đều có tên chứa ít nhất một từ mà người dùng nhập vào.
         \end{itemize}
-    \end{block}
+    \end{columns}
 \end{frame}
-
-%------------------------------------------------
 
 \begin{frame}
-    \frametitle{Tấn công khai thác lỗ hổng}
-
-    \textbf{Các cuộc tấn công có thể bao gồm cả 4 phương thức sau:}
-    \begin{enumerate}
-        \item Giả mạo: tạo ra một số mánh khóe để người dùng không nghi ngờ hệ thống đã bị tấn công.
-        \item Chặn thông tin: Liên quan đến việc nghe lén các truyền và chuyển hướng chúng để sử dụng trái phép.
-        \item Gián đoạn thông tin: Gây ra sự gián đoạn trong một kênh truyền thông, ngăn chặn việc truyền dữ liệu.
-        \item Thay đổi thông tin: thay đổi dữ liệu có trong các đường truyền hoặc tập tin.
-    \end{enumerate}
-
-    \textbf{2 nhóm tấn công:}
-    \begin{enumerate}
-        \item Tấn công nhằm thay đổi các dữ liệu.
-        \item Tấn công nhằm nghe lén và theo dõi các dữ liệu.
-    \end{enumerate}
+    \frametitle{Chạy thử ứng dụng}
 \end{frame}
-%------------------------------------------------
-\begin{frame}
-    \frametitle{Các tấn công độc hại}
-    \begin{block}{Birthday attacks:}
-        \begin{itemize}
-            \item Tấn công Ngày sinh là một loại tấn công mật mã dựa trên sự khai thác vấn đề Ngày sinh (Birthday problem)- một hiện tượng xác suất tạo ra nghịch lý đối với cảm giác của con người, do vậy còn được gọi là “Nghịch lý Ngày sinh”(Birthday paradox). Áp dụng lí thuyết xác suất thống kê, giả sử trong 1 phòng có 23 người ngẫu nhiên, xác suất có ít nhất  2 người trùng ngày sinh là 50\%.
-            \item Công thức tổng quát để tính xác suất có ít nhất 2 người trùng ngày sinh trong n người ngẫu nhiên:
-                  \begin{figure}[h]
-                      \centering\includegraphics[width=0.4\linewidth]{images/bday.png}
-                  \end{figure}
-            \item Với n = 70 người ngẫu nhiên, p(n) ~ 99\%, nghĩa là gần như chắc chắn trong 70 người ngẫu nhiên có 2 người trùng ngày sinh.
-        \end{itemize}
-    \end{block}
-\end{frame}
-
 
 \begin{frame}
-    \frametitle{Eavesdropping}
-    \begin{block}{}
-        Tạo ra các gói tin có địa chỉ IP giả mạo không là địa chỉ máy gửi gói tin
-    \end{block}
-    \begin{block}{}
-        Vượt qua các kiểm soát về nguồn gốc địa chỉ IP.
-    \end{block}
-    \begin{block}{}
-        Phục vụ các mô hình tấn công khác.
-        \begin{itemize}
-            \item Tấn công về phiên Tấn công về session.
-            \item Tấn công kiểu phản xạ.
-        \end{itemize}
-    \end{block}
-    \begin{block}{}
-        Giải pháp:
-        \begin{itemize}
-            \item Không sử dụng xác thực là địa chỉ IP.
-            \item Phát hiện các bất thường về kết nối Phát hiện các bất thường về kết nối mạng.
-        \end{itemize}
-    \end{block}
+    \frametitle{Tài nguyên và tham khảo}
+    \begin{itemize}
+        \item Logo ứng dụng và tên Clover: được nhóm xin phép từ nhãn hàng Clover và đã được sự đồng ý từ chị chủ nhãn hàng, trang bán hàng của nhãn hàng tại \href{https://www.facebook.com/TiemmaynhaAn}{\color{blue} https://www.facebook.com/TiemmaynhaAn}.
+        \item Về hình ảnh người mẫu Việt Nam ở mục sản phẩm mới: là bạn Phan Hữu Lộc - cựu sinh viên K17 khoa Sinh học của trường Đại Học Khoa Học Tự Nhiên TP.HCM và là người mẫu của nhãn hàng Clover phía trên.
+        \item Các hình ảnh sản phẩm khác được nhóm lấy về (chưa xin phép) từ trang bán hàng Farfetch tại \href{https://www.farfetch.com}{\color{blue} https://www.farfetch.com}.
+        \item Về các kĩ thuật code trong đồ án ngoài slide của Thầy lý thuyết nhóm còn tham khảo thêm trong cuốn \textbf{\color{teal} Android Programming for Beginners}, link sách tại \href{https://www.amazon.com/Android-Programming-Beginners-depth-full-featured/dp/1800563434}{\color{blue} https://www.amazon.com/Android-Programming-Beginners-depth-full-featured/dp/1800563434}.
+    \end{itemize}
 \end{frame}
-
 
 \begin{frame}
     \frametitle{Hỏi đáp và kết thúc}
     \includegraphics[width=\textwidth]{images/ask_and_answer.jpg}
 \end{frame}
-
-
-
 
 \begin{frame}
     \Huge{\centerline{HẾT}}

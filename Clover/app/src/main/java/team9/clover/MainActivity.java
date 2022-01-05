@@ -463,10 +463,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DatabaseModel.updateMasterCart();
 
         if (DatabaseModel.firebaseUser == null) {
-            DatabaseModel.signOut();
             DatabaseModel.masterUid = "";
         }
-
-        DatabaseModel.firebaseUser = null;
     }
 }

@@ -12,6 +12,7 @@ import android.widget.Toast;
 import team9.clover.Fragment.ForgetPasswordFragment;
 import team9.clover.Fragment.SignInFragment;
 import team9.clover.Fragment.SignUpFragment;
+import team9.clover.Model.DatabaseModel;
 import team9.clover.Module.Reuse;
 
 public class LogInActivity extends AppCompatActivity {
@@ -25,6 +26,10 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+
+        if (DatabaseModel.categoryModelList == null || DatabaseModel.categoryModelList.size() == 0) {
+            DatabaseModel.loadHomePageData();
+        }
 
         refer();
         setEvent();
