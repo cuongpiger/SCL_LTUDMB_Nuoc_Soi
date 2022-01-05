@@ -1,10 +1,10 @@
-PWD /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1
+PWD /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.tex
-OUTPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.log
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.tex
+OUTPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
@@ -175,7 +175,7 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries
 INPUT /usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfadings.code.tex
 INPUT /usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code.tex
 INPUT /usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code.tex
-OUTPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.pdf
+OUTPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.pdf
 INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
@@ -230,9 +230,9 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.aux
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.aux
-OUTPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.aux
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.aux
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.aux
+OUTPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.aux
 INPUT /usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
@@ -245,13 +245,13 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.out
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.out
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.out
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.out
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.out
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.out
-OUTPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.out
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.out
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.out
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.out
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.out
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.out
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.out
+OUTPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.out
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vncsc10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vncsc10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vncsc10.tfm
@@ -271,81 +271,144 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/logo.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/logo.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/logo.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/logo.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/logo.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/logo.png
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vnr17.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vnbx12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vnbx12.tfm
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/01.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/01.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/01.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/02.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/02.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/02.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/03.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/03.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/03.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/01.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/01.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/01.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/02.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/02.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/02.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/03.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/03.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/03.png
 INPUT /usr/share/texlive/texmf-dist/tex/latex/vntex/t5cmss.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/vntex/t5cmss.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vnss12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vnti12.tfm
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/04.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/04.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/04.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/05.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/05.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/05.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/06.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/06.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/06.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/07.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/07.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/07.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/08.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/08.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/08.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/09.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/09.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/09.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/10.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/10.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/10.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/11.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/11.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/11.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/12.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/12.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/12.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/13.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/13.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/13.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/14.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/14.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/14.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/15.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/15.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/15.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/16.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/16.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/16.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/17.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/17.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/17.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/18.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/18.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/18.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/19.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/19.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/19.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/20.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/20.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/20.png
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.aux
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.out
-INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.out
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/04.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/04.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/04.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/05.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/05.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/05.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/06.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/06.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/06.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/07.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/07.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/07.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/08.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/08.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/08.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/09.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/09.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/09.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/10.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/10.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/10.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/11.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/11.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/11.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/12.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/12.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/12.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/13.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/13.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/13.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/14.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/14.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/14.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/15.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/15.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/15.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/16.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/16.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/16.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/17.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/17.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/17.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/18.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/18.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/18.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/19.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/19.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/19.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/20.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/20.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/20.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/21.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/21.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/21.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/22.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/22.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/22.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/23.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/23.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/23.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/24.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/24.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/24.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/25.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/25.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/25.png
+INPUT /usr/share/texlive/texmf-dist/tex/latex/vntex/t5cmtt.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/vntex/t5cmtt.fd
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vntt12.tfm
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/26.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/26.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/26.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/27.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/27.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/27.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/28.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/28.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/28.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/29.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/29.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/29.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/30.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/30.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/30.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/31.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/31.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/31.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/32.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/32.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/32.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/33.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/33.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/33.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/36.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/36.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/36.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/37.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/37.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/37.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/38.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/38.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/38.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/39.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/39.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/39.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/40.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/40.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/40.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/41.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/41.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/41.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/42.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/42.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/42.png
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.aux
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.out
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.out
 INPUT /usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb
@@ -354,3 +417,4 @@ INPUT /usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vncsc10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnss12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnti12.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt12.pfb

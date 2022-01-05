@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.11.10)  4 JAN 2022 14:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.11.10)  5 JAN 2022 00:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.tex"
-(/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.tex
+**/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.tex
+(/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.tex
 LaTeX2e <2020-02-02> patch level 2
 L3 programming layer <2020-02-14> (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
@@ -670,7 +670,7 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 19.
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count305
 \l__pdf_internal_box=\box62
-) (/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.aux)
+) (/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
@@ -767,18 +767,18 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 22.
 LaTeX Info: Redefining \pageref on input line 22.
 LaTeX Info: Redefining \nameref on input line 22.
- (/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.out) (/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.out)
+ (/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.out) (/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
-<images/logo.png, id=127, 120.45pt x 94.6737pt>
+<images/logo.png, id=175, 120.45pt x 94.6737pt>
 File: images/logo.png Graphic file (type png)
 <use images/logo.png>
 Package pdftex.def Info: images/logo.png  used on input line 46.
 (pdftex.def)             Requested size: 120.44969pt x 94.67346pt.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/logo.png>]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/logo.png>]
 
 Package hyperref Warning: Composite letter `\textacute+\ohorn'
 (hyperref)                not defined in PD1 encoding,
@@ -1016,18 +1016,18 @@ Package hyperref Warning: Composite letter `\textdotbelow+\uhorn'
 Package hyperref Warning: Glyph not defined in PD1 encoding,
 (hyperref)                removing `\uhorn' on input line 80.
 
-<images/01.png, id=141, 608.2725pt x 1284.8pt>
+<images/01.png, id=189, 608.2725pt x 1284.8pt>
 File: images/01.png Graphic file (type png)
 <use images/01.png>
 Package pdftex.def Info: images/01.png  used on input line 85.
 (pdftex.def)             Requested size: 134.7021pt x 284.52756pt.
-<images/02.png, id=142, 608.2725pt x 1284.8pt>
+<images/02.png, id=190, 608.2725pt x 1284.8pt>
 File: images/02.png Graphic file (type png)
 <use images/02.png>
 Package pdftex.def Info: images/02.png  used on input line 93.
 (pdftex.def)             Requested size: 134.7021pt x 284.52756pt.
-[2 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/01.png>] [3 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/02.png>]
-<images/03.png, id=153, 722.7pt x 1525.7pt>
+[2 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/01.png>] [3 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/02.png>]
+<images/03.png, id=202, 722.7pt x 1525.7pt>
 File: images/03.png Graphic file (type png)
 <use images/03.png>
 Package pdftex.def Info: images/03.png  used on input line 102.
@@ -1155,7 +1155,7 @@ Overfull \hbox (10.38489pt too wide) in paragraph at lines 125--143
 [][] 
  []
 
-[4 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/03.png>]
+[4 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/03.png>]
 
 Package hyperref Warning: Composite letter `\textasciigrave+\acircumflex'
 (hyperref)                not defined in PD1 encoding,
@@ -1247,13 +1247,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 155--156
 
  []
 
-<images/04.png, id=159, 625.33624pt x 1284.8pt>
+<images/04.png, id=208, 625.33624pt x 1284.8pt>
 File: images/04.png Graphic file (type png)
 <use images/04.png>
 Package pdftex.def Info: images/04.png  used on input line 161.
 (pdftex.def)             Requested size: 138.48087pt x 284.52756pt.
-[5] [6 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/04.png>]
-<images/05.png, id=173, 1084.05pt x 2228.325pt>
+[5] [6 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/04.png>]
+<images/05.png, id=222, 1084.05pt x 2228.325pt>
 File: images/05.png Graphic file (type png)
 <use images/05.png>
 Package pdftex.def Info: images/05.png  used on input line 171.
@@ -1320,13 +1320,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 192--193
 
  []
 
-[7 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/05.png>]
-<images/06.png, id=180, 1084.05pt x 2228.325pt>
+[7 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/05.png>]
+<images/06.png, id=228, 1084.05pt x 2228.325pt>
 File: images/06.png Graphic file (type png)
 <use images/06.png>
 Package pdftex.def Info: images/06.png  used on input line 203.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
- [8 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/06.png>]
+ [8 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/06.png>]
 
 Package hyperref Warning: Composite letter `\textacute+\uhorn'
 (hyperref)                not defined in PD1 encoding,
@@ -1385,23 +1385,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 229--230
 
  []
 
-<images/07.png, id=186, 1084.05pt x 2228.325pt>
+<images/07.png, id=234, 1084.05pt x 2228.325pt>
 File: images/07.png Graphic file (type png)
 <use images/07.png>
 Package pdftex.def Info: images/07.png  used on input line 235.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
 [9]
-<images/08.png, id=192, 1084.05pt x 2228.325pt>
+<images/08.png, id=240, 1084.05pt x 2228.325pt>
 File: images/08.png Graphic file (type png)
 <use images/08.png>
 Package pdftex.def Info: images/08.png  used on input line 241.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
-<images/09.png, id=193, 1084.05pt x 2228.325pt>
+<images/09.png, id=241, 1084.05pt x 2228.325pt>
 File: images/09.png Graphic file (type png)
 <use images/09.png>
 Package pdftex.def Info: images/09.png  used on input line 247.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
- [10 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/07.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/08.png>]
+ [10 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/07.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/08.png>]
 
 Package hyperref Warning: Composite letter `\textacute+\uhorn'
 (hyperref)                not defined in PD1 encoding,
@@ -1437,12 +1437,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 264--265
 
  []
 
-<images/10.png, id=200, 1084.05pt x 2228.325pt>
+<images/10.png, id=248, 1084.05pt x 2228.325pt>
 File: images/10.png Graphic file (type png)
 <use images/10.png>
 Package pdftex.def Info: images/10.png  used on input line 270.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
-[11 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/09.png>] [12 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/10.png>]
+[11 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/09.png>] [12 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/10.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 292--293
 
  []
@@ -1456,30 +1456,30 @@ Underfull \hbox (badness 10000) in paragraph at lines 302--303
 
  []
 
-<images/11.png, id=212, 1084.05pt x 2228.325pt>
+<images/11.png, id=260, 1084.05pt x 2228.325pt>
 File: images/11.png Graphic file (type png)
 <use images/11.png>
 Package pdftex.def Info: images/11.png  used on input line 306.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
-[13 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/11.png>] [14]
-<images/12.png, id=222, 1084.05pt x 2228.325pt>
+[13 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/11.png>] [14]
+<images/12.png, id=270, 1084.05pt x 2228.325pt>
 File: images/12.png Graphic file (type png)
 <use images/12.png>
 Package pdftex.def Info: images/12.png  used on input line 331.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
- [15 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/12.png>]
-<images/13.png, id=228, 1084.05pt x 2228.325pt>
+ [15 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/12.png>]
+<images/13.png, id=276, 1084.05pt x 2228.325pt>
 File: images/13.png Graphic file (type png)
 <use images/13.png>
 Package pdftex.def Info: images/13.png  used on input line 344.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
- [16 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/13.png>]
-<images/14.png, id=234, 1084.05pt x 2228.325pt>
+ [16 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/13.png>]
+<images/14.png, id=282, 1084.05pt x 2228.325pt>
 File: images/14.png Graphic file (type png)
 <use images/14.png>
 Package pdftex.def Info: images/14.png  used on input line 359.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
- [17 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/14.png>]
+ [17 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/14.png>]
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
 (hyperref)                removing `\h' on input line 375.
@@ -1497,23 +1497,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 376--377
 
  []
 
-<images/15.png, id=240, 1084.05pt x 2228.325pt>
+<images/15.png, id=288, 1084.05pt x 2228.325pt>
 File: images/15.png Graphic file (type png)
 <use images/15.png>
 Package pdftex.def Info: images/15.png  used on input line 382.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
-[18 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/15.png>]
-<images/16.png, id=247, 1084.05pt x 2228.325pt>
+[18 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/15.png>]
+<images/16.png, id=295, 1084.05pt x 2228.325pt>
 File: images/16.png Graphic file (type png)
 <use images/16.png>
 Package pdftex.def Info: images/16.png  used on input line 399.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
-<images/17.png, id=248, 1084.05pt x 2228.325pt>
+<images/17.png, id=296, 1084.05pt x 2228.325pt>
 File: images/17.png Graphic file (type png)
 <use images/17.png>
 Package pdftex.def Info: images/17.png  used on input line 405.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
- [19 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/16.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/17.png>]
+ [19 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/16.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/17.png>]
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
 (hyperref)                removing `\h' on input line 410.
@@ -1536,23 +1536,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 411--412
 
  []
 
-<images/18.png, id=255, 1084.05pt x 2228.325pt>
+<images/18.png, id=303, 1084.05pt x 2228.325pt>
 File: images/18.png Graphic file (type png)
 <use images/18.png>
 Package pdftex.def Info: images/18.png  used on input line 417.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
-[20 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/18.png>]
-<images/19.png, id=261, 1084.05pt x 2228.325pt>
+[20 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/18.png>]
+<images/19.png, id=309, 1084.05pt x 2228.325pt>
 File: images/19.png Graphic file (type png)
 <use images/19.png>
 Package pdftex.def Info: images/19.png  used on input line 434.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
-<images/20.png, id=262, 1084.05pt x 2228.325pt>
+<images/20.png, id=310, 1084.05pt x 2228.325pt>
 File: images/20.png Graphic file (type png)
 <use images/20.png>
 Package pdftex.def Info: images/20.png  used on input line 440.
 (pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
- [21 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/19.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/images/20.png>]
+ [21 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/19.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/20.png>]
 
 Package hyperref Warning: Composite letter `\textacute+\ecircumflex'
 (hyperref)                not defined in PD1 encoding,
@@ -1579,29 +1579,417 @@ Underfull \hbox (badness 10000) in paragraph at lines 451--452
 
  []
 
-[22]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 455.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 455.
- (/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 455.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 455.
+<images/21.png, id=317, 1084.05pt x 2228.325pt>
+File: images/21.png Graphic file (type png)
+<use images/21.png>
+Package pdftex.def Info: images/21.png  used on input line 457.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+<images/22.png, id=318, 1084.05pt x 2228.325pt>
+File: images/22.png Graphic file (type png)
+<use images/22.png>
+Package pdftex.def Info: images/22.png  used on input line 463.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+[22 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/21.png>]
+<images/23.png, id=324, 1084.05pt x 2228.325pt>
+File: images/23.png Graphic file (type png)
+<use images/23.png>
+Package pdftex.def Info: images/23.png  used on input line 469.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+<images/24.png, id=325, 1084.05pt x 2228.325pt>
+File: images/24.png Graphic file (type png)
+<use images/24.png>
+Package pdftex.def Info: images/24.png  used on input line 475.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+ [23 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/22.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/23.png>] [24 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/24.png>]
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\h' on input line 495.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\h' on input line 495.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\acircumflex' on input line 495.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 496--497
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 498--499
+
+ []
+
+<images/25.png, id=339, 1084.05pt x 2228.325pt>
+File: images/25.png Graphic file (type png)
+<use images/25.png>
+Package pdftex.def Info: images/25.png  used on input line 504.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 512.
+(/usr/share/texlive/texmf-dist/tex/latex/vntex/t5cmtt.fd
+File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+) [25 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/25.png>]
+
+Package hyperref Warning: Composite letter `\textacute+\uhorn'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textacute' on input line 517.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\uhorn' on input line 517.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\u' on input line 517.
+
+
+Package hyperref Warning: Composite letter `\textacute+\ecircumflex'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textacute' on input line 517.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\ecircumflex' on input line 517.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\h' on input line 517.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\h' on input line 517.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\acircumflex' on input line 517.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 518--519
+
+ []
+
+<images/26.png, id=345, 1084.05pt x 2228.325pt>
+File: images/26.png Graphic file (type png)
+<use images/26.png>
+Package pdftex.def Info: images/26.png  used on input line 524.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\h' on input line 534.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 535--536
+
+ []
+
+[26 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/26.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 537--538
+
+ []
+
+<images/27.png, id=352, 1084.05pt x 2228.325pt>
+File: images/27.png Graphic file (type png)
+<use images/27.png>
+Package pdftex.def Info: images/27.png  used on input line 543.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+<images/28.png, id=353, 1084.05pt x 2228.325pt>
+File: images/28.png Graphic file (type png)
+<use images/28.png>
+Package pdftex.def Info: images/28.png  used on input line 549.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+[27 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/27.png>]
+<images/29.png, id=359, 1084.05pt x 2228.325pt>
+File: images/29.png Graphic file (type png)
+<use images/29.png>
+Package pdftex.def Info: images/29.png  used on input line 555.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+ [28 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/28.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/29.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 576--577
+
+ []
+
+<images/30.png, id=366, 1084.05pt x 2228.325pt>
+File: images/30.png Graphic file (type png)
+<use images/30.png>
+Package pdftex.def Info: images/30.png  used on input line 582.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+[29]
+<images/31.png, id=371, 1084.05pt x 2228.325pt>
+File: images/31.png Graphic file (type png)
+<use images/31.png>
+Package pdftex.def Info: images/31.png  used on input line 588.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+<images/32.png, id=372, 1084.05pt x 2228.325pt>
+File: images/32.png Graphic file (type png)
+<use images/32.png>
+Package pdftex.def Info: images/32.png  used on input line 594.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+ [30 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/30.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/31.png>]
+<images/33.png, id=380, 1084.05pt x 2228.325pt>
+File: images/33.png Graphic file (type png)
+<use images/33.png>
+Package pdftex.def Info: images/33.png  used on input line 600.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+ [31 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/32.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/33.png>]
+
+Package hyperref Warning: Composite letter `\textdotbelow+i'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textdotbelow' on input line 618.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\h' on input line 618.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\uhorn' on input line 618.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\dj' on input line 618.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\ohorn' on input line 618.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 619--620
+
+ []
+
+<images/36.png, id=387, 1084.05pt x 2228.325pt>
+File: images/36.png Graphic file (type png)
+<use images/36.png>
+Package pdftex.def Info: images/36.png  used on input line 627.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+[32]
+
+Package hyperref Warning: Composite letter `\textacute+\ecircumflex'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textacute' on input line 639.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\ecircumflex' on input line 639.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\dj' on input line 639.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\ohorn' on input line 639.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 640--641
+
+ []
+
+<images/37.png, id=392, 1084.05pt x 2228.325pt>
+File: images/37.png Graphic file (type png)
+<use images/37.png>
+Package pdftex.def Info: images/37.png  used on input line 646.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+[33 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/36.png>]
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\h' on input line 659.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\uhorn' on input line 659.
+
+
+Package hyperref Warning: Composite letter `\textasciigrave+\ohorn'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textasciigrave' on input line 659.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\ohorn' on input line 659.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 660--661
+
+ []
+
+<images/38.png, id=398, 1084.05pt x 2228.325pt>
+File: images/38.png Graphic file (type png)
+<use images/38.png>
+Package pdftex.def Info: images/38.png  used on input line 666.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+[34 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/37.png>]
+<images/39.png, id=404, 1084.05pt x 2228.325pt>
+File: images/39.png Graphic file (type png)
+<use images/39.png>
+Package pdftex.def Info: images/39.png  used on input line 672.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+<images/40.png, id=405, 1084.05pt x 2228.325pt>
+File: images/40.png Graphic file (type png)
+<use images/40.png>
+Package pdftex.def Info: images/40.png  used on input line 678.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+ [35 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/38.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/39.png>]
+<images/41.png, id=412, 1084.05pt x 2228.325pt>
+File: images/41.png Graphic file (type png)
+<use images/41.png>
+Package pdftex.def Info: images/41.png  used on input line 684.
+(pdftex.def)             Requested size: 138.41718pt x 284.52756pt.
+ [36 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/40.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/41.png>]
+
+Package hyperref Warning: Composite letter `\texttilde+\uhorn'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\texttilde' on input line 702.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\uhorn' on input line 702.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\dj' on input line 702.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\h' on input line 702.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\ecircumflex' on input line 702.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\dj' on input line 702.
+
+
+Package hyperref Warning: Composite letter `\textdotbelow+\abreve'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textdotbelow' on input line 702.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\abreve' on input line 702.
+
+
+Package hyperref Warning: Composite letter `\textdotbelow+\ecircumflex'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textdotbelow' on input line 702.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\ecircumflex' on input line 702.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\dj' on input line 702.
+
+
+Package hyperref Warning: Composite letter `\textasciigrave+\ocircumflex'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textasciigrave' on input line 702.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\ocircumflex' on input line 702.
+
+
+Package hyperref Warning: Composite letter `\textasciigrave+\ecircumflex'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textasciigrave' on input line 703.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\ecircumflex' on input line 703.
+
+
+Package hyperref Warning: Composite letter `\textdotbelow+\ecircumflex'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textdotbelow' on input line 703.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\ecircumflex' on input line 703.
+
+
+Package hyperref Warning: Composite letter `\textasciigrave+\ecircumflex'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textasciigrave' on input line 706.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\ecircumflex' on input line 706.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\uhorn' on input line 706.
+
+
+Package hyperref Warning: Composite letter `\texttilde+\uhorn'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\texttilde' on input line 706.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\uhorn' on input line 706.
+
+
+Package hyperref Warning: Composite letter `\textacute+\uhorn'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textacute' on input line 709.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\uhorn' on input line 709.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\u' on input line 709.
+
+
+Package hyperref Warning: Composite letter `\textacute+\ecircumflex'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textacute' on input line 709.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\ecircumflex' on input line 709.
+
+<images/42.png, id=421, 1277.77374pt x 686.565pt>
+File: images/42.png Graphic file (type png)
+<use images/42.png>
+Package pdftex.def Info: images/42.png  used on input line 714.
+(pdftex.def)             Requested size: 500.484pt x 268.91164pt.
+[37]
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\h' on input line 720.
+
+[38 </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/images/42.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 729.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 729.
+ (/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 729.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 729.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: C30050653AFF00283262787ADE2DE792;2014.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 455.
+(rerunfilecheck)             Checksum: 8CD29B9A47560EA87A157857F87177B5;2984.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 729.
  ) 
 Here is how much of TeX's memory you used:
- 20587 strings out of 481239
- 378770 string characters out of 5920376
- 623687 words of memory out of 5000000
- 35364 multiletter control sequences out of 15000+600000
- 548903 words of font info for 51 fonts, out of 8000000 for 9000
+ 20790 strings out of 481239
+ 381725 string characters out of 5920376
+ 623685 words of memory out of 5000000
+ 35495 multiletter control sequences out of 15000+600000
+ 549214 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,8n,83p,587b,394s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vncsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnti12.pfb>
-Output written on "/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/bao cao lan 1/main.pdf" (23 pages, 10263286 bytes).
+ 68i,8n,83p,600b,394s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vncsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt12.pfb>
+Output written on /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/report/main.pdf (39 pages, 16420566 bytes).
 PDF statistics:
- 316 PDF objects out of 1000 (max. 8388607)
- 243 compressed objects within 3 object streams
- 67 named destinations out of 1000 (max. 500000)
- 406 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 494 PDF objects out of 1000 (max. 8388607)
+ 383 compressed objects within 4 object streams
+ 115 named destinations out of 1000 (max. 500000)
+ 602 words of extra memory for PDF output out of 10000 (max. 10000000)
 

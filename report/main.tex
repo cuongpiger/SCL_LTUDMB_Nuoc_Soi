@@ -113,9 +113,9 @@ Không có.\\
     \hline
     \textbf{STT} & \textbf{MSSV} & \textbf{Họ và tên}  & \textbf{Đóng góp} (tổng 100\%) \\
     \hline \hline
-    1            & 19424915      & Dương Trọng Đức     & 30\%                           \\ \hline
-    2            & 20424008      & Dương Mạnh Cường    & 36\%                           \\ \hline
-    3            & 20424013      & Phạm Nguyễn Mỹ Diễm & 34\%                           \\
+    1            & 19424915      & Dương Trọng Đức     & 32\%                           \\ \hline
+    2            & 20424008      & Dương Mạnh Cường    & 35\%                           \\ \hline
+    3            & 20424013      & Phạm Nguyễn Mỹ Diễm & 33\%                           \\
     \hline
 \end{tabular}
 
@@ -451,5 +451,279 @@ Phần này sẽ mô tả chi tiết các công việc mà các thành viên c�
 Được thực hiện bởi sinh viên 20424013.\\
 
 \indent Màn hình này được chuyển đến khi người dùng nhấn vào các item của các thành phần \textbf{5, 6, 8} trong mục 2.3.1, thành phần \textbf{1} trong mục 2.3.2, thành phần \textbf{2} trong mục 2.3.3. Dưới đây là hình chụp màn hình này.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/21.png}
+    \caption{Màn hình chi tiết sản phẩm 1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/22.png}
+    \caption{Màn hình chi tiết sản phẩm 2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/23.png}
+    \caption{Màn hình chi tiết sản phẩm 3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/24.png}
+    \caption{Dialog cho phép người dùng chọn size + số lượng sản phẩm thêm vào giỏ hàng}
+\end{figure}
+
+\indent \textbf{Các thành phần và chức năng kèm theo trên màn hình}
+\begin{itemize}
+    \item \textbf{1}: View Pager - hiển thị các hình ảnh của sản phẩm.
+    \item \textbf{2}: Floating Action Button - cho phép người dùng nhấn vào để thêm sản phầm vào mục yêu thích. Khi vào màn hình chi tiết một sản phẩm, tuy vào sản phẩm hiện tại có được thêm vào mục yêu thích của người dùng từ trước không mà icon trong button được thay đổi cho phù hợp. Nếu người dùng chưa đăng nhập thì một Toast sẽ hiện lên thông báo cho người dùng biết là chức năng này cần đăng nhập.
+    \item \textbf{3}: Các text view - hiển thị thông tin của sản phẩm.
+    \item \textbf{4}: As home indicator - quay về fragment trước đó được lưu trong backstack.
+    \item \textbf{5}: Menu item Search - nhấn vào để thực hiện chức năng tìm kiếm.
+    \item \textbf{6}: Menu item Cart - nhấn vào để đến fragment giỏ hàng.
+    \item \textbf{7} + \textbf{9}: TabLayout + View Pager 2 - hiển thị các thông tin thêm về sản phẩm. Bên trong tab "Mô tả" là một Text View, bên trong tab "Thông tin" và "Kích thước" là các GridView.
+    \item \textbf{8}: Button - nhấn vào sẽ hiện một Dialog để người dùng có thể chọn size và số lượng sản phẩm để thêm vào giỏ hàng. Nếu người dùng chưa đăng nhập thì một Toast sẽ hiện lên thông báo cho người dùng biết là chức năng này cần đăng nhập.
+    \item \textbf{10}: Horizontal Recycler View - hiển thị tám sản phẩm nằm cùng danh mục mới sản phẩm hiện tại, nhấn vào item sẽ đi đến một fragment chi tiết sản phẩm khác tương ứng với sản phẩm đó.
+    \item \textbf{11}: Spinner - cho phép người dùng chọn các size của sản phẩm.
+    \item \textbf{12}: Text View - để người dùng nhập số lượng sản phẩm cần mua cho size tương ứng.
+    \item \textbf{13}: Button - khi click vào sản phẩm sẽ được thêm vào giỏ hàng cùng size và số lượng đã chọn.
+\end{itemize}
+
+\subsubsection{Màn hình sản phẩm yêu thích}
+Được thực hiện bởi sinh viên 20424008.\\
+
+\indent Chức năng này được truy cập khi người dùng nhấn vào các Hamburger toggle, sau đó thông qua navigation view mà người dùng có thể truy cập vào màn hình này (xem lại hình 14 ở mục 2.3.1).\\
+
+\indent Người dùng chỉ có thể truy cập vào màn hình này khi đã đăng nhập, nếu chưa đăng nhập thì một Toast sẽ hiện lên yêu cầu người dùng đăng nhập để sử dụng tính năng này. Dưới đây là hình chụp của màn hình này.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/25.png}
+    \caption{Màn hình sản phẩm yêu thích}
+\end{figure}
+
+\indent \textbf{Các thành phần và chức năng kèm theo trên màn hình}
+\begin{itemize}
+    \item \textbf{1}: Hamburger toggle - dùng để truy cập vào navigation view.
+    \item \textbf{2}: Vertical Recycler View - hiển thị các sản phẩm mà người dùng đã thêm vào mục yêu thích của mình.
+    \item \textbf{3}: Floating Action Button - người dùng có thể nhấn vào để xóa sản phẩm khỏi mục yêu thích. Tuy nhiên để tránh người dùng nhấn nhầm, ứng dụng không xóa ngay mà chỉ chuyển icon của button này đi, cho đến khi fragment này rơi vào \texttt{onPause} thì nó mới thực sự được xóa khỏi mục yêu thích của người dùng và Firestore được cập nhật.
+    \item \textbf{4}: Image view - hiển thị hình ảnh của sản phẩm, nếu người dùng nhấn vào thì sẽ đưa người dùng đến trang chi tiết sản phẩm của sản phẩm đó.
+    \item \textbf{5}: Các Text View - hiển thị các thông tin cơ bản của sản phẩm.
+\end{itemize}
+
+\subsubsection{Chức năng tìm kiếm sản phẩm}
+Được thực hiện bởi sinh viên 20424008.\\
+
+\indent Chức năng này được sử dụng ở các màn hình nằm ở các mục 2.3.1, 2.3.2, 2.3.3 và 2.3.4. Cho phép người dùng tìm kiếm theo từ khóa dựa trên tên của sản phẩm. Dưới đây là hình chụp từ màn hình này.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/26.png}
+    \caption{Màn hình sản phẩm yêu thích}
+\end{figure}
+
+\indent \textbf{Các thành phần và chức năng kèm theo trên màn hình}
+\begin{itemize}
+    \item Khi người dùng nhấn vào bất kì một menu item search nào, một search box như hình trên sẽ hiển thị ra, đồng thời người dùng sẽ được đưa đến một fragment khác, nơi các sản phẩm được tìm kiểm sẽ hiển thị dưới dạng một GridView.
+    \item Ở đây, em tìm kiếm các sản phẩm dựa vào ba từ khóa là \textsf{dress}, \textsf{isola} và \textsf{hồi}, thì toàn bộ các sản phẩm được tìm ra bên dưới đều có tên chứa ít nhất một từ mà người dùng nhập vào.
+\end{itemize}
+
+\subsubsection{Màn hình giỏ hàng}
+Được thực hiện bởi sinh viên 20424013.\\
+
+\indent Người dùng chỉ có thể truy cập vào màn hình này khi đã đăng nhập, nếu không một Toast sẽ hiện lên thông báo cho người dùng cần đăng nhập để sử dụng tính năng này.\\
+
+\indent Màn hình này có thể được truy cập thông qua navigation view khi người dùng nhấn vào Hamburger toggle hoặc thông qua menu item cart. Dưới đây là hình chụp màn hình này.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/27.png}
+    \caption{Màn hình giỏ hàng}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/28.png}
+    \caption{Màn hình giỏ hàng - dialog chỉnh sửa sản phẩm}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/29.png}
+    \caption{Màn hình giỏ hàng - Alert Dialog cảnh báo sản phẩm sẽ bị xóa}
+\end{figure}
+
+\newpage
+\indent \textbf{Các thành phần và chức năng kèm theo trên màn hình}
+\begin{itemize}
+    \item \textbf{1}: Hamburger toggle - để người dùng truy cập vào navigation view.
+    \item \textbf{2}: Các Text view - thể hiện tên sản phẩm, các size và số lượng sản phẩm được đặt với size tương ứng, tổng tiền cho sản phẩm đó.
+    \item \textbf{3}: Image button - nhấn vào cho phép người dùng chỉnh sửa sản phẩm tương ứng.
+    \item \textbf{4}: Image button - nhấn vào một alert dialog hiện ra cảnh báo cho người dùng rằng họ có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng hay không.
+    \item \textbf{5}: Image view - nhấn vào sẽ đi đến màn hình chi tiết sản phẩm của sản phẩm đó để thêm vào yêu thích, đặt size khác.
+    \item \textbf{6}: Button - nhấn vào để đi đến màn hình thanh toán.
+    \item \textbf{7}: Text View - thể hiện tổng giá trị của giỏ hàng.
+    \item \textbf{8}: Spinner - nằm trong dialog khi người dùng nhấn vào thành phần \textbf{3}, cho phép người dùng chọn size cần chỉnh số lượng.
+    \item \textbf{9}: Text input - để người dùng thay đổi số lượng của sản phẩm theo size tương ứng.
+    \item \textbf{10}: Button - khi nhấn vào thì size và số lượng hiện tại sẽ được cập nhật lại vào giỏ hàng.
+    \item \textbf{11}: Alert Dialog - cảnh báo khi người dùng nhấn vào thành phần \textbf{4}, để xác nhận người dùng có thực sự muốn xóa sản phẩm khỏi giỏ hàng hay không. Nếu người dùng chọn "Đồng ý" thì sản phẩm sẽ bị xóa khỏi đơn hàng và đơn hàng được cập nhật lại.
+\end{itemize}
+
+\subsubsection{Màn hình thanh toán}
+Được thực hiện bởi sinh viên 20424013.\\
+
+\indent Màn hình này được truy cập khi người dùng nhấn vào thành phần \textbf{6} trên màn hình giỏ hàng (xem hình 27 mục 2.3.7). Cho phép người dùng thực hiện thanh toán cho đơn hàng. Dưới đây là hình chụp màn hình này.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/30.png}
+    \caption{Màn hình thanh toán}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/31.png}
+    \caption{Màn hình thanh toán - chỉnh sửa địa chỉ giao hàng}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/32.png}
+    \caption{Màn hình thanh toán - progress dialog}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/33.png}
+    \caption{Màn hình thanh toán - đặt hàng thành công}
+\end{figure}
+
+\newpage
+\indent \textbf{Các thành phần và chức năng kèm theo trên màn hình}
+\begin{itemize}
+    \item \textbf{1}: As home indicator - nhấn vào để quay về màn hình giỏ hàng.
+    \item \textbf{2}: Các text view - thể hiện số sản phẩm của hóa đơn, tổng tiền, tiền vận chuyển.
+    \item \textbf{3}: Các text view - hiển thị địa chỉ giao hàng mặc định (nếu người dùng đã thiết lập trong fragment tài khoản, nhóm sẽ trình bày sau). Nếu chưa đăng nhập thì các trường này là rỗng.
+    \item \textbf{4}: Image Button - cho phép người dùng thay đổi địa chỉ giao hàng.
+    \item \textbf{5}: Button - xác nhận thanh toán, chỉ có thể click nếu toàn bộ các trường trong thành phần \textbf{3} đã được nhập, nếu không thể hiện Toast cảnh báo người dùng chưa nhập đầy đủ thông tin.
+    \item \textbf{6}: Dialog - cho phép người dùng thay đổi địa chỉ giao hàng.
+    \item \textbf{7}: Button - cập nhập lại địa chỉ giao hàng mới.
+    \item \textbf{8}: Progress Dialog - hiển thị khi người dùng nhấn vào thành phần \textbf{7}, lúc này ứng dụng đang ghi dữ liệu vào Firestore, dialog này sẽ tắt khi Firestore trả về kết quả.
+    \item \textbf{9}: Nếu đơn hàng được đặt thành công thì một màn hình như hình 33 sẽ hiển thị đi kèm là button để quay về trang chính của ứng dụng ở mục 2.3.1.
+\end{itemize}
+
+\subsubsection{Màn hình lịch sử đơn hàng}
+Được thực hiện bởi sinh viên 20424013.\\
+
+\indent Màn hình này được truy cập thông qua navigation view và chỉ khi người dùng đã đăng nhập, nếu không thì một Toast sẽ thông báo yêu cầu người dùng đăng nhập.
+
+\indent Màn hình này giúp lưu lại lịch sử của đơn hàng của người dùng. Dưới đây là hình chụp của màn hình này.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/36.png}
+    \caption{Màn hình lịch sử đơn hàng}
+\end{figure}
+
+\indent \textbf{Các thành phần và chức năng kèm theo trên màn hình}
+\begin{itemize}
+    \item \textbf{1}: Hamburger toggle - để truy cập vào navigation view.
+    \item \textbf{2}: Vertical Recycler View - hiển thị các đơn hàng của người dùng. Khi người dùng nhấn vào một item thì sẽ được đưa đến màn hình chi tiết đơn hàng sẽ được trình bày ở mục 2.3.10.
+    \item \textbf{3}: Linear Layout + Text View - hiển thị ngày đặt hàng của đơn hàng đó.
+    \item \textbf{4}: Các Text View - hiển thị thông tin của đơn hàng, bao gồm mã đơn hàng, số sản phẩm, tổng tiền và trạng thái đơn hàng.
+\end{itemize}
+
+\subsubsection{Màn hình chi tiết đơn hàng}
+Được thực hiện bởi sinh viên 20424013.\\
+
+\indent Màn hình này thể hiện chi tiết của một đơn hàng, được truy cập khi người dùng nhấn vào một item của Vertical Recycler View ở màn hình lịch sử đơn hàng ở mục 2.3.9. Dưới đây là hình chụp của màn hình này.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/37.png}
+    \caption{Màn hình chi tiết đơn hàng}
+\end{figure}
+
+\indent \textbf{Các thành phần và chức năng kèm theo trên màn hình}
+\begin{itemize}
+    \item \textbf{1}: As home indicator - dùng để quay lại màn hình lịch sử đơn hàng.
+    \item \textbf{2}: Image View - hiển thị hình ảnh của một sản phẩm trong đơn hàng, khi nhấn vào người dùng sẽ được đưa đến trang chi tiết sản phẩm.
+    \item \textbf{3}: Các Text view - thể hiện các thông tin về sản phẩm bao gồm tên sản phẩm, kích thước + số lượng, tổng tiền cho sản phẩm này.
+    \item \textbf{4}: Các Text view - thể hiện các thông tin chi tiết cho toàn bộ đơn hàng này.
+    \item \textbf{5}: Hiển thị trạng thái hiện tại của đơn hàng.
+\end{itemize}
+
+\subsubsection{Màn hình tài khoản người dùng}
+Được thực hiện bởi sinh viên 19424015.\\
+
+\indent Màn hình này thể hiện chi tiết của một đơn hàng, được truy cập khi người dùng nhấn vào một item của Vertical Recycler View ở màn hình lịch sử đơn hàng ở mục 2.3.9. Dưới đây là hình chụp của màn hình này.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/38.png}
+    \caption{Màn hình tài khoản người dùng}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/39.png}
+    \caption{Màn hình tài khoản người dùng - chỉnh sửa địa chỉ giao hàng mặc định}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/40.png}
+    \caption{Màn hình tài khoản người dùng - đặt lại mật khẩu}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{images/41.png}
+    \caption{Màn hình tài khoản người dùng - đăng xuất}
+\end{figure}
+
+\indent \textbf{Các thành phần và chức năng kèm theo trên màn hình}
+\begin{itemize}
+    \item \textbf{1}: Hamburger toggle - dùng để truy cập vào navigation view.
+    \item \textbf{2}: Floating action button - khi người dùng nhấn vào sẽ hiện lên một alert dialog để hỏi lại người dùng có muốn đăng xuất hay không. 
+    \item \textbf{3}: Các text view - thể hiện các thông tin về địa chỉ giao hàng mặc định của người dùng.
+    \item \textbf{4}: Image button - nhấn vào sẽ hiện một dialog để người dùng cập nhật địa chỉ giao hàng mặc định.
+    \item \textbf{5}: Các text view - cho biết email của người dùng (không thể thay đổi email).
+    \item \textbf{6}: Image button - nhấn vào một alert dialog hiện lên hỏi người dùng có muốn đặt lại password không.
+    \item \textbf{7}: Dialog - hiển thị các Text input layout để người dùng cập nhật địa chỉ giao hàng mặc định, dialog này hiện lên khi người dùng nhấn vào thành phần \textbf{4}.
+    \item \textbf{8}: Button - khi người dùng nhấn vào thì địa chỉ giao hàng mặc định sẽ được cập nhật dựa vào những thông tin mà người dùng vừa nhập vào dialog.
+    \item \textbf{9}: Alert dialog - hiển thị ra khi người dùng nhấn vào thành phần \textbf{6}, nếu người dùng chọn "Có" thì một mail đặt lại mật khẩu được gửi về email mà người dùng dùng đăng ký tài khoản.
+    \item \textbf{10}: Alert dialog - hiển thị ra khi người dùng nhấn vào thành phần \textbf{2} để xác nhận người dùng có muốn đăng xuất không, nếu người dùng chọn có thì ứng dụng sẽ đăng xuất tài khoản và quay về trang Splash Screen.
+\end{itemize}
+
+\section{Những điểm đặc biệt trong đồ án}
+\subsection{Về giao diện}
+Nhóm tìm hiểu về phong cách thiết kế Material Design trên trang \url{https://material.io}
+
+\subsection{Về kho lưu trữ, CSDL và Authentication}
+Nhòm tìm hiểu về các dịch vụ lưu trự Firestore, dịch vụ lưu trự file Firestorage và xác thực Authentication được cung cấp từ Google.
+
+\subsection{Chức năng tìm kiếm}
+Vì chức năng tìm kiếm này dựa theo tên của sản phẩm, trong Firestore có một phương thức là \texttt{whereArrayContainsAny()} để xem một trường dạng mảng trong document có chứa giá trị nào phù hợp trong mảng đầu vào không. Nến nhóm lợi dụng phương thức này để thực hiện chức năng tìm kiếm, dưới đây là cách nhóm tổ chức các trường dữ liệu của sản phẩm được lưu trữ trong CSDL.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/42.png}
+    \caption{ProductModel - được lưu trữ trong Firestore}
+\end{figure}
+
+\indent ở đây trường \texttt{search} chính là trường \texttt{title} được nhóm lưu dưới dạng mảng để thực hiện chức năng tìm kiếm.
+
+\section{Tham khảo}
+\begin{itemize}
+    \item Logo ứng dụng và tên Clover: được nhóm xin phép từ nhãn hàng Clover và đã được sự đồng ý từ chị chủ nhãn hàng, trang bán hàng của shop tại \url{https://www.facebook.com/TiemmaynhaAn}.
+    \item Về hình ảnh người mẫu Việt Nam ở mục sản phẩm mới: là bạn Phan Hữu Lộc - cựu sinh viên K17 khoa Sinh học của trường Đại Học Khoa Học Tự Nhiên TP.HCM và là người mẫu của nhãn hàng Clover phía trên.
+    \item Các hình ảnh sản phẩm khác được nhóm lấy về (chưa xin phép) từ trang bán hàng Farfetch tại \url{https://www.farfetch.com}. Và do nhóm đã lấy về cách đây khá lâu nên đường link chi tiết của từng sản phẩm nhóm không nắm rõ được nữa, nhóm xin gửi lời xin lỗi đến Thầy vì sự cố này của nhóm.
+    \item Về các kĩ thuật code trong đồ án ngoài slide của Thầy lý thuyết nhóm còn tham khảo thêm trong cuốn \textbf{Android Programming for Beginners}, link sách tại \url{https://www.amazon.com/Android-Programming-Beginners-depth-full-featured/dp/1800563434}.
+\end{itemize}
+
 
 \end{document}

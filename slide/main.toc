@@ -1,0 +1,9 @@
+\babel@toc {vietnamese}{}
+\beamer@sectionintoc {1}{Giới thiệu về ứng dụng Clover}{3}{0}{1}
+\beamer@sectionintoc {2}{Các package + dịch vụ bên thứ ba}{3}{0}{2}
+\beamer@subsectionintoc {2}{1}{Các package}{3}{0}{2}
+\beamer@subsectionintoc {2}{2}{Các dịch vụ bên thứ ba}{3}{0}{2}
+\beamer@sectionintoc {3}{Các màn hình và chức năng kèm theo + mã nguồn}{3}{0}{3}
+\beamer@sectionintoc {4}{Chạy thử ứng dụng}{3}{0}{4}
+\beamer@sectionintoc {5}{Tài nguyên và tham khảo}{3}{0}{5}
+\beamer@sectionintoc {6}{Hỏi đáp và kết thúc}{3}{0}{6}
