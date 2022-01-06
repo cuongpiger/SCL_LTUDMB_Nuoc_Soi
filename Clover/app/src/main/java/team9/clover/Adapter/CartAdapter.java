@@ -105,6 +105,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                                            if (task.isSuccessful()) {
                                                productList.remove(position);
                                                notifyDataSetChanged();
+                                               DatabaseModel.refreshMasterOrder();
                                                mTotalCart.setText(Reuse.vietnameseCurrency(masterOrder.getTotal()));
                                            }
                                         });

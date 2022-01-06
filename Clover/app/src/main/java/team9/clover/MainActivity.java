@@ -364,7 +364,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mSearch = menu.getItem(0);
         mBell = menu.getItem(1);
         mBag = menu.getItem(2);
-        homeFragment.setActionBar(getSupportActionBar());
+        homeFragment.setActionBar(getSupportActionBar(), categoryAdapter);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.abSearch).getActionView();

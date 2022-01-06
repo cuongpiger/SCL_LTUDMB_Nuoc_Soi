@@ -117,5 +117,7 @@ public class CartFragment extends Fragment {
         super.onResume();
         setActionBar();
         isChanged = false;
+        DatabaseModel.refreshMasterOrder();
+        mTotalCart.setText(Reuse.vietnameseCurrency(masterOrder.getTotal()));
     }
 }

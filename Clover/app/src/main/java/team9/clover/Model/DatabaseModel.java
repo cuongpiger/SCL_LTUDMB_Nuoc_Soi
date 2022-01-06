@@ -341,8 +341,6 @@ public class DatabaseModel {
                 .collection(CartItemModel.class.getSimpleName()).get();
     }
 
-
-
     public static Task<QuerySnapshot> searchProduct(List<String> keyword) {
         if (firebaseFirestore == null) firebaseFirestore = FirebaseFirestore.getInstance();
         if (pirate == null) pirate = firebaseFirestore.collection(ProductModel.class.getSimpleName());

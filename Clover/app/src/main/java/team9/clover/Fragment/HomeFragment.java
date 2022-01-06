@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import team9.clover.Adapter.CategoryAdapter;
 import team9.clover.MainActivity;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.Adapter.HomePageAdapter;
@@ -30,6 +31,7 @@ public class HomeFragment extends Fragment {
     RecyclerView mHomePage;
     HomePageAdapter homePageAdapter;
     ActionBar actionBar = null;
+    CategoryAdapter categoryAdapter = null;
 
 
     public HomeFragment() { }
@@ -75,13 +77,19 @@ public class HomeFragment extends Fragment {
             mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
 
             MainActivity.navigationView.getMenu().findItem(R.id.nvMall).setChecked(true);
+            if (categoryAdapter != null) {
+                CategoryAdapter.currentTab = 0;
+                categoryAdapter.notifyDataSetChanged();
+            }
+
 
             displayActionBarMenu(true);
         }
     }
 
-    public void setActionBar(ActionBar actionBar) {
+    public void setActionBar(ActionBar actionBar, CategoryAdapter categoryAdapter) {
         this.actionBar = actionBar;
+        this.categoryAdapter = categoryAdapter;
     }
 }
 
