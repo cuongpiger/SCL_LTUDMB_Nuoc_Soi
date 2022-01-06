@@ -109,6 +109,7 @@ public class CartFragment extends Fragment {
         MainActivity.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         MainActivity.displayActionBarMenu(false);
         MainActivity.displayCategory(false);
+        MainActivity.navigationView.getMenu().findItem(R.id.nvCart).setChecked(true);
     }
 
     @Override

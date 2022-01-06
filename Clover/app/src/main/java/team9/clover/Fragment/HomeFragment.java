@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import team9.clover.MainActivity;
 import team9.clover.Model.DatabaseModel;
 import team9.clover.Adapter.HomePageAdapter;
 import team9.clover.R;
@@ -72,6 +73,8 @@ public class HomeFragment extends Fragment {
             toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
             toggle.setToolbarNavigationClickListener(null);
             mCategory.setVisibility(View.VISIBLE); // hiển thị lại thanh category navigation view
+
+            MainActivity.navigationView.getMenu().findItem(R.id.nvMall).setChecked(true);
 
             displayActionBarMenu(true);
         }

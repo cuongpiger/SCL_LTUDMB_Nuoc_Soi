@@ -34,6 +34,8 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Stack;
+
 import team9.clover.Adapter.CategoryAdapter;
 import team9.clover.Adapter.SearchAdapter;
 import team9.clover.Fragment.AccountFragment;
@@ -133,10 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
             }
 
-            // user choose icon bag shopping
-            clearBackStack();
             previousNavigation = R.id.nvCart;
-            navigationView.getMenu().findItem(previousNavigation).setChecked(true);
             setFragment(CartFragment.ID, new CartFragment(getSupportActionBar()));
         }
 
@@ -160,8 +159,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 toggle.setDrawerIndicatorEnabled(true); // hiển thị hamburger
                 previousNavigation = itemId;
             } else if (itemId == R.id.nvFavorite) {
-                // nếu user nhấp vào mục sản phẩm yêu thích
-                    clearBackStack();
                 if (DatabaseModel.masterUid.isEmpty()) {
                     navigationView.setCheckedItem(R.id.nvMall);
                     Toast.makeText(MainActivity.this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
@@ -171,7 +168,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     setFragment(FavoriteFragment.ID, new FavoriteFragment(getSupportActionBar()));
                 }
             } else if (itemId == R.id.nvCart) {
-                clearBackStack();
                 if (DatabaseModel.masterUid.isEmpty()) {
                     navigationView.setCheckedItem(R.id.nvMall);
                     Toast.makeText(MainActivity.this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
@@ -181,7 +177,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     setFragment(CartFragment.ID, new CartFragment(getSupportActionBar()));
                 }
             } else if (itemId == R.id.nvOrder) {
-                clearBackStack();
                 if (DatabaseModel.masterUid.isEmpty()) {
                     navigationView.setCheckedItem(R.id.nvMall);
                     Toast.makeText(MainActivity.this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
@@ -191,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     setFragment(OrdersFragment.ID, new OrdersFragment(getSupportActionBar()));
                 }
             } else if (itemId == R.id.nvProfile) {
-                clearBackStack();
                 if (DatabaseModel.masterUid.isEmpty()) {
                     new MaterialAlertDialogBuilder(MainActivity.this, R.style.ThemeOverlay_App_MaterialAlertDialog)
                             .setMessage("Bạn có muốn đăng nhập không?")
@@ -255,7 +249,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (lastFragmentName.equals(ProductDetailFragment.NAME) ||
                         lastFragmentName.equals(ViewMoreFragment.NAME) ||
                         lastFragmentName.equals(DeliveryFragment.NAME) ||
-                        lastFragmentName.equals(OrderDetailFragment.NAME)) {
+                        lastFragmentName.equals(OrderDetailFragment.NAME) ||
+
+                        lastFragmentName.equals(AccountFragment.NAME) ||
+                        lastFragmentName.equals(OrdersFragment.NAME) ||
+                        lastFragmentName.equals(FavoriteFragment.NAME) ||
+                        lastFragmentName.equals(CartFragment.NAME)) {
                     getSupportFragmentManager().popBackStack();
                 } else if (lastFragmentName.equals(SpecificProductFragment.NAME)) {
                     getSupportFragmentManager().popBackStack(SpecificProductFragment.NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE);

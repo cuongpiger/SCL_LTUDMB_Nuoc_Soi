@@ -68,6 +68,7 @@ public class OrdersFragment extends Fragment {
         MainActivity.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         MainActivity.displayActionBarMenu(false);
         MainActivity.displayCategory(false);
+        MainActivity.navigationView.getMenu().findItem(R.id.nvOrder).setChecked(true);
     }
 
     @Override
