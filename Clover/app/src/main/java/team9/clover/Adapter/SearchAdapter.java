@@ -86,7 +86,7 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                String keyword = charSequence.toString();
+                String keyword = charSequence.toString().trim();
 
                 if (canSearch && !keyword.isEmpty()) {
                     canSearch = false;
