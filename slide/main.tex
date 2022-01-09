@@ -131,36 +131,24 @@
     \frametitle{Các màn hình và chức năng kèm theo (1)}
     \framesubtitle{Nội dung}
     \begin{flushleft}
-        \large{\textbf{Trình bày: } 19424013 - Dương Trọng Đức}
-        \begin{itemize}
-            \item Màn hình + chức năng đăng nhập.
-        \end{itemize}
-    \end{flushleft}
-
-    \begin{flushleft}
-        \large{\textbf{Trình bày: } 20424013 - Phạm Nguyễn Mỹ Diễm}
-        \begin{itemize}
-            \item Màn hình chi tiết sản phẩm và chức năng kèm theo.
-        \end{itemize}
-    \end{flushleft}
-
-    \begin{flushleft}
-        \large{\textbf{Trình bày: } 20424008 - Dương Mạnh Cường}
-        \begin{itemize}
-            \item Màn hình chính của ứng dụng.
+        \large{\textbf{Các màn hình chính và chức năng quan trọng được trình bày:}}
+        \begin{enumerate}
+            \item Màn hình đăng nhập.
+            \item Màn hình chi tiết sản phẩm.
+            \item Màn hình chính.
             \item Chức năng tìm kiếm.
-        \end{itemize}
+        \end{enumerate}
     \end{flushleft}
 
     \begin{flushleft}
-        Ngoài ra còn có các màn hình khác như \textsf{\color{teal} Giỏ hàng, Lịch sử mua hàng, Tài khoản người dùng,...} nhưng đơn giản và không phức tạp bằng những màn hình + chức năng trên nên nhóm xin rút gọn phần trình bày cho chúng.
+        Ngoài ra còn có các màn hình khác như \textsf{\color{teal} Giỏ hàng, Lịch sử mua hàng, Tài khoản người dùng,...} nhưng đơn giản và đa phần được kế thừa từ các màn hình trên nên nhóm xin rút gọn phần trình bày cho chúng.
     \end{flushleft}
 \end{frame}
 
 % ============================================================================ Slide 7
 \begin{frame}
     \frametitle{Các màn hình và chức năng kèm theo (2)}
-    \framesubtitle{Màn hình + chức năng đăng nhập}
+    \framesubtitle{Màn hình đăng nhập}
 
     \begin{columns}
         \column{0.3\linewidth}
@@ -202,10 +190,33 @@
     \end{columns}
 \end{frame}
 
+
+\begin{frame}
+    \frametitle{Các màn hình và chức năng kèm theo (2)}
+    \framesubtitle{Màn hình đăng nhập - Mã nguồn minh họa}
+
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/24.png}
+            \caption{\centering\tiny{Hình 2: Màn hình đăng nhập}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent Cấu trúc cây thư mục:
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.68\textheight]{images/25.png}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+
 % ============================================================================ Slide 9
 \begin{frame}
     \frametitle{Các màn hình và chức năng kèm theo (3)}
-    \framesubtitle{Màn hình chi tiết sản phẩm và chức năng kèm theo}
+    \framesubtitle{Màn hình chi tiết sản phẩm}
 
     \begin{columns}
         \column{0.3\linewidth}
@@ -290,7 +301,7 @@
 % =========================================================================== Slide 13
 \begin{frame}
     \frametitle{Các màn hình và chức năng kèm theo (4)}
-    \framesubtitle{Màn hình chính của ứng dụng}
+    \framesubtitle{Màn hình chính}
 
     \begin{columns}
         \column{0.3\linewidth}
@@ -373,6 +384,243 @@
             \item \textbf{10}: Footer - thể hiện địa chỉ, số điện thoại, các chính sách đổi trả, bảo hành của nhãn hàng.
             \item \textbf{11}: Hamburger toggle - nhấn vào để mở navigation view.
         \end{itemize}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Các màn hình và chức năng kèm theo (4)}
+    \framesubtitle{Màn hình chính - Mã nguồn minh họa}
+
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/10.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent Cấu trúc cây thư mục:
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.68\textheight]{images/11.png}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/10.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{\texttt{AndroidManifest.xml}}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{images/12.png}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/10.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{\texttt{build.gradle}}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{images/13.png}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/10.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{\texttt{activity\_home.xml}}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{images/14.png}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/10.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{\texttt{container\_image.xml}}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{images/15.png}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/10.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{\texttt{container\_text.xml}}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{images/16.png}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/10.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{\texttt{HomeModel.java}}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{images/17.png}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/10.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{\texttt{HomeAdapter.java}} (1)
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{images/18.png}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/10.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{\texttt{HomeAdapter.java}} (2)
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{images/19.png}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/10.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{\texttt{HomeAdapter.java}} (3)
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{images/20.png}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/10.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{\texttt{HomeAdapter.java}} (4)
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{images/21.png}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/10.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{\texttt{HomeActivity.java}} (1)
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{images/22.png}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \begin{columns}
+        \column{0.3\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[height=0.7\textheight]{images/10.png}
+            \caption{\centering\tiny{Hình 6: Màn hình chính của ứng dụng 1}}
+
+        \end{figure}
+        \column{0.7\linewidth}
+        \indent \textbf{\texttt{HomeActivity.java}} (2)
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{images/23.png}
+        \end{figure}
     \end{columns}
 \end{frame}
 
