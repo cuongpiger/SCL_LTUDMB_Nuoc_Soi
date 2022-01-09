@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.11.10)  9 JAN 2022 19:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.11.10)  9 JAN 2022 21:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1267,237 +1267,323 @@ Package pdftex.def Info: images/04.png  used on input line 372.
 <images/30.png, id=550, 1445.4pt x 3051.4pt>
 File: images/30.png Graphic file (type png)
 <use images/30.png>
-Package pdftex.def Info: images/30.png  used on input line 390.
+Package pdftex.def Info: images/30.png  used on input line 393.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
+<images/31.png, id=551, 416.55624pt x 614.295pt>
+File: images/31.png Graphic file (type png)
+<use images/31.png>
+Package pdftex.def Info: images/31.png  used on input line 393.
+(pdftex.def)             Requested size: 120.11176pt x 177.1259pt.
 
-Overfull \vbox (0.50931pt too high) detected at line 390
+Overfull \vbox (0.50931pt too high) detected at line 393
  []
 
 [18
 
- </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/30.png>]
-<images/06.png, id=578, 1084.05pt x 2228.325pt>
+ </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/30.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/31.png>]
+<images/32.png, id=579, 1445.4pt x 3051.4pt>
+File: images/32.png Graphic file (type png)
+<use images/32.png>
+Package pdftex.def Info: images/32.png  used on input line 411.
+(pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
+<images/33.png, id=580, 686.565pt x 511.9125pt>
+File: images/33.png Graphic file (type png)
+<use images/33.png>
+Package pdftex.def Info: images/33.png  used on input line 411.
+(pdftex.def)             Requested size: 239.60567pt x 178.64871pt.
+ [19
+
+ </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/32.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/33.png>]
+<images/34.png, id=610, 1445.4pt x 3051.4pt>
+File: images/34.png Graphic file (type png)
+<use images/34.png>
+Package pdftex.def Info: images/34.png  used on input line 429.
+(pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
+<images/35.png, id=611, 662.475pt x 353.32pt>
+File: images/35.png Graphic file (type png)
+<use images/35.png>
+Package pdftex.def Info: images/35.png  used on input line 429.
+(pdftex.def)             Requested size: 239.60567pt x 127.78813pt.
+ [20
+
+ </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/34.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/35.png>]
+<images/37.png, id=639, 1445.4pt x 3051.4pt>
+File: images/37.png Graphic file (type png)
+<use images/37.png>
+Package pdftex.def Info: images/37.png  used on input line 447.
+(pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
+<images/36.png, id=640, 642.4pt x 516.93124pt>
+File: images/36.png Graphic file (type png)
+<use images/36.png>
+Package pdftex.def Info: images/36.png  used on input line 447.
+(pdftex.def)             Requested size: 239.60567pt x 192.80756pt.
+ [21
+
+ </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/37.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/36.png>]
+File: images/30.png Graphic file (type png)
+<use images/30.png>
+Package pdftex.def Info: images/30.png  used on input line 465.
+(pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
+<images/38.png, id=668, 846.16125pt x 807.015pt>
+File: images/38.png Graphic file (type png)
+<use images/38.png>
+Package pdftex.def Info: images/38.png  used on input line 465.
+(pdftex.def)             Requested size: 239.60567pt x 228.51166pt.
+ [22
+
+ </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/38.png>]
+File: images/30.png Graphic file (type png)
+<use images/30.png>
+Package pdftex.def Info: images/30.png  used on input line 483.
+(pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
+<images/39.png, id=695, 816.04875pt x 704.6325pt>
+File: images/39.png Graphic file (type png)
+<use images/39.png>
+Package pdftex.def Info: images/39.png  used on input line 483.
+(pdftex.def)             Requested size: 239.60567pt x 206.88637pt.
+ [23
+
+ </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/39.png>]
+<images/06.png, id=723, 1084.05pt x 2228.325pt>
 File: images/06.png Graphic file (type png)
 <use images/06.png>
-Package pdftex.def Info: images/06.png  used on input line 418.
+Package pdftex.def Info: images/06.png  used on input line 511.
 (pdftex.def)             Requested size: 88.69417pt x 182.33665pt.
 
-Overfull \vbox (6.78456pt too high) detected at line 418
+Overfull \vbox (6.78456pt too high) detected at line 511
  []
 
-[19
+[24
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/06.png>]
 File: images/06.png Graphic file (type png)
 <use images/06.png>
-Package pdftex.def Info: images/06.png  used on input line 439.
+Package pdftex.def Info: images/06.png  used on input line 532.
 (pdftex.def)             Requested size: 88.69417pt x 182.33665pt.
- [20
+ [25
 
 ]
-<images/07.png, id=633, 1084.05pt x 2228.325pt>
+<images/07.png, id=777, 1084.05pt x 2228.325pt>
 File: images/07.png Graphic file (type png)
 <use images/07.png>
-Package pdftex.def Info: images/07.png  used on input line 458.
+Package pdftex.def Info: images/07.png  used on input line 551.
 (pdftex.def)             Requested size: 88.69417pt x 182.33665pt.
- [21
+ [26
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/07.png>]
-<images/08.png, id=660, 1084.05pt x 2228.325pt>
+<images/08.png, id=804, 1084.05pt x 2228.325pt>
 File: images/08.png Graphic file (type png)
 <use images/08.png>
-Package pdftex.def Info: images/08.png  used on input line 479.
+Package pdftex.def Info: images/08.png  used on input line 572.
 (pdftex.def)             Requested size: 88.69417pt x 182.33665pt.
- [22
+ [27
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/08.png>]
-<images/10.png, id=687, 1445.4pt x 3051.4pt>
+<images/10.png, id=832, 1445.4pt x 3051.4pt>
 File: images/10.png Graphic file (type png)
 <use images/10.png>
-Package pdftex.def Info: images/10.png  used on input line 500.
+Package pdftex.def Info: images/10.png  used on input line 593.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
-<images/11.png, id=688, 400.49625pt x 682.55pt>
+<images/11.png, id=833, 400.49625pt x 682.55pt>
 File: images/11.png Graphic file (type png)
 <use images/11.png>
-Package pdftex.def Info: images/11.png  used on input line 500.
+Package pdftex.def Info: images/11.png  used on input line 593.
 (pdftex.def)             Requested size: 103.93102pt x 177.1259pt.
 
-Overfull \vbox (7.50931pt too high) detected at line 500
+Overfull \vbox (7.50931pt too high) detected at line 593
  []
 
-[23
+[28
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/10.png> </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/11.png>]
 File: images/10.png Graphic file (type png)
 <use images/10.png>
-Package pdftex.def Info: images/10.png  used on input line 518.
+Package pdftex.def Info: images/10.png  used on input line 611.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
 LaTeX Font Info:    Font shape `T5/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T5/cmtt/m/n' tried instead on input line 518.
-<images/12.png, id=717, 677.53125pt x 513.92pt>
+(Font)              Font shape `T5/cmtt/m/n' tried instead on input line 611.
+<images/12.png, id=861, 677.53125pt x 513.92pt>
 File: images/12.png Graphic file (type png)
 <use images/12.png>
-Package pdftex.def Info: images/12.png  used on input line 518.
+Package pdftex.def Info: images/12.png  used on input line 611.
 (pdftex.def)             Requested size: 239.60567pt x 181.74887pt.
- [24
+ [29
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/12.png>]
 File: images/10.png Graphic file (type png)
 <use images/10.png>
-Package pdftex.def Info: images/10.png  used on input line 536.
+Package pdftex.def Info: images/10.png  used on input line 629.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
-<images/13.png, id=744, 661.47125pt x 370.38374pt>
+<images/13.png, id=888, 661.47125pt x 370.38374pt>
 File: images/13.png Graphic file (type png)
 <use images/13.png>
-Package pdftex.def Info: images/13.png  used on input line 536.
+Package pdftex.def Info: images/13.png  used on input line 629.
 (pdftex.def)             Requested size: 239.60567pt x 134.16316pt.
- [25
+ [30
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/13.png>]
 File: images/10.png Graphic file (type png)
 <use images/10.png>
-Package pdftex.def Info: images/10.png  used on input line 554.
+Package pdftex.def Info: images/10.png  used on input line 647.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
-<images/14.png, id=772, 543.02875pt x 350.30875pt>
+<images/14.png, id=915, 543.02875pt x 350.30875pt>
 File: images/14.png Graphic file (type png)
 <use images/14.png>
-Package pdftex.def Info: images/14.png  used on input line 554.
+Package pdftex.def Info: images/14.png  used on input line 647.
 (pdftex.def)             Requested size: 239.60567pt x 154.56929pt.
- [26
+ [31
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/14.png>]
 File: images/10.png Graphic file (type png)
 <use images/10.png>
-Package pdftex.def Info: images/10.png  used on input line 572.
+Package pdftex.def Info: images/10.png  used on input line 665.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
-<images/15.png, id=799, 544.0325pt x 369.38pt>
+<images/15.png, id=944, 544.0325pt x 369.38pt>
 File: images/15.png Graphic file (type png)
 <use images/15.png>
-Package pdftex.def Info: images/15.png  used on input line 572.
+Package pdftex.def Info: images/15.png  used on input line 665.
 (pdftex.def)             Requested size: 239.60567pt x 162.68552pt.
- [27
+ [32
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/15.png>]
 File: images/10.png Graphic file (type png)
 <use images/10.png>
-Package pdftex.def Info: images/10.png  used on input line 590.
+Package pdftex.def Info: images/10.png  used on input line 683.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
-<images/16.png, id=827, 543.02875pt x 349.305pt>
+<images/16.png, id=971, 543.02875pt x 349.305pt>
 File: images/16.png Graphic file (type png)
 <use images/16.png>
-Package pdftex.def Info: images/16.png  used on input line 590.
+Package pdftex.def Info: images/16.png  used on input line 683.
 (pdftex.def)             Requested size: 239.60567pt x 154.12639pt.
- [28
+ [33
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/16.png>]
 File: images/10.png Graphic file (type png)
 <use images/10.png>
-Package pdftex.def Info: images/10.png  used on input line 608.
+Package pdftex.def Info: images/10.png  used on input line 701.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
-<images/17.png, id=854, 574.145pt x 489.83pt>
+<images/17.png, id=998, 574.145pt x 489.83pt>
 File: images/17.png Graphic file (type png)
 <use images/17.png>
-Package pdftex.def Info: images/17.png  used on input line 608.
+Package pdftex.def Info: images/17.png  used on input line 701.
 (pdftex.def)             Requested size: 239.60567pt x 204.4192pt.
- [29
+ [34
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/17.png>]
 File: images/10.png Graphic file (type png)
 <use images/10.png>
-Package pdftex.def Info: images/10.png  used on input line 626.
+Package pdftex.def Info: images/10.png  used on input line 719.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
-<images/18.png, id=881, 649.42625pt x 538.01pt>
+<images/18.png, id=1025, 649.42625pt x 538.01pt>
 File: images/18.png Graphic file (type png)
 <use images/18.png>
-Package pdftex.def Info: images/18.png  used on input line 626.
+Package pdftex.def Info: images/18.png  used on input line 719.
 (pdftex.def)             Requested size: 239.60567pt x 198.49413pt.
- [30
+ [35
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/18.png>]
 File: images/10.png Graphic file (type png)
 <use images/10.png>
-Package pdftex.def Info: images/10.png  used on input line 644.
+Package pdftex.def Info: images/10.png  used on input line 737.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
-<images/19.png, id=908, 849.1725pt x 613.29124pt>
+<images/19.png, id=1053, 849.1725pt x 613.29124pt>
 File: images/19.png Graphic file (type png)
 <use images/19.png>
-Package pdftex.def Info: images/19.png  used on input line 644.
+Package pdftex.def Info: images/19.png  used on input line 737.
 (pdftex.def)             Requested size: 239.60567pt x 173.04921pt.
- [31
+ [36
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/19.png>]
 File: images/10.png Graphic file (type png)
 <use images/10.png>
-Package pdftex.def Info: images/10.png  used on input line 662.
+Package pdftex.def Info: images/10.png  used on input line 755.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
-<images/20.png, id=937, 810.02625pt x 319.1925pt>
+<images/20.png, id=1080, 810.02625pt x 319.1925pt>
 File: images/20.png Graphic file (type png)
 <use images/20.png>
-Package pdftex.def Info: images/20.png  used on input line 662.
+Package pdftex.def Info: images/20.png  used on input line 755.
 (pdftex.def)             Requested size: 239.60567pt x 94.41423pt.
- [32
+ [37
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/20.png>]
 File: images/10.png Graphic file (type png)
 <use images/10.png>
-Package pdftex.def Info: images/10.png  used on input line 680.
+Package pdftex.def Info: images/10.png  used on input line 773.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
-<images/21.png, id=964, 651.43375pt x 508.90125pt>
+<images/21.png, id=1108, 651.43375pt x 508.90125pt>
 File: images/21.png Graphic file (type png)
 <use images/21.png>
-Package pdftex.def Info: images/21.png  used on input line 680.
+Package pdftex.def Info: images/21.png  used on input line 773.
 (pdftex.def)             Requested size: 239.60567pt x 187.18008pt.
- [33
+ [38
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/21.png>]
 File: images/10.png Graphic file (type png)
 <use images/10.png>
-Package pdftex.def Info: images/10.png  used on input line 698.
+Package pdftex.def Info: images/10.png  used on input line 791.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
-<images/22.png, id=991, 576.1525pt x 513.92pt>
+<images/22.png, id=1135, 576.1525pt x 513.92pt>
 File: images/22.png Graphic file (type png)
 <use images/22.png>
-Package pdftex.def Info: images/22.png  used on input line 698.
+Package pdftex.def Info: images/22.png  used on input line 791.
 (pdftex.def)             Requested size: 239.60567pt x 213.72765pt.
- [34
+ [39
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/22.png>]
 File: images/10.png Graphic file (type png)
 <use images/10.png>
-Package pdftex.def Info: images/10.png  used on input line 716.
+Package pdftex.def Info: images/10.png  used on input line 809.
 (pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
-<images/23.png, id=1018, 826.08624pt x 405.515pt>
+<images/23.png, id=1163, 826.08624pt x 405.515pt>
 File: images/23.png Graphic file (type png)
 <use images/23.png>
-Package pdftex.def Info: images/23.png  used on input line 716.
+Package pdftex.def Info: images/23.png  used on input line 809.
 (pdftex.def)             Requested size: 239.60567pt x 117.61488pt.
- [35
+ [40
 
  </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/23.png>]
-<images/09.png, id=1046, 1084.05pt x 2228.325pt>
+<images/09.png, id=1190, 1084.05pt x 2228.325pt>
 File: images/09.png Graphic file (type png)
 <use images/09.png>
-Package pdftex.def Info: images/09.png  used on input line 737.
+Package pdftex.def Info: images/09.png  used on input line 830.
 (pdftex.def)             Requested size: 88.69417pt x 182.33665pt.
 
-Overfull \vbox (0.50931pt too high) detected at line 737
+Overfull \vbox (0.50931pt too high) detected at line 830
  []
 
-[36
+[41
 
- </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/09.png>] [37
+ </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/09.png>]
+<images/40.png, id=1217, 1445.4pt x 3051.4pt>
+File: images/40.png Graphic file (type png)
+<use images/40.png>
+Package pdftex.def Info: images/40.png  used on input line 847.
+(pdftex.def)             Requested size: 86.36737pt x 182.33665pt.
 
-] [38
+Overfull \vbox (0.50931pt too high) detected at line 847
+ []
+
+[42
+
+ </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/40.png>]
+<images/demo.png, id=1246, 897.3525pt x 502.87875pt>
+File: images/demo.png Graphic file (type png)
+<use images/demo.png>
+Package pdftex.def Info: images/demo.png  used on input line 855.
+(pdftex.def)             Requested size: 342.2953pt x 191.8172pt.
+ [43
+
+ </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/demo.png>] [44
 
 ]
-<images/ask_and_answer.jpg, id=1131, 853.1875pt x 536.0025pt>
+<images/ask_and_answer.jpg, id=1306, 853.1875pt x 536.0025pt>
 File: images/ask_and_answer.jpg Graphic file (type jpg)
 <use images/ask_and_answer.jpg>
-Package pdftex.def Info: images/ask_and_answer.jpg  used on input line 756.
+Package pdftex.def Info: images/ask_and_answer.jpg  used on input line 870.
 (pdftex.def)             Requested size: 342.2953pt x 215.04332pt.
- [39
+ [45
 
- </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/ask_and_answer.jpg>] [40
+ </home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/ask_and_answer.jpg>] [46
 
 ]
 \tf@nav=\write6
@@ -1509,27 +1595,27 @@ Package pdftex.def Info: images/ask_and_answer.jpg  used on input line 756.
 \tf@snm=\write8
 \openout8 = `main.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 765.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 765.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 879.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 879.
  (/home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 765.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 765.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 879.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 879.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: AFEA2A9029E77E3D0C540A141E213914;532.
  ) 
 Here is how much of TeX's memory you used:
- 22131 strings out of 481239
- 411308 string characters out of 5920376
+ 22221 strings out of 481239
+ 412532 string characters out of 5920376
  835181 words of memory out of 5000000
- 36758 multiletter control sequences out of 15000+600000
+ 36825 multiletter control sequences out of 15000+600000
  552662 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  58i,16n,67p,862b,836s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnss17.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt8.pfb>
-Output written on /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/main.pdf (40 pages, 13219867 bytes).
+Output written on /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/main.pdf (46 pages, 18928444 bytes).
 PDF statistics:
- 1240 PDF objects out of 1440 (max. 8388607)
- 1127 compressed objects within 12 object streams
- 89 named destinations out of 1000 (max. 500000)
- 303 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1417 PDF objects out of 1440 (max. 8388607)
+ 1281 compressed objects within 13 object streams
+ 101 named destinations out of 1000 (max. 500000)
+ 358 words of extra memory for PDF output out of 10000 (max. 10000000)
 
