@@ -281,8 +281,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/main.aux
@@ -372,13 +370,16 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi8.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vnss12.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vnssbx10.tfm
+OUTPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/main.vrb
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/main.vrb
+INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/main.vrb
 INPUT /usr/share/texlive/texmf-dist/tex/latex/vntex/t5cmtt.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/vntex/t5cmtt.fd
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vntt12.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vntt10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vntt8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vnss9.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vnss12.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vnssbx10.tfm
 INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/02.png
 INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/02.png
 INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/02.png
@@ -392,7 +393,6 @@ INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/25.png
 INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/25.png
 INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/24.png
 INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/24.png
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/vntex/vnr/vntt10.tfm
 INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/26.png
 INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/26.png
 INPUT /home/manhcuong/Documents/SCL_LTUDMB_Nuoc_Soi/slide/images/26.png
@@ -613,5 +613,4 @@ INPUT /usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnss9.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnssbx10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnssi8.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt10.pfb
-INPUT /usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt8.pfb

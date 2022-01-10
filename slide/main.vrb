@@ -1,0 +1,15 @@
+\frametitle{Các package + dịch vụ bên thứ ba (1)}
+    \framesubtitle{Các package}
+        \begin{itemize}
+            \item \textnormal{\href{https://github.com/vinc3m1/RoundedImageView}{\color{blue} \texttt{RoundedImageView}} - Tạo ra các \texttt{ImageView} bo tròn ở các góc, import vào gradle:}\\
+            \fbox{\begin{minipage}{0.9\linewidth}
+                \texttt{\scriptsize{implementation 'com.makeramen:roundedimageview:2.3.0'}}
+            \end{minipage}}
+
+            \item \textnormal{\href{https://github.com/bumptech/glide}{\color{blue} \texttt{Glide}} - Load ảnh từ internet vào \texttt{ImageView}, import vào gradle:}\\
+            \fbox{\begin{minipage}{0.9\linewidth}
+                \texttt{\scriptsize{implementation 'com.github.bumptech.glide:glide:4.12.0'\\annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'}}
+            \end{minipage}}
+
+            \item Và một vài package khác.
+        \end{itemize}
